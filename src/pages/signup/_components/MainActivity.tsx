@@ -3,10 +3,10 @@ import { AppScreen } from "@stackflow/plugin-basic-ui";
 
 import { Button } from "@/components/ui/button";
 
-import { useFlow } from "@/utils/stackflow";
+import { useMyFlow } from "@/utils/useMyFlow";
 
 const MainActivity: ActivityComponentType = () => {
-  const { push } = useFlow();
+  const { push } = useMyFlow();
 
   const handleClickLoginButton = () => {
     push("LoginActivity", {});

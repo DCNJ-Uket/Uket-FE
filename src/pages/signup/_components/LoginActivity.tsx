@@ -3,14 +3,14 @@ import { AppScreen } from "@stackflow/plugin-basic-ui";
 
 import { Button } from "@/components/ui/button";
 
-import { useFlow } from "@/utils/stackflow";
+import { useMyFlow } from "@/utils/useMyFlow";
 
 // TODO: push 로직을 회원가입 로직으로 변경
 const LoginActivity: ActivityComponentType = () => {
-  const { push } = useFlow();
+  const { push } = useMyFlow();
 
   const handleClickLogin = () => {
-    push("ChooseActivity", {});
+    push("UserTypeActivity", {});
   };
 
   return (

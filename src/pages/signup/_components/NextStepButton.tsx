@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 
-import { useFlow } from "@/utils/stackflow";
+import { useMyFlow } from "@/utils/useMyFlow";
 
 interface NextStepButtonProps {
   activityName: never;
@@ -9,7 +9,7 @@ interface NextStepButtonProps {
 
 const NextStepButton = (props: NextStepButtonProps) => {
   const { activityName, params } = props;
-  const { push } = useFlow();
+  const { push } = useMyFlow();
 
   const handleClick = () => {
     push(activityName, params || {});
