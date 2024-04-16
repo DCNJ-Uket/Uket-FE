@@ -31,5 +31,5 @@ export const { Stack, useFlow } = stackflow({
     MailActivity,
     MailAuthActivity,
   },
-  initialActivity: () => "ChooseActivity",
+  initialActivity: () => "MainActivity",
 });
