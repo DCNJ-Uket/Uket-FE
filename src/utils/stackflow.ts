@@ -9,6 +9,7 @@ import MainActivity from "@/pages/signup/_components/MainActivity";
 import MailAuthActivity from "@/pages/signup/_components/MailAuthActivity";
 import MailActivity from "@/pages/signup/_components/MailActivity";
 import LoginActivity from "@/pages/signup/_components/LoginActivity";
+import CompleteActivity from "@/pages/signup/_components/CompleteActivity";
 import ChooseActivity from "@/pages/signup/_components/ChooseActivity";
 
 import "@stackflow/plugin-basic-ui/index.css";
@@ -30,6 +31,7 @@ export const { Stack, useFlow } = stackflow({
     UnivActivity,
     MailActivity,
     MailAuthActivity,
+    CompleteActivity,
   },
   initialActivity: () => "MainActivity",
 });
