@@ -6,7 +6,11 @@ import ChooseItem from "./ChooseItem";
 
 const ChooseActivity: ActivityComponentType = () => {
   return (
-    <AppScreen>
+    <AppScreen
+      appBar={{
+        border: false,
+      }}
+    >
       <main className="flex flex-col items-center h-full">
         <section className="container flex flex-col gap-10 justify-center grow">
           <header className="flex flex-col gap-4 w-full">
