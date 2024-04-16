@@ -14,7 +14,7 @@ import ChooseActivity from "@/pages/signup/_components/ChooseActivity";
 import "@stackflow/plugin-basic-ui/index.css";
 
 export const { Stack, useFlow } = stackflow({
-  transitionDuration: 350,
+  transitionDuration: 500,
   plugins: [
     basicRendererPlugin(),
     basicUIPlugin({
