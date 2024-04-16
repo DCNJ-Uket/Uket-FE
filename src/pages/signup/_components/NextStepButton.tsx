@@ -15,7 +15,10 @@ const NextStepButton = (props: NextStepButtonProps) => {
     push(activityName, params || {});
   };
   return (
-    <Button className="w-full h-16 font-bold" onClick={handleClick}>
+    <Button
+      className="w-full h-16 text-base font-bold rounded-none bg-brand"
+      onClick={handleClick}
+    >
       다음으로
     </Button>
   );
