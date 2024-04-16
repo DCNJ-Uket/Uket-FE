@@ -31,11 +31,11 @@ const MailAuthActivity: ActivityComponentType<MailAuthActivityProps> = ({
               placeholder="인증 번호 입력하기"
               className="border-2 border-black"
             />
-            <aside className="flex justify-between items-center">
+            <aside className="flex justify-between items-center text-sm">
               <div>2:32</div>
-              <div className="flex gap-2 items-center">
+              <div className="flex gap-2 items-center text-xs">
                 <span>메일이 오지 않았나요?</span>
-                <Button variant="link" className="p-0 text-[#7B7B7B]">
+                <Button variant="link" className="p-0 text-xs text-[#7B7B7B]">
                   다시 보내기
                 </Button>
               </div>
@@ -43,7 +43,7 @@ const MailAuthActivity: ActivityComponentType<MailAuthActivityProps> = ({
           </section>
         </section>
         <footer className="w-full">
-          <NextStepButton activityName={"" as never} />
+          <NextStepButton activityName={"CompleteActivity" as never} />
         </footer>
       </main>
     </AppScreen>
