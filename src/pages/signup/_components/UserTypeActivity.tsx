@@ -1,10 +1,10 @@
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
+import UserTypeItem from "./UserTypeItem";
 import NextStepButton from "./NextStepButton";
-import ChooseItem from "./ChooseItem";
 
-const ChooseActivity: ActivityComponentType = () => {
+const UserTypeActivity: ActivityComponentType = () => {
   return (
     <AppScreen
       appBar={{
@@ -20,8 +20,8 @@ const ChooseActivity: ActivityComponentType = () => {
             </h1>
           </header>
           <section className="flex flex-col gap-2 justify-center items-center">
-            <ChooseItem title="대학생" desc="소속 학교가 있는 대학생이에요" />
-            <ChooseItem title="일반인" desc="소속 학교가 없는 일반인이에요" />
+            <UserTypeItem title="대학생" desc="소속 학교가 있는 대학생이에요" />
+            <UserTypeItem title="일반인" desc="소속 학교가 없는 일반인이에요" />
           </section>
         </section>
         <footer className="w-full">
@@ -32,4 +32,4 @@ const ChooseActivity: ActivityComponentType = () => {
   );
 };
 
-export default ChooseActivity;
+export default UserTypeActivity;
