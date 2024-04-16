@@ -8,6 +8,11 @@ import { useFlow } from "@/utils/stackflow";
 // TODO: push 로직을 회원가입 로직으로 변경
 const LoginActivity: ActivityComponentType = () => {
   const { push } = useFlow();
+
+  const handleClickLogin = () => {
+    push("ChooseActivity", {});
+  };
+
   return (
     <AppScreen
       appBar={{
@@ -27,7 +32,7 @@ const LoginActivity: ActivityComponentType = () => {
         <section className="flex flex-col gap-2 justify-center items-center w-full">
           <Button
             className="w-full bg-[#FEE500] text-[#191919]"
-            onClick={() => push("ChooseActivity", {})}
+            onClick={handleClickLogin}
           >
             카카오 계정으로 계속하기
           </Button>
