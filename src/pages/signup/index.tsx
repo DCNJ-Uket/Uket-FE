@@ -1,9 +1,13 @@
+import { Suspense } from "react";
+
 import { Stack } from "@/utils/stackflow";
 
 const SignUpPage = () => {
   return (
     <main>
-      <Stack />
+      <Suspense>
+        <Stack />
+      </Suspense>
     </main>
   );
 };
