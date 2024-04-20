@@ -17,7 +17,7 @@ const NextStepButton = (props: NextStepButtonProps) => {
   };
   return (
     <Button
-      className="w-full h-16 text-base font-bold rounded-none bg-brand"
+      className="w-full h-16 text-base font-extrabold rounded-none hover:bg-brandHover bg-brand"
       onClick={handleClick}
       disabled={disabled}
     >
