@@ -3,6 +3,7 @@ import { AppScreen } from "@stackflow/plugin-basic-ui";
 
 import NextStepButton from "./NextStepButton";
 
+// TODO: 다음 Stack 이동 로직 변경
 const CompleteActivity: ActivityComponentType = () => {
   return (
     <AppScreen
@@ -19,7 +20,10 @@ const CompleteActivity: ActivityComponentType = () => {
           </h2>
         </header>
         <footer className="w-full">
-          <NextStepButton activityName={"MainActivity" as never} />
+          <NextStepButton
+            activityName={"MainActivity" as never}
+            disabled={false}
+          />
         </footer>
       </main>
     </AppScreen>
