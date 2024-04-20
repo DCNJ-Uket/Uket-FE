@@ -1,12 +1,24 @@
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
+import { ActivityParams } from "../_hooks/useStackForm";
 import NextStepButton from "./NextStepButton";
 
-const UnivActivity: ActivityComponentType = () => {
+interface UnivParams extends ActivityParams {}
+
+// TODO: 버튼 비활성화 로직 추가
+const UnivActivity: ActivityComponentType<UnivParams> = ({ params }) => {
+  const { form } = params;
+
   return (
     <AppScreen appBar={{ border: false }}>
       <main className="flex flex-col items-center h-full">
@@ -17,37 +29,68 @@ const UnivActivity: ActivityComponentType = () => {
             </h1>
           </header>
           <section className="flex flex-col gap-3">
-            <div>
-              <Label htmlFor="univ">학교</Label>
-              <Input
-                type="text"
-                id="univ"
-                placeholder="학교 검색"
-                className="border-2 border-black"
-              />
-            </div>
-            <div>
-              <Label htmlFor="major">학과</Label>
-              <Input
-                type="text"
-                id="major"
-                placeholder="학과 검색"
-                className="border-2 border-black"
-              />
-            </div>
-            <div>
-              <Label htmlFor="number">학번</Label>
-              <Input
-                type="number"
-                id="number"
-                placeholder="학번 입력"
-                className="border-2 border-black"
-              />
-            </div>
+            <FormField
+              control={form.control}
+              name="userUniv"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>학교</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="학교 검색"
+                      className="border-2 border-black"
+                      autoComplete="off"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="userMajor"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>학과</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="학과 검색"
+                      className="border-2 border-black"
+                      autoComplete="off"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="userId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>학번</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="학번 입력"
+                      className="border-2 border-black"
+                      autoComplete="off"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </section>
         </section>
         <footer className="w-full">
-          <NextStepButton activityName={"MailActivity" as never} />
+          <NextStepButton
+            activityName={"MailActivity" as never}
+            params={{ form }}
+            disabled={false}
+          />
         </footer>
       </main>
     </AppScreen>
