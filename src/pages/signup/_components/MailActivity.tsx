@@ -12,22 +12,28 @@ import {
 import { validate } from "../_utils/vaildate";
 import { ActivityParams } from "../_hooks/useStackForm";
 import NextStepButton from "./NextStepButton";
+import {
+  Activity,
+  ActivityContent,
+  ActivityFooter,
+  ActivityHeader,
+} from "./Activity";
 
 interface MailParams extends ActivityParams {}
 
 const MailActivity: ActivityComponentType<MailParams> = ({ params }) => {
   const { form } = params;
-  
+
   return (
     <AppScreen appBar={{ border: false }}>
-      <main className="flex flex-col items-center h-full">
-        <section className="flex flex-col gap-10 justify-center w-full grow">
-          <header className="container flex flex-col gap-3 justify-end w-full grow">
+      <Activity>
+        <ActivityContent>
+          <ActivityHeader>
             <h1 className="text-xl font-bold">
               <p>학생 인증을 위해</p>
               <p>학교 메일 인증이 필요해요</p>
             </h1>
-          </header>
+          </ActivityHeader>
           <section className="grow">
             <FormField
               control={form.control}
@@ -46,25 +52,27 @@ const MailActivity: ActivityComponentType<MailParams> = ({ params }) => {
                     </FormControl>
                     <FormMessage />
                   </FormItem>
-                  <NextStepButton
-                    activityName={"MailAuthActivity" as never}
-                    params={{
-                      email: field.value,
-                      form,
-                    }}
-                    disabled={
-                      !validate({
-                        type: "email",
-                        value: field.value,
-                      })
-                    }
-                  />
+                  <ActivityFooter>
+                    <NextStepButton
+                      activityName={"MailAuthActivity" as never}
+                      params={{
+                        email: field.value,
+                        form,
+                      }}
+                      disabled={
+                        !validate({
+                          type: "email",
+                          value: field.value,
+                        })
+                      }
+                    />
+                  </ActivityFooter>
                 </div>
               )}
             />
           </section>
-        </section>
-      </main>
+        </ActivityContent>
+      </Activity>
     </AppScreen>
   );
 };

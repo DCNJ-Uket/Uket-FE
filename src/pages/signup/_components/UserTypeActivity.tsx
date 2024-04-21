@@ -14,6 +14,12 @@ import { validate } from "../_utils/vaildate";
 import { useStackForm } from "../_hooks/useStackForm";
 import UserTypeItem from "./UserTypeItem";
 import NextStepButton from "./NextStepButton";
+import {
+  Activity,
+  ActivityContent,
+  ActivityFooter,
+  ActivityHeader,
+} from "./Activity";
 
 const UserTypeActivity: ActivityComponentType = () => {
   const { form } = useStackForm();
@@ -24,14 +30,14 @@ const UserTypeActivity: ActivityComponentType = () => {
         border: false,
       }}
     >
-      <main className="flex flex-col items-center h-full">
-        <section className="flex flex-col gap-10 justify-center w-full grow">
-          <header className="container flex flex-col gap-4 justify-end w-full grow">
+      <Activity>
+        <ActivityContent>
+          <ActivityHeader>
             <h1 className="text-xl font-bold">
               <p>대학생인가요?</p>
               <p>일반인인가요?</p>
             </h1>
-          </header>
+          </ActivityHeader>
           <section className="grow">
             <FormField
               control={form.control}
@@ -79,22 +85,24 @@ const UserTypeActivity: ActivityComponentType = () => {
                     </FormControl>
                     <FormMessage />
                   </FormItem>
-                  <NextStepButton
-                    activityName={"NameActivity" as never}
-                    params={{ form }}
-                    disabled={
-                      !validate({
-                        type: "type",
-                        value: field.value,
-                      })
-                    }
-                  />
+                  <ActivityFooter>
+                    <NextStepButton
+                      activityName={"NameActivity" as never}
+                      params={{ form }}
+                      disabled={
+                        !validate({
+                          type: "type",
+                          value: field.value,
+                        })
+                      }
+                    />
+                  </ActivityFooter>
                 </div>
               )}
             />
           </section>
-        </section>
-      </main>
+        </ActivityContent>
+      </Activity>
     </AppScreen>
   );
 };

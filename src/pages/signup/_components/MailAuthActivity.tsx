@@ -12,6 +12,12 @@ import { Button } from "@/components/ui/button";
 
 import { ActivityParams, useStackForm } from "../_hooks/useStackForm";
 import NextStepButton from "./NextStepButton";
+import {
+  Activity,
+  ActivityContent,
+  ActivityFooter,
+  ActivityHeader,
+} from "./Activity";
 
 interface MailAuthParams extends ActivityParams {
   email: string;
@@ -26,14 +32,14 @@ const MailAuthActivity: ActivityComponentType<MailAuthParams> = ({
 
   return (
     <AppScreen appBar={{ border: false }}>
-      <main className="flex flex-col items-center h-full">
-        <section className="flex flex-col gap-10 justify-center w-full grow">
-          <header className="container flex flex-col gap-3 justify-end w-full grow">
+      <Activity>
+        <ActivityContent>
+          <ActivityHeader>
             <h1 className="text-xl font-bold">
               <p>{email}로</p>
               <p>보낸 메일에 적힌 숫자를 입력해 주세요</p>
             </h1>
-          </header>
+          </ActivityHeader>
           <section className="grow">
             <form
               onSubmit={form.handleSubmit(onSubmit)}
@@ -69,18 +75,20 @@ const MailAuthActivity: ActivityComponentType<MailAuthParams> = ({
                         </div>
                       </aside>
                     </div>
-                    <NextStepButton
-                      activityName={"CompleteActivity" as never}
-                      disabled={false}
-                    />
+                    <ActivityFooter>
+                      <NextStepButton
+                        activityName={"CompleteActivity" as never}
+                        disabled={false}
+                      />
+                    </ActivityFooter>
                   </>
                 )}
               />
               <Button type="submit">Click</Button>
             </form>
           </section>
-        </section>
-      </main>
+        </ActivityContent>
+      </Activity>
     </AppScreen>
   );
 };
