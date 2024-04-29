@@ -1,18 +1,22 @@
 import { AxiosError } from "axios";
 
-import { REDIRECT_URI } from "@/constants/auth_url";
+import { GOOGLE_REDIRECT_URI, KAKAO_REDIRECT_URI } from "@/constants/auth_url";
 
 import { instance } from "./instance";
 
-export const login = async (code: string) => {
+export type Provider = "kakao" | "google";
+
+export const login = async (code: string, provider: Provider) => {
+  const redirect_uri =
+    provider === "google" ? GOOGLE_REDIRECT_URI : KAKAO_REDIRECT_URI;
+
   try {
-    const { data } = await instance.post(`/auth/login/kakao`, {
+    const { data } = await instance.post(`/auth/login/${provider}`, {
       code,
-      redirectUri: REDIRECT_URI,
+      redirectUri: redirect_uri,
     });
 
     const { isRegistered } = data;
-
 
     return isRegistered;
   } catch (error) {
