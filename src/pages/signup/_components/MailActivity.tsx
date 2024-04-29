@@ -29,7 +29,7 @@ const MailActivity: ActivityComponentType<MailParams> = ({ params }) => {
       <Activity>
         <ActivityContent>
           <ActivityHeader>
-            <h1 className="text-xl font-bold">
+            <h1 className="text-2xl font-black">
               <p>학생 인증을 위해</p>
               <p>학교 메일 인증이 필요해요</p>
             </h1>
@@ -45,7 +45,7 @@ const MailActivity: ActivityComponentType<MailParams> = ({ params }) => {
                       <Input
                         type="email"
                         placeholder="학교 메일 주소 입력하기"
-                        className="border-2 border-black"
+                        className="border border-formInput"
                         {...field}
                         value={field.value}
                       />

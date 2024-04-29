@@ -10,18 +10,20 @@ interface UserTypeItemProps {
 
 const UserTypeItem = (props: UserTypeItemProps) => {
   const { title, desc, selected } = props;
-  
+
   return (
     <div
       className={cn(
-        `flex flex-col items-center gap-2 rounded-md px-5 pb-5 pt-3 transition-colors duration-300`,
+        `flex flex-col justify-between gap-2 rounded-lg shadow-lg transition-colors duration-300 h-60 overflow-hidden`,
         `${selected ? "bg-brand/50" : "bg-[#d7d7d7]"}`,
       )}
     >
-      <header>{title}</header>
       <section className="flex gap-5 justify-evenly items-center">
         <Skeleton className="w-20 h-20 rounded-full" />
-        <aside>{desc}</aside>
+      </section>
+      <section className="flex flex-col gap-2 justify-center p-3 py-5 bg-white">
+        <h1 className="font-bold">{title}</h1>
+        <h2 className="text-gray-500">{desc}</h2>
       </section>
     </div>
   );

@@ -24,12 +24,11 @@ const PhoneActivity: ActivityComponentType<PhoneParams> = ({ params }) => {
       <Activity>
         <ActivityContent>
           <ActivityHeader>
-            <h1 className="text-xl font-bold">
+            <h1 className="text-2xl font-black">
               <p>전화번호를 입력해 주세요</p>
             </h1>
-            <h2 className="text-[#B6B7B8]">
-              <p>하이픈(-)없이</p>
-              <p>숫자로만 입력해 주세요.</p>
+            <h2 className="text-gray-500">
+              <p>하이픈(-)없이 숫자로만 입력해 주세요.</p>
             </h2>
           </ActivityHeader>
           <section className="grow">
@@ -43,7 +42,7 @@ const PhoneActivity: ActivityComponentType<PhoneParams> = ({ params }) => {
                       <Input
                         type="tel"
                         placeholder="전화번호를 입력해 주세요"
-                        className="border-2 border-black"
+                        className="border border-formInput"
                         autoComplete="off"
                         {...field}
                       />

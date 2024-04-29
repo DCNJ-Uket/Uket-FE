@@ -33,7 +33,7 @@ const UserTypeActivity: ActivityComponentType = () => {
       <Activity>
         <ActivityContent>
           <ActivityHeader>
-            <h1 className="text-xl font-bold">
+            <h1 className="text-2xl font-black">
               <p>대학생인가요?</p>
               <p>일반인인가요?</p>
             </h1>
@@ -49,9 +49,9 @@ const UserTypeActivity: ActivityComponentType = () => {
                       <RadioGroup
                         onValueChange={field.onChange}
                         defaultValue={field.value}
-                        className="flex flex-col justify-center items-center space-y-1"
+                        className="container flex justify-center items-center w-full"
                       >
-                        <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormItem className="flex items-center space-y-0">
                           <FormControl>
                             <RadioGroupItem
                               value="univ"

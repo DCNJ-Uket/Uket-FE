@@ -35,7 +35,7 @@ const MailAuthActivity: ActivityComponentType<MailAuthParams> = ({
       <Activity>
         <ActivityContent>
           <ActivityHeader>
-            <h1 className="text-xl font-bold">
+            <h1 className="text-2xl font-black">
               <p>{email}로</p>
               <p>보낸 메일에 적힌 숫자를 입력해 주세요</p>
             </h1>
