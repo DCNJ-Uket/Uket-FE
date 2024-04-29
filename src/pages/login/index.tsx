@@ -1,38 +1,10 @@
-import { Link, useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 
 import { GOOGLE_LOGIN_URL, KAKAO_LOGIN_URL } from "@/constants/auth_url";
 
-import { useNavigate } from "@/router";
-import { login } from "@/api/auth";
-
 const LoginPage = () => {
-  const [params] = useSearchParams();
-  const code = params.get("code");
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!code) return;
-
-    const handleAuth = async () => {
-      const isRegistered = await login(code);
-
-      if (!isRegistered) {
-        navigate("/signup", {
-          replace: true,
-        });
-      } else {
-        navigate("/", {
-          replace: true,
-        });
-      }
-    };
-
-    handleAuth();
-  }, [code]);
-
   return (
     <main className="flex flex-col items-center h-full">
       <header className="container mt-2 w-full h-fit">
