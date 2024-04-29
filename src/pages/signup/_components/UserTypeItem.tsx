@@ -1,18 +1,29 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
+import { cn } from "@/lib/utils";
+
 interface UserTypeItemProps {
   title: string;
   desc: string;
+  selected: boolean;
 }
 
 const UserTypeItem = (props: UserTypeItemProps) => {
-  const { title, desc } = props;
+  const { title, desc, selected } = props;
+
   return (
-    <div className="flex flex-col items-center gap-2 bg-[#d7d7d7] px-5 pb-5 pt-3">
-      <header>{title}</header>
-      <section className="flex items-center justify-evenly gap-5">
-        <Skeleton className="h-20 w-20 rounded-full" />
-        <aside>{desc}</aside>
+    <div
+      className={cn(
+        `flex flex-col justify-between gap-2 rounded-lg shadow-lg transition-colors duration-300 h-60 overflow-hidden`,
+        `${selected ? "bg-brand/50" : "bg-[#d7d7d7]"}`,
+      )}
+    >
+      <section className="flex gap-5 justify-evenly items-center">
+        <Skeleton className="w-20 h-20 rounded-full" />
+      </section>
+      <section className="flex flex-col gap-2 justify-center p-3 py-5 bg-white">
+        <h1 className="font-bold">{title}</h1>
+        <h2 className="text-gray-500">{desc}</h2>
       </section>
     </div>
   );
