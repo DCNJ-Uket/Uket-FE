@@ -1,12 +1,38 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 
-const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
-const KAKAO_LOGIN_URL = `${BASE_URL}/${import.meta.env.VITE_KAKAO_LOGIN}`;
-const GOOGLE_LOGIN_URL = `${BASE_URL}/${import.meta.env.VITE_GOOGLE_LOGIN}`;
+import { GOOGLE_LOGIN_URL, KAKAO_LOGIN_URL } from "@/constants/auth_url";
+
+import { useNavigate } from "@/router";
+import { login } from "@/api/auth";
 
 const LoginPage = () => {
+  const [params] = useSearchParams();
+  const code = params.get("code");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!code) return;
+
+    const handleAuth = async () => {
+      const isRegistered = await login(code);
+
+      if (!isRegistered) {
+        navigate("/signup", {
+          replace: true,
+        });
+      } else {
+        navigate("/", {
+          replace: true,
+        });
+      }
+    };
+
+    handleAuth();
+  }, [code]);
+
   return (
     <main className="flex flex-col items-center h-full">
       <header className="container mt-2 w-full h-fit">
@@ -24,7 +50,7 @@ const LoginPage = () => {
         </section>
         <section className="container flex flex-col gap-2 justify-center items-center w-full">
           <Link to={KAKAO_LOGIN_URL} className="block w-full">
-            <Button className="h-12 w-full rounded-xl bg-[#FEE500] text-[#191919] hover:bg-[#eed600] text-base">
+            <Button className="h-12 w-full rounded-xl bg-[#FEE500] text-base text-[#191919] hover:bg-[#eed600]">
               카카오 계정으로 계속하기
             </Button>
           </Link>
