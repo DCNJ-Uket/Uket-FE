@@ -71,8 +71,9 @@
     @apply border-border;
   }
   body {
-    @apply h-screen w-screen bg-background text-foreground;
+    @apply bg-background text-foreground;
   }
+
   #root {
     @apply h-full w-full;
   }
