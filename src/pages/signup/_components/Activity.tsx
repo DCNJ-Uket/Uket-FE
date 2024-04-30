@@ -1,6 +1,12 @@
 import React from "react";
 
+import { FormType } from "../_hooks/useStackForm";
+
 import { cn } from "@/lib/utils";
+
+export interface ActivityParams {
+  form: FormType;
+}
 
 const ActivityHeader = ({
   className,

@@ -10,13 +10,13 @@ import {
 } from "@/components/ui/form";
 
 import { validate } from "../_utils/vaildate";
-import { ActivityParams } from "../_hooks/useStackForm";
 import NextStepButton from "./NextStepButton";
 import {
   Activity,
   ActivityContent,
   ActivityFooter,
   ActivityHeader,
+  ActivityParams,
 } from "./Activity";
 
 interface MailParams extends ActivityParams {}
@@ -43,11 +43,11 @@ const MailActivity: ActivityComponentType<MailParams> = ({ params }) => {
                   <FormItem className="container">
                     <FormControl>
                       <Input
+                        {...field}
                         type="email"
                         placeholder="학교 메일 주소 입력하기"
                         className="border border-formInput"
-                        {...field}
-                        value={field.value}
+                        value={field.value || ""}
                       />
                     </FormControl>
                     <FormMessage />
@@ -62,7 +62,7 @@ const MailActivity: ActivityComponentType<MailParams> = ({ params }) => {
                       disabled={
                         !validate({
                           type: "email",
-                          value: field.value,
+                          value: field.value || "",
                         })
                       }
                     />
