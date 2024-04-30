@@ -10,3 +10,13 @@ export const instance = axios.create({
     Accept: "application/json",
   },
 });
+
+instance.interceptors.request.use(config => {
+  if (config.url === "/users/register") {
+    const accessToken = localStorage.getItem("accessToken");
+
+    config.headers.Authorization = `Bearer ${accessToken}`;
+  }
+
+  return config;
+});
