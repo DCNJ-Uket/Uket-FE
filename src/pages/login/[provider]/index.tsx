@@ -2,33 +2,21 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { LoaderCircle } from "lucide-react";
 
-import { useNavigate, useParams } from "@/router";
-import { Provider, login } from "@/api/auth";
+import { useMutationLogin } from "@/hooks/mutations/useMutationLogin";
+
+import { Provider } from "@/types/authType";
+
+import { useParams } from "@/router";
 
 const CallbackPage = () => {
   const { provider } = useParams("/login/:provider");
-  const navigate = useNavigate();
   const [params] = useSearchParams();
   const code = params.get("code");
+  const { mutate } = useMutationLogin();
 
   useEffect(() => {
     if (!code) return;
-
-    const handleAuth = async () => {
-      const isRegistered = await login(code, provider as Provider);
-      console.log(isRegistered, provider);
-      if (!isRegistered) {
-        navigate("/signup", {
-          replace: true,
-        });
-      } else {
-        navigate("/", {
-          replace: true,
-        });
-      }
-    };
-
-    handleAuth();
+    mutate({ code, provider: provider as Provider });
   }, [code]);
 
   return (
