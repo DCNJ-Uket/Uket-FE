@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/form";
 
 import { validate } from "../_utils/vaildate";
+import { ActivityParams } from "../_hooks/useStackForm";
 import NextStepButton from "./NextStepButton";
 import {
   Activity,
