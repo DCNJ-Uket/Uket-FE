@@ -10,13 +10,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { ActivityParams } from "../_hooks/useStackForm";
 import NextStepButton from "./NextStepButton";
 import {
   Activity,
   ActivityContent,
   ActivityFooter,
   ActivityHeader,
+  ActivityParams,
 } from "./Activity";
 
 interface UnivParams extends ActivityParams {}
@@ -44,11 +44,12 @@ const UnivActivity: ActivityComponentType<UnivParams> = ({ params }) => {
                   <FormLabel>학교</FormLabel>
                   <FormControl>
                     <Input
+                      {...field}
                       placeholder="학교 검색"
                       className="border border-formInput"
                       autoComplete="off"
                       isIcon
-                      {...field}
+                      value={field.value || ""}
                     />
                   </FormControl>
                   <FormMessage />
@@ -63,11 +64,12 @@ const UnivActivity: ActivityComponentType<UnivParams> = ({ params }) => {
                   <FormLabel>학과</FormLabel>
                   <FormControl>
                     <Input
+                      {...field}
                       placeholder="학과 검색"
                       className="border border-formInput"
                       autoComplete="off"
                       isIcon
-                      {...field}
+                      value={field.value || ""}
                     />
                   </FormControl>
                   <FormMessage />
@@ -82,10 +84,11 @@ const UnivActivity: ActivityComponentType<UnivParams> = ({ params }) => {
                   <FormLabel>학번</FormLabel>
                   <FormControl>
                     <Input
+                      {...field}
                       placeholder="학번 입력"
                       className="border border-formInput"
                       autoComplete="off"
-                      {...field}
+                      value={field.value || ""}
                     />
                   </FormControl>
                   <FormMessage />

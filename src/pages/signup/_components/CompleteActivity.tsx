@@ -15,12 +15,18 @@ const CompleteActivity: ActivityComponentType = () => {
     <AppScreen
       appBar={{
         border: false,
+        backButton: {
+          renderIcon: () => <div className="hidden"></div>,
+          onClick: e => e.preventDefault(),
+        },
       }}
     >
       <Activity>
         <ActivityContent>
           <ActivityHeader className="justify-center items-center">
-            <h1 className="text-lg text-[#5E5E6E]">회원가입이 완료되었습니다.</h1>
+            <h1 className="text-lg text-[#5E5E6E]">
+              회원가입이 완료되었습니다.
+            </h1>
             <h2 className="text-2xl font-black text-center">
               <p>이제 학교 축제 티켓을</p>
               <p>예매하러 가볼까요?</p>

@@ -10,13 +10,14 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 
-import { ActivityParams, useStackForm } from "../_hooks/useStackForm";
+import { useStackForm } from "../_hooks/useStackForm";
 import NextStepButton from "./NextStepButton";
 import {
   Activity,
   ActivityContent,
   ActivityFooter,
   ActivityHeader,
+  ActivityParams,
 } from "./Activity";
 
 interface MailAuthParams extends ActivityParams {
@@ -54,10 +55,11 @@ const MailAuthActivity: ActivityComponentType<MailAuthParams> = ({
                       <FormItem>
                         <FormControl>
                           <Input
+                            {...field}
                             autoComplete="off"
                             placeholder="인증 번호 입력하기"
                             className="border-2 border-black"
-                            {...field}
+                            value={field.value || ""}
                           />
                         </FormControl>
                         <FormMessage />
@@ -77,6 +79,7 @@ const MailAuthActivity: ActivityComponentType<MailAuthParams> = ({
                     </div>
                     <ActivityFooter>
                       <NextStepButton
+                        type="submit"
                         activityName={"CompleteActivity" as never}
                         disabled={false}
                       />
@@ -84,7 +87,6 @@ const MailAuthActivity: ActivityComponentType<MailAuthParams> = ({
                   </>
                 )}
               />
-              <Button type="submit">Click</Button>
             </form>
           </section>
         </ActivityContent>
