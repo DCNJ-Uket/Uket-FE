@@ -377,13 +377,13 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.2.1.tgz#16308cea045f0fc777b6ff20a9f25474dd8293d2"
   integrity sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==
 
-"@generouted/react-router@^1.18.7":
-  version "1.18.7"
-  resolved "https://registry.yarnpkg.com/@generouted/react-router/-/react-router-1.18.7.tgz#8329d99819a6b396fff3d56181c6af65bd0d9301"
-  integrity sha512-bT3IMnEfkRPSJ7CkEEzrnGhKxbDDF0RpnAOEDToHdJDVw/mfjZ51F8H5v3fCgQSpOeMuxaQo/TIjqOaE012PGg==
+"@generouted/react-router@^1.19.3":
+  version "1.19.3"
+  resolved "https://registry.yarnpkg.com/@generouted/react-router/-/react-router-1.19.3.tgz#4e0900849921279faa99992bc6ae5f25bd1719e1"
+  integrity sha512-3/Y0j302HnwxyU0KOoCOFSVwJZN4eD73+CVtSaOKUnLbGW1ftP1dT8Eur14PALGvZOVR4gsFrUJFq6a4c/kWvQ==
   dependencies:
     fast-glob "^3.3.2"
-    generouted "^1.18.7"
+    generouted "^1.19.3"
 
 "@hookform/resolvers@^3.3.4":
   version "3.3.4"
@@ -2546,10 +2546,10 @@ functions-have-names@^1.2.3:
   resolved "https://registry.yarnpkg.com/functions-have-names/-/functions-have-names-1.2.3.tgz#0404fe4ee2ba2f607f0e0ec3c80bae994133b834"
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
 
-generouted@^1.18.7:
-  version "1.18.7"
-  resolved "https://registry.yarnpkg.com/generouted/-/generouted-1.18.7.tgz#b9250adcce2d539e89c714d32fd29838d8b285eb"
-  integrity sha512-n8u9Ml1aWKaXL1EldqUqHRmcCyotx0q1xcVeBH65BZMKuPT74AW2Ncw89pgonPDSYb19R7Kiuw3243FTU4DP0Q==
+generouted@^1.19.3:
+  version "1.19.3"
+  resolved "https://registry.yarnpkg.com/generouted/-/generouted-1.19.3.tgz#b4ee4efbf463d4dd9d3b3945b98950490fffcd35"
+  integrity sha512-1KnOmPYBNryAm+9PvvOTOzKiWvuBKRwK+Xr4dP/I9U00y7UAv/VrFGeb0v7mYMiny6jpWBmfBFKaUvq4Q0Z4dQ==
 
 get-caller-file@^2.0.5:
   version "2.0.5"
