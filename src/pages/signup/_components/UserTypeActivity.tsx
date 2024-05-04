@@ -9,6 +9,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import Logo from "@/components/Logo";
 
 import { validate } from "../_utils/vaildate";
 import { useStackForm } from "../_hooks/useStackForm";
@@ -28,6 +29,7 @@ const UserTypeActivity: ActivityComponentType = () => {
     <AppScreen
       appBar={{
         border: false,
+        renderLeft: () => <Logo onActivity />,
       }}
     >
       <Activity>
