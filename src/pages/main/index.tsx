@@ -16,15 +16,15 @@ const MainPage = () => {
           </h1>
         </header>
         <section className="flex flex-col gap-2 justify-center items-center w-full">
-          <Link to="/select-univ" className="w-full">
+          <Link to="/select-univ" className="block w-full text-center">
             <Button className="p-6 w-full text-base text-white rounded-xl border border-brand bg-brand hover:bg-brand/80 sm:w-80">
               축제 예매하기
             </Button>
           </Link>
-          <Button className="p-6 w-full text-base bg-transparent rounded-xl border border-brand text-brand hover:bg-primary-foreground sm:w-80">
-            내 티켓 확인하기
-          </Button>
-        </section>
+                      <Button className="p-6 w-full text-base bg-transparent rounded-xl border border-brand text-brand hover:bg-primary-foreground sm:w-80">
+              내 티켓 확인하기
+            </Button>
+                  </section>
       </main>
     </main>
   );
