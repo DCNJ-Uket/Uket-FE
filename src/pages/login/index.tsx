@@ -9,11 +9,11 @@ const LoginPage = () => {
     <main className="flex flex-col justify-evenly items-center h-full">
       <main className="container flex flex-col justify-evenly w-full h-full">
         <section className="flex flex-col gap-4 items-center w-full">
-          <h1 className="text-2xl font-black">
+          <h1 className="w-full text-2xl font-black">
             <p>학교 축제 티켓을</p>
             <p>예매해 볼까요?</p>
           </h1>
-          <h2 className="text-[#454545]">
+          <h2 className="w-full text-[#454545]">
             회원가입/로그인 방식을 선택해 주세요.
           </h2>
         </section>
