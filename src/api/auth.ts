@@ -1,12 +1,12 @@
 import { AxiosError } from "axios";
 
+import { FormSchemaType } from "@/hooks/useStackForm";
+
 import { GOOGLE_REDIRECT_URI, KAKAO_REDIRECT_URI } from "@/constants/auth_url";
 
 import { LoginRequestParams } from "@/types/authType";
 
 import { instance } from "./instance";
-
-import { FormSchemaType } from "@/pages/signup/_hooks/useStackForm";
 
 // export interface SignUpData
 export const login = async ({ code, provider }: LoginRequestParams) => {

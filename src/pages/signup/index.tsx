@@ -4,7 +4,7 @@ import { Form } from "@/components/ui/form";
 
 import { Stack } from "@/utils/stackflow";
 
-import { useStackForm } from "./_hooks/useStackForm";
+import { useStackForm } from "../../hooks/useStackForm";
 
 const SignUpPage = () => {
   const { form } = useStackForm();

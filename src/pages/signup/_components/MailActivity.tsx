@@ -9,7 +9,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { validate } from "../_utils/vaildate";
+import { validateForm } from "../../../utils/vaildateForm";
 import NextStepButton from "./NextStepButton";
 import {
   Activity,
@@ -60,7 +60,7 @@ const MailActivity: ActivityComponentType<MailParams> = ({ params }) => {
                         form,
                       }}
                       disabled={
-                        !validate({
+                        !validateForm({
                           type: "email",
                           value: field.value || "",
                         })

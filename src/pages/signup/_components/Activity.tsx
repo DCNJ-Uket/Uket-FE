@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FormType } from "../_hooks/useStackForm";
+import { FormType } from "../../../hooks/useStackForm";
 
 import { cn } from "@/lib/utils";
 

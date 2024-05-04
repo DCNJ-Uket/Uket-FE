@@ -11,6 +11,6 @@ export const EXP: Record<ValidateExp, RegExp> = {
   type: /^(univ|no_univ)$/,
 };
 
-export const validate = ({ type, value }: ValidationFunctionProps) => {
+export const validateForm = ({ type, value }: ValidationFunctionProps) => {
   return EXP[type].test(value);
 };
