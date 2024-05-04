@@ -22,7 +22,7 @@ const SelectUnivPage = () => {
 
   return (
     <main className="relative flex h-full flex-col items-center justify-evenly bg-[#F2F2F2]">
-      <main className="container flex overflow-y-scroll flex-col gap-10 mt-7 w-full h-full">
+      <main className="container flex overflow-y-scroll flex-col gap-10 mt-7 mb-10 w-full h-full">
         <header className="text-[27px] font-bold">
           <p>참여하고자 하는</p>
           <p>축제가 열리는</p>
