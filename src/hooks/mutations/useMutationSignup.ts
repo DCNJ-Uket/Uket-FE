@@ -1,10 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 
+import { FormSchemaType } from "@/hooks/useStackForm";
+
 import { AuthResponse } from "@/types/authType";
 
 import { saveTokenList } from "@/utils/handleToken";
 
-import { FormSchemaType } from "@/pages/signup/_hooks/useStackForm";
 import { signup } from "@/api/auth";
 
 export const useMutationSignup = () => {

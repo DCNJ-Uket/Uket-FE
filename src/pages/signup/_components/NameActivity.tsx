@@ -9,7 +9,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { validate } from "../_utils/vaildate";
+import { validateForm } from "../../../utils/vaildateForm";
 import NextStepButton from "./NextStepButton";
 import {
   Activity,
@@ -59,7 +59,7 @@ const NameActivity: ActivityComponentType<NameParmas> = ({ params }) => {
                       activityName={"PhoneActivity" as never}
                       params={{ form }}
                       disabled={
-                        !validate({
+                        !validateForm({
                           type: "name",
                           value: field.value,
                         })

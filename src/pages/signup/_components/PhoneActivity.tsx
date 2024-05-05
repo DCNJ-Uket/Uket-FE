@@ -5,8 +5,8 @@ import { AppScreen } from "@stackflow/plugin-basic-ui";
 import { Input } from "@/components/ui/input";
 import { FormControl, FormField, FormItem } from "@/components/ui/form";
 
-import { validate } from "../_utils/vaildate";
-import { useStackForm } from "../_hooks/useStackForm";
+import { validateForm } from "../../../utils/vaildateForm";
+import { useStackForm } from "../../../hooks/useStackForm";
 import NextStepButton from "./NextStepButton";
 import {
   Activity,
@@ -69,7 +69,7 @@ const PhoneActivity: ActivityComponentType<PhoneParams> = ({ params }) => {
                         }
                         params={{ form }}
                         disabled={
-                          !validate({
+                          !validateForm({
                             type: "phone",
                             value: field.value,
                           })

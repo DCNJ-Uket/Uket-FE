@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-/* global module, require */
 /* eslint no-undef: "error" */
 module.exports = {
   darkMode: ["class"],
@@ -28,6 +27,8 @@ module.exports = {
         foreground: "hsl(var(--foreground))",
         brand: "#7250FD",
         brandHover: "#633cff",
+        buttonDisabled: "#17171B",
+        formInput: "#D9D9D9",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -56,7 +57,6 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        formInput: "#D9D9D9",
       },
       borderRadius: {
         lg: "var(--radius)",

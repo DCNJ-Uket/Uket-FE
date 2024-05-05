@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useMutationSignup } from "@/hooks/mutations/useMutationSignup";
 
-import { EXP } from "../_utils/vaildate";
+import { EXP } from "../utils/vaildateForm";
 
 export type FormSchemaType = z.infer<typeof FormSchema>;
 export type FormType = UseFormReturn<FormSchemaType, unknown, undefined>;

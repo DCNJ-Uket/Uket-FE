@@ -9,9 +9,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import Logo from "@/components/Logo";
 
-import { validate } from "../_utils/vaildate";
-import { useStackForm } from "../_hooks/useStackForm";
+import { validateForm } from "../../../utils/vaildateForm";
+import { useStackForm } from "../../../hooks/useStackForm";
 import UserTypeItem from "./UserTypeItem";
 import NextStepButton from "./NextStepButton";
 import {
@@ -28,6 +29,7 @@ const UserTypeActivity: ActivityComponentType = () => {
     <AppScreen
       appBar={{
         border: false,
+        renderLeft: () => <Logo onActivity />,
       }}
     >
       <Activity>
@@ -90,7 +92,7 @@ const UserTypeActivity: ActivityComponentType = () => {
                       activityName={"NameActivity" as never}
                       params={{ form }}
                       disabled={
-                        !validate({
+                        !validateForm({
                           type: "type",
                           value: field.value,
                         })

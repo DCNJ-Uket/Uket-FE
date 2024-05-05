@@ -3,7 +3,14 @@
 
 import { components, hooks, utils } from "@generouted/react-router/client";
 
-export type Path = `/` | `/login` | `/login/:provider` | `/main` | `/signup`;
+export type Path =
+  | `/`
+  | `/home`
+  | `/login`
+  | `/login/:provider`
+  | `/main`
+  | `/select-univ`
+  | `/signup`;
 
 export type Params = {
   "/login/:provider": { provider: string };
