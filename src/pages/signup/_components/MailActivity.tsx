@@ -48,6 +48,7 @@ const MailActivity: ActivityComponentType<MailParams> = ({ params }) => {
                         placeholder="학교 메일 주소 입력하기"
                         className="border border-formInput"
                         value={field.value || ""}
+                        autoFocus
                       />
                     </FormControl>
                     <FormMessage />

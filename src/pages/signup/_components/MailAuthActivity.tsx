@@ -60,6 +60,7 @@ const MailAuthActivity: ActivityComponentType<MailAuthParams> = ({
                             placeholder="인증 번호 입력하기"
                             className="border-2 border-black"
                             value={field.value || ""}
+                            autoFocus
                           />
                         </FormControl>
                         <FormMessage />
