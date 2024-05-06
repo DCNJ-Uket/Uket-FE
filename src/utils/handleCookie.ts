@@ -13,7 +13,7 @@ interface CookieSetOptions {
 
 const cookies = new Cookies();
 
-export const setCookie = (
+export const setRefreshToken = (
   name: string,
   value: string,
   options?: CookieSetOptions,
@@ -21,6 +21,6 @@ export const setCookie = (
   cookies.set(name, value, { ...options });
 };
 
-export const getCookie = (name: string) => {
+export const getRefreshToken = (name: string) => {
   return cookies.get(name);
 };
