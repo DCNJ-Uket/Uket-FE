@@ -9,6 +9,8 @@ import {
   ActivityHeader,
 } from "./Activity";
 
+import WelecomeImage from "/signupComplete.png";
+
 // TODO: 다음 Stack 이동 로직 변경
 const CompleteActivity: ActivityComponentType = () => {
   return (
@@ -23,7 +25,7 @@ const CompleteActivity: ActivityComponentType = () => {
     >
       <Activity>
         <ActivityContent>
-          <ActivityHeader className="justify-center items-center">
+          <ActivityHeader className="relative justify-center items-center">
             <h1 className="text-lg text-[#5E5E6E]">
               회원가입이 완료되었습니다.
             </h1>
@@ -31,8 +33,13 @@ const CompleteActivity: ActivityComponentType = () => {
               <p>이제 학교 축제 티켓을</p>
               <p>예매하러 가볼까요?</p>
             </h2>
+            <img
+              src={WelecomeImage}
+              alt="가입 완료 이미지"
+              className="absolute h-full animate-ping-dealy"
+            />
           </ActivityHeader>
-          <ActivityFooter>
+          <ActivityFooter className="z-10">
             <NextStepButton
               activityName={"MainActivity" as never}
               disabled={false}

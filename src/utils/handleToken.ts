@@ -12,3 +12,13 @@ export const saveTokenList = (accessToken: string, refreshToken: string) => {
     path: "/",
   });
 };
+
+export const getAccessToken = () => {
+  try {
+    const accessToken = localStorage.getItem("accessToken");
+    
+    return accessToken ? accessToken : null;
+  } catch (error) {
+    return null;
+  }
+};

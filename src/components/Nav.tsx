@@ -1,5 +1,7 @@
 import { useLocation } from "react-router-dom";
 
+import { useAuth } from "@/hooks/useAuth";
+
 import { Button } from "./ui/button";
 import Logo from "./Logo";
 
@@ -11,17 +13,23 @@ const PRIVATE: Path[] = ["/login", "/signup"];
 const Nav = () => {
   const { pathname } = useLocation();
   const isPrivatePath = PRIVATE.includes(pathname as Path);
+  const isAuthenticated = useAuth();
+  const profileComponent = isAuthenticated ? (
+    <Button variant="link" className="p-0 pt-1 font-bold">
+      로그인됨
+    </Button>
+  ) : (
+    <Link to="/login">
+      <Button variant="link" className="p-0 pt-1 font-bold">
+        로그인
+      </Button>
+    </Link>
+  );
 
   return (
     <nav className="container flex justify-between items-center self-stretch my-2 w-full h-10">
       <Logo />
-      {!isPrivatePath && (
-        <Link to="/login">
-          <Button variant="link" className="p-0 pt-1 font-bold">
-            로그인
-          </Button>
-        </Link>
-      )}
+      {!isPrivatePath && profileComponent}
     </nav>
   );
 };

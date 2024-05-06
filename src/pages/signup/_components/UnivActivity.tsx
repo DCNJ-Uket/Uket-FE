@@ -10,6 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+import SearchSelector from "./SearchSelector";
 import NextStepButton from "./NextStepButton";
 import {
   Activity,
@@ -28,7 +29,7 @@ const UnivActivity: ActivityComponentType<UnivParams> = ({ params }) => {
   return (
     <AppScreen appBar={{ border: false }}>
       <Activity>
-        <ActivityContent>
+        <ActivityContent className="gap-10">
           <ActivityHeader>
             <h1 className="text-2xl font-black">
               <p>학교와 학과, 학번을</p>
@@ -36,45 +37,17 @@ const UnivActivity: ActivityComponentType<UnivParams> = ({ params }) => {
             </h1>
           </ActivityHeader>
           <section className="container flex flex-col gap-3 grow">
-            <FormField
-              control={form.control}
-              name="userUniv"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>학교</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="학교 검색"
-                      className="border border-formInput"
-                      autoComplete="off"
-                      isIcon
-                      value={field.value || ""}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+            <SearchSelector
+              form={form}
+              formType="userUniv"
+              label="학교"
+              placeholder="학교 검색"
             />
-            <FormField
-              control={form.control}
-              name="userMajor"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>학과</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="학과 검색"
-                      className="border border-formInput"
-                      autoComplete="off"
-                      isIcon
-                      value={field.value || ""}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+            <SearchSelector
+              form={form}
+              formType="userMajor"
+              label="학과"
+              placeholder="학과 검색"
             />
             <FormField
               control={form.control}
@@ -85,7 +58,7 @@ const UnivActivity: ActivityComponentType<UnivParams> = ({ params }) => {
                   <FormControl>
                     <Input
                       {...field}
-                      placeholder="학번 입력"
+                      placeholder="학번"
                       className="border border-formInput"
                       autoComplete="off"
                       value={field.value || ""}
