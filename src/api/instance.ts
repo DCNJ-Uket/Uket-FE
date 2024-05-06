@@ -1,9 +1,13 @@
 import axios from "axios";
 
-import { getAccessToken } from "@/utils/handleToken";
+import { getAccessToken, setAccessToken } from "@/utils/handleToken";
+
+import { reissue } from "./auth";
 
 const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
 const SERVER_VERSION = "/api/v1";
+
+const AUTH_REQUIRED_PATH = ["/users/register", "/universities"];
 
 export const instance = axios.create({
   baseURL: `${BASE_URL}${SERVER_VERSION}`,
@@ -14,7 +18,7 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use(config => {
-  if (config.url === "/users/register") {
+  if (config.url && AUTH_REQUIRED_PATH.includes(config.url)) {
     const accessToken = getAccessToken();
 
     config.headers.Authorization = `Bearer ${accessToken}`;
@@ -23,6 +27,22 @@ instance.interceptors.request.use(config => {
   return config;
 });
 
-instance.interceptors.response.use(async response => {
-  return response;
-});
+instance.interceptors.response.use(
+  async response => {
+    return response;
+  },
+  async error => {
+    const { status, config } = error.response;
+
+    if (status === 401 && config.url.includes("/universities")) {
+      const newAccessToken = await reissue();
+
+      if (!newAccessToken) return Promise.reject(error);
+      setAccessToken(newAccessToken);
+
+      config.headers.Authorization = `Bearer ${newAccessToken}`;
+
+      return instance(config);
+    }
+  },
+);
