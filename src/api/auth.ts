@@ -65,16 +65,19 @@ export const signup = async ({
 };
 
 export const reissue = async () => {
-  const reissueToken = getRefreshToken("reissueToken");
+  const refreshToken = getRefreshToken("refreshToken");
   const accessToken = getAccessToken();
 
   try {
     const { data } = await instance.post("/auth/reissue", {
       accessToken,
-      reissueToken,
+      refreshToken,
     });
 
-    return data;
+    const { accessToken: newAccessToken } = data;
+    if (!newAccessToken) throw new Error("accessToken reissue error");
+
+    return newAccessToken;
   } catch (error) {
     if (error instanceof AxiosError) {
       throw error;
