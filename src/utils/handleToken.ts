@@ -1,9 +1,5 @@
 import { setCookie } from "./handleCookie";
 
-export const getAccessToken = () => {
-  return localStorage.getItem("accessToken");
-};
-
 export const saveTokenList = (accessToken: string, refreshToken: string) => {
   localStorage.setItem("accessToken", accessToken);
   setCookie("refreshToken", refreshToken, {
@@ -16,7 +12,7 @@ export const saveTokenList = (accessToken: string, refreshToken: string) => {
 export const getAccessToken = () => {
   try {
     const accessToken = localStorage.getItem("accessToken");
-    
+
     return accessToken ? accessToken : null;
   } catch (error) {
     return null;
