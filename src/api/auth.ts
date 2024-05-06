@@ -7,7 +7,7 @@ import { GOOGLE_REDIRECT_URI, KAKAO_REDIRECT_URI } from "@/constants/auth_url";
 import { LoginRequestParams } from "@/types/authType";
 
 import { getAccessToken } from "@/utils/handleToken";
-import { getCookie } from "@/utils/handleCookie";
+import { getRefreshToken } from "@/utils/handleCookie";
 
 import { instance } from "./instance";
 
@@ -65,7 +65,7 @@ export const signup = async ({
 };
 
 export const reissue = async () => {
-  const reissueToken = getCookie("reissueToken");
+  const reissueToken = getRefreshToken("reissueToken");
   const accessToken = getAccessToken();
 
   try {
