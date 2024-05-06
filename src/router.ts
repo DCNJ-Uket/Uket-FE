@@ -10,7 +10,8 @@ export type Path =
   | `/login/:provider`
   | `/main`
   | `/select-univ`
-  | `/signup`;
+  | `/signup`
+  | `/ticket-list`;
 
 export type Params = {
   "/login/:provider": { provider: string };
