@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import { Suspense, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 
@@ -30,7 +31,14 @@ const SelectUnivPage = () => {
           <p>학교를 선택해 주세요.</p>
         </header>
         <section className="grid grid-cols-3 auto-rows-min gap-3 grow md:grid-cols-6">
-          <UnivList selectedUniv={selectedUniv} onSelect={handleSelectUniv} />
+          <ErrorBoundary fallback={<div>Something went wrong.</div>}>
+            <Suspense fallback={<div>Loading...</div>}>
+              <UnivList
+                selectedUniv={selectedUniv}
+                onSelect={handleSelectUniv}
+              />
+            </Suspense>
+          </ErrorBoundary>
         </section>
       </main>
       <footer className="container flex sticky bottom-5 flex-col justify-center items-center w-full">
