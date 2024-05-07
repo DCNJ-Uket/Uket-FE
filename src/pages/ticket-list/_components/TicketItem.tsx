@@ -1,6 +1,21 @@
-const TicketItem = () => {
+import { cn } from "@/lib/utils";
+
+interface TicketItemProps {
+  selected?: boolean;
+  onSelect: () => void;
+}
+
+const TicketItem = (props: TicketItemProps) => {
+  const { selected, onSelect } = props;
+
   return (
-    <div className="grid max-h-[500px] w-full min-w-[300px] cursor-pointer grid-cols-1 grid-rows-5 items-center justify-center divide-y divide-dashed">
+    <div
+      className={cn(
+        "grid h-[500px] min-w-[287px] cursor-pointer grid-cols-1 grid-rows-5 items-center justify-center divide-y divide-dashed opacity-50",
+        selected && "opacity-100",
+      )}
+      onClick={onSelect}
+    >
       <div className="row-span-4 grid h-full grid-flow-col grid-rows-2 gap-3.5 rounded-b-3xl  rounded-t-lg bg-white p-4 shadow-lg">
         <div className="h-full w-full rounded-lg bg-green-800"></div>
         <div className="flex w-full flex-col justify-around p-[3px]">
