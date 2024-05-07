@@ -1,13 +1,3 @@
-import { setRefreshToken } from "./handleCookie";
-
-export const saveTokenList = (accessToken: string, refreshToken: string) => {
-  localStorage.setItem("accessToken", accessToken);
-  setRefreshToken("refreshToken", refreshToken, {
-    maxAge: 60 * 60 * 24 * 14,
-    path: "/",
-  });
-};
-
 export const setAccessToken = (accessToken: string) => {
   localStorage.setItem("accessToken", accessToken);
 };

@@ -2,7 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 
 import { AuthResponse } from "@/types/authType";
 
-import { saveTokenList } from "@/utils/handleToken";
+import { setAccessToken } from "@/utils/handleToken";
+import { setRefreshToken } from "@/utils/handleCookie";
 
 import { reissue } from "@/api/auth";
 
@@ -10,7 +11,11 @@ export const useMutationReissue = () => {
   const mutation = useMutation({
     mutationFn: reissue,
     onSuccess: ({ accessToken, refreshToken }: AuthResponse) => {
-      saveTokenList(accessToken, refreshToken);
+      setAccessToken(accessToken);
+      setRefreshToken("refreshToken", refreshToken, {
+        maxAge: 60 * 60 * 24 * 14,
+        path: "/",
+      });
     },
     onError: error => {
       console.error(error);

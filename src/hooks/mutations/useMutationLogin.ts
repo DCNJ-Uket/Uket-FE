@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 
 import { AuthResponse, LoginRequestParams } from "@/types/authType";
 
-import { saveTokenList } from "@/utils/handleToken";
+import { setAccessToken } from "@/utils/handleToken";
 import { setRefreshToken } from "@/utils/handleCookie";
 
 import { useNavigate } from "@/router";
@@ -15,8 +15,11 @@ export const useMutationLogin = () => {
     mutationFn: ({ code, provider }: LoginRequestParams) =>
       login({ code, provider }),
     onSuccess: ({ accessToken, refreshToken, isRegistered }: AuthResponse) => {
-      saveTokenList(accessToken, refreshToken);
-      setRefreshToken("refreshToken", refreshToken);
+      setAccessToken(accessToken);
+      setRefreshToken("refreshToken", refreshToken, {
+        maxAge: 60 * 60 * 24 * 14,
+        path: "/",
+      });
 
       if (isRegistered) {
         navigate("/main", {

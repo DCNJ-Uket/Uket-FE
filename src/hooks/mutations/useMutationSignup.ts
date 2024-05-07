@@ -4,7 +4,8 @@ import { FormSchemaType } from "@/hooks/useStackForm";
 
 import { AuthResponse } from "@/types/authType";
 
-import { saveTokenList } from "@/utils/handleToken";
+import { setAccessToken } from "@/utils/handleToken";
+import { setRefreshToken } from "@/utils/handleCookie";
 
 import { signup } from "@/api/auth";
 
@@ -20,7 +21,11 @@ export const useMutationSignup = () => {
     }: Partial<FormSchemaType>) =>
       signup({ userType, userName, userPhone, userUniv, userId, userMajor }),
     onSuccess: ({ accessToken, refreshToken }: AuthResponse) => {
-      saveTokenList(accessToken, refreshToken);
+      setAccessToken(accessToken);
+      setRefreshToken("refreshToken", refreshToken, {
+        maxAge: 60 * 60 * 24 * 14,
+        path: "/",
+      });
     },
     onError: error => {
       console.error(error);
