@@ -6,6 +6,9 @@ import { GOOGLE_REDIRECT_URI, KAKAO_REDIRECT_URI } from "@/constants/auth_url";
 
 import { LoginRequestParams } from "@/types/authType";
 
+import { getAccessToken } from "@/utils/handleToken";
+import { getRefreshToken } from "@/utils/handleCookie";
+
 import { instance } from "./instance";
 
 // export interface SignUpData
@@ -35,7 +38,7 @@ export const signup = async ({
   userId,
   userMajor,
 }: Partial<FormSchemaType>) => {
-  const isUnivStudnet = userType === "univ";
+  const isUnivStudent = userType === "univ";
   const baseBody = {
     depositorName: userName,
     phoneNumber: userPhone,
@@ -50,10 +53,31 @@ export const signup = async ({
   try {
     const { data } = await instance.post(
       "/users/register",
-      isUnivStudnet ? univBody : baseBody,
+      isUnivStudent ? univBody : baseBody,
     );
 
     return data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      throw error;
+    }
+  }
+};
+
+export const reissue = async () => {
+  const refreshToken = getRefreshToken("refreshToken");
+  const accessToken = getAccessToken();
+
+  try {
+    const { data } = await instance.post("/auth/reissue", {
+      accessToken,
+      refreshToken,
+    });
+
+    const { accessToken: newAccessToken } = data;
+    if (!newAccessToken) throw new Error("accessToken reissue error");
+
+    return newAccessToken;
   } catch (error) {
     if (error instanceof AxiosError) {
       throw error;
