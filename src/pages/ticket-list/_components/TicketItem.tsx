@@ -32,10 +32,10 @@ const TicketItem = (props: TicketItemProps) => {
         <div className="h-full w-full rounded-lg bg-green-800"></div>
         <div className="flex w-full flex-col justify-around p-[3px]">
           <div>
-            <p className="text-[12px] text-[#5E5E6E]">건국대</p>
+            <p className="text-xs text-[#5E5E6E]">건국대</p>
             <p className="text-xl font-black">녹색지대 Day 1</p>
           </div>
-          <div className="grid max-h-max w-full grid-cols-2 grid-rows-2 gap-1.5 text-[12px]">
+          <div className="grid max-h-max w-full grid-cols-2 grid-rows-2 gap-1.5 text-xs">
             <div>
               <p className="font-bold">예매자</p>
               <p className="text-[#5E5E6E]">김건국</p>
