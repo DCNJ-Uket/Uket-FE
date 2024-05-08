@@ -11,6 +11,7 @@ export type Path =
   | `/main`
   | `/select-univ`
   | `/signup`
+  | `/ticket-detail`
   | `/ticket-list`;
 
 export type Params = {
