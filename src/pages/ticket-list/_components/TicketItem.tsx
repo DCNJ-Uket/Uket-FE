@@ -1,3 +1,6 @@
+import { useState } from "react";
+
+import { useNavigate } from "@/router";
 import { cn } from "@/lib/utils";
 
 interface TicketItemProps {
@@ -5,8 +8,17 @@ interface TicketItemProps {
   onSelect: () => void;
 }
 
+// TODO: 추후에 qr코드 추가 + qr 클릭시 티켓 상세화면으로 이동 및 화면 밝아지는 기능 추가
 const TicketItem = (props: TicketItemProps) => {
   const { selected, onSelect } = props;
+  const [clickQR, setClickQR] = useState(false);
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    setClickQR(!clickQR);
+    if (!clickQR) return;
+    navigate("/ticket-detail");
+  };
 
   return (
     <div
@@ -47,8 +59,11 @@ const TicketItem = (props: TicketItemProps) => {
         <div className="self-end text-[10px] text-[#7250FD]">
           102389751(일련번호)
         </div>
-        {/* 추후에 qr코드 추가 */}
-        <div className="aspect-square h-full min-h-[60px] self-center bg-black"></div>
+        {/* 추후에 qr코드 추가 + qr 클릭시 티켓 상세화면으로 이동 및 화면 밝아지기 */}
+        <div
+          className="aspect-square h-full min-h-[60px] self-center bg-black"
+          onClick={handleNavigate}
+        ></div>
       </div>
     </div>
   );
