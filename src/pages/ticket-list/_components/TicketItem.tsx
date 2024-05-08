@@ -8,7 +8,7 @@ interface TicketItemProps {
   onSelect: () => void;
 }
 
-// TODO: 추후에 qr코드 추가 + qr 클릭시 티켓 상세화면으로 이동 및 화면 밝아지는 기능 추가
+// TODO: 추후에 qr코드 추가, 상세페이지 경로 수정
 const TicketItem = (props: TicketItemProps) => {
   const { selected, onSelect } = props;
   const [clickQR, setClickQR] = useState(false);
@@ -28,7 +28,7 @@ const TicketItem = (props: TicketItemProps) => {
       )}
       onClick={onSelect}
     >
-      <div className="row-span-4 grid h-full grid-flow-col grid-rows-2 gap-3.5 rounded-b-3xl  rounded-t-lg bg-white p-4 shadow-lg">
+      <div className="row-span-4 grid h-full grid-flow-col grid-rows-2 gap-3.5 rounded-b-[27px]  rounded-t-[9px] bg-white p-4 shadow-lg">
         <div className="h-full w-full rounded-lg bg-green-800"></div>
         <div className="flex w-full flex-col justify-around p-[3px]">
           <div>
@@ -59,7 +59,6 @@ const TicketItem = (props: TicketItemProps) => {
         <div className="self-end text-[10px] text-[#7250FD]">
           102389751(일련번호)
         </div>
-        {/* 추후에 qr코드 추가 + qr 클릭시 티켓 상세화면으로 이동 및 화면 밝아지기 */}
         <div
           className="aspect-square h-full min-h-[60px] self-center bg-black"
           onClick={handleNavigate}
