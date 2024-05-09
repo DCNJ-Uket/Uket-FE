@@ -1,3 +1,14 @@
+export type FestivalInfo = {
+  id: number;
+  name: string;
+  startDate: string;
+  endDate: string;
+  location: string;
+  banners: { url: string }[];
+};
+
+export type FestivalInfoResponse = FestivalInfo;
+
 export type FestivalUniversity = {
   id: number;
   name: string;
