@@ -11,7 +11,7 @@ export const useQueryUnivOrMajor = <T extends UniversityInfo | MajorInfo>(
   const debouncedQuery = useDebounce(query, 500);
 
   const { data, error } = useQuery<T[] | undefined, Error>({
-    queryKey: ["univ-list", debouncedQuery],
+    queryKey: ["univ-or-major", debouncedQuery],
     queryFn: () => callback(debouncedQuery),
     enabled: !!debouncedQuery,
   });
