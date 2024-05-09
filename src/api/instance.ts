@@ -7,7 +7,7 @@ import { reissue } from "./auth";
 const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
 const SERVER_VERSION = "/api/v1";
 
-const AUTH_REQUIRED_PATH = ["/users/register", "/universities"];
+const AUTH_REQUIRED_PATH = ["/users/register"];
 
 export const instance = axios.create({
   baseURL: `${BASE_URL}${SERVER_VERSION}`,
