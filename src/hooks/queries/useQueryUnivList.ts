@@ -1,11 +1,11 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 
-import { getUniversityList } from "@/api/univ";
+import { getFestivalUniversityList } from "@/api/univ";
 
 export const useQueryUnivList = () => {
   const { data, error } = useSuspenseQuery({
     queryKey: ["univ-search"],
-    queryFn: getUniversityList,
+    queryFn: getFestivalUniversityList,
     staleTime: 10000,
     gcTime: 300000,
   });
