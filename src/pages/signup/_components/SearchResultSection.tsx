@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { useQueryUnivOrMajor } from "@/hooks/queries/useQueryUniv";
+import { useQueryUnivOrMajor } from "@/hooks/queries/useQueryUnivOrMajor";
 
 import { MajorInfo, UniversityInfo } from "@/types/univType";
 
