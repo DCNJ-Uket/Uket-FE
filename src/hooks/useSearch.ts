@@ -1,8 +1,6 @@
 import { Control, useWatch } from "react-hook-form";
 import { useEffect, useState } from "react";
 
-import { UNIVERSITY_LIST } from "@/constants/university_list";
-
 import { FormType } from "./useStackForm";
 
 interface UseSearchProps {
@@ -21,10 +19,10 @@ export const useSearch = ({
   callback,
 }: UseSearchProps) => {
   const [selectedItem, setSelectedItem] = useState(placeholder);
-  const [searchedResult, setSearchedResult] = useState([]);
   const value = useWatch({
     control: control as Control,
     name: formType,
+    defaultValue: placeholder,
   });
 
   const handleSelectItem = (item: string) => {
@@ -34,11 +32,8 @@ export const useSearch = ({
   };
 
   useEffect(() => {
-    const result = UNIVERSITY_LIST.filter(item => item.includes(value));
-    if (!result) return;
-
-    setSearchedResult(result as never);
+    setSelectedItem(value);
   }, [value]);
 
-  return { selectedItem, searchedResult, value, handleSelectItem };
+  return { selectedItem, value, handleSelectItem };
 };
