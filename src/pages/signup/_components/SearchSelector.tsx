@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import { Suspense, useState } from "react";
 import { Search } from "lucide-react";
 
 import { Separator } from "@/components/ui/separator";
@@ -20,6 +21,9 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { FormSchemaType, FormType } from "@/hooks/useStackForm";
+import { useSearch } from "@/hooks/useSearch";
+
+import SearchResultSection from "./SearchResultSection";
 
 type formType = "userUniv" | "userMajor";
 
@@ -34,9 +38,13 @@ const SearchSelector = (props: UnivSearchProps) => {
   const { form, formType, label, placeholder } = props;
   const sublabel = label === "학교" ? "학교명" : "학과명";
   const [open, setOpen] = useState(false);
-  const selectedValue = useMemo(() => {
-    return form.getValues(formType) ? form.getValues(formType) : placeholder;
-  }, [form, formType, placeholder]);
+  const { selectedItem, value, handleSelectItem } = useSearch({
+    form,
+    control: form.control,
+    formType,
+    placeholder,
+    callback: setOpen,
+  });
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
@@ -47,7 +55,7 @@ const SearchSelector = (props: UnivSearchProps) => {
         >
           <p className="absolute left-0 -top-7">{label}</p>
           <Search className="w-5 h-5 text-gray-500" />
-          <span className="text-slate-500">{selectedValue}</span>
+          <span className="text-slate-500">{selectedItem || value}</span>
         </Button>
       </DrawerTrigger>
       <DrawerContent>
@@ -79,7 +87,15 @@ const SearchSelector = (props: UnivSearchProps) => {
           </DrawerHeader>
           <Separator className="bg-brand" />
           <DrawerFooter className="px-10 py-7 h-80 text-base">
-            {/* // TODO: API 호출로 학교, 학과 목록으로 교체 */}
+            <ErrorBoundary fallback={<div>Something went wrong.</div>}>
+              <Suspense fallback={<div>Loading...</div>}>
+                <SearchResultSection
+                  value={value}
+                  formType={formType}
+                  onSelect={handleSelectItem}
+                />
+              </Suspense>
+            </ErrorBoundary>
           </DrawerFooter>
         </div>
       </DrawerContent>
