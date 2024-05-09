@@ -12,7 +12,13 @@ interface UnivItemProps extends Pick<FestivalUniversity, "logoUrl" | "name"> {
 const UnivItem = (props: UnivItemProps) => {
   const { selected, onSelect, name, logoUrl } = props;
   const univLogo = logoUrl ? (
-    <img src={logoUrl} alt={name} width={100} loading="lazy" />
+    <img
+      src={logoUrl}
+      alt={name}
+      width={200}
+      loading="lazy"
+      className="object-cover"
+    />
   ) : (
     <Skeleton className="w-full h-full rounded-full" />
   );
