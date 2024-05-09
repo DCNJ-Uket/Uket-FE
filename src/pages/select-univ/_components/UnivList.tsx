@@ -3,19 +3,19 @@ import { useQueryFestivalUnivList } from "@/hooks/queries/useQueryFestivalUnivLi
 import UnivItem from "./UnivItem";
 
 interface UnivListProps {
-  selectedUniv: string | null;
-  onSelect: (name: string) => void;
+  selectedUnivId: number | null;
+  onSelect: (id: number, name: string) => void;
 }
 
 const UnivList = (props: UnivListProps) => {
-  const { selectedUniv, onSelect } = props;
+  const { selectedUnivId, onSelect } = props;
   const { data: univList } = useQueryFestivalUnivList();
 
   return univList!.map(({ id, name, logoUrl }) => (
     <UnivItem
       key={id}
-      selected={selectedUniv === name}
-      onSelect={() => onSelect(name)}
+      selected={selectedUnivId === id}
+      onSelect={() => onSelect(id, name)}
       logoUrl={logoUrl}
       name={name}
     />
