@@ -21,7 +21,7 @@ const FestivalSection = (props: FestivalSectionProps) => {
         </div>
         <div className="space-y-2">
           <h1 className="text-lg font-bold">입장 위치</h1>
-          <FestivalMap />
+          <FestivalMap festivalLocation={data?.location} />
         </div>
       </div>
     </section>
