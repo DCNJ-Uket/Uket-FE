@@ -1,7 +1,15 @@
+import { useState } from "react";
+
 import WhiteLogo from "@/components/WhiteLogo";
+
+import CancelModal from "./_components/CancelModal";
 
 const TicketDetail = () => {
   // TODO: 화면 밝기 높아지게 구현해야함 + 예매 취소시에 팝업창 띄우기
+  const [modalOpen, setModalOpen] = useState(false);
+  const handleCancelTicket = () => {
+    setModalOpen(true);
+  };
 
   return (
     <main className="relative flex h-full flex-col items-center justify-evenly bg-green-800 opacity-75">
@@ -56,9 +64,18 @@ const TicketDetail = () => {
             <div className="my-[1%] w-full border-[1px] border-[#5E5E6E]"></div>
 
             <div className="px-[2px]">
-              <p className="text-xs text-[#FD724F] underline decoration-solid">
+              <p
+                className="w-fit text-xs text-[#FD724F] underline decoration-solid"
+                onClick={handleCancelTicket}
+              >
                 예매취소
               </p>
+              {modalOpen ? (
+                <CancelModal
+                  modalOpen={modalOpen}
+                  setModalOpen={setModalOpen}
+                />
+              ) : null}
             </div>
           </div>
         </div>
