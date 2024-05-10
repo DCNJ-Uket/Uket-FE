@@ -60,7 +60,7 @@ const Carousel = (props: PropType) => {
   }, [emblaApi, updateSlidesInView]);
 
   return (
-    <section className="w-full h-44 embla">
+    <section className="w-full h-44 rounded-lg shadow-md embla">
       <div className="w-full h-full embla__viewport" ref={emblaRef}>
         <div className="h-full embla__container">{slideComponent}</div>
         <div className="embla__controls">
