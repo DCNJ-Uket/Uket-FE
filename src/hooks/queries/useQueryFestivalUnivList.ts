@@ -4,9 +4,9 @@ import { getFestivalUniversityList } from "@/api/univ";
 
 export const useQueryFestivalUnivList = () => {
   const { data, error } = useSuspenseQuery({
-    queryKey: ["univ-search"],
+    queryKey: ["univ-select"],
     queryFn: getFestivalUniversityList,
-    staleTime: 10000,
+    staleTime: 20000,
     gcTime: 300000,
   });
 
