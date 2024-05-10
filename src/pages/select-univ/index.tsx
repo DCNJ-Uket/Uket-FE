@@ -1,9 +1,10 @@
-import { ErrorBoundary } from "react-error-boundary";
 import { Suspense, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import RetryErrorBoundary from "@/components/RetryErrorBoundary";
 
 import UnivList from "./_components/UnivList";
+import UnivListFallback from "./_components/fallback/UnivListFallback";
 
 import { useNavigate } from "@/router";
 import { cn } from "@/lib/utils";
@@ -36,14 +37,14 @@ const SelectUnivPage = () => {
           <p>학교를 선택해 주세요.</p>
         </header>
         <section className="grid grid-cols-3 auto-rows-min gap-3 grow md:grid-cols-6">
-          <ErrorBoundary fallback={<div>Something went wrong.</div>}>
-            <Suspense fallback={<div>Loading...</div>}>
+          <RetryErrorBoundary>
+            <Suspense fallback={<UnivListFallback />}>
               <UnivList
                 selectedUnivId={selectedUnivId}
                 onSelect={handleSelectUniv}
               />
             </Suspense>
-          </ErrorBoundary>
+          </RetryErrorBoundary>
         </section>
       </main>
       <footer className="container flex sticky bottom-5 flex-col justify-center items-center w-full">
