@@ -18,7 +18,7 @@ const FestivalMap = (props: FestivalMapProps) => {
     <Map
       id="map"
       center={{ lat: 33.5563, lng: 126.79581 }}
-      className="w-full h-40 rounded-lg shadow-md"
+      className="w-full h-40 rounded-lg shadow-md sm:h-80 lg:h-96"
       onCreate={initializeMap}
     >
       {marker && position && (
