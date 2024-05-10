@@ -6,6 +6,7 @@ import RetryErrorBoundary from "@/components/RetryErrorBoundary";
 
 import UnivSelector from "./_components/UnivSelector";
 import FestivalSection from "./_components/FestivalSection";
+import FestivalSectionFallback from "./_components/fallback/FestivalSectionFallback";
 
 const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -23,7 +24,7 @@ const HomePage = () => {
       <main className="container flex flex-col gap-3 mt-2 w-full h-full bg-white">
         <UnivSelector currentUniv={univName} onSelect={handleSelectUnivItem} />
         <RetryErrorBoundary>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<FestivalSectionFallback />}>
             <FestivalSection univId={univId} />
           </Suspense>
         </RetryErrorBoundary>
