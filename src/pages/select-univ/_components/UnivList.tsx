@@ -1,4 +1,4 @@
-import { useQueryUnivList } from "@/hooks/queries/useQueryUnivList";
+import { useQueryFestivalUnivList } from "@/hooks/queries/useQueryFestivalUnivList";
 
 import UnivItem from "./UnivItem";
 
@@ -9,7 +9,7 @@ interface UnivListProps {
 
 const UnivList = (props: UnivListProps) => {
   const { selectedUniv, onSelect } = props;
-  const { data: univList } = useQueryUnivList();
+  const { data: univList } = useQueryFestivalUnivList();
 
   return univList!.map(({ id, name, logoUrl }) => (
     <UnivItem

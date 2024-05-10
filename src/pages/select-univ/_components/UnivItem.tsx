@@ -1,10 +1,10 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { UniversityInfo } from "@/types/univType";
+import { FestivalUniversity } from "@/types/univType";
 
 import { cn } from "@/lib/utils";
 
-interface UnivItemProps extends Pick<UniversityInfo, "logoUrl" | "name"> {
+interface UnivItemProps extends Pick<FestivalUniversity, "logoUrl" | "name"> {
   selected?: boolean;
   onSelect: () => void;
 }
