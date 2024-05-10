@@ -2,6 +2,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 import { useQueryFestivalInfoByUniversity } from "@/hooks/queries/useQueryFestivalByUniversity";
 
+import Carousel from "./carousel/Carousel";
+
 interface FestivalSectionProps {
   univId: string | null;
 }
@@ -9,7 +11,6 @@ interface FestivalSectionProps {
 // TODO: 카카오 지도에 API 응답으로 얻은 위치 연결 & 배너 이미지 슬라이더 구현
 const FestivalSection = (props: FestivalSectionProps) => {
   const { univId } = props;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { data } = useQueryFestivalInfoByUniversity(univId);
 
   return (
@@ -17,9 +18,7 @@ const FestivalSection = (props: FestivalSectionProps) => {
       <div className="flex flex-col gap-3">
         <div className="space-y-2">
           <h1 className="text-lg font-bold">축제 일정﹒라인업</h1>
-          <div>
-            <Skeleton className="w-full h-44 rounded-lg" />
-          </div>
+          <Carousel slides={data?.banners} />
         </div>
         <div className="space-y-2">
           <h1 className="text-lg font-bold">입장 위치</h1>
