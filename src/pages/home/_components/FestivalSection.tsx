@@ -1,7 +1,6 @@
-import { Skeleton } from "@/components/ui/skeleton";
-
 import { useQueryFestivalInfoByUniversity } from "@/hooks/queries/useQueryFestivalByUniversity";
 
+import FestivalMap from "./map/FestivalMap";
 import Carousel from "./carousel/Carousel";
 
 interface FestivalSectionProps {
@@ -22,9 +21,7 @@ const FestivalSection = (props: FestivalSectionProps) => {
         </div>
         <div className="space-y-2">
           <h1 className="text-lg font-bold">입장 위치</h1>
-          <div>
-            <Skeleton className="w-full h-40 rounded-lg" />
-          </div>
+          <FestivalMap />
         </div>
       </div>
     </section>
