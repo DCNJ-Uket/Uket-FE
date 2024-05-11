@@ -56,7 +56,7 @@ const TicketItem = (props: TicketItemProps) => {
         </div>
       </div>
       <div className="flex h-full w-full flex-row justify-between rounded-b-lg rounded-t-3xl bg-white p-5 shadow-lg">
-        <div className="self-end text-[10px] text-[#7250FD]">
+        <div className="self-end text-[10px] text-brand">
           102389751(일련번호)
         </div>
         <div

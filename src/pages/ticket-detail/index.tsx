@@ -22,7 +22,7 @@ const TicketDetail = () => {
         <div className="flex h-full w-full flex-col gap-5 rounded-t-[9px] bg-white shadow-lg">
           <div className="mx-[88px] mt-14">
             <div className="mx-auto aspect-square max-h-[300px] min-h-[168px] min-w-[168px] max-w-[300px] bg-black"></div>
-            <div className="mt-2 text-center text-[10px] text-[#7250FD]">
+            <div className="mt-2 text-center text-[10px] text-brand">
               102389751
             </div>
           </div>
