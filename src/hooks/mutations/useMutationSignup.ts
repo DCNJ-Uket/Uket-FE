@@ -19,7 +19,14 @@ export const useMutationSignup = () => {
       userId,
       userMajor,
     }: Partial<FormSchemaType>) =>
-      signup({ userType, userName, userPhone, userUniv, userId, userMajor }),
+      signup({
+        userType,
+        userName,
+        userPhone,
+        userUniv,
+        userId,
+        userMajor,
+      }),
     onSuccess: ({ accessToken, refreshToken }: AuthResponse) => {
       setAccessToken(accessToken);
       setRefreshToken("refreshToken", refreshToken, {
@@ -28,8 +35,9 @@ export const useMutationSignup = () => {
       });
     },
     onError: error => {
-      console.error(error);
+      throw error;
     },
+    throwOnError: true,
   });
 
   return mutation;
