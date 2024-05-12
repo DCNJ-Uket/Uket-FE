@@ -39,7 +39,7 @@ export const FormSchema = z
   });
 
 export const useStackForm = () => {
-  const { mutate } = useMutationSignup();
+  const { mutateAsync } = useMutationSignup();
 
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
@@ -50,10 +50,10 @@ export const useStackForm = () => {
     mode: "onChange",
   });
 
-  const onSubmit = (data: FormSchemaType) => {
+  const onSubmit = async (data: FormSchemaType) => {
     const { userType, userName, userPhone, userUniv, userId, userMajor } = data;
 
-    mutate({
+    await mutateAsync({
       userType,
       userName,
       userPhone,
