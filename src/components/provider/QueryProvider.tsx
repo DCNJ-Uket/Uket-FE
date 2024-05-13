@@ -4,9 +4,15 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      throwOnError: false,
+      throwOnError: true,
       refetchOnWindowFocus: false,
       retry: false,
+    },
+    mutations: {
+      onError: error => {
+        throw error;
+      },
+      throwOnError: true,
     },
   },
 });

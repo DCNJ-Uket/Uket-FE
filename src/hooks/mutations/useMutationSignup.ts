@@ -18,7 +18,7 @@ export const useMutationSignup = () => {
       userUniv,
       userId,
       userMajor,
-    }: Partial<FormSchemaType>) =>
+          }: Partial<FormSchemaType>) =>
       signup({
         userType,
         userName,
@@ -26,7 +26,7 @@ export const useMutationSignup = () => {
         userUniv,
         userId,
         userMajor,
-      }),
+              }),
     onSuccess: ({ accessToken, refreshToken }: AuthResponse) => {
       setAccessToken(accessToken);
       setRefreshToken("refreshToken", refreshToken, {
@@ -34,10 +34,6 @@ export const useMutationSignup = () => {
         path: "/",
       });
     },
-    onError: error => {
-      throw error;
-    },
-    throwOnError: true,
   });
 
   return mutation;

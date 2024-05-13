@@ -31,9 +31,6 @@ export const useMutationLogin = () => {
         });
       }
     },
-    onError: error => {
-      console.error(error);
-    },
   });
 
   return mutation;

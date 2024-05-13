@@ -17,9 +17,6 @@ export const useMutationReissue = () => {
         path: "/",
       });
     },
-    onError: error => {
-      console.error(error);
-    },
   });
 
   return mutation;
