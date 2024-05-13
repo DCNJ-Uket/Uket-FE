@@ -1,10 +1,13 @@
 import { useState } from "react";
 
+import CellItem from "./CellItem";
+
 import { useNavigate } from "@/router";
 import { cn } from "@/lib/utils";
 
+
 interface TicketItemProps {
-  selected?: boolean;
+  selected: boolean;
   onSelect: () => void;
 }
 
@@ -36,22 +39,10 @@ const TicketItem = (props: TicketItemProps) => {
             <p className="text-xl font-black">녹색지대 Day 1</p>
           </div>
           <div className="grid max-h-max w-full grid-cols-2 grid-rows-2 gap-1.5 text-xs">
-            <div>
-              <p className="font-bold">예매자</p>
-              <p className="text-[#5E5E6E]">김건국</p>
-            </div>
-            <div>
-              <p className="font-bold">입장 날짜</p>
-              <p className="text-[#5E5E6E]">10월 24일(수)</p>
-            </div>
-            <div>
-              <p className="font-bold">위치(공연장)</p>
-              <p className="text-[#5E5E6E]">건국대학교 노천극장</p>
-            </div>
-            <div>
-              <p className="font-bold">입장 시간</p>
-              <p className="text-[#5E5E6E]">17:00~17:20</p>
-            </div>
+            <CellItem title={"예매자"} content={"김건국"} />
+            <CellItem title={"입장 날짜"} content={"10월 24일(수)"} />
+            <CellItem title={"위치(공연장)"} content={"건국대학교 노천극장"} />
+            <CellItem title={"입장 시간"} content={"17:00~17:20"} />
           </div>
         </div>
       </div>

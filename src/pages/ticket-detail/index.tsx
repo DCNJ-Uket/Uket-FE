@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import WhiteLogo from "@/components/WhiteLogo";
 
+import CellItem from "./_components/CellItem";
 import CancelModal from "./_components/CancelModal";
 
 const TicketDetail = () => {
@@ -35,30 +36,15 @@ const TicketDetail = () => {
             <div className="my-[1%] w-full border-[1px] border-[#5E5E6E]"></div>
 
             <div className="grid max-h-max w-full grid-cols-2 grid-rows-3 gap-2 px-[2px] text-[12px]">
-              <div>
-                <p className="font-bold">예매자</p>
-                <p className="text-[#5E5E6E]">김건국</p>
-              </div>
-              <div>
-                <p className="font-bold">입장 날짜</p>
-                <p className="text-[#5E5E6E]">10월 24일(수)</p>
-              </div>
-              <div>
-                <p className="font-bold">위치(공연장)</p>
-                <p className="text-[#5E5E6E]">건국대학교 노천극장</p>
-              </div>
-              <div>
-                <p className="font-bold">입장 시간</p>
-                <p className="text-[#5E5E6E]">17:00~17:20</p>
-              </div>
-              <div>
-                <p className="font-bold">구매 일시</p>
-                <p className="text-[#5E5E6E]">24년 04월 01일 (월)</p>
-              </div>
-              <div>
-                <p className="font-bold">회원구분</p>
-                <p className="text-[#5E5E6E]">대학생 / 재학생</p>
-              </div>
+              <CellItem title={"예매자"} content={"김건국"} />
+              <CellItem title={"입장 날짜"} content={"10월 24일(수)"} />
+              <CellItem
+                title={"위치(공연장)"}
+                content={"건국대학교 노천극장"}
+              />
+              <CellItem title={"입장 시간"} content={"17:00~17:20"} />
+              <CellItem title={"구매 일시"} content={"24년 04월 01일 (월)"} />
+              <CellItem title={"회원구분"} content={"대학생 / 재학생"} />
             </div>
 
             <div className="my-[1%] w-full border-[1px] border-[#5E5E6E]"></div>
