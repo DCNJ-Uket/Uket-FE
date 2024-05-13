@@ -7,7 +7,7 @@ const App = () => {
   const { pathname } = useLocation();
   return (
     <section className="relative flex h-dvh w-screen flex-col">
-      {pathname !== ("/" && "/ticket-detail") && (
+      {!["/", "/ticket-detail"].includes(pathname) && (
         <header className="sticky left-0 top-0 z-10 bg-white">
           <Nav />
         </header>
