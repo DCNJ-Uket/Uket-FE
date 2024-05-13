@@ -15,13 +15,11 @@ const CancelModal = (props: CancelModalPops) => {
   const [selectYes, setSelectYes] = useState(false);
   const navigate = useNavigate();
 
-  const handleYesClick = () => {
-    setSelectYes(true);
-  };
-
-  const handleNoClick = () => {
-    setSelectYes(false);
-    setModalOpen(false);
+  const handleClick = () => {
+    setSelectYes(!selectYes);
+    if (!selectYes) {
+      setModalOpen(false);
+    }
   };
 
   const handleNavigate = () => {
@@ -39,13 +37,13 @@ const CancelModal = (props: CancelModalPops) => {
         <div className="flex gap-3">
           <Button
             className="w-full rounded-xl bg-brand p-6 text-base font-black text-[#D6D6D6]  hover:bg-brand/80 sm:w-80"
-            onClick={handleYesClick}
+            onClick={handleClick}
           >
             예
           </Button>
           <Button
             className="w-full rounded-xl bg-[#8B8B8B] p-6 text-base font-black text-[#D6D6D6]  hover:bg-[#8B8B8B]/80 sm:w-80"
-            onClick={handleNoClick}
+            onClick={handleClick}
           >
             아니오
           </Button>
