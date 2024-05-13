@@ -7,7 +7,6 @@ interface FestivalSectionProps {
   univId: string | null;
 }
 
-// TODO: 카카오 지도에 API 응답으로 얻은 위치 연결 & 배너 이미지 슬라이더 구현
 const FestivalSection = (props: FestivalSectionProps) => {
   const { univId } = props;
   const { data } = useQueryFestivalInfoByUniversity(univId);
