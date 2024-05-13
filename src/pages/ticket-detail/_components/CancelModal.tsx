@@ -6,11 +6,11 @@ import { useNavigate } from "@/router";
 
 interface CancelModalPops {
   modalOpen: boolean;
-  setModalOpen: (modalOpen: boolean) => void;
+  onOpenModal: (modalOpen: boolean) => void;
 }
 
 const CancelModal = (props: CancelModalPops) => {
-  const { setModalOpen } = props;
+  const { onOpenModal } = props;
 
   const [selectYes, setSelectYes] = useState(false);
   const navigate = useNavigate();
@@ -18,12 +18,12 @@ const CancelModal = (props: CancelModalPops) => {
   const handleClick = () => {
     setSelectYes(!selectYes);
     if (!selectYes) {
-      setModalOpen(false);
+      onOpenModal(false);
     }
   };
 
   const handleNavigate = () => {
-    setModalOpen(false);
+    onOpenModal(false);
     navigate("/ticket-list");
   };
 

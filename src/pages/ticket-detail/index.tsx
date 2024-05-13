@@ -6,10 +6,10 @@ import CellItem from "./_components/CellItem";
 import CancelModal from "./_components/CancelModal";
 
 const TicketDetail = () => {
-  // TODO: 화면 밝기 높아지게 구현해야함 + 예매 취소시에 팝업창 띄우기
-  const [modalOpen, setModalOpen] = useState(false);
+  // TODO: 화면 밝기 높아지게 구현해야함 + Figma 디자인에 따라 모달 수정
+  const [modalOpen, onModalOpen] = useState(false);
   const handleCancelTicket = () => {
-    setModalOpen(true);
+    onModalOpen(true);
   };
 
   return (
@@ -57,10 +57,7 @@ const TicketDetail = () => {
                 예매취소
               </p>
               {modalOpen ? (
-                <CancelModal
-                  modalOpen={modalOpen}
-                  setModalOpen={setModalOpen}
-                />
+                <CancelModal modalOpen={modalOpen} onOpenModal={onModalOpen} />
               ) : null}
             </div>
           </div>
