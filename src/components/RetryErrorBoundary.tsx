@@ -1,4 +1,5 @@
 import { ErrorBoundary } from "react-error-boundary";
+import { isAxiosError } from "axios";
 import { useQueryErrorResetBoundary } from "@tanstack/react-query";
 
 import { Button } from "./ui/button";
@@ -9,6 +10,11 @@ const RetryErrorBoundary = ({ children }: { children: React.ReactNode }) => {
   return (
     <ErrorBoundary
       onReset={reset}
+      onError={error => {
+        if (isAxiosError(error) && error?.response?.status === 500) {
+          throw error;
+        }
+      }}
       fallbackRender={({ error, resetErrorBoundary }) => {
         const errorMessage = error.response.data.message;
 

@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 
 import { Form } from "@/components/ui/form";
+import RetryErrorBoundary from "@/components/RetryErrorBoundary";
 
 import { Stack } from "@/utils/stackflow";
 
@@ -11,11 +12,13 @@ const SignUpPage = () => {
 
   return (
     <main>
-      <Suspense>
-        <Form {...form}>
-          <Stack />
-        </Form>
-      </Suspense>
+      <RetryErrorBoundary>
+        <Suspense>
+          <Form {...form}>
+            <Stack />
+          </Form>
+        </Suspense>
+      </RetryErrorBoundary>
     </main>
   );
 };

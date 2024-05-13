@@ -1,5 +1,4 @@
 import ReactDOM from "react-dom/client";
-import { Suspense } from "react";
 import { Routes } from "@generouted/react-router";
 
 import "./index.css";
@@ -13,9 +12,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
     <QueryProvider>
       <CookieProvider>
-        <Suspense fallback={null}>
-          <Routes />
-        </Suspense>
+        <Routes />
         <SVGProvider />
       </CookieProvider>
     </QueryProvider>

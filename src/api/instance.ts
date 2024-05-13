@@ -34,7 +34,7 @@ instance.interceptors.response.use(
   async error => {
     const { status, config } = error.response;
 
-    if (status === 401 && config.url.includes("/universities")) {
+    if (status === 401 && config.url.includes("/users/register")) {
       const newAccessToken = await reissue();
 
       if (!newAccessToken) return Promise.reject(error);
