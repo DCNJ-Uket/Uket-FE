@@ -19,7 +19,7 @@ const TimeItem = (props: TimeItemProps) => {
 
       <div className="flex gap-10 text-xs">
         <div className="flex gap-2">
-          <p className="font-medium">일시</p>
+          <p className="font-medium">남은 티켓 수량</p>
           <p className="text-[#FD724F]">40개</p>
         </div>
         <div className="flex gap-2">
