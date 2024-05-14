@@ -1,6 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import { Suspense } from "react";
 
+import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import RetryErrorBoundary from "@/components/RetryErrorBoundary";
 
@@ -20,7 +21,8 @@ const HomePage = () => {
   };
 
   return (
-    <main className="relative flex h-full flex-col items-center bg-[#F2F2F2]">
+    <main className="relative flex h-full flex-col items-center">
+      <Separator className="h-3 bg-[#F2F2F2]" />
       <main className="container mt-2 flex h-full w-full flex-col gap-3 bg-white">
         <UnivSelector currentUniv={univName} onSelect={handleSelectUnivItem} />
         <RetryErrorBoundary resetKeys={[univId]}>
