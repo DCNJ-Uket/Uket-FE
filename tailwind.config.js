@@ -92,6 +92,10 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "ping-dealy": "ping-delay 3s cubic-bezier(0, 0, 0.2, 1) infinite",
       },
+      backgroundImage: {
+        "landing-pattern":
+          "url('../../public/landingBg.png'), linear-gradient(171.65deg, #6343E1 5.82%, #000000 81.67%)",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

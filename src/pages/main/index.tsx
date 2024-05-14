@@ -1,27 +1,34 @@
 import { Button } from "@/components/ui/button";
-
-import LandingTicket from "/landingTicket.png";
+import Nav from "@/components/Nav";
 
 import { Link } from "@/router";
 
 const MainPage = () => {
   return (
-    <main className="flex flex-col justify-evenly items-center h-full">
-      <main className="container flex flex-col justify-evenly w-full h-full">
-        <header className="flex flex-col gap-5 items-center w-full">
-          <img src={LandingTicket} width={82} loading="lazy" />
-          <h1 className="text-xl font-bold text-center">
+    <main className="landing-container flex h-full flex-col items-center justify-evenly">
+      <header className="sticky left-0 top-0 z-10 w-full">
+        <Nav />
+      </header>
+      <main className="container flex h-full w-full flex-col justify-evenly">
+        <section className="mt-10 flex w-full grow flex-col items-center gap-5">
+          <h1 className="text-center text-3xl font-bold text-white">
             <p>학교 축제 공연 감상,</p>
-            <p>기다림 없이</p>
+            <p>기다림 없이 UKET</p>
           </h1>
-        </header>
-        <section className="flex flex-col gap-2 justify-center items-center w-full">
+        </section>
+        <section className="mb-5 flex w-full flex-col items-center justify-center gap-2">
           <Link to="/select-univ" className="block w-full text-center">
-            <Button className="p-6 w-full text-base rounded-xl border border-brand bg-brand hover:bg-brand/80 sm:w-80">
+            <Button
+              variant="secondary"
+              className="w-full rounded-xl bg-white p-7 text-base font-bold text-black hover:bg-slate-200 sm:w-80"
+            >
               축제 예매하기
             </Button>
           </Link>
-          <Button className="p-6 w-full text-base bg-white rounded-xl border border-brand text-brand hover:bg-primary-foreground sm:w-80">
+          <Button
+            variant="default"
+            className="w-full rounded-xl border border-white bg-black p-7 text-base text-white sm:w-80"
+          >
             내 티켓 확인하기
           </Button>
         </section>
