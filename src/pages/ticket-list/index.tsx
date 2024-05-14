@@ -1,45 +1,19 @@
-import { useState } from "react";
+import useTicketSlide from "@/hooks/useTicketSlide";
 
 import TicketItem from "./_components/TicketItem";
 
 const TicketList = () => {
-  const [selectedTicket, setSelectedTicket] = useState<number>(0);
-  const [touchStartX, setTouchStartX] = useState<number>(0);
-  const [slidePosition, setSlidePosition] = useState<number>(0);
-
+  const ticketCount = 14; // 티켓 아이템의 개수
   const ticketWidth = 287; //TicketItem의 너비
   const gapWidth = 10; //TicketItem 사이 gap
-  const slideWidth = ticketWidth + gapWidth;
-  const ticketCount = 14; // 티켓 아이템의 개수
 
-  const onTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
-    setTouchStartX(event.changedTouches[0].pageX);
-  };
-
-  const onTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
-    const touchEndX = event.changedTouches[0].pageX;
-    const distanceX = touchStartX - touchEndX;
-
-    const maxSlidePosition = (ticketCount - 1) * slideWidth;
-
-    let newPosition =
-      distanceX < 0 ? slidePosition - slideWidth : slidePosition + slideWidth;
-
-    // 슬라이드 이동 범위 제한
-    if (newPosition < 0) {
-      newPosition = 0;
-    } else if (newPosition > maxSlidePosition) {
-      newPosition = maxSlidePosition;
-    }
-
-    setSelectedTicket(Math.round(newPosition / slideWidth));
-    setSlidePosition(newPosition);
-  };
-
-  const handleSelectTicket = (index: number) => {
-    setSelectedTicket(index);
-    setSlidePosition(index * slideWidth);
-  };
+  const {
+    selectedTicket,
+    slidePosition,
+    onTouchStart,
+    onTouchEnd,
+    handleSelectTicket,
+  } = useTicketSlide(ticketCount, ticketWidth, gapWidth);
 
   return (
     <main className="relative flex h-full flex-col items-center justify-evenly bg-[#F2F2F2]">
