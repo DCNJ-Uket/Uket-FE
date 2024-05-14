@@ -8,7 +8,7 @@ import CompleteActivity from "@/pages/buy-ticket/_components/CompleteActivity";
 
 import "@stackflow/plugin-basic-ui/index.css";
 
-export const { Stack, useFlow, activities } = stackflow({
+export const { Stack, activities } = stackflow({
   transitionDuration: 500,
   plugins: [
     basicRendererPlugin(),
