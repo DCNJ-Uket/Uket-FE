@@ -1,32 +1,15 @@
 import { useMutation } from "@tanstack/react-query";
 
-import { FormSchemaType } from "@/hooks/useStackForm";
-
 import { AuthResponse } from "@/types/authType";
 
 import { setAccessToken } from "@/utils/handleToken";
 import { setRefreshToken } from "@/utils/handleCookie";
 
-import { signup } from "@/api/auth";
+import { reissue } from "@/api/auth";
 
-export const useMutationSignup = () => {
+export const useMutationReissue = () => {
   const mutation = useMutation({
-    mutationFn: ({
-      userType,
-      userName,
-      userPhone,
-      userUniv,
-      userId,
-      userMajor,
-    }: Partial<FormSchemaType>) =>
-      signup({
-        userType,
-        userName,
-        userPhone,
-        userUniv,
-        userId,
-        userMajor,
-      }),
+    mutationFn: reissue,
     onSuccess: ({ accessToken, refreshToken }: AuthResponse) => {
       setAccessToken(accessToken);
       setRefreshToken("refreshToken", refreshToken, {
@@ -35,9 +18,8 @@ export const useMutationSignup = () => {
       });
     },
     onError: error => {
-      throw error;
+      console.error(error);
     },
-    throwOnError: true,
   });
 
   return mutation;
