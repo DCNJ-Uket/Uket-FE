@@ -18,10 +18,10 @@ export const LazyLoadImage = (props: PropType) => {
 
   return (
     <div className="embla__slide">
-      {!hasLoaded && <Skeleton className="w-full h-full" />}
+      {!hasLoaded && <Skeleton className="h-full w-full" />}
       {inView && (
         <img
-          className="block object-cover w-full h-full bg-gray-100 rounded-lg"
+          className="block h-full w-full rounded-lg bg-gray-100 object-cover"
           onLoad={setLoaded}
           src={imgSrc}
           alt="축제 배너"

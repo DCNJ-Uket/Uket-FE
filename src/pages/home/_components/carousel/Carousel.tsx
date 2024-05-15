@@ -51,6 +51,7 @@ const Carousel = (props: PropType) => {
       />
     ))
   );
+
   useEffect(() => {
     if (!emblaApi) return;
 
@@ -72,7 +73,7 @@ const Carousel = (props: PropType) => {
                 key={index}
                 onClick={() => onDotButtonClick(index)}
                 className={"embla__dot".concat(
-                  index === selectedIndex ? " embla__dot--selected" : "",
+                  index === selectedIndex ? "embla__dot--selected" : "",
                 )}
               />
             ))}
