@@ -1,16 +1,21 @@
 import { ErrorBoundary } from "react-error-boundary";
+import React from "react";
 import { isAxiosError } from "axios";
 import { useQueryErrorResetBoundary } from "@tanstack/react-query";
 
-import { Button } from "./ui/button";
+import { DefaultErrorFallback } from "./ErrorFallback";
+
+interface RetryErrorBoundaryProps {
+  children: React.ReactNode;
+  resetKeys?: unknown[];
+  fallbackComponent?: React.ReactNode;
+}
 
 const RetryErrorBoundary = ({
   children,
   resetKeys,
-}: {
-  children: React.ReactNode;
-  resetKeys?: unknown[];
-}) => {
+  fallbackComponent,
+}: RetryErrorBoundaryProps) => {
   const { reset } = useQueryErrorResetBoundary();
 
   return (
@@ -23,22 +28,20 @@ const RetryErrorBoundary = ({
         }
       }}
       fallbackRender={({ error, resetErrorBoundary }) => {
-        const errorMessage = error.response.data.message;
-
-        return (
-          <div className="flex h-full w-full flex-col items-center justify-center gap-10">
-            <header className="text-center">
-              <h1 className="text-2xl font-bold">잠시 후 다시 시도해주세요</h1>
-              <h2 className="text-gray-700">{errorMessage}</h2>
-            </header>
-            <Button
-              onClick={() => resetErrorBoundary()}
-              className="w-full max-w-sm bg-brand py-5 text-base"
-            >
-              다시 시도
-            </Button>
-          </div>
+        const childElement = fallbackComponent ? (
+          (React.Children.only(fallbackComponent) as React.ReactElement)
+        ) : (
+          <DefaultErrorFallback
+            error={error}
+            resetErrorBoundary={resetErrorBoundary}
+          />
         );
+        const childWithResetBoundary = React.cloneElement(childElement, {
+          error,
+          resetErrorBoundary,
+        } as React.Attributes);
+
+        return childWithResetBoundary;
       }}
     >
       {children}
