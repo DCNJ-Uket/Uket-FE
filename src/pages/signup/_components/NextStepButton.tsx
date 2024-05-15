@@ -22,7 +22,7 @@ const NextStepButton = (as: NextStepButtonProps) => {
 
   const handleClick = () => {
     if (activityName === "MainActivity") {
-      navigate("/main", {
+      navigate("/", {
         replace: true,
       });
       return;
@@ -32,7 +32,7 @@ const NextStepButton = (as: NextStepButtonProps) => {
 
   return (
     <Button
-      className="w-full h-16 text-base font-extrabold rounded-none bg-brand hover:bg-brandHover"
+      className="h-16 w-full rounded-none bg-brand text-base font-extrabold hover:bg-brandHover"
       onClick={handleClick}
       disabled={disabled}
       {...props}

@@ -94,7 +94,7 @@ module.exports = {
       },
       backgroundImage: {
         "landing-pattern":
-          "url('../../public/landingBg.png'), linear-gradient(171.65deg, #6343E1 5.82%, #000000 81.67%)",
+          "url('/landingBg.png'), linear-gradient(171.65deg, #6343E1 5.82%, #000000 81.67%)",
       },
     },
   },

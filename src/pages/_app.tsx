@@ -9,7 +9,7 @@ const App = () => {
   return (
     <section className="relative flex h-dvh w-screen flex-col">
       <CriticalErrorBoundary>
-        {pathname !== "/" && pathname !== "/main" && (
+        {pathname !== "/" && (
           <header className="sticky left-0 top-0 z-10 bg-white">
             <Nav />
           </header>

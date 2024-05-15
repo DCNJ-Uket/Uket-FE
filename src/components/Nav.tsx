@@ -15,7 +15,7 @@ const Nav = () => {
   const { pathname } = useLocation();
   const isPrivatePath = PRIVATE.includes(pathname as Path);
   const isAuthenticated = useAuth();
-  const ladingPageTextColor = pathname === "/main" && "text-white";
+  const ladingPageTextColor = pathname === "/" && "text-white";
   const profileComponent = isAuthenticated ? (
     <Button
       variant="link"

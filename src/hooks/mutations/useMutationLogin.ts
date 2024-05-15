@@ -22,7 +22,7 @@ export const useMutationLogin = () => {
       });
 
       if (isRegistered) {
-        navigate("/main", {
+        navigate("/", {
           replace: true,
         });
       } else {

@@ -14,15 +14,11 @@ interface LogoProps {
 const Logo = (props: LogoProps) => {
   const { onActivity } = props;
   const { pathname } = useLocation();
+  const imgSrc = pathname === "/" ? LandingLogoImage : LogoImage;
 
   return (
-    <Link to="/main" className={cn(onActivity ? "pl-6 pt-2" : "")}>
-      <img
-        src={pathname === "/main" ? LandingLogoImage : LogoImage}
-        width={62}
-        loading="lazy"
-        alt="로고"
-      />
+    <Link to="/" className={cn(onActivity ? "pl-6 pt-2" : "")}>
+      <img src={imgSrc} width={62} loading="lazy" alt="로고" />
     </Link>
   );
 };
