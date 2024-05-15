@@ -1,4 +1,6 @@
 import ReactDOM from "react-dom/client";
+import { SpeedInsights } from "@vercel/speed-insights/react";
+import { inject } from "@vercel/analytics";
 import { Routes } from "@generouted/react-router";
 
 import "./index.css";
@@ -14,7 +16,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <CookieProvider>
         <Routes />
         <SVGProvider />
+        <SpeedInsights />
       </CookieProvider>
     </QueryProvider>
   </ThemeProvider>,
 );
+
+inject();
