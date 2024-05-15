@@ -2,8 +2,8 @@ import { useSearchParams } from "react-router-dom";
 import { Suspense } from "react";
 
 import { Separator } from "@/components/ui/separator";
-import { Button } from "@/components/ui/button";
 import RetryErrorBoundary from "@/components/RetryErrorBoundary";
+import BrandButton from "@/components/BrandButton";
 
 import UnivSelector from "./_components/UnivSelector";
 import FestivalSection from "./_components/FestivalSection";
@@ -25,18 +25,16 @@ const HomePage = () => {
       <Separator className="h-3 bg-[#F2F2F2]" />
       <main className="container mt-2 flex h-full w-full flex-col gap-3 bg-white">
         <UnivSelector currentUniv={univName} onSelect={handleSelectUnivItem} />
-        <RetryErrorBoundary resetKeys={[univId]}>
-          <Suspense fallback={<FestivalSectionFallback />}>
-            <FestivalSection univId={univId} />
-          </Suspense>
-        </RetryErrorBoundary>
+        <section className="grow">
+          <RetryErrorBoundary resetKeys={[univId]}>
+            <Suspense fallback={<FestivalSectionFallback />}>
+              <FestivalSection univId={univId} />
+            </Suspense>
+          </RetryErrorBoundary>
+        </section>
         <footer className="mb-3 flex w-full items-center justify-center gap-3 bg-white">
-          <Button className="basis-1/2 rounded-lg border border-brand bg-white text-brand hover:bg-primary-foreground sm:w-80">
-            내 티켓 확인
-          </Button>
-          <Button className="basis-1/2 rounded-lg border border-brand bg-brand hover:bg-brand/80 sm:w-80">
-            예매하기
-          </Button>
+          <BrandButton brand="secondary" title="내 티켓 확인" />
+          <BrandButton brand="primary" title="예매하기" />
         </footer>
       </main>
     </main>
