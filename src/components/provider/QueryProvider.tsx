@@ -10,9 +10,6 @@ const queryClient = new QueryClient({
       staleTime: 1000 * 60 * 10,
     },
     mutations: {
-      onError: error => {
-        throw error;
-      },
       throwOnError: true,
     },
   },
