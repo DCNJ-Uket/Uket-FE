@@ -7,7 +7,9 @@ import BrandButton from "@/components/BrandButton";
 
 import UnivSelector from "./_components/UnivSelector";
 import FestivalSection from "./_components/FestivalSection";
-import FestivalSectionFallback from "./_components/fallback/FestivalSectionFallback";
+import UnivSelectorSuspenseFallback from "./_components/fallback/UnivSelectorSuspenseFallback";
+import UnivSelectorErrorFallback from "./_components/fallback/UnivSelectorErrorFallback";
+import FestivalSectionSuspenseFallback from "./_components/fallback/FestivalSectionSusepnseFallback";
 
 const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -24,10 +26,19 @@ const HomePage = () => {
     <main className="relative flex h-full flex-col items-center">
       <Separator className="h-3 bg-[#F2F2F2]" />
       <main className="container mt-2 flex h-full w-full flex-col gap-3 bg-white">
-        <UnivSelector currentUniv={univName} onSelect={handleSelectUnivItem} />
+        <header>
+          <RetryErrorBoundary fallbackComponent={<UnivSelectorErrorFallback />}>
+            <Suspense fallback={<UnivSelectorSuspenseFallback />}>
+              <UnivSelector
+                currentUniv={univName}
+                onSelect={handleSelectUnivItem}
+              />
+            </Suspense>
+          </RetryErrorBoundary>
+        </header>
         <section className="grow">
           <RetryErrorBoundary resetKeys={[univId]}>
-            <Suspense fallback={<FestivalSectionFallback />}>
+            <Suspense fallback={<FestivalSectionSuspenseFallback />}>
               <FestivalSection univId={univId} />
             </Suspense>
           </RetryErrorBoundary>
