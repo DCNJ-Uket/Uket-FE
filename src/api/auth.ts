@@ -1,5 +1,3 @@
-import { AxiosError } from "axios";
-
 import { FormSchemaType } from "@/hooks/useStackForm";
 
 import { GOOGLE_REDIRECT_URI, KAKAO_REDIRECT_URI } from "@/constants/auth_url";
@@ -16,18 +14,12 @@ export const login = async ({ code, provider }: LoginRequestParams) => {
   const redirect_uri =
     provider === "google" ? GOOGLE_REDIRECT_URI : KAKAO_REDIRECT_URI;
 
-  try {
-    const { data } = await instance.post(`/auth/login/${provider}`, {
-      code,
-      redirectUri: redirect_uri,
-    });
+  const { data } = await instance.post(`/auth/login/${provider}`, {
+    code,
+    redirectUri: redirect_uri,
+  });
 
-    return data;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      throw error;
-    }
-  }
+  return data;
 };
 
 export const signup = async ({
@@ -50,37 +42,25 @@ export const signup = async ({
     studentCode: userId,
   };
 
-  try {
-    const { data } = await instance.post(
-      "/users/register",
-      isUnivStudent ? univBody : baseBody,
-    );
+  const { data } = await instance.post(
+    "/users/register",
+    isUnivStudent ? univBody : baseBody,
+  );
 
-    return data;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      throw error;
-    }
-  }
+  return data;
 };
 
 export const reissue = async () => {
   const refreshToken = getRefreshToken("refreshToken");
   const accessToken = getAccessToken();
 
-  try {
-    const { data } = await instance.post("/auth/reissue", {
-      accessToken,
-      refreshToken,
-    });
+  const { data } = await instance.post("/auth/reissue", {
+    accessToken,
+    refreshToken,
+  });
 
-    const { accessToken: newAccessToken } = data;
-    if (!newAccessToken) throw new Error("accessToken reissue error");
+  const { accessToken: newAccessToken } = data;
+  if (!newAccessToken) throw new Error("accessToken reissue error");
 
-    return newAccessToken;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      throw error;
-    }
-  }
+  return newAccessToken;
 };
