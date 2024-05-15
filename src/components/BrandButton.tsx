@@ -26,10 +26,10 @@ interface BrandButtonProps
 }
 
 const BrandButton = (props: BrandButtonProps) => {
-  const { brand, title, className } = props;
+  const { brand, title, className, ...rest } = props;
 
   return (
-    <Button className={cn(brandButtonVariants({ brand, className }))}>
+    <Button className={cn(brandButtonVariants({ brand, className }))} {...rest}>
       {title}
     </Button>
   );
