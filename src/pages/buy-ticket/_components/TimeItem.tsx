@@ -1,3 +1,4 @@
+import TimeCellItem from "./TimeCellItem";
 import CircleButton from "./CircleButton";
 
 interface TimeItemProps {
@@ -25,14 +26,8 @@ const TimeItem = (props: TimeItemProps) => {
       <div className="my-[1%] w-full border-[0.5px] border-[#CCCCCC]"></div>
 
       <div className="flex gap-10 text-xs">
-        <div className="flex gap-2">
-          <p className="font-medium">남은 티켓 수량</p>
-          <p className="text-[#FD724F]">40개</p>
-        </div>
-        <div className="flex gap-2">
-          <p className="font-medium">총 티켓 수량</p>
-          <p className="text-[#5E5E6E]">100 개</p>
-        </div>
+        <TimeCellItem title="남은 티켓 수량" amount="40" color="FD724F" />
+        <TimeCellItem title="총 티켓 수량" amount="100" color="5E5E6E" />
       </div>
     </div>
   );
