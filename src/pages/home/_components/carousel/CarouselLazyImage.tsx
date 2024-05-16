@@ -17,7 +17,7 @@ export const LazyLoadImage = (props: PropType) => {
   }, [inView, setHasLoaded]);
 
   return (
-    <div className="embla__slide">
+    <>
       {!hasLoaded && <Skeleton className="h-full w-full" />}
       {inView && (
         <img
@@ -28,6 +28,6 @@ export const LazyLoadImage = (props: PropType) => {
           data-src={imgSrc}
         />
       )}
-    </div>
+    </>
   );
 };

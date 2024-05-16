@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { EmblaCarouselType, EmblaOptionsType } from "embla-carousel";
 
+import Indicator from "@/components/Indicator";
+
 import { useDotButton } from "@/hooks/useDotButton";
 
 import { FestivalInfo } from "@/types/univType";
@@ -42,13 +44,15 @@ const Carousel = (props: PropType) => {
       </p>
     </div>
   ) : (
-    slides.map(({ url }, index) => (
-      <LazyLoadImage
-        key={index}
-        index={index}
-        imgSrc={url}
-        inView={slidesInView.indexOf(index) > -1}
-      />
+    slides.map(({ title, url }, index) => (
+      <div className="embla__slide relative" key={url}>
+        <LazyLoadImage
+          index={index}
+          imgSrc={url}
+          inView={slidesInView.indexOf(index) > -1}
+        />
+        <Indicator title={title} />
+      </div>
     ))
   );
 
@@ -73,7 +77,7 @@ const Carousel = (props: PropType) => {
                 key={index}
                 onClick={() => onDotButtonClick(index)}
                 className={"embla__dot".concat(
-                  index === selectedIndex ? "embla__dot--selected" : "",
+                  index === selectedIndex ? " embla__dot--selected" : "",
                 )}
               />
             ))}
