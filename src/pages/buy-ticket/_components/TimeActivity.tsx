@@ -1,4 +1,3 @@
-
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
@@ -21,17 +20,19 @@ const TimeActivity: ActivityComponentType = () => {
     <AppScreen appBar={{ border: false, height: "56px" }}>
       <Activity>
         <ActivityContent>
-          <ActivityHeader>
+          <ActivityHeader className="px-[22px]">
             <HeaderItem step={"02"} content={"예매 시간을 선택해 주세요."} />
           </ActivityHeader>
-          {Array.from({ length: 14 }).map((_, index) => (
-            <TimeItem
-              key={index}
-              title={`Time ${index + 1}`}
-              isSelected={selectedItem === index}
-              onSelect={() => handleSelectItem(index)}
-            />
-          ))}
+          <div className="flex flex-col gap-4 px-[22px]">
+            {Array.from({ length: 14 }).map((_, index) => (
+              <TimeItem
+                key={index}
+                title={`Time ${index + 1}`}
+                isSelected={selectedItem === index}
+                onSelect={() => handleSelectItem(index)}
+              />
+            ))}
+          </div>
           <ActivityFooter>
             <NextButton
               activityName={"CompleteActivity" as never}

@@ -1,4 +1,3 @@
-
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
@@ -21,17 +20,19 @@ const DateActivity: ActivityComponentType = () => {
     <AppScreen appBar={{ border: false, height: "56px" }}>
       <Activity>
         <ActivityContent>
-          <ActivityHeader>
+          <ActivityHeader className="px-[22px]">
             <HeaderItem step={"01"} content={"예매 날짜를 선택해 주세요."} />
           </ActivityHeader>
-          {Array.from({ length: 14 }).map((_, index) => (
-            <DateItem
-              key={index}
-              title={`Day ${index + 1}`}
-              isSelected={selectedItem === index}
-              onSelect={() => handleSelectItem(index)}
-            />
-          ))}
+          <div className="flex flex-col gap-4 px-[22px]">
+            {Array.from({ length: 14 }).map((_, index) => (
+              <DateItem
+                key={index}
+                title={`Day ${index + 1}`}
+                isSelected={selectedItem === index}
+                onSelect={() => handleSelectItem(index)}
+              />
+            ))}
+          </div>
 
           <ActivityFooter>
             <NextButton
