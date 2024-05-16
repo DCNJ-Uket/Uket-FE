@@ -1,16 +1,10 @@
-import { useState } from "react";
-
 import WhiteLogo from "@/components/WhiteLogo";
 
+import ConfirmModal from "./_components/ConfirmModal";
 import CellItem from "./_components/CellItem";
-import CancelModal from "./_components/CancelModal";
 
 const TicketDetail = () => {
   // TODO: 화면 밝기 높아지게 구현해야함 + Figma 디자인에 따라 모달 수정
-  const [modalOpen, onModalOpen] = useState(false);
-  const handleCancelTicket = () => {
-    onModalOpen(true);
-  };
 
   return (
     <main className="relative flex h-full flex-col items-center justify-evenly bg-green-800 opacity-75">
@@ -50,15 +44,14 @@ const TicketDetail = () => {
             <div className="my-[1%] w-full border-[1px] border-[#5E5E6E]"></div>
 
             <div className="px-[2px]">
-              <p
-                className="w-fit text-xs text-[#FD724F] underline decoration-solid"
-                onClick={handleCancelTicket}
-              >
-                예매취소
-              </p>
-              {modalOpen ? (
-                <CancelModal modalOpen={modalOpen} onOpenModal={onModalOpen} />
-              ) : null}
+              <ConfirmModal
+                title="정말 예매를 취소하시겠습니까?"
+                trigger={
+                  <p className="w-fit text-xs text-[#FD724F] underline decoration-solid">
+                    예매취소
+                  </p>
+                }
+              />
             </div>
           </div>
         </div>
