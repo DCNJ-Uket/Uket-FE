@@ -18,7 +18,7 @@ const FestivalMap = (props: FestivalMapProps) => {
     <Map
       id="map"
       center={{ lat: 33.5563, lng: 126.79581 }}
-      className="w-full h-40 rounded-lg shadow-md sm:h-80 lg:h-96"
+      className="h-40 w-full rounded-lg shadow-md sm:h-80 lg:h-96"
       onCreate={initializeMap}
     >
       {marker && position && (
@@ -34,7 +34,7 @@ const FestivalMap = (props: FestivalMapProps) => {
             }}
           />
           <CustomOverlayMap position={position} yAnchor={2.2} xAnchor={1}>
-            <div className="p-2 text-xs text-white truncate rounded-full customoverlay bg-brand/70">
+            <div className="customoverlay truncate rounded-full bg-brand/70 p-2 text-xs text-white">
               <a
                 href={`https://map.kakao.com/link/map/${locationName},${marker.position.lat},${marker.position.lng}`}
                 target="_blank"

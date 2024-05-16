@@ -1,12 +1,15 @@
 import { useSearchParams } from "react-router-dom";
 import { Suspense } from "react";
 
-import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import RetryErrorBoundary from "@/components/RetryErrorBoundary";
+import BrandButton from "@/components/BrandButton";
 
 import UnivSelector from "./_components/UnivSelector";
 import FestivalSection from "./_components/FestivalSection";
-import FestivalSectionFallback from "./_components/fallback/FestivalSectionFallback";
+import UnivSelectorSuspenseFallback from "./_components/fallback/UnivSelectorSuspenseFallback";
+import UnivSelectorErrorFallback from "./_components/fallback/UnivSelectorErrorFallback";
+import FestivalSectionSuspenseFallback from "./_components/fallback/FestivalSectionSusepnseFallback";
 
 const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,21 +23,29 @@ const HomePage = () => {
   };
 
   return (
-    <main className="relative flex h-full flex-col items-center bg-[#F2F2F2]">
-      <main className="container flex flex-col gap-3 mt-2 w-full h-full bg-white">
-        <UnivSelector currentUniv={univName} onSelect={handleSelectUnivItem} />
-        <RetryErrorBoundary>
-          <Suspense fallback={<FestivalSectionFallback />}>
-            <FestivalSection univId={univId} />
-          </Suspense>
-        </RetryErrorBoundary>
-        <footer className="flex gap-3 justify-center items-center mb-3 w-full bg-white">
-          <Button className="bg-white rounded-lg border basis-1/2 border-brand text-brand hover:bg-primary-foreground sm:w-80">
-            내 티켓 확인
-          </Button>
-          <Button className="rounded-lg border basis-1/2 border-brand bg-brand hover:bg-brand/80 sm:w-80">
-            예매하기
-          </Button>
+    <main className="relative flex h-full flex-col items-center">
+      <Separator className="h-3 bg-[#F2F2F2]" />
+      <main className="container mt-2 flex h-full w-full flex-col gap-3 bg-white">
+        <header>
+          <RetryErrorBoundary fallbackComponent={<UnivSelectorErrorFallback />}>
+            <Suspense fallback={<UnivSelectorSuspenseFallback />}>
+              <UnivSelector
+                currentUniv={univName}
+                onSelect={handleSelectUnivItem}
+              />
+            </Suspense>
+          </RetryErrorBoundary>
+        </header>
+        <section className="grow">
+          <RetryErrorBoundary resetKeys={[univId]}>
+            <Suspense fallback={<FestivalSectionSuspenseFallback />}>
+              <FestivalSection univId={univId} />
+            </Suspense>
+          </RetryErrorBoundary>
+        </section>
+        <footer className="mb-3 flex w-full items-center justify-center gap-3 bg-white">
+          <BrandButton brand="secondary" title="내 티켓 확인" />
+          <BrandButton brand="primary" title="예매하기" />
         </footer>
       </main>
     </main>

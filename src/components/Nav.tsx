@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 import Logo from "./Logo";
 
 import { Link, Path } from "@/router";
+import { cn } from "@/lib/utils";
 
 const PRIVATE: Path[] = ["/login", "/signup"];
 
@@ -14,20 +15,27 @@ const Nav = () => {
   const { pathname } = useLocation();
   const isPrivatePath = PRIVATE.includes(pathname as Path);
   const isAuthenticated = useAuth();
+  const ladingPageTextColor = pathname === "/" && "text-white";
   const profileComponent = isAuthenticated ? (
-    <Button variant="link" className="p-0 pt-1 font-bold">
+    <Button
+      variant="link"
+      className={cn("p-0 pt-1 font-bold", ladingPageTextColor)}
+    >
       로그인됨
     </Button>
   ) : (
     <Link to="/login">
-      <Button variant="link" className="p-0 pt-1 font-bold">
+      <Button
+        variant="link"
+        className={cn("p-0 pt-1 font-bold", ladingPageTextColor)}
+      >
         로그인
       </Button>
     </Link>
   );
 
   return (
-    <nav className="container flex justify-between items-center self-stretch my-2 w-full h-10">
+    <nav className="container my-2 flex h-10 w-full items-center justify-between self-stretch">
       <Logo />
       {!isPrivatePath && profileComponent}
     </nav>

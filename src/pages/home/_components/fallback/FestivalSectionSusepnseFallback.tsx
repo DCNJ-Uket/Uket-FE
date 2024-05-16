@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-const FestivalSectionFallback = () => {
+const FestivalSectionSuspenseFallback = () => {
   return (
     <section className="grow">
       <main className="flex flex-col gap-3">
@@ -17,4 +17,4 @@ const FestivalSectionFallback = () => {
   );
 };
 
-export default FestivalSectionFallback;
+export default FestivalSectionSuspenseFallback;

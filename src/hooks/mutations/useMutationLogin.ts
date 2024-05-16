@@ -22,7 +22,7 @@ export const useMutationLogin = () => {
       });
 
       if (isRegistered) {
-        navigate("/main", {
+        navigate("/", {
           replace: true,
         });
       } else {
@@ -30,9 +30,6 @@ export const useMutationLogin = () => {
           replace: true,
         });
       }
-    },
-    onError: error => {
-      console.error(error);
     },
   });
 
