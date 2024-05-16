@@ -1,17 +1,24 @@
+import CircleButton from "./CircleButton";
+
 interface TimeItemProps {
   title: string;
+  isSelected: boolean;
+  onSelect: () => void;
   //date: Date;
 }
 
 const TimeItem = (props: TimeItemProps) => {
-  const { title } = props;
+  const { title, isSelected, onSelect } = props;
 
   return (
-    <div className="flex w-full flex-col gap-[9px] rounded-lg bg-white px-5 pb-[15px] pt-[17px] shadow-lg">
+    <div
+      className="flex w-full flex-col gap-[9px] rounded-lg bg-white px-5 pb-[15px] pt-[17px] shadow-lg"
+      onClick={onSelect}
+    >
       <div className="flex justify-between">
         <div className="text-[32px] font-extrabold">{title}</div>
         <div className="self-center">
-          <div className="h-8 w-8 rounded-full bg-brand"></div>
+          <CircleButton isSelected={isSelected} />
         </div>
       </div>
 
