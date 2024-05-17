@@ -1,7 +1,7 @@
-
-import WhiteLogo from "@/components/WhiteLogo";
+import Logo from "@/components/Logo";
 
 import { useModals } from "@/hooks/useModals";
+
 
 import ConfirmModal from "./_components/ConfirmModal";
 import CellItem from "./_components/CellItem";
@@ -23,7 +23,7 @@ const TicketDetail = () => {
     <main className="relative flex h-full flex-col items-center justify-evenly bg-green-800 opacity-75">
       <header className="sticky left-0 top-0 z-10 w-full">
         <nav className="container my-2 flex h-10 w-full items-center justify-between self-stretch py-4">
-          <WhiteLogo />
+          <Logo />
         </nav>
       </header>
       <section className="mt-3 h-full w-full px-4">
