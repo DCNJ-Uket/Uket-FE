@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { EmblaCarouselType, EmblaOptionsType } from "embla-carousel";
 
+import Indicator from "@/components/Indicator";
+
 import { useDotButton } from "@/hooks/useDotButton";
 
 import { FestivalInfo } from "@/types/univType";
@@ -37,20 +39,23 @@ const Carousel = (props: PropType) => {
 
   const slideComponent = !slides ? (
     <div className="embla__slide">
-      <p className="flex flex-col justify-center items-center w-full h-full text-gray-500 bg-gray-100 rounded-lg">
+      <p className="flex h-full w-full flex-col items-center justify-center rounded-lg bg-gray-100 text-gray-500">
         배너가 존재하지 않아요 😢
       </p>
     </div>
   ) : (
-    slides.map(({ url }, index) => (
-      <LazyLoadImage
-        key={index}
-        index={index}
-        imgSrc={url}
-        inView={slidesInView.indexOf(index) > -1}
-      />
+    slides.map(({ title, url }, index) => (
+      <div className="embla__slide relative" key={url}>
+        <LazyLoadImage
+          index={index}
+          imgSrc={url}
+          inView={slidesInView.indexOf(index) > -1}
+        />
+        <Indicator title={title} />
+      </div>
     ))
   );
+
   useEffect(() => {
     if (!emblaApi) return;
 
@@ -60,9 +65,11 @@ const Carousel = (props: PropType) => {
   }, [emblaApi, updateSlidesInView]);
 
   return (
-    <section className="w-full h-44 rounded-lg shadow-md embla sm:h-80 lg:h-96">
-      <div className="w-full h-full embla__viewport" ref={emblaRef}>
-        <div className="h-full embla__container">{slideComponent}</div>
+    <section className="embla h-44 w-full rounded-lg shadow-md sm:h-80 lg:h-96">
+      <div className="embla__viewport h-full w-full" ref={emblaRef}>
+        <div className="embla__container h-full cursor-pointer">
+          {slideComponent}
+        </div>
         <div className="embla__controls">
           <div className="embla__dots">
             {scrollSnaps.map((_, index) => (

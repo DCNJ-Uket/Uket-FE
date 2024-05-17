@@ -11,30 +11,17 @@ import {
 import { instance } from "@/api/instance";
 
 export const getFestivalUniversityList = async () => {
-  try {
-    const { data } =
-      await instance.get<FestivalUniversityResponse>(`/universities`);
+  const { data } =
+    await instance.get<FestivalUniversityResponse>(`/universities`);
 
-    return data.items;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      throw error;
-    }
-  }
+  return data.items;
 };
 
 export const getFestiavalByUniversity = async (id: string | null) => {
-  try {
-    const { data } = await instance.get<FestivalInfoResponse>(
-      `/universities/${id}/event`,
-    );
-
-    return data;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      throw error;
-    }
-  }
+  const { data } = await instance.get<FestivalInfoResponse>(
+    `/universities/${id}/event`,
+  );
+  return data;
 };
 
 export const getUniversityList = async (query: string) => {

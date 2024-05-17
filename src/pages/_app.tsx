@@ -7,10 +7,10 @@ import CriticalErrorBoundary from "@/components/CriticalErrorBoundary";
 const App = () => {
   const { pathname } = useLocation();
   return (
-    <section className="flex relative flex-col w-screen h-dvh">
+    <section className="relative flex h-dvh w-screen flex-col">
       <CriticalErrorBoundary>
         {!["/", "/ticket-detail"].includes(pathname) && (
-          <header className="sticky top-0 left-0 z-10 bg-white">
+          <header className="sticky left-0 top-0 z-10 bg-white">
             <Nav />
           </header>
         )}
