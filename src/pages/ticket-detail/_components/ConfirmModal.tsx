@@ -1,6 +1,5 @@
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -25,25 +24,21 @@ const ConfirmModal = (props: ConfirmModalProps) => {
         </DialogHeader>
 
         <div className="flex items-center justify-center space-x-4 pt-4">
-          <DialogClose>
+          <Button
+            type="button"
+            className="w-[100px] bg-brand text-white hover:bg-brand/80"
+            onClick={confirm.onClick}
+          >
+            {confirm.title}
+          </Button>
+          {close && (
             <Button
               type="button"
-              className="w-[100px] bg-brand text-white hover:bg-brand/80"
-              onClick={confirm.onClick}
+              className="w-[100px] bg-[#D9D9D9] text-black hover:bg-[#D9D9D9]/80"
+              onClick={close.onClick}
             >
-              {confirm.title}
+              {close.title}
             </Button>
-          </DialogClose>
-          {close && (
-            <DialogClose>
-              <Button
-                type="button"
-                className="w-[100px] bg-[#D9D9D9] text-black hover:bg-[#D9D9D9]/80"
-                onClick={close.onClick}
-              >
-                {close.title}
-              </Button>
-            </DialogClose>
           )}
         </div>
       </DialogContent>
