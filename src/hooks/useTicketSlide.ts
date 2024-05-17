@@ -48,5 +48,3 @@ export const useTicketSlide = (
     handleSelectTicket,
   };
 };
-
-// export default useTicketSlide;
