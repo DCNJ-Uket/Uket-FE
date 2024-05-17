@@ -2,7 +2,6 @@ import Logo from "@/components/Logo";
 
 import { useModals } from "@/hooks/useModals";
 
-
 import ConfirmModal from "./_components/ConfirmModal";
 import CellItem from "./_components/CellItem";
 
@@ -16,7 +15,7 @@ const TicketDetail = () => {
   } = useModals({ handleState: false });
 
   const { isOpen: isOpenSecondModal, closeModal: closeSecondModal } = useModals(
-    { setState: secondModalState },
+    { setState: secondModalState, goBack: true },
   );
 
   return (
@@ -71,8 +70,11 @@ const TicketDetail = () => {
               />
               <ConfirmModal
                 isOpen={isOpenSecondModal}
-                title="정말 예매를 취소하시겠습니까?"
-                confirm={{ title: "확인", onClick: closeSecondModal }}
+                title="예매가 취소되었습니다."
+                confirm={{
+                  title: "확인",
+                  onClick: closeSecondModal,
+                }}
               />
             </div>
           </div>
