@@ -1,27 +1,23 @@
-import { useState } from "react";
 
 import WhiteLogo from "@/components/WhiteLogo";
+
+import { useModals } from "@/hooks/useModals";
 
 import ConfirmModal from "./_components/ConfirmModal";
 import CellItem from "./_components/CellItem";
 
 const TicketDetail = () => {
-  // TODO: 화면 밝기 높아지게 구현해야함 + Figma 디자인에 따라 모달 수정
-  const [openFirstModal, setOpenFirstModal] = useState(false);
-  const [openSecondModal, setOpenSecondModal] = useState(false);
+  const {
+    isOpen: isOpenFirstModal,
+    openModal: openFirstModal,
+    confirmModal: confirmFirstModal,
+    closeModal: closeFirstModal,
+    handleOtherState: secondModalState,
+  } = useModals({ handleState: false });
 
-  const handleFirstModal = () => {
-    setOpenFirstModal(!openFirstModal);
-  };
-
-  const handleSecondModal = () => {
-    setOpenFirstModal(!openFirstModal);
-    setOpenSecondModal(!openSecondModal);
-  };
-
-  const handleSecondModalClose = () => {
-    setOpenSecondModal(!openSecondModal);
-  };
+  const { isOpen: isOpenSecondModal, closeModal: closeSecondModal } = useModals(
+    { setState: secondModalState },
+  );
 
   return (
     <main className="relative flex h-full flex-col items-center justify-evenly bg-green-800 opacity-75">
@@ -63,20 +59,20 @@ const TicketDetail = () => {
             <div className="px-[2px]">
               <p
                 className="w-fit text-xs text-[#FD724F] underline decoration-solid"
-                onClick={handleFirstModal}
+                onClick={openFirstModal}
               >
                 예매취소
               </p>
               <ConfirmModal
-                isOpen={openFirstModal}
+                isOpen={isOpenFirstModal}
                 title="정말 예매를 취소하시겠습니까?"
-                confirm={{ title: "예", onClick: handleSecondModal }}
-                close={{ title: "아니오", onClick: handleFirstModal }}
+                confirm={{ title: "예", onClick: confirmFirstModal }}
+                close={{ title: "아니오", onClick: closeFirstModal }}
               />
               <ConfirmModal
-                isOpen={openSecondModal}
+                isOpen={isOpenSecondModal}
                 title="정말 예매를 취소하시겠습니까?"
-                confirm={{ title: "확인", onClick: handleSecondModalClose }}
+                confirm={{ title: "확인", onClick: closeSecondModal }}
               />
             </div>
           </div>
