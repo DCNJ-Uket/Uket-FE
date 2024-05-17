@@ -1,4 +1,4 @@
-import useTicketSlide from "@/hooks/useTicketSlide";
+import { useTicketSlide } from "@/hooks/useTicketSlide";
 
 import TicketItem from "./_components/TicketItem";
 

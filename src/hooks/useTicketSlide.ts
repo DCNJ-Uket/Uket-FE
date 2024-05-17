@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useTicketSlide = (
+export const useTicketSlide = (
   ticketCount: number,
   ticketWidth: number,
   gapWidth: number,
@@ -49,4 +49,4 @@ const useTicketSlide = (
   };
 };
 
-export default useTicketSlide;
+// export default useTicketSlide;
