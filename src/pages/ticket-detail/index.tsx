@@ -1,3 +1,4 @@
+import TicketIndicator from "@/components/TicketIndicator";
 import Logo from "@/components/Logo";
 
 import { useModals } from "@/hooks/useModals";
@@ -27,6 +28,10 @@ const TicketDetail = () => {
       </header>
       <section className="mt-3 h-full w-full px-4">
         <div className="flex h-full w-full flex-col gap-5 rounded-t-[9px] bg-white shadow-lg">
+          <div className="relative mx-3 mt-3">
+            <TicketIndicator state="darkdeposit" />
+          </div>
+
           <div className="mx-[88px] mt-14">
             <div className="mx-auto aspect-square max-h-[300px] min-h-[168px] min-w-[168px] max-w-[300px] bg-black"></div>
             <div className="mt-2 text-center text-[10px] text-brand">
