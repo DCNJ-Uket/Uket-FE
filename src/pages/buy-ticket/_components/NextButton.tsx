@@ -17,7 +17,7 @@ const NextButton = (as: NextButtonProps) => {
 
   const handleClick = () => {
     if (activityName === "MainActivity") {
-      navigate("/main", { replace: true });
+      navigate("/", { replace: true });
       return;
     }
     push(activityName, {});
