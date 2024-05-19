@@ -9,8 +9,10 @@
     "lint": "eslint '**/*.{ts,tsx}' --ext ts,tsx --fix --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "postinstall": "husky install",
+    "preinstall": "npx only-allow pnpm",
     "lint-staged": "lint-staged"
   },
+  "packageManager": "pnpm@9.1.1",
   "lint-staged": {
     "**/*.{ts,tsx}": "eslint --fix"
   },
