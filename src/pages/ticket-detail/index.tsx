@@ -29,7 +29,7 @@ const TicketDetail = () => {
       <section className="mt-3 h-full w-full px-4">
         <div className="flex h-full w-full flex-col gap-5 rounded-t-[9px] bg-white shadow-lg">
           <div className="relative mx-3 mt-3">
-            <TicketIndicator state="darkdeposit" />
+            <TicketIndicator variant={"darkdeposit"} title={"입금 확인중"} />
           </div>
 
           <div className="mx-[88px] mt-14">

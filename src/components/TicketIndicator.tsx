@@ -1,31 +1,23 @@
-import { Badge } from "./ui/badge";
+import { VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/utils";
+import { Badge, badgeVariants } from "./ui/badge";
 
-const variantMapping = {
-  deposit: "입금 확인중",
-  reservation: "예매 완료",
-  enter: "입장 완료",
-  darkdeposit: "입금 확인중",
-  darkreservation: "예매 완료",
-  darkenter: "입장 완료",
-} as const;
-
-type BadgeVariant = keyof typeof variantMapping;
+type BadgeVariant = VariantProps<typeof badgeVariants>["variant"];
 
 interface IndicatorBadge {
-  state: BadgeVariant;
+  variant: BadgeVariant;
+  title: string;
 }
 
 const TicketIndicator = (props: IndicatorBadge) => {
-  const { state } = props;
+  const { variant, title } = props;
 
   return (
     <Badge
-      className={cn("absolute left-2 top-2 rounded-lg text-[10px] font-normal")}
-      variant={state}
+      className="absolute left-2 top-2 rounded-lg text-[10px] font-normal"
+      variant={variant}
     >
-      {variantMapping[state]}
+      {title}
     </Badge>
   );
 };
