@@ -1,10 +1,11 @@
 import { useState } from "react";
 
+import TicketIndicator from "@/components/TicketIndicator";
+
 import CellItem from "./CellItem";
 
 import { useNavigate } from "@/router";
 import { cn } from "@/lib/utils";
-
 
 interface TicketItemProps {
   selected: boolean;
@@ -32,7 +33,9 @@ const TicketItem = (props: TicketItemProps) => {
       onClick={onSelect}
     >
       <div className="row-span-4 grid h-full grid-flow-col grid-rows-2 gap-3.5 rounded-b-[27px]  rounded-t-[9px] bg-white p-4 shadow-lg">
-        <div className="h-full w-full rounded-lg bg-green-800"></div>
+        <div className="relative h-full w-full rounded-lg bg-green-800">
+          <TicketIndicator variant={"deposit"} title={"입금 확인중"} />
+        </div>
         <div className="flex w-full flex-col justify-around p-[3px]">
           <div>
             <p className="text-xs text-[#5E5E6E]">건국대</p>

@@ -14,7 +14,9 @@ interface LogoProps {
 const Logo = (props: LogoProps) => {
   const { onActivity } = props;
   const { pathname } = useLocation();
-  const imgSrc = pathname === "/" ? LandingLogoImage : LogoImage;
+  const imgSrc = ["/", "/ticket-detail"].includes(pathname)
+    ? LandingLogoImage
+    : LogoImage;
 
   return (
     <Link to="/" className={cn(onActivity ? "pl-6 pt-2" : "")}>
