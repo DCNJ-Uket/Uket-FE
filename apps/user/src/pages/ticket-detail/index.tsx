@@ -1,5 +1,5 @@
-
-import WhiteLogo from "@/components/WhiteLogo";
+import TicketIndicator from "@/components/TicketIndicator";
+import Logo from "@/components/Logo";
 
 import { useModals } from "@/hooks/useModals";
 
@@ -16,18 +16,22 @@ const TicketDetail = () => {
   } = useModals({ handleState: false });
 
   const { isOpen: isOpenSecondModal, closeModal: closeSecondModal } = useModals(
-    { setState: secondModalState },
+    { setState: secondModalState, goBack: true },
   );
 
   return (
     <main className="relative flex h-full flex-col items-center justify-evenly bg-green-800 opacity-75">
       <header className="sticky left-0 top-0 z-10 w-full">
         <nav className="container my-2 flex h-10 w-full items-center justify-between self-stretch py-4">
-          <WhiteLogo />
+          <Logo />
         </nav>
       </header>
       <section className="mt-3 h-full w-full px-4">
         <div className="flex h-full w-full flex-col gap-5 rounded-t-[9px] bg-white shadow-lg">
+          <div className="relative mx-3 mt-3">
+            <TicketIndicator variant={"darkdeposit"} title={"입금 확인중"} />
+          </div>
+
           <div className="mx-[88px] mt-14">
             <div className="mx-auto aspect-square max-h-[300px] min-h-[168px] min-w-[168px] max-w-[300px] bg-black"></div>
             <div className="mt-2 text-center text-[10px] text-brand">
@@ -71,8 +75,11 @@ const TicketDetail = () => {
               />
               <ConfirmModal
                 isOpen={isOpenSecondModal}
-                title="정말 예매를 취소하시겠습니까?"
-                confirm={{ title: "확인", onClick: closeSecondModal }}
+                title="예매가 취소되었습니다."
+                confirm={{
+                  title: "확인",
+                  onClick: closeSecondModal,
+                }}
               />
             </div>
           </div>

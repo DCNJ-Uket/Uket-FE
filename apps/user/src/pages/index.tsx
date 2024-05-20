@@ -26,12 +26,14 @@ const MainPage = () => {
               축제 예매하기
             </Button>
           </Link>
-          <Button
-            variant="default"
-            className="w-full rounded-xl border border-white bg-black p-7 text-base text-white sm:w-80"
-          >
-            내 티켓 확인하기
-          </Button>
+          <Link to="/ticket-list" className="block w-full text-center">
+            <Button
+              variant="default"
+              className="w-full rounded-xl border border-white bg-black p-7 text-base text-white sm:w-80"
+            >
+              내 티켓 확인하기
+            </Button>
+          </Link>
         </section>
       </main>
     </main>
