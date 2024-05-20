@@ -5,6 +5,7 @@
   "scripts": {
     "ui:add": "pnpm dlx shadcn-ui@latest add"
   },
+  "packageManager": "pnpm@9.1.1",
   "devDependencies": {
     "@types/node": "^20.12.12",
     "@types/react": "^18.3.2",
