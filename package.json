@@ -1,7 +1,7 @@
 {
   "name": "uket",
   "private": true,
-  "packageManager": "pnpm@9.1.1",
+  "packageManager": "pnpm@9.1.1+sha256.9551e803dcb7a1839fdf5416153a844060c7bce013218ce823410532504ac10b",
   "scripts": {
     "build": "turbo run build",
     "build:user": "turbo run build --filter user",
