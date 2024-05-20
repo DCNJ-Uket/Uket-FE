@@ -14,10 +14,4 @@ export default defineConfig({
       "@ui": path.resolve(__dirname, "../../packages/ui/src"),
     },
   },
-  build: {
-    rollupOptions: {
-      // External packages that should not be bundled into your library.
-      external: ["react", "react-dom", "react-router-dom", "react/jsx-runtime"],
-    },
-  },
 });
