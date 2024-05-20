@@ -1,0 +1,20 @@
+{
+  "extends": "@uket/typescript-config/vite.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "react"
+      }
+    ],
+    /* Alias Path */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "types": ["kakao.maps.d.ts"],
+    "jsx": "react"
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "exclude": ["node_modules"]
+}
