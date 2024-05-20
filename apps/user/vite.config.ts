@@ -14,4 +14,18 @@ export default defineConfig({
       "@ui": path.resolve(__dirname, "../../packages/ui/src"),
     },
   },
+  build: {
+    sourcemap: true,
+    rollupOptions: {
+      onwarn(warning, defaultHandler) {
+        if (warning.code === "SOURCEMAP_ERROR") {
+          return
+        }
+
+        defaultHandler(warning)
+      },
+      // External packages that should not be bundled into your library.
+      external: ["react", "react-dom", "react-router-dom", "react/jsx-runtime"],
+    },
+  },
 });
