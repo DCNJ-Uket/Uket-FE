@@ -12,7 +12,7 @@
       "@/*": ["./src/*"]
     },
     "types": ["kakao.maps.d.ts"],
-    "jsx": "react"
+    "jsx": "react-jsx"
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }],
