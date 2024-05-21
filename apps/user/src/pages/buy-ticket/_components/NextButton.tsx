@@ -25,7 +25,7 @@ const NextButton = (as: NextButtonProps) => {
 
   return (
     <Button
-      className="h-16 w-full rounded-none bg-brand text-base font-extrabold hover:bg-brandHover"
+      className="h-16 w-full rounded-none bg-brand text-base font-extrabold hover:bg-brandHover disabled:text-black disabled:bg-formInput disabled:opacity-100"
       onClick={handleClick}
       disabled={disabled}
       {...props}
