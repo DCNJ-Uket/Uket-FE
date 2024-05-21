@@ -1,7 +1,9 @@
+import { useSearchParams } from "react-router-dom";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
 import useItemSelect from "@/hooks/useItemSelect";
+import { useQueryShowList } from "@/hooks/queries/useQueryShowList";
 
 import NextButton from "./NextButton";
 import HeaderItem from "./HeaderItem";
@@ -16,6 +18,11 @@ import {
 const DateActivity: ActivityComponentType = () => {
   const { selectedItem, handleSelectItem } = useItemSelect();
 
+  const [searchParams] = useSearchParams();
+  const showId = searchParams.get("id");
+
+  const { data: showList } = useQueryShowList(showId);
+
   return (
     <AppScreen appBar={{ border: false, height: "56px" }}>
       <Activity>
@@ -24,12 +31,12 @@ const DateActivity: ActivityComponentType = () => {
             <HeaderItem step={"01"} content={"예매 날짜를 선택해 주세요."} />
           </ActivityHeader>
           <div className="flex flex-col gap-4 px-[22px]">
-            {Array.from({ length: 14 }).map((_, index) => (
+            {showList.map(({ id, name }) => (
               <DateItem
-                key={index}
-                title={`Day ${index + 1}`}
-                isSelected={selectedItem === index}
-                onSelect={() => handleSelectItem(index)}
+                key={id}
+                title={name}
+                isSelected={selectedItem === id}
+                onSelect={() => handleSelectItem(id)}
               />
             ))}
           </div>

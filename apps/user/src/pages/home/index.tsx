@@ -2,8 +2,6 @@ import { useSearchParams } from "react-router-dom";
 import { Suspense } from "react";
 import { Separator } from "@uket/ui/components/ui/separator";
 
-
-
 import RetryErrorBoundary from "@/components/RetryErrorBoundary";
 import BrandButton from "@/components/BrandButton";
 
