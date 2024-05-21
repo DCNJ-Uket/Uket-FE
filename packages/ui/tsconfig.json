@@ -1,7 +1,6 @@
 {
-  "extends": "@uket/typescript-config/vite.json",
+  "extends": "@uket/typescript-config/react-library.json",
   "compilerOptions": {
-    "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
       "@ui/*": ["./src/*"]
