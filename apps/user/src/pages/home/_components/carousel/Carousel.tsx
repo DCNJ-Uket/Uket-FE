@@ -10,7 +10,7 @@ import { FestivalInfo } from "@/types/univType";
 
 import { LazyLoadImage } from "./CarouselLazyImage";
 import { DotButton } from "./CarouselDotButton";
-
+import "@/styles/Carousel.css";
 interface PropType {
   slides: FestivalInfo["banners"] | undefined;
 }
