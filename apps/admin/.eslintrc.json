@@ -1,0 +1,9 @@
+{
+  "root": true,
+  "extends": ["@uket/eslint-config/next.js"],
+  "parser": "@typescript-eslint/parser",
+  "ignorePatterns": ["next.config.mjs", "postcss.config.cjs"],
+  "parserOptions": {
+    "project": true
+  }
+}
