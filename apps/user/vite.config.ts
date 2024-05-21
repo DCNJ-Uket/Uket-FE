@@ -2,7 +2,7 @@ import path from "path";
 
 import mkcert from "vite-plugin-mkcert";
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
+import react from "@vitejs/plugin-react";
 import generouted from "@generouted/react-router/plugin";
 
 // https://vitejs.dev/config/
@@ -15,14 +15,17 @@ export default defineConfig({
     },
   },
   build: {
+    sourcemap: true,
+
     rollupOptions: {
-      external: ["react", "react-dom", "react/jsx-runtime"],
-      output: {
-        globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
-          "react/jsx-runtime": "JSXRuntime",
-        },
+      onLog(level, log, handler) {
+        if (
+          log.cause &&
+          log.cause.message === `Can't resolve original location of error.`
+        ) {
+          return;
+        }
+        handler(level, log);
       },
     },
   },
