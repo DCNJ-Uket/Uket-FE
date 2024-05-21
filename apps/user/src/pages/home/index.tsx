@@ -2,14 +2,20 @@ import { useSearchParams } from "react-router-dom";
 import { Suspense } from "react";
 import { Separator } from "@uket/ui/components/ui/separator";
 
+
+
 import RetryErrorBoundary from "@/components/RetryErrorBoundary";
 import BrandButton from "@/components/BrandButton";
+
+import { useQueryFestivalInfoByUniversity } from "@/hooks/queries/useQueryFestivalByUniversity";
 
 import UnivSelector from "./_components/UnivSelector";
 import FestivalSection from "./_components/FestivalSection";
 import UnivSelectorSuspenseFallback from "./_components/fallback/UnivSelectorSuspenseFallback";
 import UnivSelectorErrorFallback from "./_components/fallback/UnivSelectorErrorFallback";
 import FestivalSectionSuspenseFallback from "./_components/fallback/FestivalSectionSusepnseFallback";
+
+import { useNavigate } from "@/router";
 
 const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,6 +26,17 @@ const HomePage = () => {
     searchParams.set("select-univ", name);
     searchParams.set("id", id);
     setSearchParams(searchParams);
+  };
+
+  //Test
+  const { data } = useQueryFestivalInfoByUniversity(univId);
+  const navigate = useNavigate();
+
+  const handleBuyTicketNavigate = () => {
+    navigate({
+      pathname: "/buy-ticket",
+      search: `?id=${data.id}`,
+    });
   };
 
   return (
@@ -45,7 +62,11 @@ const HomePage = () => {
         </section>
         <footer className="mb-3 flex w-full items-center justify-center gap-3 bg-white">
           <BrandButton brand="secondary" title="내 티켓 확인" />
-          <BrandButton brand="primary" title="예매하기" />
+          <BrandButton
+            brand="primary"
+            title="예매하기"
+            onClick={handleBuyTicketNavigate}
+          />
         </footer>
       </main>
     </main>
