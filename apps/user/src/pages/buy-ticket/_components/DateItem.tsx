@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { cn } from "@uket/ui/lib/utils";
 
-import { useSetTime } from "@/hooks/useSetTime";
+import { useSetTime } from "@/hooks/useFormatTime";
 
 import CircleButton from "./CircleButton";
-
 
 interface DateItemProps {
   name: string;
