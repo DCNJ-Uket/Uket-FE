@@ -31,14 +31,27 @@ const DateActivity: ActivityComponentType = () => {
             <HeaderItem step={"01"} content={"예매 날짜를 선택해 주세요."} />
           </ActivityHeader>
           <div className="flex flex-col gap-4 px-[22px]">
-            {showList.map(({ id, name }) => (
-              <DateItem
-                key={id}
-                title={name}
-                isSelected={selectedItem === id}
-                onSelect={() => handleSelectItem(id)}
-              />
-            ))}
+            {showList.map(
+              ({
+                id,
+                name,
+                startDate,
+                endDate,
+                ticketingDate,
+                totalTicketCount,
+              }) => (
+                <DateItem
+                  key={id}
+                  name={name}
+                  startDate={startDate}
+                  endDate={endDate}
+                  ticketingDate={ticketingDate}
+                  totalTicketCount={totalTicketCount}
+                  isSelected={selectedItem === id}
+                  onSelect={() => handleSelectItem(id)}
+                />
+              ),
+            )}
           </div>
 
           <ActivityFooter>

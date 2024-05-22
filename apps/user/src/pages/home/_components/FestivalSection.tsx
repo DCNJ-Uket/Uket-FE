@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import { useQueryFestivalInfoByUniversity } from "@/hooks/queries/useQueryFestivalByUniversity";
 
 import SectionItem from "./SectionItem";
@@ -6,11 +8,18 @@ import Carousel from "./carousel/Carousel";
 
 interface FestivalSectionProps {
   univId: string | null;
+  updateShowId: (id: number) => void;
 }
 
 const FestivalSection = (props: FestivalSectionProps) => {
-  const { univId } = props;
+  const { univId, updateShowId } = props;
   const { data } = useQueryFestivalInfoByUniversity(univId);
+
+  useEffect(() => {
+    if (data && data.id) {
+      updateShowId(data.id);
+    }
+  }, []);
 
   return (
     <div className="flex flex-col gap-3">

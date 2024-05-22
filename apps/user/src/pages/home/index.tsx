@@ -1,11 +1,9 @@
 import { useSearchParams } from "react-router-dom";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { Separator } from "@uket/ui/components/ui/separator";
 
 import RetryErrorBoundary from "@/components/RetryErrorBoundary";
 import BrandButton from "@/components/BrandButton";
-
-import { useQueryFestivalInfoByUniversity } from "@/hooks/queries/useQueryFestivalByUniversity";
 
 import UnivSelector from "./_components/UnivSelector";
 import FestivalSection from "./_components/FestivalSection";
@@ -27,14 +25,20 @@ const HomePage = () => {
   };
 
   //Test
-  const { data } = useQueryFestivalInfoByUniversity(univId);
+  const [showId, setShowId] = useState<number>(-1);
+  const updateShowId = (id: number) => {
+    setShowId(id);
+  };
+
   const navigate = useNavigate();
 
   const handleBuyTicketNavigate = () => {
-    navigate({
-      pathname: "/buy-ticket",
-      search: `?id=${data.id}`,
-    });
+    if (showId !== -1) {
+      navigate({
+        pathname: "/buy-ticket",
+        search: `?id=${showId}`,
+      });
+    }
   };
 
   return (
@@ -54,7 +58,7 @@ const HomePage = () => {
         <section className="grow">
           <RetryErrorBoundary resetKeys={[univId]}>
             <Suspense fallback={<FestivalSectionSuspenseFallback />}>
-              <FestivalSection univId={univId} />
+              <FestivalSection univId={univId} updateShowId={updateShowId} />
             </Suspense>
           </RetryErrorBoundary>
         </section>
