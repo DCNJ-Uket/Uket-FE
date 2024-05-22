@@ -1,4 +1,4 @@
-export const useSetTime = (date: string) => {
+export const useFormatTime = (date: string) => {
   const datePart = date.split("T")[0];
   const formatDate = datePart.replace(/-/g, ".");
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { cn } from "@uket/ui/lib/utils";
 
-import { useSetTime } from "@/hooks/useFormatTime";
+import { useFormatTime } from "@/hooks/useFormatTime";
 
 import CircleButton from "./CircleButton";
 
@@ -40,10 +40,10 @@ const DateItem = (props: DateItemProps) => {
   }, [ticketingDate]);
 
   const { formatDate: formatShowDate, formatTime: formatStartTime } =
-    useSetTime(startDate);
-  const { formatTime: formatEndTime } = useSetTime(endDate);
+    useFormatTime(startDate);
+  const { formatTime: formatEndTime } = useFormatTime(endDate);
   const { formatDate: formatTicketingDate, formatTime: formatTicketingTime } =
-    useSetTime(ticketingDate);
+    useFormatTime(ticketingDate);
 
   return (
     <div className="relative">

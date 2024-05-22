@@ -18,10 +18,16 @@ import {
 const DateActivity: ActivityComponentType = () => {
   const { selectedItem, handleSelectItem } = useItemSelect();
 
-  const [searchParams] = useSearchParams();
-  const showId = searchParams.get("id");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const showId = searchParams.get("showId");
 
   const { data: showList } = useQueryShowList(showId);
+
+  const handleTicketParams = (showId: string | null, ticketingId: number) => {
+    searchParams.set("showId", showId as string);
+    searchParams.set("ticketingId", ticketingId.toString());
+    setSearchParams(searchParams);
+  };
 
   return (
     <AppScreen appBar={{ border: false, height: "56px" }}>
@@ -48,7 +54,10 @@ const DateActivity: ActivityComponentType = () => {
                   ticketingDate={ticketingDate}
                   totalTicketCount={totalTicketCount}
                   isSelected={selectedItem === id}
-                  onSelect={() => handleSelectItem(id)}
+                  onSelect={() => {
+                    handleSelectItem(id);
+                    handleTicketParams(showId, id);
+                  }}
                 />
               ),
             )}

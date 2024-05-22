@@ -1,7 +1,9 @@
+import { useSearchParams } from "react-router-dom";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
 import useItemSelect from "@/hooks/useItemSelect";
+import { useQueryTicketingList } from "@/hooks/queries/useQueryTicketingList";
 
 import TimeItem from "./TimeItem";
 import NextButton from "./NextButton";
@@ -16,6 +18,11 @@ import {
 const TimeActivity: ActivityComponentType = () => {
   const { selectedItem, handleSelectItem } = useItemSelect();
 
+  const [searchParams] = useSearchParams();
+  const ticketingId = searchParams.get("ticketingId");
+
+  const { data: ticketingList } = useQueryTicketingList(ticketingId);
+
   return (
     <AppScreen appBar={{ border: false, height: "56px" }}>
       <Activity>
@@ -24,14 +31,19 @@ const TimeActivity: ActivityComponentType = () => {
             <HeaderItem step={"02"} content={"예매 시간을 선택해 주세요."} />
           </ActivityHeader>
           <div className="flex flex-col gap-4 px-[22px]">
-            {Array.from({ length: 14 }).map((_, index) => (
-              <TimeItem
-                key={index}
-                title={`Time ${index + 1}`}
-                isSelected={selectedItem === index}
-                onSelect={() => handleSelectItem(index)}
-              />
-            ))}
+            {ticketingList.map(
+              ({ id, startTime, endTime, reservedCount, totalCount }) => (
+                <TimeItem
+                  key={id}
+                  startTime={startTime}
+                  endTime={endTime}
+                  reservedCount={reservedCount}
+                  totalCount={totalCount}
+                  isSelected={selectedItem === id}
+                  onSelect={() => handleSelectItem(id)}
+                />
+              ),
+            )}
           </div>
           <ActivityFooter>
             <NextButton

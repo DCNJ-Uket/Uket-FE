@@ -2,7 +2,7 @@ import { cn } from "@uket/ui/lib/utils";
 
 interface TimeCellItemProps {
   title: string;
-  amount: string;
+  amount: number;
   color: string;
 }
 
