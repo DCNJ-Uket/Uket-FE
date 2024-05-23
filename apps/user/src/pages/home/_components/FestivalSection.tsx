@@ -19,7 +19,7 @@ const FestivalSection = (props: FestivalSectionProps) => {
     if (data && data.id) {
       updateShowId(data.id);
     }
-  }, []);
+  }, [data]);
 
   return (
     <div className="flex flex-col gap-3">
