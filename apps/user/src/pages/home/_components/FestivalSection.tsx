@@ -13,13 +13,14 @@ interface FestivalSectionProps {
 
 const FestivalSection = (props: FestivalSectionProps) => {
   const { univId, updateShowId } = props;
+
   const { data } = useQueryFestivalInfoByUniversity(univId);
 
   useEffect(() => {
-    if (data && data.id) {
+    if (data && data.id && typeof updateShowId === "function") {
       updateShowId(data.id);
     }
-  }, [data]);
+  }, []);
 
   return (
     <div className="flex flex-col gap-3">
