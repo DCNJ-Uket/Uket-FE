@@ -1,8 +1,7 @@
 import { useFormatTime } from "@/hooks/useFormatTime";
 
-import TimeCellItem from "./TimeCellItem";
+import TicketQuantityItem from "./TicketQuantityItem";
 import CircleButton from "./CircleButton";
-
 
 interface TimeItemProps {
   startTime: string;
@@ -45,12 +44,16 @@ const TimeItem = (props: TimeItemProps) => {
       <div className="my-[1%] w-full border-[0.5px] border-[#CCCCCC]"></div>
 
       <div className="flex gap-10 text-xs">
-        <TimeCellItem
+        <TicketQuantityItem
           title="남은 티켓 수량"
           amount={leftCount}
           color="FD724F"
         />
-        <TimeCellItem title="총 티켓 수량" amount={totalCount} color="5E5E6E" />
+        <TicketQuantityItem
+          title="총 티켓 수량"
+          amount={totalCount}
+          color="5E5E6E"
+        />
       </div>
     </div>
   );

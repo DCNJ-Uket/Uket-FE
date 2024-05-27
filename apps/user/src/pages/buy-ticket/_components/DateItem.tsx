@@ -3,6 +3,7 @@ import { cn } from "@uket/ui/lib/utils";
 
 import { useFormatTime } from "@/hooks/useFormatTime";
 
+import TicketQuantityItem from "./TicketQuantityItem";
 import CircleButton from "./CircleButton";
 
 interface DateItemProps {
@@ -78,10 +79,11 @@ const DateItem = (props: DateItemProps) => {
               </p>
             </div>
           </div>
-          <div className="flex gap-2">
-            <p className="font-medium">티켓 수량</p>
-            <p className="text-[#5E5E6E]">{totalTicketCount}</p>
-          </div>
+          <TicketQuantityItem
+            title="티켓 수량"
+            amount={totalTicketCount}
+            color="5E5E6E"
+          />
         </div>
       </div>
     </div>
