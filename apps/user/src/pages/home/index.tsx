@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { Separator } from "@uket/ui/components/ui/separator";
 
 import RetryErrorBoundary from "@/components/RetryErrorBoundary";
@@ -11,6 +11,8 @@ import UnivSelectorSuspenseFallback from "./_components/fallback/UnivSelectorSus
 import UnivSelectorErrorFallback from "./_components/fallback/UnivSelectorErrorFallback";
 import FestivalSectionSuspenseFallback from "./_components/fallback/FestivalSectionSusepnseFallback";
 
+import { useNavigate } from "@/router";
+
 const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const univId = searchParams.get("id");
@@ -20,6 +22,23 @@ const HomePage = () => {
     searchParams.set("select-univ", name);
     searchParams.set("id", id);
     setSearchParams(searchParams);
+  };
+
+  //Test
+  const [showId, setShowId] = useState<number>(-1);
+  const updateShowId = (id: number) => {
+    setShowId(id);
+  };
+
+  const navigate = useNavigate();
+
+  const handleBuyTicketNavigate = () => {
+    if (showId !== -1) {
+      navigate({
+        pathname: "/buy-ticket",
+        search: `?univName=${univName}&showId=${showId}`,
+      });
+    }
   };
 
   return (
@@ -39,13 +58,17 @@ const HomePage = () => {
         <section className="grow">
           <RetryErrorBoundary resetKeys={[univId]}>
             <Suspense fallback={<FestivalSectionSuspenseFallback />}>
-              <FestivalSection univId={univId} />
+              <FestivalSection univId={univId} updateShowId={updateShowId} />
             </Suspense>
           </RetryErrorBoundary>
         </section>
         <footer className="mb-3 flex w-full items-center justify-center gap-3 bg-white">
           <BrandButton brand="secondary" title="내 티켓 확인" />
-          <BrandButton brand="primary" title="예매하기" />
+          <BrandButton
+            brand="primary"
+            title="예매하기"
+            onClick={handleBuyTicketNavigate}
+          />
         </footer>
       </main>
     </main>

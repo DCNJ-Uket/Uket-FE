@@ -1,6 +1,12 @@
 import React from "react";
 import { cn } from "@uket/ui/lib/utils";
 
+import { FormType } from "@/hooks/useTicketStackForm";
+
+export interface ActivityParams {
+  form: FormType;
+}
+
 const ActivityHeader = ({
   className,
   ...props
@@ -23,7 +29,7 @@ const ActivityContent = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => {
   return (
-    <main className="flex h-full flex-col items-center overflow-y-scroll bg-[#F2F2F2] pt-8">
+    <main className="flex h-full flex-col items-center overflow-y-scroll bg-[#F2F2F2] pt-4">
       <section
         className={cn(
           "flex w-full grow flex-col justify-center gap-4",
