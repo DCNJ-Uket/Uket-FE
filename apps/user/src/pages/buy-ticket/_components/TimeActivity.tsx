@@ -5,6 +5,8 @@ import { AppScreen } from "@stackflow/plugin-basic-ui";
 import useItemSelect from "@/hooks/useItemSelect";
 import { useQueryReservationList } from "@/hooks/queries/useQueryReservationList";
 
+import { getSelectedShowDate } from "@/utils/handleSelectedShowDate";
+
 import TimeItem from "./TimeItem";
 import SelectTicketItem from "./SelectTicketItem";
 import NextButton from "./NextButton";
@@ -16,6 +18,7 @@ import {
   ActivityHeader,
   ActivityParams,
 } from "./Activity";
+
 
 interface TimeParams extends ActivityParams {}
 
@@ -40,7 +43,10 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
         <ActivityContent>
           <div className="flex gap-3 px-[22px] pb-4">
             <SelectTicketItem title="선택 학교" content={univName!} />
-            <SelectTicketItem title="선택 날짜" content={""} />
+            <SelectTicketItem
+              title="선택 날짜"
+              content={getSelectedShowDate()}
+            />
           </div>
           <ActivityHeader className="px-[22px]">
             <HeaderItem step={"02"} content={"예매 시간을 선택해 주세요."} />
