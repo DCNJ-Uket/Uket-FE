@@ -36,7 +36,7 @@ const HomePage = () => {
     if (eventId !== -1) {
       navigate({
         pathname: "/buy-ticket",
-        search: `?univName=${univName}&eventId=${eventId}`,
+        search: `?univName=${univName}&univId=${univId}&eventId=${eventId}`,
       });
     }
   };
