@@ -1,4 +1,4 @@
-import { ShowInfoResponse, TicketingInfoResponse } from "@/types/showType";
+import { ShowInfoResponse, ReservationInfoResponse } from "@/types/showType";
 
 import { getAccessToken } from "@/utils/handleToken";
 
@@ -12,19 +12,20 @@ export const getShowList = async (id: string | null) => {
       Authorization: `Bearer ${accessToken}`,
     },
   });
+
   return data.shows;
 };
 
-export const getTicketingList = async (id: string | null) => {
+export const getReservationList = async (id: string | null) => {
   const accessToken = getAccessToken();
 
-  const { data } = await instance.get<TicketingInfoResponse>(
-    `/events/shows/${id}/ticketings`,
+  const { data } = await instance.get<ReservationInfoResponse>(
+    `/events/shows/${id}/reservations`,
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     },
   );
-  return data.ticketings;
+  return data.reservations;
 };

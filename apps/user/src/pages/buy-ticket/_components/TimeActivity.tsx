@@ -4,7 +4,7 @@ import { AppScreen } from "@stackflow/plugin-basic-ui";
 
 import useItemSelect from "@/hooks/useItemSelect";
 import { useFormatTime } from "@/hooks/useFormatTime";
-import { useQueryTicketingList } from "@/hooks/queries/useQueryTicketingList";
+import { useQueryReservationList } from "@/hooks/queries/useQueryReservationList";
 
 import TimeItem from "./TimeItem";
 import SelectTicketItem from "./SelectTicketItem";
@@ -33,7 +33,7 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
   const [searchParams] = useSearchParams();
   const ticketingId = searchParams.get("ticketingId");
 
-  const { data: ticketingList } = useQueryTicketingList(ticketingId);
+  const { data: ticketingList } = useQueryReservationList(ticketingId);
 
   const setFormValues = (startTime: string, endTime: string) => {
     form.setValue("startTime", startTime!);
