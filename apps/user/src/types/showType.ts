@@ -26,3 +26,11 @@ export type ReservationInfoResponse = {
   showName: string;
   reservations: ReservationInfo[];
 };
+
+export type TicketResponse = {
+  success: boolean;
+  ticket: {
+    userId: number;
+    ticketId: number;
+  };
+};
