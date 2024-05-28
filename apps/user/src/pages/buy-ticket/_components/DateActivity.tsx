@@ -6,6 +6,8 @@ import { useTicketStackForm } from "@/hooks/useTicketStackForm";
 import useItemSelect from "@/hooks/useItemSelect";
 import { useQueryShowList } from "@/hooks/queries/useQueryShowList";
 
+import { setSelectedShowDate } from "@/utils/handleSelectedShowDate";
+
 import SelectTicketItem from "./SelectTicketItem";
 import NextButton from "./NextButton";
 import HeaderItem from "./HeaderItem";
@@ -17,9 +19,8 @@ import {
   ActivityHeader,
 } from "./Activity";
 
-const DateActivity: ActivityComponentType = () => {
-  const { selectedItem, handleSelectItem } = useItemSelect();
 
+const DateActivity: ActivityComponentType = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const univName = searchParams.get("univName");
   const univId = searchParams.get("univId");
@@ -30,12 +31,20 @@ const DateActivity: ActivityComponentType = () => {
 
   const { data: showList } = useQueryShowList(eventId);
 
+  const { selectedItem, handleSelectItem } = useItemSelect();
+
   const handleTicketParams = (eventId: string | null, showId: number) => {
     searchParams.set("univName", univName as string);
     searchParams.set("univId", univId as string);
     searchParams.set("eventId", eventId as string);
     searchParams.set("showId", showId.toString());
     setSearchParams(searchParams);
+  };
+
+  const handleSelectDate = (id: number, name: string, startDate: string) => {
+    handleSelectItem(id);
+    handleTicketParams(eventId, id);
+    setSelectedShowDate(name, startDate);
   };
 
   return (
@@ -67,8 +76,7 @@ const DateActivity: ActivityComponentType = () => {
                   totalTicketCount={totalTicketCount}
                   isSelected={selectedItem === id}
                   onSelect={() => {
-                    handleSelectItem(id);
-                    handleTicketParams(eventId, id);
+                    handleSelectDate(id, name, startDate);
                   }}
                 />
               ),
