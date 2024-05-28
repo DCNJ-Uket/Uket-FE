@@ -3,7 +3,6 @@ import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
 import useItemSelect from "@/hooks/useItemSelect";
-import { useFormatTime } from "@/hooks/useFormatTime";
 import { useQueryReservationList } from "@/hooks/queries/useQueryReservationList";
 
 import TimeItem from "./TimeItem";
@@ -23,21 +22,16 @@ interface TimeParams extends ActivityParams {}
 const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
   const { form } = params;
 
-  const formData = form.getValues();
-  const univName = formData.univName;
-  const { formatDate: showDate } = useFormatTime(formData.date);
-  const selectDate = `${formData.showName} (${showDate.slice(2)})`;
-
   const { selectedItem, handleSelectItem } = useItemSelect();
 
   const [searchParams] = useSearchParams();
-  const ticketingId = searchParams.get("ticketingId");
+  const univName = searchParams.get("univName");
+  const showId = searchParams.get("showId");
 
-  const { data: ticketingList } = useQueryReservationList(ticketingId);
+  const { data: reservationList } = useQueryReservationList(showId);
 
-  const setFormValues = (startTime: string, endTime: string) => {
-    form.setValue("startTime", startTime!);
-    form.setValue("endTime", endTime);
+  const setFormValues = (reservationId: number) => {
+    form.setValue("reservationId", reservationId);
   };
 
   return (
@@ -45,14 +39,14 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
       <Activity>
         <ActivityContent>
           <div className="flex gap-3 px-[22px] pb-4">
-            <SelectTicketItem title="선택 학교" content={univName} />
-            <SelectTicketItem title="선택 날짜" content={selectDate} />
+            <SelectTicketItem title="선택 학교" content={univName!} />
+            <SelectTicketItem title="선택 날짜" content={""} />
           </div>
           <ActivityHeader className="px-[22px]">
             <HeaderItem step={"02"} content={"예매 시간을 선택해 주세요."} />
           </ActivityHeader>
           <div className="flex flex-col gap-4 px-[22px]">
-            {ticketingList.map(
+            {reservationList.map(
               ({ id, startTime, endTime, reservedCount, totalCount }) => (
                 <TimeItem
                   key={id}
@@ -63,7 +57,7 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
                   isSelected={selectedItem === id}
                   onSelect={() => {
                     handleSelectItem(id);
-                    setFormValues(startTime, endTime);
+                    setFormValues(id);
                   }}
                 />
               ),

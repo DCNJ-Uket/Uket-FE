@@ -18,27 +18,24 @@ import {
 } from "./Activity";
 
 const DateActivity: ActivityComponentType = () => {
-  const { form } = useTicketStackForm();
-
   const { selectedItem, handleSelectItem } = useItemSelect();
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const showId = searchParams.get("showId");
   const univName = searchParams.get("univName");
+  const univId = searchParams.get("univId");
+  const eventId = searchParams.get("eventId");
 
-  const { data: showList } = useQueryShowList(showId);
+  const { form } = useTicketStackForm();
+  form.setValue("universityId", parseInt(univId!, 10));
 
-  const handleTicketParams = (showId: string | null, ticketingId: number) => {
+  const { data: showList } = useQueryShowList(eventId);
+
+  const handleTicketParams = (eventId: string | null, showId: number) => {
     searchParams.set("univName", univName as string);
-    searchParams.set("showId", showId as string);
-    searchParams.set("ticketingId", ticketingId.toString());
+    searchParams.set("univId", univId as string);
+    searchParams.set("eventId", eventId as string);
+    searchParams.set("showId", showId.toString());
     setSearchParams(searchParams);
-  };
-
-  const setFormValues = (name: string, startDate: string) => {
-    form.setValue("univName", univName!);
-    form.setValue("showName", name);
-    form.setValue("date", startDate);
   };
 
   return (
@@ -71,8 +68,7 @@ const DateActivity: ActivityComponentType = () => {
                   isSelected={selectedItem === id}
                   onSelect={() => {
                     handleSelectItem(id);
-                    handleTicketParams(showId, id);
-                    setFormValues(name, startDate);
+                    handleTicketParams(eventId, id);
                   }}
                 />
               ),
