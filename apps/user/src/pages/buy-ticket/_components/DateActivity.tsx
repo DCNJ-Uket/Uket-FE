@@ -1,12 +1,12 @@
 import { useSearchParams } from "react-router-dom";
+import { useState } from "react";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
 import { useTicketStackForm } from "@/hooks/useTicketStackForm";
 import useItemSelect from "@/hooks/useItemSelect";
+import { useFormatTime } from "@/hooks/useFormatTime";
 import { useQueryShowList } from "@/hooks/queries/useQueryShowList";
-
-import { setSelectedShowDate } from "@/utils/handleSelectedShowDate";
 
 import SelectTicketItem from "./SelectTicketItem";
 import NextButton from "./NextButton";
@@ -19,7 +19,6 @@ import {
   ActivityHeader,
 } from "./Activity";
 
-
 const DateActivity: ActivityComponentType = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const univName = searchParams.get("univName");
@@ -28,6 +27,9 @@ const DateActivity: ActivityComponentType = () => {
 
   const { form } = useTicketStackForm();
   form.setValue("universityId", parseInt(univId!, 10));
+
+  const [selectedShowDate, setSelectedShowDate] = useState("");
+  const [selectedShowName, setSelectedShowName] = useState("");
 
   const { data: showList } = useQueryShowList(eventId);
 
@@ -44,8 +46,12 @@ const DateActivity: ActivityComponentType = () => {
   const handleSelectDate = (id: number, name: string, startDate: string) => {
     handleSelectItem(id);
     handleTicketParams(eventId, id);
-    setSelectedShowDate(name, startDate);
+    setSelectedShowDate(startDate);
+    setSelectedShowName(name);
   };
+
+  const { formatDate } = useFormatTime(selectedShowDate);
+  const formatShowDate = `${selectedShowName} (${formatDate.slice(2)})`;
 
   return (
     <AppScreen appBar={{ border: false, height: "56px" }}>
@@ -87,7 +93,7 @@ const DateActivity: ActivityComponentType = () => {
             <NextButton
               activityName={"TimeActivity" as never}
               disabled={selectedItem === null}
-              params={{ form }}
+              params={{ showDate: formatShowDate, form }}
             ></NextButton>
           </ActivityFooter>
         </ActivityContent>
