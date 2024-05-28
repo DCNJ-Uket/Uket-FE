@@ -6,22 +6,16 @@ export type FormSchemaType = z.infer<typeof FormSchema>;
 export type FormType = UseFormReturn<FormSchemaType, unknown, undefined>;
 
 export const FormSchema = z.object({
-  univName: z.string(),
-  showName: z.string(),
-  date: z.string(),
-  startTime: z.string(),
-  endTime: z.string(),
+  universityId: z.string(),
+  reservationId: z.string(),
 });
 
 export const useTicketStackForm = () => {
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      univName: "",
-      showName: "",
-      date: "",
-      startTime: "",
-      endTime: "",
+      reservationId: "",
+      universityId: "",
     },
     mode: "onChange",
   });
