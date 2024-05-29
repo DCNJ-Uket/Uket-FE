@@ -27,10 +27,10 @@ export type ReservationInfoResponse = {
   reservations: ReservationInfo[];
 };
 
-export type TicketResponse = {
-  success: boolean;
+export interface TicketResponse {
+  success: true;
   ticket: {
     userId: number;
     ticketId: number;
   };
-};
+}

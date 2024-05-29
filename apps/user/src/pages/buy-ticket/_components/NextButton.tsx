@@ -29,11 +29,14 @@ const NextButton = (as: NextButtonProps) => {
     } else if (activityName === "CompleteActivity") {
       const { form } = params || {};
       if (form) {
-        const isSuccess = await onSubmit(form.getValues());
-        if (isSuccess) {
+        const ticketResponse = await onSubmit(form.getValues());
+
+        if ("success" in ticketResponse && ticketResponse.success) {
           push(activityName, params || {});
+        } else {
+          navigate("/", { replace: true });
+          return;
         }
-        return;
       }
     } else {
       push(activityName, params || {});

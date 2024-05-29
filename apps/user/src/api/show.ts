@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import { FormSchemaType } from "@/hooks/useTicketStackForm";
 
 import {
@@ -9,6 +11,7 @@ import {
 import { getAccessToken } from "@/utils/handleToken";
 
 import { instance } from "./instance";
+
 
 export const getShowList = async (id: string | null) => {
   const accessToken = getAccessToken();
@@ -41,11 +44,19 @@ export const buyTicket = async (
 ): Promise<TicketResponse> => {
   const accessToken = getAccessToken();
 
-  const { data } = await instance.post<TicketResponse>("/tickets", formData, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  return data;
+  try {
+    const { data } = await instance.post<TicketResponse>("/tickets", formData, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      const errorResponse = error.response.data;
+      return errorResponse;
+    } else {
+      throw new Error("An unexpected error occurred");
+    }
+  }
 };
