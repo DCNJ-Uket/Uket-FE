@@ -1,9 +1,8 @@
 import { Button } from "@uket/ui/components/ui/button";
 
-import { FormType } from "@/hooks/useTicketStackForm";
+import { FormType, useTicketStackForm } from "@/hooks/useTicketStackForm";
 
 import { useMyFlow } from "@/utils/useMyFlow";
-
 
 import { useNavigate } from "@/router";
 
@@ -19,14 +18,26 @@ interface NextButtonProps
 const NextButton = (as: NextButtonProps) => {
   const { activityName, disabled, params, ...props } = as;
   const { push } = useMyFlow();
+  const { onSubmit } = useTicketStackForm();
+
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (activityName === "MainActivity") {
       navigate("/", { replace: true });
       return;
+    } else if (activityName === "CompleteActivity") {
+      const { form } = params || {};
+      if (form) {
+        const isSuccess = await onSubmit(form.getValues());
+        if (isSuccess) {
+          push(activityName, params || {});
+        }
+        return;
+      }
+    } else {
+      push(activityName, params || {});
     }
-    push(activityName, params || {});
   };
 
   return (

@@ -1,7 +1,10 @@
 import { FormSchemaType } from "@/hooks/useTicketStackForm";
 
-import { ShowInfoResponse, ReservationInfoResponse } from "@/types/showType";
-
+import {
+  ShowInfoResponse,
+  ReservationInfoResponse,
+  TicketResponse,
+} from "@/types/showType";
 
 import { getAccessToken } from "@/utils/handleToken";
 
@@ -33,10 +36,12 @@ export const getReservationList = async (id: string | null) => {
   return data.reservations;
 };
 
-export const buyTicket = async (formData: FormSchemaType) => {
+export const buyTicket = async (
+  formData: FormSchemaType,
+): Promise<TicketResponse> => {
   const accessToken = getAccessToken();
 
-  const { data } = await instance.post("/tickets", formData, {
+  const { data } = await instance.post<TicketResponse>("/tickets", formData, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },

@@ -2,7 +2,6 @@ import { useSearchParams } from "react-router-dom";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
-import { useTicketStackForm } from "@/hooks/useTicketStackForm";
 import useItemSelect from "@/hooks/useItemSelect";
 import { useQueryReservationList } from "@/hooks/queries/useQueryReservationList";
 
@@ -24,7 +23,6 @@ interface TimeParams extends ActivityParams {
 
 const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
   const { form, showDate } = params;
-  const { onSubmit } = useTicketStackForm();
 
   const { selectedItem, handleSelectItem } = useItemSelect();
 
@@ -36,10 +34,6 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
 
   const setFormValues = (reservationId: number) => {
     form.setValue("reservationId", reservationId);
-  };
-
-  const handleSubmit = () => {
-    onSubmit(form.getValues());
   };
 
   return (
@@ -76,7 +70,7 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
               type="submit"
               activityName={"CompleteActivity" as never}
               disabled={selectedItem === null}
-              onClick={handleSubmit}
+              params={{ form }}
             ></NextButton>
           </ActivityFooter>
         </ActivityContent>
