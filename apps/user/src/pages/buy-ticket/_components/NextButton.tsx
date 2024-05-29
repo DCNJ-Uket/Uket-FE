@@ -28,6 +28,7 @@ const NextButton = (as: NextButtonProps) => {
     if (activityName === "MainActivity") {
       pop();
       pop();
+      pop();
       navigate("/", { replace: true });
       return;
     } else if (activityName === "CompleteActivity") {
