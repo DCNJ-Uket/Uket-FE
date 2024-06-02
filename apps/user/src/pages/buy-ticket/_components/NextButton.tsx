@@ -24,7 +24,7 @@ const NextButton = (as: NextButtonProps) => {
 
   const form = params?.form;
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (activityName === "MainActivity") {
       pop();
       pop();
@@ -33,7 +33,7 @@ const NextButton = (as: NextButtonProps) => {
       return;
     } else if (activityName === "CompleteActivity") {
       if (form) {
-        const ticketResponse = onSubmit(form.getValues());
+        const ticketResponse = await onSubmit(form.getValues());
 
         if ("success" in ticketResponse && ticketResponse.success) {
           push(activityName, params || {});
