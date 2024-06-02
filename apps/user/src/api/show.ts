@@ -1,5 +1,3 @@
-import axios from "axios";
-
 import { FormSchemaType } from "@/hooks/useTicketStackForm";
 
 import {
@@ -11,7 +9,6 @@ import {
 import { getAccessToken } from "@/utils/handleToken";
 
 import { instance } from "./instance";
-
 
 export const getShowList = async (id: string | null) => {
   const accessToken = getAccessToken();
@@ -36,27 +33,13 @@ export const getReservationList = async (id: string | null) => {
       },
     },
   );
+
   return data.reservations;
 };
 
 export const buyTicket = async (
   formData: FormSchemaType,
 ): Promise<TicketResponse> => {
-  const accessToken = getAccessToken();
-
-  try {
-    const { data } = await instance.post<TicketResponse>("/tickets", formData, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    return data;
-  } catch (error) {
-    if (axios.isAxiosError(error) && error.response) {
-      const errorResponse = error.response.data;
-      return errorResponse;
-    } else {
-      throw new Error("An unexpected error occurred");
-    }
-  }
+  const { data } = await instance.post<TicketResponse>("/tickets", formData);
+  return data;
 };
