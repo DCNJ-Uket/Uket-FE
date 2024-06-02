@@ -1,17 +1,20 @@
+import { Suspense } from "react";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
+
+import RetryErrorBoundary from "@/components/RetryErrorBoundary";
 
 import { useTicketStackForm } from "@/hooks/useTicketStackForm";
 import { useShowSelection } from "@/hooks/useShowSelections";
 import useItemSelect from "@/hooks/useItemSelect";
 import { useFormatTime } from "@/hooks/useFormatTime";
 import useDateTicketParams from "@/hooks/useDateTicketParams";
-import { useQueryShowList } from "@/hooks/queries/useQueryShowList";
 
+
+import ShowList from "./ShowList";
 import SelectTicketItem from "./SelectTicketItem";
 import NextButton from "./NextButton";
 import HeaderItem from "./HeaderItem";
-import DateItem from "./DateItem";
 import {
   Activity,
   ActivityContent,
@@ -31,8 +34,6 @@ const DateActivity: ActivityComponentType = () => {
     selectedShowName,
     setSelectedShowName,
   } = useShowSelection();
-
-  const { data: showList } = useQueryShowList(eventId);
 
   const { selectedItem, handleSelectItem } = useItemSelect();
 
@@ -60,31 +61,16 @@ const DateActivity: ActivityComponentType = () => {
           <ActivityHeader className="px-[22px]">
             <HeaderItem step={"01"} content={"예매 날짜를 선택해 주세요."} />
           </ActivityHeader>
-          <div className="flex flex-col gap-4 px-[22px]">
-            {showList.map(
-              ({
-                id,
-                name,
-                startDate,
-                endDate,
-                ticketingDate,
-                totalTicketCount,
-              }) => (
-                <DateItem
-                  key={id}
-                  name={name}
-                  startDate={startDate}
-                  endDate={endDate}
-                  ticketingDate={ticketingDate}
-                  totalTicketCount={totalTicketCount}
-                  isSelected={selectedItem === id}
-                  onSelect={() => {
-                    handleSelectDate(id, name, startDate);
-                  }}
-                />
-              ),
-            )}
-          </div>
+
+          <RetryErrorBoundary>
+            <Suspense>
+              <ShowList
+                eventId={eventId.toString()}
+                selectedItem={selectedItem}
+                onSelect={handleSelectDate}
+              />
+            </Suspense>
+          </RetryErrorBoundary>
 
           <ActivityFooter>
             <NextButton
