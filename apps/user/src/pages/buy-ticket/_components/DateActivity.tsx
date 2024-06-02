@@ -1,9 +1,9 @@
 import { useSearchParams } from "react-router-dom";
-import { useState } from "react";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
 import { useTicketStackForm } from "@/hooks/useTicketStackForm";
+import { useShowSelection } from "@/hooks/useShowSelections";
 import useItemSelect from "@/hooks/useItemSelect";
 import { useFormatTime } from "@/hooks/useFormatTime";
 import { useQueryShowList } from "@/hooks/queries/useQueryShowList";
@@ -28,8 +28,12 @@ const DateActivity: ActivityComponentType = () => {
   const { form } = useTicketStackForm();
   form.setValue("universityId", parseInt(univId!, 10));
 
-  const [selectedShowDate, setSelectedShowDate] = useState("");
-  const [selectedShowName, setSelectedShowName] = useState("");
+  const {
+    selectedShowDate,
+    setSelectedShowDate,
+    selectedShowName,
+    setSelectedShowName,
+  } = useShowSelection();
 
   const { data: showList } = useQueryShowList(eventId);
 
