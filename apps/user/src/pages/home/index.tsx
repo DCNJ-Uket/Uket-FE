@@ -26,7 +26,7 @@ const HomePage = () => {
 
   //Test
   const [eventId, setEventId] = useState<number>(-1);
-  const updateEventId = (id: number) => {
+  const handleUpdateEventId = (id: number) => {
     setEventId(id);
   };
 
@@ -58,7 +58,10 @@ const HomePage = () => {
         <section className="grow">
           <RetryErrorBoundary resetKeys={[univId]}>
             <Suspense fallback={<FestivalSectionSuspenseFallback />}>
-              <FestivalSection univId={univId} updateEventId={updateEventId} />
+              <FestivalSection
+                univId={univId}
+                handleUpdateEventId={handleUpdateEventId}
+              />
             </Suspense>
           </RetryErrorBoundary>
         </section>
