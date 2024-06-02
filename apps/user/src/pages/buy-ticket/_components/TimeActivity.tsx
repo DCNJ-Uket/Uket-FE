@@ -1,12 +1,14 @@
 import { useSearchParams } from "react-router-dom";
+import { Suspense } from "react";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
-import useItemSelect from "@/hooks/useItemSelect";
-import { useQueryReservationList } from "@/hooks/queries/useQueryReservationList";
+import RetryErrorBoundary from "@/components/RetryErrorBoundary";
 
-import TimeItem from "./TimeItem";
+import useItemSelect from "@/hooks/useItemSelect";
+
 import SelectTicketItem from "./SelectTicketItem";
+import ReservationList from "./ReservationList";
 import NextButton from "./NextButton";
 import HeaderItem from "./HeaderItem";
 import {
@@ -28,12 +30,11 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
 
   const [searchParams] = useSearchParams();
   const univName = searchParams.get("univName");
-  const showId = searchParams.get("showId");
+  const showId = searchParams.get("showId") as string;
 
-  const { data: reservationList } = useQueryReservationList(showId);
-
-  const setFormValues = (reservationId: number) => {
-    form.setValue("reservationId", reservationId);
+  const handleSelectReservation = (id: number) => {
+    handleSelectItem(id);
+    form.setValue("reservationId", id);
   };
 
   return (
@@ -47,24 +48,17 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
           <ActivityHeader className="px-[22px]">
             <HeaderItem step={"02"} content={"예매 시간을 선택해 주세요."} />
           </ActivityHeader>
-          <div className="flex flex-col gap-4 px-[22px]">
-            {reservationList.map(
-              ({ id, startTime, endTime, reservedCount, totalCount }) => (
-                <TimeItem
-                  key={id}
-                  startTime={startTime}
-                  endTime={endTime}
-                  reservedCount={reservedCount}
-                  totalCount={totalCount}
-                  isSelected={selectedItem === id}
-                  onSelect={() => {
-                    handleSelectItem(id);
-                    setFormValues(id);
-                  }}
-                />
-              ),
-            )}
-          </div>
+
+          <RetryErrorBoundary>
+            <Suspense>
+              <ReservationList
+                showId={showId}
+                selectedItem={selectedItem}
+                onSelect={handleSelectReservation}
+              />
+            </Suspense>
+          </RetryErrorBoundary>
+
           <ActivityFooter>
             <NextButton
               type="submit"
