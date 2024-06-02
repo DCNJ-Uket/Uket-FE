@@ -60,7 +60,7 @@ const HomePage = () => {
             <Suspense fallback={<FestivalSectionSuspenseFallback />}>
               <FestivalSection
                 univId={univId}
-                handleUpdateEventId={handleUpdateEventId}
+                onUpdateEventId={handleUpdateEventId}
               />
             </Suspense>
           </RetryErrorBoundary>

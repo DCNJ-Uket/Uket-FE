@@ -8,17 +8,17 @@ import Carousel from "./carousel/Carousel";
 
 interface FestivalSectionProps {
   univId: string | null;
-  handleUpdateEventId: (id: number) => void;
+  onUpdateEventId: (id: number) => void;
 }
 
 const FestivalSection = (props: FestivalSectionProps) => {
-  const { univId, handleUpdateEventId } = props;
+  const { univId, onUpdateEventId } = props;
 
   const { data } = useQueryFestivalInfoByUniversity(univId);
 
   useEffect(() => {
-    if (data && data.id && typeof handleUpdateEventId === "function") {
-      handleUpdateEventId(data.id);
+    if (data && data.id && typeof onUpdateEventId === "function") {
+      onUpdateEventId(data.id);
     }
   }, []);
 
