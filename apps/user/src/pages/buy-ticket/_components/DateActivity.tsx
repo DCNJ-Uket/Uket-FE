@@ -1,4 +1,3 @@
-import { useSearchParams } from "react-router-dom";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
@@ -6,6 +5,7 @@ import { useTicketStackForm } from "@/hooks/useTicketStackForm";
 import { useShowSelection } from "@/hooks/useShowSelections";
 import useItemSelect from "@/hooks/useItemSelect";
 import { useFormatTime } from "@/hooks/useFormatTime";
+import useDateTicketParams from "@/hooks/useDateTicketParams";
 import { useQueryShowList } from "@/hooks/queries/useQueryShowList";
 
 import SelectTicketItem from "./SelectTicketItem";
@@ -20,10 +20,7 @@ import {
 } from "./Activity";
 
 const DateActivity: ActivityComponentType = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const univName = searchParams.get("univName");
-  const univId = searchParams.get("univId");
-  const eventId = searchParams.get("eventId");
+  const { univName, univId, eventId, setTicketParams } = useDateTicketParams();
 
   const { form } = useTicketStackForm();
   form.setValue("universityId", parseInt(univId!, 10));
@@ -39,12 +36,8 @@ const DateActivity: ActivityComponentType = () => {
 
   const { selectedItem, handleSelectItem } = useItemSelect();
 
-  const handleTicketParams = (eventId: string | null, showId: number) => {
-    searchParams.set("univName", univName as string);
-    searchParams.set("univId", univId as string);
-    searchParams.set("eventId", eventId as string);
-    searchParams.set("showId", showId.toString());
-    setSearchParams(searchParams);
+  const handleTicketParams = (eventId: string, showId: number) => {
+    setTicketParams(eventId, showId);
   };
 
   const handleSelectDate = (id: number, name: string, startDate: string) => {
