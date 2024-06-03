@@ -31,23 +31,11 @@ const NextButton = (as: NextButtonProps) => {
       pop();
       navigate("/", { replace: true });
       return;
-    } else if (activityName === "CompleteActivity") {
-      if (form) {
-        const ticketResponse = await onSubmit(form.getValues());
-
-        if ("success" in ticketResponse && ticketResponse.success) {
-          push(activityName, params || {});
-        } else {
-          pop();
-          pop();
-          navigate("/", { replace: true });
-
-          return;
-        }
-      }
-    } else {
-      push(activityName, params || {});
+    } else if (activityName === "CompleteActivity" && form) {
+      await onSubmit(form.getValues());
     }
+
+    push(activityName, params || {});
   };
 
   return (

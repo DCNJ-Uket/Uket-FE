@@ -2,7 +2,7 @@ import { z } from "zod";
 import { UseFormReturn, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { buyTicket } from "@/api/show";
+import { useMutationBuyTicket } from "./mutations/useMutationBuyTicket";
 
 export type FormSchemaType = z.infer<typeof FormSchema>;
 export type FormType = UseFormReturn<FormSchemaType, unknown, undefined>;
@@ -13,6 +13,8 @@ export const FormSchema = z.object({
 });
 
 export const useTicketStackForm = () => {
+  const { mutateAsync } = useMutationBuyTicket();
+
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -23,8 +25,10 @@ export const useTicketStackForm = () => {
   });
 
   const onSubmit = async (data: FormSchemaType) => {
-    const response = await buyTicket(data);
-    return response;
+    const { universityId, reservationId } = data;
+
+    const result = await mutateAsync({ universityId, reservationId });
+    return result;
   };
 
   return { form, onSubmit };

@@ -56,17 +56,16 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
                 selectedItem={selectedItem}
                 onSelect={handleSelectReservation}
               />
+              <ActivityFooter>
+                <NextButton
+                  type="submit"
+                  activityName={"CompleteActivity" as never}
+                  disabled={selectedItem === null}
+                  params={{ form }}
+                ></NextButton>
+              </ActivityFooter>
             </Suspense>
           </RetryErrorBoundary>
-
-          <ActivityFooter>
-            <NextButton
-              type="submit"
-              activityName={"CompleteActivity" as never}
-              disabled={selectedItem === null}
-              params={{ form }}
-            ></NextButton>
-          </ActivityFooter>
         </ActivityContent>
       </Activity>
     </AppScreen>
