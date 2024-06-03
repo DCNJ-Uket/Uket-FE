@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { cn } from "@uket/ui/lib/utils";
 import { Button } from "@uket/ui/components/ui/button";
 
-import RetryErrorBoundary from "@/components/RetryErrorBoundary";
+import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
 
 import { useSelectUniversity } from "@/hooks/useSelectUniversity";
 

@@ -1,8 +1,9 @@
 import { useSearchParams } from "react-router-dom";
+import { FallbackProps } from "react-error-boundary";
 import { Suspense, useState } from "react";
 import { Separator } from "@uket/ui/components/ui/separator";
 
-import RetryErrorBoundary from "@/components/RetryErrorBoundary";
+import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
 import BrandButton from "@/components/BrandButton";
 
 import UnivSelector from "./_components/UnivSelector";
@@ -46,7 +47,11 @@ const HomePage = () => {
       <Separator className="h-3 bg-[#F2F2F2]" />
       <main className="container mt-2 flex h-full w-full flex-col gap-3 bg-white">
         <header>
-          <RetryErrorBoundary fallbackComponent={<UnivSelectorErrorFallback />}>
+          <RetryErrorBoundary
+            fallbackComponent={(props: FallbackProps) => (
+              <UnivSelectorErrorFallback {...props} />
+            )}
+          >
             <Suspense fallback={<UnivSelectorSuspenseFallback />}>
               <UnivSelector
                 currentUniv={univName}

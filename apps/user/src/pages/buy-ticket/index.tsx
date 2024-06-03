@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import RetryErrorBoundary from "@/components/RetryErrorBoundary";
+import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
 
 import { Stack } from "@/utils/buyTicketFlow";
 
