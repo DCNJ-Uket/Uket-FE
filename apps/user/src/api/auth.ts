@@ -60,7 +60,6 @@ export const reissue = async () => {
   });
 
   const { accessToken: newAccessToken } = data;
-  if (!newAccessToken) throw new Error("accessToken reissue error");
 
   return newAccessToken;
 };
