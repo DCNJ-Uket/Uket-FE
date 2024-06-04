@@ -1,91 +1,93 @@
-import { useCallback, useEffect, useState } from "react";
-import useEmblaCarousel from "embla-carousel-react";
-import { EmblaCarouselType, EmblaOptionsType } from "embla-carousel";
+import { useEffect, useState } from "react";
+import {
+  Carousel,
+  CarouselApi,
+  CarouselContent,
+  CarouselItem,
+} from "@uket/ui/components/ui/carousel";
+import { Card, CardContent } from "@uket/ui/components/ui/card";
 
 import Indicator from "@/components/Indicator";
-
-import { useDotButton } from "@/hooks/useDotButton";
 
 import { FestivalInfo } from "@/types/univType";
 
 import { LazyLoadImage } from "./CarouselLazyImage";
-import { DotButton } from "./CarouselDotButton";
-import "@/styles/Carousel.css";
+import CarouselDotButtonList from "./CarouselDotButtonList";
+
 interface PropType {
   slides: FestivalInfo["banners"] | undefined;
 }
 
-const OPTIONS: EmblaOptionsType = { align: "start", loop: true };
-
-const Carousel = (props: PropType) => {
+const CarouselT = (props: PropType) => {
   const { slides } = props;
-  const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS);
+  const [emblaApi, setEmblaApi] = useState<CarouselApi>();
   const [slidesInView, setSlidesInView] = useState<number[]>([]);
 
-  const { selectedIndex, scrollSnaps, onDotButtonClick } =
-    useDotButton(emblaApi);
+  useEffect(() => {
+    if (!emblaApi) {
+      return;
+    }
 
-  const updateSlidesInView = useCallback((emblaApi: EmblaCarouselType) => {
-    setSlidesInView(slidesInView => {
-      if (slidesInView.length === emblaApi.slideNodes().length) {
-        emblaApi.off("slidesInView", updateSlidesInView);
-      }
-      const inView = emblaApi
-        .slidesInView()
-        .filter((index: number) => !slidesInView.includes(index));
-      return slidesInView.concat(inView);
-    });
-  }, []);
+    const updateSlidesInView = () => {
+      setSlidesInView(slidesInView => {
+        if (slidesInView.length === emblaApi.slideNodes().length) {
+          emblaApi.off("slidesInView", updateSlidesInView);
+        }
+        const inView = emblaApi
+          .slidesInView()
+          .filter((index: number) => !slidesInView.includes(index));
+        return slidesInView.concat(inView);
+      });
+    };
+
+    emblaApi.on("slidesInView", updateSlidesInView);
+    emblaApi.on("reInit", updateSlidesInView);
+  }, [emblaApi]);
 
   const slideComponent = !slides ? (
-    <div className="embla__slide">
-      <p className="flex h-full w-full flex-col items-center justify-center rounded-lg bg-gray-100 text-gray-500">
-        배너가 존재하지 않아요 😢
-      </p>
-    </div>
+    <CarouselItem>
+      <div className="p-1">
+        <Card>
+          <CardContent className="flex aspect-square items-center justify-center p-6">
+            <p className="flex h-full w-full flex-col items-center justify-center rounded-lg bg-gray-100 text-gray-500">
+              배너가 존재하지 않아요 😢
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+    </CarouselItem>
   ) : (
     slides.map(({ title, url }, index) => (
-      <div className="embla__slide relative" key={url}>
-        <LazyLoadImage
-          index={index}
-          imgSrc={url}
-          inView={slidesInView.indexOf(index) > -1}
-        />
-        <Indicator title={title} />
-      </div>
+      <CarouselItem key={url} className="basis-full">
+        <div className="p-1">
+          <Card className="border-none">
+            <CardContent className="relative h-44 rounded-lg p-0 shadow-md sm:h-80 lg:h-96">
+              <LazyLoadImage
+                imgSrc={url}
+                inView={slidesInView.indexOf(index) > -1}
+              />
+              <Indicator
+                title={title}
+                variant={"banner"}
+                className="left-3 top-3"
+              />
+            </CardContent>
+          </Card>
+        </div>
+      </CarouselItem>
     ))
   );
 
-  useEffect(() => {
-    if (!emblaApi) return;
-
-    updateSlidesInView(emblaApi);
-    emblaApi.on("slidesInView", updateSlidesInView);
-    emblaApi.on("reInit", updateSlidesInView);
-  }, [emblaApi, updateSlidesInView]);
-
   return (
-    <section className="embla h-44 w-full rounded-lg shadow-md sm:h-80 lg:h-96">
-      <div className="embla__viewport h-full w-full" ref={emblaRef}>
-        <div className="embla__container h-full cursor-pointer">
-          {slideComponent}
-        </div>
-        <div className="embla__controls">
-          <div className="embla__dots">
-            {scrollSnaps.map((_, index) => (
-              <DotButton
-                key={index}
-                onClick={() => onDotButtonClick(index)}
-                className={"embla__dot".concat(
-                  index === selectedIndex ? " embla__dot--selected" : "",
-                )}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
+    <Carousel
+      className="w-full max-w-full"
+      opts={{ align: "start" }}
+      setApi={setEmblaApi}
+    >
+      <CarouselContent>{slideComponent}</CarouselContent>
+      <CarouselDotButtonList emblaApi={emblaApi} />
+    </Carousel>
   );
 };
 
-export default Carousel;
+export default CarouselT;

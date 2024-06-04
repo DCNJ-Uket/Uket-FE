@@ -26,18 +26,18 @@ const HomePage = () => {
   };
 
   //Test
-  const [showId, setShowId] = useState<number>(-1);
-  const updateShowId = (id: number) => {
-    setShowId(id);
+  const [eventId, setEventId] = useState<number>(-1);
+  const handleUpdateEventId = (id: number) => {
+    setEventId(id);
   };
 
   const navigate = useNavigate();
 
   const handleBuyTicketNavigate = () => {
-    if (showId !== -1) {
+    if (eventId !== -1) {
       navigate({
         pathname: "/buy-ticket",
-        search: `?univName=${univName}&showId=${showId}`,
+        search: `?univName=${univName}&univId=${univId}&eventId=${eventId}`,
       });
     }
   };
@@ -63,7 +63,10 @@ const HomePage = () => {
         <section className="grow">
           <RetryErrorBoundary resetKeys={[univId]}>
             <Suspense fallback={<FestivalSectionSuspenseFallback />}>
-              <FestivalSection univId={univId} updateShowId={updateShowId} />
+              <FestivalSection
+                univId={univId}
+                onUpdateEventId={handleUpdateEventId}
+              />
             </Suspense>
           </RetryErrorBoundary>
         </section>

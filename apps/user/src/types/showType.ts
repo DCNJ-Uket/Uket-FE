@@ -13,7 +13,7 @@ export type ShowInfoResponse = {
   shows: ShowInfo[];
 };
 
-export type TicketingInfo = {
+export type ReservationInfo = {
   id: number;
   type: string;
   startTime: string;
@@ -22,7 +22,15 @@ export type TicketingInfo = {
   totalCount: number;
 };
 
-export type TicketingInfoResponse = {
+export type ReservationInfoResponse = {
   showName: string;
-  ticketings: TicketingInfo[];
+  reservations: ReservationInfo[];
 };
+
+export interface TicketResponse {
+  success: true;
+  ticket: {
+    userId: number;
+    ticketId: number;
+  };
+}
