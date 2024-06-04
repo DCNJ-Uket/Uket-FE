@@ -19,7 +19,7 @@ export const setRefreshToken = (
   options?: CookieSetOptions,
 ) => {
   const defaultOptions = {
-    maxAge: 60 * 60 * 24 * 14,
+    maxAge: 60 * 60 * 2,
     path: "/",
   };
   cookies.set(name, value, { ...options } || defaultOptions);
