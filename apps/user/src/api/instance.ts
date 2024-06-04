@@ -34,10 +34,19 @@ instance.interceptors.response.use(
   async error => {
     const { status, config } = error.response;
 
+    if (status === 403 && config.url === "/auth/reissue") {
+      window.location.href = "/login";
+      return Promise.reject(error);
+    }
+
     if (status === 401 && AUTH_REQUIRED_PATH.includes(config.url)) {
       const newAccessToken = await reissue();
 
-      if (!newAccessToken) return Promise.reject(error);
+      if (!newAccessToken) {
+        window.location.href = "/login";
+        return Promise.reject(error);
+      }
+
       setAccessToken(newAccessToken);
 
       config.headers.Authorization = `Bearer ${newAccessToken}`;
