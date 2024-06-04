@@ -34,7 +34,7 @@ instance.interceptors.response.use(
   async error => {
     const { status, config } = error.response;
 
-    if (status === 403 && config.url === "/auth/reissue") {
+    if (config.url === "/auth/reissue") {
       window.location.href = "/login";
       return Promise.reject(error);
     }
