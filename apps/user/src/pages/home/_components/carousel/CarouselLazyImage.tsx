@@ -1,13 +1,12 @@
 import { useState, useCallback } from "react";
 import { Skeleton } from "@uket/ui/components/ui/skeleton";
 
-interface PropType {
+interface LazyLoadImageProps {
   imgSrc: string;
   inView: boolean;
-  index: number;
 }
 
-export const LazyLoadImage = (props: PropType) => {
+export const LazyLoadImage = (props: LazyLoadImageProps) => {
   const { imgSrc, inView } = props;
   const [hasLoaded, setHasLoaded] = useState(false);
 
