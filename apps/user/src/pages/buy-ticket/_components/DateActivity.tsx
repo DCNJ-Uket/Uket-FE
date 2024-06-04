@@ -1,15 +1,20 @@
-import { useSearchParams } from "react-router-dom";
+import { Suspense } from "react";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
-import { useTicketStackForm } from "@/hooks/useTicketStackForm";
-import useItemSelect from "@/hooks/useItemSelect";
-import { useQueryShowList } from "@/hooks/queries/useQueryShowList";
+import RetryErrorBoundary from "@/components/RetryErrorBoundary";
 
+import { useTicketStackForm } from "@/hooks/useTicketStackForm";
+import { useShowSelection } from "@/hooks/useShowSelections";
+import useItemSelect from "@/hooks/useItemSelect";
+import { useFormatTime } from "@/hooks/useFormatTime";
+import useDateTicketParams from "@/hooks/useDateTicketParams";
+
+
+import ShowList from "./ShowList";
 import SelectTicketItem from "./SelectTicketItem";
 import NextButton from "./NextButton";
 import HeaderItem from "./HeaderItem";
-import DateItem from "./DateItem";
 import {
   Activity,
   ActivityContent,
@@ -18,28 +23,33 @@ import {
 } from "./Activity";
 
 const DateActivity: ActivityComponentType = () => {
+  const { univName, univId, eventId, setTicketParams } = useDateTicketParams();
+
   const { form } = useTicketStackForm();
+  form.setValue("universityId", parseInt(univId!, 10));
+
+  const {
+    selectedShowDate,
+    setSelectedShowDate,
+    selectedShowName,
+    setSelectedShowName,
+  } = useShowSelection();
 
   const { selectedItem, handleSelectItem } = useItemSelect();
 
-  const [searchParams, setSearchParams] = useSearchParams();
-  const showId = searchParams.get("showId");
-  const univName = searchParams.get("univName");
-
-  const { data: showList } = useQueryShowList(showId);
-
-  const handleTicketParams = (showId: string | null, ticketingId: number) => {
-    searchParams.set("univName", univName as string);
-    searchParams.set("showId", showId as string);
-    searchParams.set("ticketingId", ticketingId.toString());
-    setSearchParams(searchParams);
+  const handleTicketParams = (eventId: string, showId: number) => {
+    setTicketParams(eventId, showId);
   };
 
-  const setFormValues = (name: string, startDate: string) => {
-    form.setValue("univName", univName!);
-    form.setValue("showName", name);
-    form.setValue("date", startDate);
+  const handleSelectDate = (id: number, name: string, startDate: string) => {
+    handleSelectItem(id);
+    handleTicketParams(eventId, id);
+    setSelectedShowDate(startDate);
+    setSelectedShowName(name);
   };
+
+  const { formatDate } = useFormatTime(selectedShowDate);
+  const formatShowDate = `${selectedShowName} (${formatDate.slice(2)})`;
 
   return (
     <AppScreen appBar={{ border: false, height: "56px" }}>
@@ -51,39 +61,22 @@ const DateActivity: ActivityComponentType = () => {
           <ActivityHeader className="px-[22px]">
             <HeaderItem step={"01"} content={"예매 날짜를 선택해 주세요."} />
           </ActivityHeader>
-          <div className="flex flex-col gap-4 px-[22px]">
-            {showList.map(
-              ({
-                id,
-                name,
-                startDate,
-                endDate,
-                ticketingDate,
-                totalTicketCount,
-              }) => (
-                <DateItem
-                  key={id}
-                  name={name}
-                  startDate={startDate}
-                  endDate={endDate}
-                  ticketingDate={ticketingDate}
-                  totalTicketCount={totalTicketCount}
-                  isSelected={selectedItem === id}
-                  onSelect={() => {
-                    handleSelectItem(id);
-                    handleTicketParams(showId, id);
-                    setFormValues(name, startDate);
-                  }}
-                />
-              ),
-            )}
-          </div>
+
+          <RetryErrorBoundary>
+            <Suspense>
+              <ShowList
+                eventId={eventId.toString()}
+                selectedItem={selectedItem}
+                onSelect={handleSelectDate}
+              />
+            </Suspense>
+          </RetryErrorBoundary>
 
           <ActivityFooter>
             <NextButton
               activityName={"TimeActivity" as never}
               disabled={selectedItem === null}
-              params={{ form }}
+              params={{ showDate: formatShowDate, form }}
             ></NextButton>
           </ActivityFooter>
         </ActivityContent>
