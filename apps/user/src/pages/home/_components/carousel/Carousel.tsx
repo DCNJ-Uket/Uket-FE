@@ -51,7 +51,7 @@ const Carousel = (props: PropType) => {
           imgSrc={url}
           inView={slidesInView.indexOf(index) > -1}
         />
-        <Indicator title={title} />
+        <Indicator title={title} variant={"banner"} />
       </div>
     ))
   );

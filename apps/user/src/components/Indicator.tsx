@@ -1,22 +1,26 @@
 import React from "react";
-import { cn } from "@uket/ui/lib/utils";
-import { Badge } from "@uket/ui/components/ui/badge";
+import { VariantProps, cn } from "@uket/ui/lib/utils";
+import { Badge, badgeVariants } from "@uket/ui/components/ui/badge";
 
-interface IndicatorBadge {
+type BadgeVariant = VariantProps<typeof badgeVariants>["variant"];
+
+interface IndicatorBadge extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
   rounded?: boolean;
+  variant: BadgeVariant;
 }
 
 const Indicator = (props: IndicatorBadge) => {
-  const { title, rounded } = props;
+  const { title, rounded, variant, className } = props;
 
   return (
     <Badge
       className={cn(
-        "absolute left-6 top-2",
+        "absolute left-6 top-2 px-2 py-1",
         rounded ? "rounded-lg" : "rounded-md",
+        className,
       )}
-      variant="banner"
+      variant={variant}
     >
       {title}
     </Badge>

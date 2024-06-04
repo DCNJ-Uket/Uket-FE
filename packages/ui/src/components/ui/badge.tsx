@@ -21,7 +21,7 @@ const badgeVariants = cva(
         deposit: "border-transparent bg-[#5E5E6E] text-[#FFEF60]",
         darkreservation: "border-transparent bg-[#81B0FE] text-[#17171B]",
         darkenter: "border-transparent bg-[#9981FE] text-[#ffffff]",
-        darkdeposit: "border-transparent bg-[#FFEF60] text-[#5E5E6E]",
+        darkdeposit: "border-transparent bg-[#FDD881] text-[#5E5E6E]",
       },
     },
     defaultVariants: {
