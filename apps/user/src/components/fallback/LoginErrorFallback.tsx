@@ -2,15 +2,12 @@ import { FallbackProps } from "react-error-boundary";
 import { cn } from "@uket/ui/lib/utils";
 import { Button } from "@uket/ui/components/ui/button";
 
-import { useNavigate } from "@/router";
-
 interface LoginErrorFallbackProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     FallbackProps {}
 
 const LoginErrorFallback = (props: LoginErrorFallbackProps) => {
   const { className, resetErrorBoundary, ...rest } = props;
-  const navigate = useNavigate();
 
   return (
     <Button
@@ -18,7 +15,6 @@ const LoginErrorFallback = (props: LoginErrorFallbackProps) => {
       className={cn("p-0 text-xs underline", className)}
       onClick={() => {
         resetErrorBoundary();
-        navigate("/login");
       }}
       {...rest}
     >
