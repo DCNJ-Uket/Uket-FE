@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { FallbackProps } from "react-error-boundary";
+import { cn } from "@uket/ui/lib/utils";
 
 import Profile from "./Profile";
 import Logo from "./Logo";
@@ -12,7 +13,6 @@ const PRIVATE: Path[] = ["/login", "/signup"];
 
 const Nav = () => {
   const { pathname } = useLocation();
-
   const isPrivatePath = PRIVATE.includes(pathname as Path);
 
   return (
@@ -20,8 +20,12 @@ const Nav = () => {
       <Logo />
       {!isPrivatePath && (
         <RetryErrorBoundary
+          resetKeys={["user-info"]}
           fallbackComponent={(props: FallbackProps) => (
-            <LoginErrorFallback className="text-white" {...props} />
+            <LoginErrorFallback
+              className={cn("text-black", pathname === "/" && "text-white")}
+              {...props}
+            />
           )}
         >
           <Profile />
