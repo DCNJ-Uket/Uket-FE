@@ -13,7 +13,7 @@ const PRIVATE: Path[] = ["/login", "/signup"];
 
 const Nav = () => {
   const { pathname } = useLocation();
-  const isPrivatePath = PRIVATE.includes(pathname as Path);
+  const isPrivatePath = PRIVATE.some(path => pathname.startsWith(path));
 
   return (
     <nav className="container my-2 flex h-10 w-full items-center justify-between self-stretch">

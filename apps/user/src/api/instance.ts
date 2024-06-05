@@ -1,8 +1,14 @@
 import axios from "axios";
 
-import { getAccessToken, setAccessToken } from "@/utils/handleToken";
+import {
+  clearAccessToken,
+  getAccessToken,
+  setAccessToken,
+} from "@/utils/handleToken";
+import { clearRefreshToken } from "@/utils/handleCookie";
 
 import { reissue } from "./auth";
+
 
 const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
 const SERVER_VERSION = "/api/v1";
@@ -34,18 +40,14 @@ instance.interceptors.response.use(
   async error => {
     const { status, config } = error.response;
 
-    if (config.url === "/auth/reissue") {
-      window.location.href = "/login";
-      return Promise.reject(error);
+    if ((status === 404 || status === 403) && config.url === "/auth/reissue") {
+      clearAccessToken("accessToken");
+      clearRefreshToken("refreshToken");
+      window.location.replace("/login");
     }
 
     if (status === 401 && AUTH_REQUIRED_PATH.includes(config.url)) {
       const newAccessToken = await reissue();
-
-      if (!newAccessToken) {
-        window.location.href = "/login";
-        return Promise.reject(error);
-      }
 
       setAccessToken(newAccessToken);
 
