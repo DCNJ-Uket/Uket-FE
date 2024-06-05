@@ -9,7 +9,6 @@ import { getRefreshToken } from "@/utils/handleCookie";
 
 import { instance } from "./instance";
 
-// export interface SignUpData
 export const login = async ({ code, provider }: LoginRequestParams) => {
   const redirect_uri =
     provider === "google" ? GOOGLE_REDIRECT_URI : KAKAO_REDIRECT_URI;
