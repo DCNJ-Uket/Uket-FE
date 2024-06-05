@@ -18,13 +18,17 @@ export const setRefreshToken = (
   value: string,
   options?: CookieSetOptions,
 ) => {
-  const defaultOptions = {
+  const defaultOptions: CookieSetOptions = {
     maxAge: 60 * 60 * 2,
     path: "/",
   };
-  cookies.set(name, value, { ...options } || defaultOptions);
+  cookies.set(name, value, { ...defaultOptions, ...options });
 };
 
 export const getRefreshToken = (name: string) => {
   return cookies.get(name);
+};
+
+export const clearRefreshToken = (name: string) => {
+  return cookies.remove(name);
 };

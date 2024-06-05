@@ -11,3 +11,7 @@ export const getAccessToken = () => {
     return null;
   }
 };
+
+export const clearAccessToken = (accessToken: string) => {
+  localStorage.removeItem(accessToken);
+};
