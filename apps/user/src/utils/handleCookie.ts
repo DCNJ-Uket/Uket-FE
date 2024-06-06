@@ -1,6 +1,6 @@
 import { Cookies } from "react-cookie";
 
-interface CookieSetOptions {
+export interface CookieSetOptions {
   path?: string;
   expires?: Date;
   maxAge?: number;
@@ -18,9 +18,17 @@ export const setRefreshToken = (
   value: string,
   options?: CookieSetOptions,
 ) => {
-  cookies.set(name, value, { ...options });
+  const defaultOptions: CookieSetOptions = {
+    maxAge: 60 * 60 * 2,
+    path: "/",
+  };
+  cookies.set(name, value, { ...defaultOptions, ...options });
 };
 
 export const getRefreshToken = (name: string) => {
   return cookies.get(name);
+};
+
+export const clearRefreshToken = (name: string) => {
+  return cookies.remove(name);
 };

@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 
+
 import { Stack } from "@/utils/buyTicketFlow";
 
 const BuyTicket = () => {

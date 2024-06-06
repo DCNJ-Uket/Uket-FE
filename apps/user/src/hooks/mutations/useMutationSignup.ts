@@ -18,7 +18,7 @@ export const useMutationSignup = () => {
       userUniv,
       userId,
       userMajor,
-          }: Partial<FormSchemaType>) =>
+    }: Partial<FormSchemaType>) =>
       signup({
         userType,
         userName,
@@ -26,13 +26,10 @@ export const useMutationSignup = () => {
         userUniv,
         userId,
         userMajor,
-              }),
+      }),
     onSuccess: ({ accessToken, refreshToken }: AuthResponse) => {
       setAccessToken(accessToken);
-      setRefreshToken("refreshToken", refreshToken, {
-        maxAge: 60 * 60 * 24 * 14,
-        path: "/",
-      });
+      setRefreshToken("refreshToken", refreshToken);
     },
   });
 

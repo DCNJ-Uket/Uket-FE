@@ -15,6 +15,8 @@ export const useQueryUserInfo = () => {
   const { data, error } = useSuspenseQuery<UserInfoResponse>({
     queryKey: ["user-info"],
     queryFn: () => getUserInfo(),
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
   });
 
   if (error) {

@@ -12,10 +12,7 @@ export const useMutationReissue = () => {
     mutationFn: reissue,
     onSuccess: ({ accessToken, refreshToken }: AuthResponse) => {
       setAccessToken(accessToken);
-      setRefreshToken("refreshToken", refreshToken, {
-        maxAge: 60 * 60 * 24 * 14,
-        path: "/",
-      });
+      setRefreshToken("refreshToken", refreshToken);
     },
   });
 

@@ -1,9 +1,11 @@
 import { useLocation } from "react-router-dom";
-import { Button } from "@uket/ui/components/ui/button";
+import { FallbackProps } from "react-error-boundary";
+import { cn } from "@uket/ui/lib/utils";
 
-import RetryErrorBoundary from "./RetryErrorBoundary";
 import Profile from "./Profile";
 import Logo from "./Logo";
+import LoginErrorFallback from "./fallback/LoginErrorFallback";
+import RetryErrorBoundary from "./error/RetryErrorBoundary";
 
 import { Path } from "@/router";
 
@@ -11,14 +13,21 @@ const PRIVATE: Path[] = ["/login", "/signup"];
 
 const Nav = () => {
   const { pathname } = useLocation();
-
-  const isPrivatePath = PRIVATE.includes(pathname as Path);
+  const isPrivatePath = PRIVATE.some(path => pathname.startsWith(path));
 
   return (
     <nav className="container my-2 flex h-10 w-full items-center justify-between self-stretch">
       <Logo />
       {!isPrivatePath && (
-        <RetryErrorBoundary fallbackComponent={<Button>다시 시도</Button>}>
+        <RetryErrorBoundary
+          resetKeys={["user-info"]}
+          fallbackComponent={(props: FallbackProps) => (
+            <LoginErrorFallback
+              className={cn("text-black", pathname === "/" && "text-white")}
+              {...props}
+            />
+          )}
+        >
           <Profile />
         </RetryErrorBoundary>
       )}

@@ -1,8 +1,9 @@
 import { useSearchParams } from "react-router-dom";
+import { FallbackProps } from "react-error-boundary";
 import { Suspense, useState } from "react";
 import { Separator } from "@uket/ui/components/ui/separator";
 
-import RetryErrorBoundary from "@/components/RetryErrorBoundary";
+import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
 import BrandButton from "@/components/BrandButton";
 
 import UnivSelector from "./_components/UnivSelector";
@@ -41,12 +42,20 @@ const HomePage = () => {
     }
   };
 
+  const handleMyTicketNavigate = () => {
+    navigate("/ticket-list");
+  };
+
   return (
     <main className="relative flex h-full flex-col items-center">
       <Separator className="h-3 bg-[#F2F2F2]" />
       <main className="container mt-2 flex h-full w-full flex-col gap-3 bg-white">
         <header>
-          <RetryErrorBoundary fallbackComponent={<UnivSelectorErrorFallback />}>
+          <RetryErrorBoundary
+            fallbackComponent={(props: FallbackProps) => (
+              <UnivSelectorErrorFallback {...props} />
+            )}
+          >
             <Suspense fallback={<UnivSelectorSuspenseFallback />}>
               <UnivSelector
                 currentUniv={univName}
@@ -66,7 +75,11 @@ const HomePage = () => {
           </RetryErrorBoundary>
         </section>
         <footer className="mb-3 flex w-full items-center justify-center gap-3 bg-white">
-          <BrandButton brand="secondary" title="내 티켓 확인" />
+          <BrandButton
+            brand="secondary"
+            title="내 티켓 확인"
+            onClick={handleMyTicketNavigate}
+          />
           <BrandButton
             brand="primary"
             title="예매하기"

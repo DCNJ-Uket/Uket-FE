@@ -1,14 +1,14 @@
-import { ErrorBoundary } from "react-error-boundary";
+import { ErrorBoundary, FallbackProps } from "react-error-boundary";
 import React from "react";
 import { isAxiosError } from "axios";
 import { useQueryErrorResetBoundary } from "@tanstack/react-query";
 
-import { DefaultErrorFallback } from "./ErrorFallback";
+import DefaultErrorFallback from "../fallback/DefaultErrorFallback";
 
 interface RetryErrorBoundaryProps {
   children: React.ReactNode;
   resetKeys?: unknown[];
-  fallbackComponent?: React.ReactNode;
+  fallbackComponent?: (props: FallbackProps) => React.ReactNode;
 }
 
 const RetryErrorBoundary = ({
@@ -27,22 +27,7 @@ const RetryErrorBoundary = ({
           throw error;
         }
       }}
-      fallbackRender={({ error, resetErrorBoundary }) => {
-        const childElement = fallbackComponent ? (
-          (React.Children.only(fallbackComponent) as React.ReactElement)
-        ) : (
-          <DefaultErrorFallback
-            error={error}
-            resetErrorBoundary={resetErrorBoundary}
-          />
-        );
-        const childWithResetBoundary = React.cloneElement(childElement, {
-          error,
-          resetErrorBoundary,
-        } as React.Attributes);
-
-        return childWithResetBoundary;
-      }}
+      fallbackRender={fallbackComponent || DefaultErrorFallback}
     >
       {children}
     </ErrorBoundary>

@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import { Form } from "@uket/ui/components/ui/form";
 
-import RetryErrorBoundary from "@/components/RetryErrorBoundary";
 
 import { Stack } from "@/utils/stackflow";
 
@@ -12,13 +11,11 @@ const SignUpPage = () => {
 
   return (
     <main>
-      <RetryErrorBoundary>
-        <Suspense>
-          <Form {...form}>
-            <Stack />
-          </Form>
-        </Suspense>
-      </RetryErrorBoundary>
+      <Suspense>
+        <Form {...form}>
+          <Stack />
+        </Form>
+      </Suspense>
     </main>
   );
 };

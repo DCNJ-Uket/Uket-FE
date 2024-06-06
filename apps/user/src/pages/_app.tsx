@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 
 import Nav from "@/components/Nav";
-import CriticalErrorBoundary from "@/components/CriticalErrorBoundary";
+import CriticalErrorBoundary from "@/components/error/CriticalErrorBoundary";
 
 const App = () => {
   const { pathname } = useLocation();

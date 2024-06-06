@@ -7,9 +7,9 @@ import {
   ErrorDescription,
   ErrorHeader,
   ErrorTitle,
-} from "@/components/ErrorFallback";
+} from "@/components/error/CustomError";
 
-const UnivSelectorErrorFallback = (props: Partial<FallbackProps>) => {
+const UnivSelectorErrorFallback = (props: FallbackProps) => {
   const { error, resetErrorBoundary } = props;
   const errorMessage = error.response.data.message;
 

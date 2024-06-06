@@ -16,10 +16,7 @@ export const useMutationLogin = () => {
       login({ code, provider }),
     onSuccess: ({ accessToken, refreshToken, isRegistered }: AuthResponse) => {
       setAccessToken(accessToken);
-      setRefreshToken("refreshToken", refreshToken, {
-        maxAge: 60 * 60 * 24 * 14,
-        path: "/",
-      });
+      setRefreshToken("refreshToken", refreshToken);
 
       if (isRegistered) {
         navigate("/", {
