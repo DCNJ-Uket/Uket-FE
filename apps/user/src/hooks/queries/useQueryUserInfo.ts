@@ -4,13 +4,15 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { UserInfoResponse } from "@/types/userType";
 
 import { getAccessToken } from "@/utils/handleToken";
+import { getRefreshToken } from "@/utils/handleCookie";
 
 import { getUserInfo } from "@/api/user";
 
 export const useQueryUserInfo = () => {
   const accessToken = getAccessToken();
+  const refreshToken = getRefreshToken("refreshToken");
 
-  if (!accessToken) return { data: null };
+  if (!accessToken || !refreshToken) return { data: null };
 
   const { data, error } = useSuspenseQuery<UserInfoResponse>({
     queryKey: ["user-info"],
