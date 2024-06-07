@@ -34,7 +34,7 @@ const ErrorContainer = (props: ErrorProps) => {
   return (
     <div
       className={cn(
-        "flex h-dvh w-full items-center justify-center gap-3",
+        "flex h-full w-full items-center justify-center gap-3",
         className,
       )}
       {...rest}
