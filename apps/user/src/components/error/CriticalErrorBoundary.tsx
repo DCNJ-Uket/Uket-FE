@@ -43,13 +43,13 @@ const CriticalErrorBoundary = ({ children }: { children: React.ReactNode }) => {
           <footer className="mb-10 flex w-full flex-col justify-end gap-2">
             <Button
               onClick={() => home(resetErrorBoundary)}
-              className="rounded-xl border border-[#5E5E6E] bg-[#5E5E6E] py-6 text-xs font-bold"
+              className="rounded-xl border border-[#5E5E6E] bg-[#5E5E6E] py-6 text-xs font-bold hover:bg-[#757583]"
             >
               홈 화면으로
             </Button>
             <Button
               onClick={back}
-              className="rounded-xl border border-[#5E5E6E] bg-white py-6 text-xs font-bold text-[#5E5E6E]"
+              className="rounded-xl border border-[#5E5E6E] bg-white py-6 text-xs font-bold text-[#5E5E6E] hover:bg-slate-100"
             >
               이전 페이지로
             </Button>
