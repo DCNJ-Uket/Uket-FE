@@ -9,11 +9,18 @@ import { clearRefreshToken } from "@/utils/handleCookie";
 
 import { reissue } from "./auth";
 
-
 const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
 const SERVER_VERSION = "/api/v1";
 
 const AUTH_REQUIRED_PATH = ["/users/register", "/users/info", "/tickets"];
+const DYNAMIC_AUTH_REQUIRED_PATH = [
+  /\/events\/\d+\/shows/,
+  /\/events\/shows\/\d+\/reservations/,
+];
+
+const isDynamicUrlMatched = (url: string): boolean => {
+  return DYNAMIC_AUTH_REQUIRED_PATH.some(path => path.test(url));
+};
 
 export const instance = axios.create({
   baseURL: `${BASE_URL}${SERVER_VERSION}`,
@@ -40,13 +47,20 @@ instance.interceptors.response.use(
   async error => {
     const { status, config } = error.response;
 
-    if ((status === 404 || status === 403) && config.url === "/auth/reissue") {
+    if (
+      (status === 404 || status === 403 || status === 400) &&
+      config.url === "/auth/reissue"
+    ) {
       clearAccessToken("accessToken");
       clearRefreshToken("refreshToken");
       window.location.replace("/login");
     }
 
-    if (status === 401 && AUTH_REQUIRED_PATH.includes(config.url)) {
+    if (
+      status === 401 &&
+      AUTH_REQUIRED_PATH.includes(config.url) &&
+      isDynamicUrlMatched(config.url)
+    ) {
       const newAccessToken = await reissue();
 
       setAccessToken(newAccessToken);
