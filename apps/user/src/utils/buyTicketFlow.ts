@@ -21,8 +21,7 @@ export const { Stack, activities } = stackflow({
     TimeActivity,
     CompleteActivity,
   },
-  // initialActivity: () => "DateActivity",
-  initialActivity: () => "CompleteActivity",
+  initialActivity: () => "DateActivity",
 });
 
 export type TypeActivities = typeof activities;
