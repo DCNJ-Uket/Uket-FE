@@ -88,11 +88,20 @@ const config = {
             opacity: "1",
           },
         },
+        "rotate-axis": {
+          "0%": {
+            transform: "perspective(800px) rotateY(0deg)",
+          },
+          "100%": {
+            transform: "perspective(800px) rotateY(360deg)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "ping-dealy": "ping-delay 3s cubic-bezier(0, 0, 0.2, 1) infinite",
+        "rotate-axis": "rotate-axis 4.5s linear infinite",
       },
       backgroundImage: {
         "landing-pattern":
