@@ -21,9 +21,9 @@ const CompleteActivity: ActivityComponentType = () => {
             <img
               src={Ticketing3DImg}
               alt="티켓 이미지"
-              className="animate-rotate-axis"
+              className="animate-rotate-axis w-[180px]"
             />
-            <h1 className="mt-6 text-[23px] font-black">
+            <h1 className="mt-10 text-[23px] font-black">
               <p>예매가 완료되었습니다.</p>
             </h1>
             <img
