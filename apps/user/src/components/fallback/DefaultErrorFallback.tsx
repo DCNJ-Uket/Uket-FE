@@ -29,13 +29,13 @@ const DefaultErrorFallback = (props: FallbackProps) => {
       <footer className="flex w-full flex-col gap-2">
         <Button
           onClick={resetErrorBoundary}
-          className="rounded-xl border border-[#5E5E6E] bg-[#5E5E6E] py-6 text-xs font-bold"
+          className="rounded-xl border border-[#5E5E6E] bg-[#5E5E6E] py-6 text-xs font-bold hover:bg-[#777784]"
         >
           다시 시도
         </Button>
         <Button
           onClick={back}
-          className="rounded-xl border border-[#5E5E6E] bg-white py-6 text-xs font-bold text-[#5E5E6E]"
+          className="rounded-xl border border-[#5E5E6E] bg-white py-6 text-xs font-bold text-[#5E5E6E] hover:bg-slate-100"
         >
           이전 페이지로
         </Button>

@@ -1,4 +1,3 @@
-import React from "react";
 import { useLocation } from "react-router-dom";
 import { cn } from "@uket/ui/lib/utils";
 
@@ -15,9 +14,7 @@ interface LogoProps {
 const Logo = (props: LogoProps) => {
   const { onActivity } = props;
   const { pathname } = useLocation();
-  const imgSrc = ["/", "/ticket-detail"].includes(pathname)
-    ? LandingLogoImage
-    : LogoImage;
+  const imgSrc = ["/"].includes(pathname) ? LandingLogoImage : LogoImage;
 
   return (
     <Link to="/" className={cn(onActivity ? "pl-6 pt-2" : "")}>

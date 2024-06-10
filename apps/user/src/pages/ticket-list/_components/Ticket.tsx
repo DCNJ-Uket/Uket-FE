@@ -13,7 +13,7 @@ import ConfirmModal from "./ConfirmModal";
 const Ticket = () => {
   return (
     <Card className="border-none bg-transparent shadow-none">
-      <CardContent className="flex h-[500px] flex-col divide-y-2 divide-dashed p-0">
+      <CardContent className="flex flex-col divide-y divide-dashed p-0">
         <section className="flex basis-3/4 flex-col overflow-hidden rounded-b-3xl rounded-t-xl bg-white shadow-xl">
           <header className="relative">
             <AspectRatio ratio={16 / 9}>

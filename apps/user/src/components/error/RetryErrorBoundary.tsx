@@ -23,11 +23,9 @@ const RetryErrorBoundary = ({
       onReset={reset}
       resetKeys={resetKeys}
       onError={error => {
-        if (isAxiosError(error) && error?.response?.status === 500) {
-          throw error;
-        }
+        if (isAxiosError(error) && error?.response?.status === 500) throw error;
       }}
-      fallbackRender={fallbackComponent || DefaultErrorFallback}
+      FallbackComponent={fallbackComponent || DefaultErrorFallback}
     >
       {children}
     </ErrorBoundary>

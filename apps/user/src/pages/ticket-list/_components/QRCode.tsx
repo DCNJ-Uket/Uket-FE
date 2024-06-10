@@ -16,15 +16,22 @@ import TicketHeader from "./TicketHeader";
 import TicketDetail from "./TicketDetail";
 import ConfirmModal from "./ConfirmModal";
 
+import QRCodeImage from "/qrcode.png";
+
 // TODO: 하드코딩 값을 API 응답 값으로 수정 & index.tsx의 데이터와 동일하게 연결
 const QRCode = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button
-          variant="outline"
-          className="aspect-square h-20 w-20 bg-slate-100"
-        />
+        <Button variant="outline" className="h-20 w-20 p-0 border-none">
+          <img
+            src={QRCodeImage}
+            alt="qrcode"
+            width={100}
+            height={100}
+            className="aspect-square object-cover"
+          />
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-w-xs rounded-lg sm:max-w-md">
         <DialogHeader className="gap-3">
@@ -37,11 +44,17 @@ const QRCode = () => {
             />
           </DialogTitle>
           <DialogDescription className="flex flex-col items-center justify-center gap-2">
-            <div className="aspect-square h-40 w-40 bg-slate-100" />
+            <img
+              src={QRCodeImage}
+              alt="qrcode"
+              width={100}
+              height={100}
+              className="aspect-square h-32 w-32"
+            />
             <div className="text-xs text-[#7250FD]">UUID394023852</div>
           </DialogDescription>
         </DialogHeader>
-        <section className="flex flex-col gap-5">
+        <section className="flex flex-col gap-3">
           <TicketHeader university="건국대학교" title="녹색지대" day="DAY 1" />
           <Separator className="bg-[#5E5E6E]" />
           <TicketDetail
