@@ -58,8 +58,8 @@ instance.interceptors.response.use(
 
     if (
       status === 401 &&
-      AUTH_REQUIRED_PATH.includes(config.url) &&
-      isDynamicUrlMatched(config.url)
+      (AUTH_REQUIRED_PATH.includes(config.url) ||
+        isDynamicUrlMatched(config.url))
     ) {
       const newAccessToken = await reissue();
 
