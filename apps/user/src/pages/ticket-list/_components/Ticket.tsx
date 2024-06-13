@@ -5,12 +5,36 @@ import Indicator from "@/components/Indicator";
 
 import TicketHeader from "./TicketHeader";
 import TicketDetail from "./TicketDetail";
-import QRCode from "./QRCode";
 import GridItem from "./GridItem";
-import ConfirmModal from "./ConfirmModal";
+import { QRCodeType, TicketItem } from "@/types/ticketType";
+import { lazy } from "react";
 
-// TODO: 실제 QR Code 추가
-const Ticket = () => {
+const QRCode = lazy(() => import("./QRCode"));
+const ConfirmModal = lazy(() => import("./ConfirmModal"));
+
+interface TicketProps {
+  ticket: TicketItem;
+  qrCode: QRCodeType;
+}
+
+const Ticket = (props: TicketProps) => {
+  const {
+    ticket: {
+      userName,
+      showDate,
+      enterStartTime,
+      enterEndTime,
+      showLocation,
+      universityName,
+      ticketStatus,
+      ticketNo,
+      showName,
+      eventName,
+      ticketId,
+    },
+    qrCode,
+  } = props;
+
   return (
     <Card className="border-none bg-transparent shadow-none">
       <CardContent className="flex flex-col divide-y divide-dashed p-0">
@@ -25,32 +49,34 @@ const Ticket = () => {
             </AspectRatio>
             <Indicator
               variant={"darkdeposit"}
-              title="입금 확인중"
+              title={ticketStatus}
               rounded
               className="left-3 top-3"
             />
           </header>
-          <main className="container flex grow flex-col justify-around py-5">
+          <main className="container flex grow flex-col justify-around gap-3 py-5">
             <TicketHeader
-              university="건국대학교"
-              title="녹색지대"
-              day="DAY 1"
+              universityName={universityName}
+              eventName={eventName}
+              showName={showName}
             />
             <TicketDetail
-              owner="김건국"
-              enterDate="4월 21일 (수)"
-              enterTime="17:00~17:20"
-              location="건국대학교 노천극장"
+              userName={userName}
+              showDate={showDate}
+              enterTime={`${enterStartTime} ~ ${enterEndTime}`}
+              showLocation={showLocation}
             />
           </main>
         </section>
-        <footer className="container flex basis-1/4 justify-between rounded-b-xl rounded-t-3xl bg-white py-5 shadow-md">
+        <footer className="flex basis-1/4 justify-around rounded-b-xl rounded-t-3xl bg-white py-5 pl-5 shadow-md">
           <aside className="flex flex-col items-start justify-between">
-            <GridItem title="일련번호" content="102389751" />
+            <div className="w-32 truncate">
+              <GridItem title="일련번호" content={ticketNo} isTicketNo />
+            </div>
             <ConfirmModal />
           </aside>
           <aside>
-            <QRCode />
+            <QRCode qrCode={qrCode} id={ticketId} />
           </aside>
         </footer>
       </CardContent>
