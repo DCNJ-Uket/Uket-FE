@@ -1,4 +1,5 @@
 import { TicketItem } from "@/types/ticketType";
+
 import GridItem from "./GridItem";
 
 interface TicketDetailProps

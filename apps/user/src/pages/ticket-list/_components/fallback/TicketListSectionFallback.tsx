@@ -1,5 +1,5 @@
-import { AspectRatio } from "@uket/ui/components/ui/aspect-ratio";
 import { Skeleton } from "@uket/ui/components/ui/skeleton";
+import { AspectRatio } from "@uket/ui/components/ui/aspect-ratio";
 
 const TicketListSectionFallback = () => {
   return (
@@ -26,8 +26,8 @@ const TicketListSectionFallback = () => {
       </div>
       <div className="container flex justify-between rounded-b-xl rounded-t-3xl bg-white py-5">
         <div className="flex flex-col items-start justify-evenly">
-          <Skeleton className="w-16 h-4"/>
-          <Skeleton className="w-16 h-4"/>
+          <Skeleton className="h-4 w-16" />
+          <Skeleton className="h-4 w-16" />
         </div>
         <Skeleton className="h-20 w-20" />
       </div>

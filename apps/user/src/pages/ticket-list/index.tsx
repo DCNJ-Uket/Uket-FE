@@ -1,6 +1,8 @@
-import TicketListSection from "./_components/TicketListSection";
-import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
 import { Suspense } from "react";
+
+import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
+
+import TicketListSection from "./_components/TicketListSection";
 import TicketListSectionFallback from "./_components/fallback/TicketListSectionFallback";
 
 const TicketListPage = () => {

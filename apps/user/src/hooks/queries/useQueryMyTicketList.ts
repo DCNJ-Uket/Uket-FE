@@ -1,6 +1,8 @@
-import { getMyTicketList } from "@/api/ticket";
-import { formatDate } from "@/utils/handleTicket";
 import { useSuspenseQuery } from "@tanstack/react-query";
+
+import { formatDate } from "@/utils/handleTicket";
+
+import { getMyTicketList } from "@/api/ticket";
 
 export const useQueryMyTicketList = () => {
   const { data, error } = useSuspenseQuery({

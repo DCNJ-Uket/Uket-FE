@@ -3,9 +3,11 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@uket/ui/components/ui/carousel";
-import Ticket from "./Ticket";
-import { useQueryMyTicketList } from "@/hooks/queries/useQueryMyTicketList";
+
 import { useQueryTicketQRCode } from "@/hooks/queries/useQueryTicketQRCode";
+import { useQueryMyTicketList } from "@/hooks/queries/useQueryMyTicketList";
+
+import Ticket from "./Ticket";
 
 const TicketListSection = () => {
   const { data: myTicketList } = useQueryMyTicketList();

@@ -1,5 +1,6 @@
-import { TicketItem } from "@/types/ticketType";
 import { Badge } from "@uket/ui/components/ui/badge";
+
+import { TicketItem } from "@/types/ticketType";
 
 interface TicketHeaderProps
   extends Pick<TicketItem, "universityName" | "eventName" | "showName"> {}

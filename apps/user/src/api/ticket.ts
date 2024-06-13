@@ -1,4 +1,9 @@
-import { MyTicketListInfoResponse, MyTicketQRCodeResponse, TicketItem } from "@/types/ticketType";
+import {
+  MyTicketListInfoResponse,
+  MyTicketQRCodeResponse,
+  TicketItem,
+} from "@/types/ticketType";
+
 import { instance } from "./instance";
 
 export const getTicketQRCode = async (ticketId: TicketItem["ticketId"]) => {

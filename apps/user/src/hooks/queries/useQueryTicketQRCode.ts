@@ -1,7 +1,10 @@
-import { getTicketQRCode } from "@/api/ticket";
-import { TicketItem } from "@/types/ticketType";
-import { createBlobURL } from "@/utils/handleTicket";
 import { useSuspenseQueries } from "@tanstack/react-query";
+
+import { TicketItem } from "@/types/ticketType";
+
+import { createBlobURL } from "@/utils/handleTicket";
+
+import { getTicketQRCode } from "@/api/ticket";
 
 export const useQueryTicketQRCode = (ticketList: TicketItem[]) => {
   const queries = ticketList.map(({ ticketId }) => ({

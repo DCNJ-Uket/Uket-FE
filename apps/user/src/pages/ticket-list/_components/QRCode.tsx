@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Separator } from "@uket/ui/components/ui/separator";
 import {
   Dialog,
@@ -8,21 +9,21 @@ import {
   DialogTrigger,
 } from "@uket/ui/components/ui/dialog";
 import { Button } from "@uket/ui/components/ui/button";
+import { useQueryClient } from "@tanstack/react-query";
 
 import Indicator from "@/components/Indicator";
 
-import TicketHeader from "./TicketHeader";
-import TicketDetail from "./TicketDetail";
-import ConfirmModal from "./ConfirmModal";
-
-import { useQueryClient } from "@tanstack/react-query";
-import { useMemo } from "react";
 import {
   MyTicketListInfoResponse,
   QRCodeType,
   TicketItem,
 } from "@/types/ticketType";
+
 import { formatDate } from "@/utils/handleTicket";
+
+import TicketHeader from "./TicketHeader";
+import TicketDetail from "./TicketDetail";
+import ConfirmModal from "./ConfirmModal";
 
 interface QRCodeProps {
   id: TicketItem["ticketId"];

@@ -1,13 +1,14 @@
+import { lazy } from "react";
 import { Card, CardContent } from "@uket/ui/components/ui/card";
 import { AspectRatio } from "@uket/ui/components/ui/aspect-ratio";
 
 import Indicator from "@/components/Indicator";
 
+import { QRCodeType, TicketItem } from "@/types/ticketType";
+
 import TicketHeader from "./TicketHeader";
 import TicketDetail from "./TicketDetail";
 import GridItem from "./GridItem";
-import { QRCodeType, TicketItem } from "@/types/ticketType";
-import { lazy } from "react";
 
 const QRCode = lazy(() => import("./QRCode"));
 const ConfirmModal = lazy(() => import("./ConfirmModal"));
