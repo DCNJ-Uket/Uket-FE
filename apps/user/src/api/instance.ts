@@ -12,10 +12,16 @@ import { reissue } from "./auth";
 const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
 const SERVER_VERSION = "/api/v1";
 
-const AUTH_REQUIRED_PATH = ["/users/register", "/users/info", "/tickets"];
+const AUTH_REQUIRED_PATH = [
+  "/users/register",
+  "/users/info",
+  "/tickets",
+  "/users/tickets",
+];
 const DYNAMIC_AUTH_REQUIRED_PATH = [
   /\/events\/\d+\/shows/,
   /\/events\/shows\/\d+\/reservations/,
+  /\/tickets\/\d+\/qrcode/,
 ];
 
 const isDynamicUrlMatched = (url: string): boolean => {
@@ -31,7 +37,10 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use(config => {
-  if (config.url && AUTH_REQUIRED_PATH.includes(config.url)) {
+  if (
+    config.url &&
+    (AUTH_REQUIRED_PATH.includes(config.url) || isDynamicUrlMatched(config.url))
+  ) {
     const accessToken = getAccessToken();
 
     config.headers.Authorization = `Bearer ${accessToken}`;
