@@ -12,7 +12,7 @@ const TicketListPage = () => {
         <header className="container text-xl font-bold">
           <p>내 티켓</p>
         </header>
-        <section className="flex w-full justify-center py-10">
+        <section className="flex w-full justify-center py-10 lg:container">
           <RetryErrorBoundary>
             <Suspense fallback={<TicketListSectionFallback />}>
               <TicketListSection />

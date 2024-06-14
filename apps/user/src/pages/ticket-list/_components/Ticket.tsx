@@ -69,7 +69,7 @@ const Ticket = (props: TicketProps) => {
             />
           </main>
         </section>
-        <footer className="flex basis-1/4 justify-around rounded-b-xl rounded-t-3xl bg-white py-5 pl-5 shadow-md">
+        <footer className="flex basis-1/4 justify-around rounded-b-xl rounded-t-3xl bg-white pt-5 pb-2 pl-3 shadow-md">
           <aside className="flex flex-col items-start justify-between">
             <div className="w-32 truncate">
               <GridItem title="일련번호" content={ticketNo} isTicketNo />
