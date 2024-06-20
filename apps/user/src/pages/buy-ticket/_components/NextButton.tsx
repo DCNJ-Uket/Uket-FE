@@ -32,9 +32,9 @@ const NextButton = (as: NextButtonProps) => {
       navigate("/", { replace: true });
       return;
     } else if (activityName === "CompleteActivity" && form) {
-      pop();
-      pop();
       await onSubmit(form.getValues());
+      pop();
+      pop();
     }
 
     push(activityName, params || {});
