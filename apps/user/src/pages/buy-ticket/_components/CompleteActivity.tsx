@@ -1,3 +1,4 @@
+import { useSearchParams } from "react-router-dom";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
@@ -13,6 +14,12 @@ import CompleteBackgroudImg from "/ticketingComplete.png";
 import Ticketing3DImg from "/complete3DTicket.png";
 
 const CompleteActivity: ActivityComponentType = () => {
+  const [searchParams] = useSearchParams();
+  const univName = searchParams.get("univName");
+  const univId = searchParams.get("univId") as string;
+
+  const routeUrl = `/home?select-univ=${univName}&id=${univId}`;
+
   return (
     <AppScreen appBar={{ border: false, height: "56px" }}>
       <Activity>
@@ -35,6 +42,7 @@ const CompleteActivity: ActivityComponentType = () => {
           <ActivityFooter className="z-10">
             <NextButton
               activityName={"MainActivity" as never}
+              routeUrl={routeUrl}
               disabled={false}
             ></NextButton>
           </ActivityFooter>
