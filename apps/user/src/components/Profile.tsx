@@ -19,6 +19,9 @@ const Profile = () => {
         <Button
           variant="link"
           className={cn("p-0 pt-1 font-bold", ladingPageTextColor)}
+          onClick={() => {
+            navigate("/myinfo");
+          }}
         >
           <div className="flex items-center gap-3">
             <div className="relative h-6 w-6">
