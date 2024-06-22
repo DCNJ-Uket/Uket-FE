@@ -9,7 +9,7 @@ import RetryErrorBoundary from "./error/RetryErrorBoundary";
 
 import { Path } from "@/router";
 
-const PRIVATE: Path[] = ["/login", "/signup"];
+const PRIVATE: Path[] = ["/login", "/signup", "/myinfo"];
 
 const Nav = () => {
   const { pathname } = useLocation();
