@@ -7,9 +7,7 @@ import { Button } from "@ui/components/ui/button";
 const QRReaderSection = () => {
   const cameraRef = useRef<HTMLVideoElement>(null);
   const [facingMode, setFacingMode] = useState<"user" | "environment">("user");
-  const [errorMessage, setErrorMessage] = useState<string | null>(
-    "카메라에 접근할 수 없습니다. 권한을 확인해주세요.",
-  );
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleToggleFacingMode = () => {
     setFacingMode(prevMode => (prevMode === "user" ? "environment" : "user"));
