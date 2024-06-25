@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 
 import "@uket/ui/globals.css";
 import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,9 @@ export default function RootLayout({
             <Nav />
           </header>
           <main className="grow">{children}</main>
+          <footer>
+            <Footer />
+          </footer>
         </main>
       </body>
     </html>
