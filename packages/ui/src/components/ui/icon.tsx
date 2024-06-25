@@ -6,4 +6,5 @@ export {
   Sun,
   SwitchCameraIcon,
   ScanIcon,
+  LoaderCircleIcon,
 } from "lucide-react";
