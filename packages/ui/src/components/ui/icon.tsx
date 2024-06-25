@@ -1,1 +1,10 @@
-export { RotateCcwIcon, LoaderCircle, Search, Moon, Sun } from "lucide-react";
+export {
+  RotateCcwIcon,
+  LoaderCircle,
+  Search,
+  Moon,
+  Sun,
+  SwitchCameraIcon,
+  ScanIcon,
+  LoaderCircleIcon,
+} from "lucide-react";
