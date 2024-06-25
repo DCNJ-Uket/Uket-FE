@@ -6,13 +6,13 @@ import { useQueryUserInfo } from "@/hooks/queries/useQueryUserInfo";
 import { clearAccessToken } from "@/utils/handleToken";
 import { clearRefreshToken } from "@/utils/handleCookie";
 
+import LogoutModal from "./_components/LogoutModal";
 import InfoSection from "./_components/InfoSection";
 import InfoItem from "./_components/InfoItem";
 
 import { useNavigate } from "@/router";
 
-
-//TODO: 회원 정보 api 수정되면 반영, 회원탈퇴
+//TODO: 회원 정보 api 수정되면 반영, 회원탈퇴, 로그인/회원탈퇴 modal
 
 const MyInfo = () => {
   const { data: userInfo } = useQueryUserInfo();
@@ -21,7 +21,6 @@ const MyInfo = () => {
   const logout = () => {
     clearRefreshToken("refreshToken");
     clearAccessToken("accessToken");
-    navigate("/", { replace: true });
   };
 
   return (
@@ -79,15 +78,7 @@ const MyInfo = () => {
             </div>
           </section>
           <div className="flex flex-col items-center gap-4">
-            <Button
-              variant="secondary"
-              className="w-full rounded-xl bg-white p-6 text-sm font-medium text-black hover:bg-slate-200 sm:w-80"
-              onClick={() => {
-                logout();
-              }}
-            >
-              로그아웃
-            </Button>
+            <LogoutModal onLogout={logout} />
             <Button
               variant="secondary"
               className="w-full rounded-xl bg-white p-6 text-sm font-medium text-black hover:bg-slate-200 sm:w-80"
