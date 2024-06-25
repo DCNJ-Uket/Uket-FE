@@ -3,16 +3,26 @@ import { Button } from "@uket/ui/components/ui/button";
 
 import { useQueryUserInfo } from "@/hooks/queries/useQueryUserInfo";
 
+import { clearAccessToken } from "@/utils/handleToken";
+import { clearRefreshToken } from "@/utils/handleCookie";
+
 import InfoSection from "./_components/InfoSection";
 import InfoItem from "./_components/InfoItem";
 
 import { useNavigate } from "@/router";
 
-//TODO: 회원 정보 api 수정되면 반영, 로그아웃/회원탈퇴
+
+//TODO: 회원 정보 api 수정되면 반영, 회원탈퇴
 
 const MyInfo = () => {
   const { data: userInfo } = useQueryUserInfo();
   const navigate = useNavigate();
+
+  const logout = () => {
+    clearRefreshToken("refreshToken");
+    clearAccessToken("accessToken");
+    navigate("/", { replace: true });
+  };
 
   return (
     <main className="relative flex h-full flex-col items-center bg-[#F2F2F2]">
@@ -68,10 +78,13 @@ const MyInfo = () => {
               </div>
             </div>
           </section>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col items-center gap-4">
             <Button
               variant="secondary"
               className="w-full rounded-xl bg-white p-6 text-sm font-medium text-black hover:bg-slate-200 sm:w-80"
+              onClick={() => {
+                logout();
+              }}
             >
               로그아웃
             </Button>
