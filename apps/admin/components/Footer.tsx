@@ -8,7 +8,7 @@ import { cn } from "@ui/lib/utils";
 // TODO: 실제 링크로 대체
 const links = [
   {
-    href: "/qr-read",
+    href: "/qr-scan",
     title: "QR 스캔하기",
   },
   {
