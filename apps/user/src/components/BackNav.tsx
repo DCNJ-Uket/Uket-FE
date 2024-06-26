@@ -9,7 +9,7 @@ const BackNav = (props: BackNavProps) => {
   const goURL = props.goURL;
 
   return (
-    <nav className="container my-2 flex h-10 w-full items-center justify-between self-stretch">
+    <nav className="my-2 flex h-10 w-full items-center justify-between self-stretch pl-[14px]">
       <Link to={goURL}>
         <IconBack />
       </Link>

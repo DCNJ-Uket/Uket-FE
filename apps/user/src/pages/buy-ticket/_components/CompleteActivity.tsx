@@ -21,7 +21,16 @@ const CompleteActivity: ActivityComponentType = () => {
   const routeUrl = `/home?select-univ=${univName}&id=${univId}`;
 
   return (
-    <AppScreen appBar={{ border: false, height: "56px" }}>
+    <AppScreen
+      appBar={{
+        border: false,
+        backButton: {
+          renderIcon: () => <div className="hidden"></div>,
+          onClick: e => e.preventDefault(),
+        },
+        height: "56px",
+      }}
+    >
       <Activity>
         <ActivityContent className=" bg-white">
           <ActivityHeader className="relative items-center justify-center">
