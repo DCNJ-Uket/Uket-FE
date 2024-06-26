@@ -1,31 +1,22 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 import Nav from "@/components/Nav";
 import CriticalErrorBoundary from "@/components/error/CriticalErrorBoundary";
 import BackNav from "@/components/BackNav";
 
+import usePreviousPath from "@/hooks/usePreviousPath";
+
 import Redirects from "@/utils/redirects";
+
 
 const App = () => {
   const { pathname } = useLocation();
-  const [previousPath, setPreviousPath] = useState<string>("/");
-
-  useEffect(() => {
-    const storage = globalThis?.sessionStorage;
-    if (storage) {
-      const currentPath = storage.getItem("currentPath");
-      if (currentPath !== pathname) {
-        setPreviousPath(currentPath || "/");
-        storage.setItem("currentPath", pathname);
-      }
-    }
-  }, [pathname]);
+  const previousPath = usePreviousPath();
 
   const renderHeader = () => {
-    if (pathname === "/") {
+    if (["/"].includes(pathname)) {
       return null;
-    } else if (pathname === "/myinfo") {
+    } else if (["/myinfo", "/buy-ticket"].includes(pathname)) {
       return (
         <header className="sticky left-0 top-0 z-10 bg-white">
           <BackNav goURL={previousPath} />
