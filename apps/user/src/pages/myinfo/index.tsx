@@ -12,7 +12,7 @@ import InfoItem from "./_components/InfoItem";
 
 import { useNavigate } from "@/router";
 
-//TODO: 회원 정보 api 수정되면 반영, 회원탈퇴, 로그인/회원탈퇴 modal
+//TODO: 회원 정보 api 수정되면 반영(+ 일반인/대학생 여부 나눠서 작성), 회원탈퇴 modal 및 기능
 
 const MyInfo = () => {
   const { data: userInfo } = useQueryUserInfo();
@@ -60,13 +60,10 @@ const MyInfo = () => {
             </InfoSection>
 
             <InfoSection title="학교">
-              <InfoItem title={"학교"} content={"userInfo.universityId"} />
+              <InfoItem title={"학교"} content={"추후 대학교 이름"} />
               <InfoItem title={"학과"} content={userInfo.studentMajor} />
               <InfoItem title={"학번"} content={userInfo.studentCode} />
-              <InfoItem
-                title={"학교 인증 여부"}
-                content={"userInfo.isRegistered"}
-              />
+              <InfoItem title={"학교 인증 여부"} content={"추후 인증 여부"} />
             </InfoSection>
 
             <div className="flex flex-col gap-2">
