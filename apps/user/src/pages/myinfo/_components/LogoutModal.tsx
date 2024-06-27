@@ -15,7 +15,7 @@ interface LogoutModalProps {
 }
 
 const LogoutModal = (props: LogoutModalProps) => {
-  const onLogout = props.onLogout;
+  const { onLogout } = props;
 
   const [open, setOpen] = useState(false);
   const [logoutCompleted, setLogoutCompleted] = useState(false);
