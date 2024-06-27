@@ -15,9 +15,9 @@ const Nav = () => {
   const previousPath = usePreviousPath();
 
   return (
-    <nav className="container my-2 flex h-10 w-full items-center justify-between self-stretch">
+    <>
       {["/", "/home"].includes(pathname) ? (
-        <>
+        <nav className="container my-2 flex h-10 w-full items-center justify-between self-stretch">
           <Logo />
           <RetryErrorBoundary
             resetKeys={["user-info"]}
@@ -30,13 +30,15 @@ const Nav = () => {
           >
             <Profile />
           </RetryErrorBoundary>
-        </>
+        </nav>
       ) : (
-        <Link to={previousPath}>
-          <IconBack />
-        </Link>
+        <nav className="my-2 flex h-10 w-full items-center justify-between self-stretch pl-[14px]">
+          <Link to={previousPath}>
+            <IconBack />
+          </Link>
+        </nav>
       )}
-    </nav>
+    </>
   );
 };
 
