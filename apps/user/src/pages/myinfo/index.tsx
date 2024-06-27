@@ -59,10 +59,14 @@ const MyInfo = () => {
                   depositorName={userInfo.depositorName}
                   phoneNumber={userInfo.phoneNumber}
                 />
-                <UnivInfo
-                  studentMajor={userInfo.studentMajor}
-                  studentCode={userInfo.studentCode}
-                />
+                {userInfo.universityEmail === "일반인" && (
+                  <UnivInfo
+                    universityName={userInfo.universityName}
+                    studentMajor={userInfo.studentMajor}
+                    studentCode={userInfo.studentCode}
+                  />
+                )}
+
                 <div className="flex flex-col gap-2">
                   <div className="pl-3 text-sm font-bold">알림</div>
                   <div className="flex w-full items-center justify-between rounded-xl bg-white p-6">
