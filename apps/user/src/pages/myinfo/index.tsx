@@ -6,9 +6,9 @@ import { useQueryUserInfo } from "@/hooks/queries/useQueryUserInfo";
 import { clearAccessToken } from "@/utils/handleToken";
 import { clearRefreshToken } from "@/utils/handleCookie";
 
+import UnivInfo from "./_components/UnivInfo";
 import LogoutModal from "./_components/LogoutModal";
-import InfoSection from "./_components/InfoSection";
-import InfoItem from "./_components/InfoItem";
+import GeneralInfo from "./_components/GeneralInfo";
 
 import { useNavigate } from "@/router";
 
@@ -50,21 +50,15 @@ const MyInfo = () => {
             </Button>
           </div>
           <section className="flex flex-col gap-5">
-            <InfoSection title="일반">
-              <InfoItem
-                title={"이름(입금자명)"}
-                content={userInfo.depositorName}
-              />
-              <InfoItem title={"전화번호"} content={userInfo.phoneNumber} />
-              <InfoItem title={"사용자구분"} content={"대학생"} />
-            </InfoSection>
+            <GeneralInfo
+              depositorName={userInfo.depositorName}
+              phoneNumber={userInfo.phoneNumber}
+            />
 
-            <InfoSection title="학교">
-              <InfoItem title={"학교"} content={"추후 대학교 이름"} />
-              <InfoItem title={"학과"} content={userInfo.studentMajor} />
-              <InfoItem title={"학번"} content={userInfo.studentCode} />
-              <InfoItem title={"학교 인증 여부"} content={"추후 인증 여부"} />
-            </InfoSection>
+            <UnivInfo
+              studentMajor={userInfo.studentMajor}
+              studentCode={userInfo.studentCode}
+            />
 
             <div className="flex flex-col gap-2">
               <div className="pl-3 text-sm font-bold">알림</div>
