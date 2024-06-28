@@ -9,6 +9,7 @@ export type Path =
   | `/home`
   | `/login`
   | `/login/:provider`
+  | `/myinfo`
   | `/select-univ`
   | `/signup`
   | `/ticket-list`

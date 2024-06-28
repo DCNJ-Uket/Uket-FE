@@ -25,5 +25,5 @@ export const useQueryUserInfo = () => {
     throw error;
   }
 
-  return { data: data || null };
+  return { data: data };
 };

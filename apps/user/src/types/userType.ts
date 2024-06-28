@@ -4,7 +4,7 @@ export type UserInfoResponse = {
   profileImage: string;
   isRegistered: boolean;
   phoneNumber: string;
-  universityId: number;
+  universityName: string;
   studentMajor: string;
   studentCode: string;
   universityEmail: string;
