@@ -23,3 +23,9 @@ export const getMyTicketList = async () => {
 
   return data;
 };
+
+export const cancelTicket = async (ticketId: TicketItem["ticketId"]) => {
+  const { data } = await instance.delete(`/tickets/${ticketId}/cancel`);
+
+  return data;
+};
