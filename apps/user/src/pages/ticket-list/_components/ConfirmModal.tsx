@@ -28,8 +28,7 @@ function ConfirmModal(props: ConfirmModalProps) {
         setOpen(false);
         setCancelCompleted(true);
       },
-      onError: error => {
-        console.error("Error cancelling ticket:", error);
+      onError: () => {
         setOpen(false);
         alert("티켓 취소 중 오류가 발생했습니다. 다시 시도해주세요.");
       },
