@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useToast } from "@uket/ui/components/ui/use-toast";
 import {
   Dialog,
   DialogClose,
@@ -16,6 +17,7 @@ interface ConfirmModalProps {
 
 function ConfirmModal(props: ConfirmModalProps) {
   const { ticketId } = props;
+  const { toast } = useToast();
 
   const [open, setOpen] = useState(false);
   const [cancelCompleted, setCancelCompleted] = useState(false);
@@ -30,7 +32,11 @@ function ConfirmModal(props: ConfirmModalProps) {
       },
       onError: () => {
         setOpen(false);
-        alert("티켓 취소 중 오류가 발생했습니다. 다시 시도해주세요.");
+        toast({
+          variant: "destructive",
+          title: "오류",
+          description: "티켓 취소 중 오류가 발생했습니다. 다시 시도해주세요.",
+        });
       },
     });
   };
