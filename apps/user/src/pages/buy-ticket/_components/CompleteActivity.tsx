@@ -33,7 +33,7 @@ const CompleteActivity: ActivityComponentType = () => {
     >
       <Activity>
         <ActivityContent className=" bg-white">
-          <ActivityHeader className="relative items-center justify-center">
+          <ActivityHeader className="relative items-center justify-center overflow-hidden">
             <img
               src={Ticketing3DImg}
               alt="티켓 이미지"
