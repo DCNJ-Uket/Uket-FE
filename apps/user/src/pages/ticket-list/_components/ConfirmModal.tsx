@@ -8,8 +8,10 @@ import {
   DialogTrigger,
 } from "@uket/ui/components/ui/dialog";
 import { Button } from "@uket/ui/components/ui/button";
+import { useQueryClient } from "@tanstack/react-query";
 
-import { useMutationCancelTicket } from "../../../hooks/mutations/useMutationCancelTicket";
+import { useMutationCancelTicket } from "@/hooks/mutations/useMutationCancelTicket";
+
 
 interface ConfirmModalProps {
   ticketId: number;
@@ -23,6 +25,8 @@ function ConfirmModal(props: ConfirmModalProps) {
   const [cancelCompleted, setCancelCompleted] = useState(false);
 
   const mutation = useMutationCancelTicket();
+
+  const queryClient = useQueryClient();
 
   const handleCancel = () => {
     mutation.mutate(ticketId, {
@@ -43,7 +47,7 @@ function ConfirmModal(props: ConfirmModalProps) {
 
   const handleComplete = () => {
     setCancelCompleted(false);
-    window.location.reload();
+    queryClient.invalidateQueries({ queryKey: ["my-ticket-list"] });
   };
 
   return (
