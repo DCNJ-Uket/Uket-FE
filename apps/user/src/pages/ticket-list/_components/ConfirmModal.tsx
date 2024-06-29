@@ -10,20 +10,16 @@ import { Button } from "@uket/ui/components/ui/button";
 
 import { useMutationCancelTicket } from "../../../hooks/mutations/useMutationCancelTicket";
 
-import { useNavigate } from "@/router";
-
 interface ConfirmModalProps {
   ticketId: number;
 }
 
-// TODO: 예매 취소 API 연결 및 예매 취소 연결
 function ConfirmModal(props: ConfirmModalProps) {
   const { ticketId } = props;
 
   const [open, setOpen] = useState(false);
   const [cancelCompleted, setCancelCompleted] = useState(false);
 
-  const navigate = useNavigate();
   const mutation = useMutationCancelTicket();
 
   const handleCancel = () => {
@@ -42,7 +38,7 @@ function ConfirmModal(props: ConfirmModalProps) {
 
   const handleComplete = () => {
     setCancelCompleted(false);
-    navigate("/ticket-list", { replace: true });
+    window.location.reload();
   };
 
   return (
