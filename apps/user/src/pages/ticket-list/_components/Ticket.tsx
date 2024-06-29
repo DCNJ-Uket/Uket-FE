@@ -69,12 +69,12 @@ const Ticket = (props: TicketProps) => {
             />
           </main>
         </section>
-        <footer className="flex basis-1/4 justify-around rounded-b-xl rounded-t-3xl bg-white pt-5 pb-2 pl-3 shadow-md">
+        <footer className="flex basis-1/4 justify-around rounded-b-xl rounded-t-3xl bg-white pb-2 pl-3 pt-5 shadow-md">
           <aside className="flex flex-col items-start justify-between">
             <div className="w-32 truncate">
               <GridItem title="일련번호" content={ticketNo} isTicketNo />
             </div>
-            <ConfirmModal />
+            <ConfirmModal ticketId={ticketId} />
           </aside>
           <aside>
             <QRCode qrCode={qrCode} id={ticketId} />

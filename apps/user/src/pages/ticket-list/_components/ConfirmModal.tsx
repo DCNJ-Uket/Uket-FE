@@ -8,18 +8,36 @@ import {
 } from "@uket/ui/components/ui/dialog";
 import { Button } from "@uket/ui/components/ui/button";
 
+import { useMutationCancelTicket } from "../../../hooks/mutations/useMutationCancelTicket";
+
 import { useNavigate } from "@/router";
 
-// TODO: 예매 취소 API 연결 및 예매 취소 후 모달 닫는 로직 추가
-function ConfirmModal() {
+interface ConfirmModalProps {
+  ticketId: number;
+}
+
+// TODO: 예매 취소 API 연결 및 예매 취소 연결
+function ConfirmModal(props: ConfirmModalProps) {
+  const { ticketId } = props;
+
   const [open, setOpen] = useState(false);
   const [cancelCompleted, setCancelCompleted] = useState(false);
 
   const navigate = useNavigate();
+  const mutation = useMutationCancelTicket();
 
   const handleCancel = () => {
-    setOpen(false);
-    setCancelCompleted(true);
+    mutation.mutate(ticketId, {
+      onSuccess: () => {
+        setOpen(false);
+        setCancelCompleted(true);
+      },
+      onError: error => {
+        console.error("Error cancelling ticket:", error);
+        setOpen(false);
+        alert("티켓 취소 중 오류가 발생했습니다. 다시 시도해주세요.");
+      },
+    });
   };
 
   const handleComplete = () => {
