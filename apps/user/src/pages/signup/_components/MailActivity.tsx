@@ -1,3 +1,4 @@
+import { useWatch } from "react-hook-form";
 import { Input } from "@uket/ui/components/ui/input";
 import {
   FormControl,
@@ -7,6 +8,8 @@ import {
 } from "@uket/ui/components/ui/form";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
+
+import { useMutationRequestEmailAuth } from "@/hooks/mutations/useMutationRequestEmailAuth";
 
 import { validateForm } from "../../../utils/vaildateForm";
 import NextStepButton from "./NextStepButton";
@@ -20,8 +23,19 @@ import {
 
 interface MailParams extends ActivityParams {}
 
+// TODO: 에러 표시하는 방식 변경 & universityId 값 변경
 const MailActivity: ActivityComponentType<MailParams> = ({ params }) => {
   const { form } = params;
+
+  const email = useWatch({
+    control: form.control,
+    name: "userEmail",
+  });
+
+  const { mutateAsync, error, isPending } = useMutationRequestEmailAuth({
+    email: email!,
+    universityId: 2,
+  });
 
   return (
     <AppScreen appBar={{ border: false }}>
@@ -48,9 +62,14 @@ const MailActivity: ActivityComponentType<MailParams> = ({ params }) => {
                         className="border-formInput border"
                         value={field.value || ""}
                         autoFocus
+                        autoComplete="off"
                       />
                     </FormControl>
-                    <FormMessage />
+                    {error && (
+                      <FormMessage className="text-error text-xs">
+                        대학 이메일 정보가 잘못되었습니다.
+                      </FormMessage>
+                    )}
                   </FormItem>
                   <ActivityFooter>
                     <NextStepButton
@@ -65,6 +84,8 @@ const MailActivity: ActivityComponentType<MailParams> = ({ params }) => {
                           value: field.value || "",
                         })
                       }
+                      mutate={mutateAsync}
+                      isLoading={isPending}
                     />
                   </ActivityFooter>
                 </div>

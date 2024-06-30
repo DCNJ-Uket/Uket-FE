@@ -1,3 +1,4 @@
+import { useWatch } from "react-hook-form";
 import { Input } from "@uket/ui/components/ui/input";
 import {
   FormControl,
@@ -9,6 +10,10 @@ import { Button } from "@uket/ui/components/ui/button";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
+import { useTimer } from "@/hooks/useTimer";
+import { useMutationVerifyEmailAuth } from "@/hooks/mutations/useMutationVerifyEmailAuth";
+import { useMutationRequestEmailAuth } from "@/hooks/mutations/useMutationRequestEmailAuth";
+
 import { useStackForm } from "../../../hooks/useStackForm";
 import NextStepButton from "./NextStepButton";
 import {
@@ -19,16 +24,39 @@ import {
   ActivityParams,
 } from "./Activity";
 
+import { useEmailAuthStore } from "@/store/useEmailAuthStore";
+
 interface MailAuthParams extends ActivityParams {
   email: string;
 }
 
-// TODO: 메일 인증 로직 & 다음 Stack 로직 추가
+// TODO: 에러 표시하는 방식 변경 & universityId 변경
 const MailAuthActivity: ActivityComponentType<MailAuthParams> = ({
   params,
 }) => {
   const { form, email } = params;
   const { onSubmit } = useStackForm();
+  const { emailAuthInfo } = useEmailAuthStore();
+  const { expiration, formatTime } = useTimer(emailAuthInfo?.expiration);
+  const authCode = useWatch({
+    control: form.control,
+    name: "userEmailAuth",
+  });
+
+  const { mutate: requestEmailAuth } = useMutationRequestEmailAuth({
+    email: email!,
+    universityId: 2,
+  });
+
+  const {
+    mutateAsync: verifyEmailAuth,
+    error,
+    isPending,
+  } = useMutationVerifyEmailAuth({
+    email: email!,
+    universityId: 2,
+    authCode: authCode!,
+  });
 
   return (
     <AppScreen appBar={{ border: false }}>
@@ -53,24 +81,33 @@ const MailAuthActivity: ActivityComponentType<MailAuthParams> = ({
                     <div className="container">
                       <FormItem>
                         <FormControl>
-                          <Input
-                            {...field}
-                            autoComplete="off"
-                            placeholder="인증 번호 입력하기"
-                            className="border-2 border-black"
-                            value={field.value || ""}
-                            autoFocus
-                          />
+                          <div className="relative">
+                            <Input
+                              {...field}
+                              autoComplete="off"
+                              placeholder="인증 번호 입력하기"
+                              className="border-2 border-black"
+                              value={field.value || ""}
+                              autoFocus
+                            />
+                            <div className="text-error absolute right-4 top-1/2 -translate-y-1/2">
+                              {formatTime(expiration)}
+                            </div>
+                          </div>
                         </FormControl>
-                        <FormMessage />
+                        {error && (
+                          <FormMessage className="text-error text-xs">
+                            인증번호가 일치하지 않습니다.
+                          </FormMessage>
+                        )}
                       </FormItem>
-                      <aside className="m-0 flex items-center justify-between text-sm">
-                        <div>2:32</div>
+                      <aside className="mt-3 flex items-center justify-center text-sm">
                         <div className="flex items-center gap-2 text-xs">
                           <span>메일이 오지 않았나요?</span>
                           <Button
                             variant="link"
                             className="p-0 text-xs text-[#7B7B7B]"
+                            onClick={() => requestEmailAuth()}
                           >
                             다시 보내기
                           </Button>
@@ -82,6 +119,8 @@ const MailAuthActivity: ActivityComponentType<MailAuthParams> = ({
                         type="submit"
                         activityName={"CompleteActivity" as never}
                         disabled={false}
+                        mutate={verifyEmailAuth}
+                        isLoading={isPending}
                       />
                     </ActivityFooter>
                   </>
