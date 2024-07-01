@@ -1,8 +1,7 @@
-import { ErrorBoundary } from "react-error-boundary";
 import { Suspense, useState } from "react";
 import { Separator } from "@uket/ui/components/ui/separator";
 import { Input } from "@uket/ui/components/ui/input";
-import { Search } from "@uket/ui/components/ui/icon";
+import { LoaderCircleIcon, Search } from "@uket/ui/components/ui/icon";
 import {
   FormControl,
   FormField,
@@ -19,23 +18,23 @@ import {
 } from "@uket/ui/components/ui/drawer";
 import { Button } from "@uket/ui/components/ui/button";
 
-import { FormSchemaType, FormType } from "@/hooks/useStackForm";
+import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
+
+import { FormType } from "@/hooks/useStackForm";
 import { useSearch } from "@/hooks/useSearch";
 
 import SearchResultSection from "./SearchResultSection";
 
-type formType = "userUniv" | "userMajor";
+type formType = "userUniv";
 
 interface UnivSearchProps {
   form: FormType;
   formType: formType;
-  label: string;
   placeholder: string;
 }
 
-const SearchSelector = (props: UnivSearchProps) => {
-  const { form, formType, label, placeholder } = props;
-  const sublabel = label === "학교" ? "학교명" : "학과명";
+const SearchUnivSelector = (props: UnivSearchProps) => {
+  const { form, formType, placeholder } = props;
   const [open, setOpen] = useState(false);
   const { selectedItem, value, handleSelectItem } = useSearch({
     form,
@@ -52,7 +51,7 @@ const SearchSelector = (props: UnivSearchProps) => {
           variant="outline"
           className="border-formInput relative mt-7 flex justify-start gap-3 px-3 hover:bg-inherit"
         >
-          <p className="absolute -top-7 left-0">{label}</p>
+          <p className="absolute -top-7 left-0">학교</p>
           <Search className="h-5 w-5 text-gray-500" />
           <span className="text-slate-500">{selectedItem || value}</span>
         </Button>
@@ -62,16 +61,16 @@ const SearchSelector = (props: UnivSearchProps) => {
           <DrawerHeader className="p-0">
             <FormField
               control={form.control}
-              name={formType as keyof FormSchemaType}
+              name={formType}
               render={({ field }) => (
                 <FormItem className="flex flex-col items-start">
                   <FormLabel className="ml-10 text-xs text-[rgb(137,137,161)]">
-                    {sublabel}
+                    학교명
                   </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
-                      placeholder={placeholder}
+                      placeholder="학교 검색"
                       className="border-none outline-none ring-0 ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                       autoComplete="off"
                       isIcon
@@ -85,16 +84,14 @@ const SearchSelector = (props: UnivSearchProps) => {
             />
           </DrawerHeader>
           <Separator className="bg-brand" />
-          <DrawerFooter className="h-80 px-10 py-7 text-base">
-            <ErrorBoundary fallback={<div>Something went wrong.</div>}>
-              <Suspense fallback={<div>Loading...</div>}>
-                <SearchResultSection
-                  value={value}
-                  formType={formType}
-                  onSelect={handleSelectItem}
-                />
+          <DrawerFooter className="h-80 px-8 py-7 text-base">
+            <RetryErrorBoundary>
+              <Suspense
+                fallback={<LoaderCircleIcon className="animate-spin" />}
+              >
+                <SearchResultSection onSelect={handleSelectItem} />
               </Suspense>
-            </ErrorBoundary>
+            </RetryErrorBoundary>
           </DrawerFooter>
         </div>
       </DrawerContent>
@@ -102,4 +99,4 @@ const SearchSelector = (props: UnivSearchProps) => {
   );
 };
 
-export default SearchSelector;
+export default SearchUnivSelector;
