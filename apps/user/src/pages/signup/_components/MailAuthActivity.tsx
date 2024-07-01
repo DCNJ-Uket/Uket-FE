@@ -86,11 +86,11 @@ const MailAuthActivity: ActivityComponentType<MailAuthParams> = ({
                               {...field}
                               autoComplete="off"
                               placeholder="인증 번호 입력하기"
-                              className="border-2 border-black"
+                              className="border border-[#D9D9D9] placeholder:text-[#8989A1] placeholder:font-light"
                               value={field.value || ""}
                               autoFocus
                             />
-                            <div className="text-error absolute right-4 top-1/2 -translate-y-1/2">
+                            <div className="text-error absolute right-4 top-1/2 -translate-y-1/2 font-light">
                               {formatTime(expiration)}
                             </div>
                           </div>
@@ -102,11 +102,11 @@ const MailAuthActivity: ActivityComponentType<MailAuthParams> = ({
                         )}
                       </FormItem>
                       <aside className="mt-3 flex items-center justify-center text-sm">
-                        <div className="flex items-center gap-2 text-xs">
+                        <div className="flex items-center gap-2 text-xs text-[#8989A1]">
                           <span>메일이 오지 않았나요?</span>
                           <Button
                             variant="link"
-                            className="p-0 text-xs text-[#7B7B7B]"
+                            className="p-0 text-xs font-medium underline"
                             onClick={() => requestEmailAuth()}
                           >
                             다시 보내기

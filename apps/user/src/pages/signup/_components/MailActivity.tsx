@@ -67,7 +67,8 @@ const MailActivity: ActivityComponentType<MailParams> = ({ params }) => {
                     </FormControl>
                     {error && (
                       <FormMessage className="text-error text-xs">
-                        대학 이메일 정보가 잘못되었습니다.
+                        선택한 학교의 메일이 아니거나 서비스에 등록되지 않은
+                        학교입니다.
                       </FormMessage>
                     )}
                   </FormItem>
