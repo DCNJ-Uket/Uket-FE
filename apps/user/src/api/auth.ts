@@ -37,7 +37,7 @@ export const signup = async ({
   };
   const univBody = {
     ...baseBody,
-    university: userUniv,
+    university: userUniv?.univName,
     universityEmail: userEmail,
     studentMajor: userMajor,
     studentCode: userId,
