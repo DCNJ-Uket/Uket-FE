@@ -51,7 +51,15 @@ export const useStackForm = () => {
   });
 
   const onSubmit = async (data: FormSchemaType) => {
-    const { userType, userName, userPhone, userUniv, userId, userMajor } = data;
+    const {
+      userType,
+      userName,
+      userPhone,
+      userUniv,
+      userId,
+      userMajor,
+      userEmail,
+    } = data;
 
     await mutateAsync({
       userType,
@@ -60,6 +68,7 @@ export const useStackForm = () => {
       userUniv,
       userId,
       userMajor,
+      userEmail,
     });
   };
 
