@@ -1,6 +1,8 @@
+import { FallbackProps } from "react-error-boundary";
 import { Suspense } from "react";
 import { Form } from "@uket/ui/components/ui/form";
 
+import SignupErrorFallback from "@/components/fallback/SignupErrorFallback";
 import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
 
 import { Stack } from "@/utils/stackflow";
@@ -12,7 +14,11 @@ const SignUpPage = () => {
 
   return (
     <main>
-      <RetryErrorBoundary>
+      <RetryErrorBoundary
+        fallbackComponent={(props: FallbackProps) => (
+          <SignupErrorFallback {...props} />
+        )}
+      >
         <Suspense>
           <Form {...form}>
             <Stack />
