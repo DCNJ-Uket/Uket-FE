@@ -14,6 +14,8 @@ import { useTimer } from "@/hooks/useTimer";
 import { useMutationVerifyEmailAuth } from "@/hooks/mutations/useMutationVerifyEmailAuth";
 import { useMutationRequestEmailAuth } from "@/hooks/mutations/useMutationRequestEmailAuth";
 
+import { EmailInfo } from "@/types/emailType";
+
 import { useStackForm } from "../../../hooks/useStackForm";
 import NextStepButton from "./NextStepButton";
 import {
@@ -26,37 +28,51 @@ import {
 
 import { useEmailAuthStore } from "@/store/useEmailAuthStore";
 
-interface MailAuthParams extends ActivityParams {
-  email: string;
-}
+interface MailAuthParams extends ActivityParams, Pick<EmailInfo, "email"> {}
 
-// TODO: 에러 표시하는 방식 변경 & universityId 변경
+// TODO: 에러 표시하는 방식 변경
 const MailAuthActivity: ActivityComponentType<MailAuthParams> = ({
   params,
 }) => {
   const { form, email } = params;
   const { onSubmit } = useStackForm();
   const { emailAuthInfo } = useEmailAuthStore();
-  const { expiration, formatTime } = useTimer(emailAuthInfo?.expiration);
+
+  const { expiration, formatTime, resetTimer } = useTimer(
+    emailAuthInfo?.expiration,
+  );
+
   const authCode = useWatch({
     control: form.control,
     name: "userEmailAuth",
   });
 
-  const { mutate: requestEmailAuth } = useMutationRequestEmailAuth({
+  const { mutateAsync: requestEmailAuth } = useMutationRequestEmailAuth({
     email: email!,
-    universityId: 2,
+    universityId: form.getValues("userUniv.univId"),
   });
 
   const {
     mutateAsync: verifyEmailAuth,
+    isSuccess: isAuthSuccess,
     error,
-    isPending,
+    reset,
   } = useMutationVerifyEmailAuth({
     email: email!,
-    universityId: 2,
+    universityId: form.getValues("userUniv.univId"),
     authCode: authCode!,
   });
+
+  const handleVerify = async () => {
+    await verifyEmailAuth();
+  };
+
+  const handleRequestAuth = async (resetField: () => void) => {
+    reset();
+    resetField();
+    resetTimer();
+    await requestEmailAuth();
+  };
 
   return (
     <AppScreen appBar={{ border: false }}>
@@ -86,13 +102,24 @@ const MailAuthActivity: ActivityComponentType<MailAuthParams> = ({
                               {...field}
                               autoComplete="off"
                               placeholder="인증 번호 입력하기"
-                              className="border border-[#D9D9D9] placeholder:text-[#8989A1] placeholder:font-light"
+                              className="border border-[#D9D9D9] py-6 placeholder:font-light placeholder:text-[#8989A1]"
                               value={field.value || ""}
                               autoFocus
+                              disabled={isAuthSuccess}
                             />
-                            <div className="text-error absolute right-4 top-1/2 -translate-y-1/2 font-light">
-                              {formatTime(expiration)}
-                            </div>
+                            <aside className="absolute right-4 top-1/2 flex -translate-y-1/2 items-center gap-3 font-light">
+                              <div className="text-error">
+                                {!isAuthSuccess && formatTime(expiration)}
+                              </div>
+                              <Button
+                                type="button"
+                                className="bg-brand hover:bg-brandHover h-8 w-12"
+                                onClick={handleVerify}
+                                disabled={isAuthSuccess}
+                              >
+                                인증
+                              </Button>
+                            </aside>
                           </div>
                         </FormControl>
                         {error && (
@@ -100,27 +127,36 @@ const MailAuthActivity: ActivityComponentType<MailAuthParams> = ({
                             인증번호가 일치하지 않습니다.
                           </FormMessage>
                         )}
+                        {isAuthSuccess && (
+                          <span className="text-brand text-xs">
+                            인증되었습니다!
+                          </span>
+                        )}
+                        <aside className="mt-3 flex items-center justify-center text-sm">
+                          <div className="flex items-center gap-2 text-xs text-[#8989A1]">
+                            <span>메일이 오지 않았나요?</span>
+                            <Button
+                              type="button"
+                              variant="link"
+                              className="px-2 text-xs font-medium underline hover:bg-slate-100"
+                              onClick={() =>
+                                handleRequestAuth(() => {
+                                  form.resetField("userEmailAuth");
+                                })
+                              }
+                              disabled={isAuthSuccess}
+                            >
+                              다시 보내기
+                            </Button>
+                          </div>
+                        </aside>
                       </FormItem>
-                      <aside className="mt-3 flex items-center justify-center text-sm">
-                        <div className="flex items-center gap-2 text-xs text-[#8989A1]">
-                          <span>메일이 오지 않았나요?</span>
-                          <Button
-                            variant="link"
-                            className="p-0 text-xs font-medium underline"
-                            onClick={() => requestEmailAuth()}
-                          >
-                            다시 보내기
-                          </Button>
-                        </div>
-                      </aside>
                     </div>
                     <ActivityFooter>
                       <NextStepButton
                         type="submit"
                         activityName={"CompleteActivity" as never}
-                        disabled={false}
-                        mutate={verifyEmailAuth}
-                        isLoading={isPending}
+                        disabled={!isAuthSuccess}
                       />
                     </ActivityFooter>
                   </>

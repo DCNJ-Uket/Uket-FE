@@ -23,7 +23,7 @@ import {
 
 interface MailParams extends ActivityParams {}
 
-// TODO: 에러 표시하는 방식 변경 & universityId 값 변경
+// TODO: 에러 표시하는 방식 변경
 const MailActivity: ActivityComponentType<MailParams> = ({ params }) => {
   const { form } = params;
 
@@ -34,7 +34,7 @@ const MailActivity: ActivityComponentType<MailParams> = ({ params }) => {
 
   const { mutateAsync, error, isPending } = useMutationRequestEmailAuth({
     email: email!,
-    universityId: 2,
+    universityId: form.getValues("userUniv.univId"),
   });
 
   return (

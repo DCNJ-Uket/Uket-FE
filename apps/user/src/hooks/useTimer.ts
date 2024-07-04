@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const useTimer = (time: number | undefined) => {
-  const [expiration, setExpiration] = useState(time || 0); // 초기 상태를 180초로 설정
+  const [expiration, setExpiration] = useState(time || 0);
 
   useEffect(() => {
     if (expiration && expiration > 0) {
@@ -19,5 +19,9 @@ export const useTimer = (time: number | undefined) => {
     return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
   };
 
-  return { expiration, formatTime };
+  const resetTimer = useCallback(() => {
+    setExpiration(time || 0);
+  }, [time]);
+
+  return { expiration, formatTime, resetTimer };
 };
