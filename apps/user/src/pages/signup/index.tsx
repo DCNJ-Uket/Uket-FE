@@ -13,7 +13,7 @@ const SignUpPage = () => {
   const { form } = useStackForm();
 
   return (
-    <main>
+    <main className="relative flex h-full flex-col items-center justify-center">
       <RetryErrorBoundary
         fallbackComponent={(props: FallbackProps) => (
           <SignupErrorFallback {...props} />

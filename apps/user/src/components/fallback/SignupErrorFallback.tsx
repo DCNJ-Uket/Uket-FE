@@ -26,7 +26,7 @@ const SignupErrorFallback = (props: SignupErrorFallbackProps) => {
         <ErrorDescription>회원가입을 다시 시도해 주세요.</ErrorDescription>
       </ErrorHeader>
       <footer className="flex w-full flex-col gap-2">
-        <Link to="/signup" replace>
+        <Link to="/" replace className="flex justify-center">
           <Button
             onClick={resetErrorBoundary}
             className="rounded-xl border border-[#5E5E6E] bg-[#5E5E6E] py-6 text-xs font-bold hover:bg-[#777784]"
