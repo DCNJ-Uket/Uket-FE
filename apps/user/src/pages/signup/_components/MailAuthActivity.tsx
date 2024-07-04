@@ -104,7 +104,6 @@ const MailAuthActivity: ActivityComponentType<MailAuthParams> = ({
                               placeholder="인증 번호 입력하기"
                               className="border border-[#D9D9D9] py-6 placeholder:font-light placeholder:text-[#8989A1]"
                               value={field.value || ""}
-                              autoFocus
                               disabled={isAuthSuccess}
                             />
                             <aside className="absolute right-4 top-1/2 flex -translate-y-1/2 items-center gap-3 font-light">
