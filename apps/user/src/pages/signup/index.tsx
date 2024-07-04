@@ -1,6 +1,9 @@
+import { FallbackProps } from "react-error-boundary";
 import { Suspense } from "react";
 import { Form } from "@uket/ui/components/ui/form";
 
+import SignupErrorFallback from "@/components/fallback/SignupErrorFallback";
+import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
 
 import { Stack } from "@/utils/stackflow";
 
@@ -10,12 +13,18 @@ const SignUpPage = () => {
   const { form } = useStackForm();
 
   return (
-    <main>
-      <Suspense>
-        <Form {...form}>
-          <Stack />
-        </Form>
-      </Suspense>
+    <main className="relative flex h-full flex-col items-center justify-center">
+      <RetryErrorBoundary
+        fallbackComponent={(props: FallbackProps) => (
+          <SignupErrorFallback {...props} />
+        )}
+      >
+        <Suspense>
+          <Form {...form}>
+            <Stack />
+          </Form>
+        </Suspense>
+      </RetryErrorBoundary>
     </main>
   );
 };

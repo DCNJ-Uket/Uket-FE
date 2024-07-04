@@ -30,6 +30,7 @@ const config = {
         brand: "#7250FD",
         brandHover: "#633cff",
         buttonDisabled: "#17171B",
+        error: "#FD724F",
         formInput: "#D9D9D9",
         primary: {
           DEFAULT: "hsl(var(--primary))",
