@@ -1,15 +1,12 @@
-import { Suspense } from "react";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
-
-import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
 
 import { useTicketStackForm } from "@/hooks/useTicketStackForm";
 import { useShowSelection } from "@/hooks/useShowSelections";
 import useItemSelect from "@/hooks/useItemSelect";
 import { useFormatTime } from "@/hooks/useFormatTime";
 import useDateTicketParams from "@/hooks/useDateTicketParams";
-
+import { useQueryShowList } from "@/hooks/queries/useQueryShowList";
 
 import ShowList from "./ShowList";
 import SelectTicketItem from "./SelectTicketItem";
@@ -24,6 +21,9 @@ import {
 
 const DateActivity: ActivityComponentType = () => {
   const { univName, univId, eventId, setTicketParams } = useDateTicketParams();
+
+  const { data } = useQueryShowList(eventId);
+  const { reservationUserType, shows } = data;
 
   const { form } = useTicketStackForm();
   form.setValue("universityId", parseInt(univId!, 10));
@@ -55,6 +55,10 @@ const DateActivity: ActivityComponentType = () => {
     <AppScreen appBar={{ border: false, height: "56px" }}>
       <Activity>
         <ActivityContent>
+          <div className="flex gap-5 px-[22px]">
+            <div>{univName}</div>
+            <div>{reservationUserType}</div>
+          </div>
           <div className="flex gap-3 px-[22px] pb-4">
             <SelectTicketItem title="선택 학교" content={univName!} />
           </div>
@@ -62,21 +66,21 @@ const DateActivity: ActivityComponentType = () => {
             <HeaderItem step={"01"} content={"예매 날짜를 선택해 주세요."} />
           </ActivityHeader>
 
-          <RetryErrorBoundary>
-            <Suspense>
-              <ShowList
-                eventId={eventId.toString()}
-                selectedItem={selectedItem}
-                onSelect={handleSelectDate}
-              />
-            </Suspense>
-          </RetryErrorBoundary>
+          <ShowList
+            shows={shows}
+            selectedItem={selectedItem}
+            onSelect={handleSelectDate}
+          />
 
           <ActivityFooter>
             <NextButton
               activityName={"TimeActivity" as never}
               disabled={selectedItem === null}
-              params={{ showDate: formatShowDate, form }}
+              params={{
+                showDate: formatShowDate,
+                reservationUserType: reservationUserType,
+                form,
+              }}
             ></NextButton>
           </ActivityFooter>
         </ActivityContent>

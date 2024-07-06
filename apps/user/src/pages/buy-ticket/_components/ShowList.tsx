@@ -1,20 +1,19 @@
-import { useQueryShowList } from "@/hooks/queries/useQueryShowList";
+import { ShowInfo } from "@/types/showType";
 
 import DateItem from "./DateItem";
 
 interface ShowListProps {
-  eventId: string;
+  shows: ShowInfo[];
   selectedItem: number | null;
   onSelect: (id: number, name: string, startDate: string) => void;
 }
 
 const ShowList = (props: ShowListProps) => {
-  const { eventId, selectedItem, onSelect } = props;
-  const { data: showList } = useQueryShowList(eventId);
+  const { shows, selectedItem, onSelect } = props;
 
   return (
     <div className="flex flex-col gap-4 px-[22px]">
-      {showList.map(
+      {shows.map(
         ({ id, name, startDate, endDate, ticketingDate, totalTicketCount }) => (
           <DateItem
             key={id}

@@ -11,6 +11,5 @@ export const useQueryShowList = (id: string | null) => {
   if (error) {
     throw error;
   }
-
   return { data };
 };

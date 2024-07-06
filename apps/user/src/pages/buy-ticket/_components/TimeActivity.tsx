@@ -1,11 +1,9 @@
 import { useSearchParams } from "react-router-dom";
-import { Suspense } from "react";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
-import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
-
 import useItemSelect from "@/hooks/useItemSelect";
+import { useQueryReservationList } from "@/hooks/queries/useQueryReservationList";
 
 import SelectTicketItem from "./SelectTicketItem";
 import ReservationList from "./ReservationList";
@@ -21,10 +19,11 @@ import {
 
 interface TimeParams extends ActivityParams {
   showDate: string;
+  reservationUserType: string;
 }
 
 const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
-  const { form, showDate } = params;
+  const { form, showDate, reservationUserType } = params;
 
   const { selectedItem, handleSelectItem } = useItemSelect();
 
@@ -37,10 +36,19 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
     form.setValue("reservationId", id);
   };
 
+  const { data: reservationList } = useQueryReservationList(
+    showId,
+    reservationUserType,
+  );
+
   return (
     <AppScreen appBar={{ border: false, height: "56px" }}>
       <Activity>
         <ActivityContent>
+          <div className="flex gap-5 px-[22px]">
+            <div>{univName}</div>
+            <div>{reservationUserType}</div>
+          </div>
           <div className="flex gap-3 px-[22px] pb-4">
             <SelectTicketItem title="선택 학교" content={univName!} />
             <SelectTicketItem title="선택 날짜" content={showDate} />
@@ -49,23 +57,19 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
             <HeaderItem step={"02"} content={"예매 시간을 선택해 주세요."} />
           </ActivityHeader>
 
-          <RetryErrorBoundary>
-            <Suspense>
-              <ReservationList
-                showId={showId}
-                selectedItem={selectedItem}
-                onSelect={handleSelectReservation}
-              />
-              <ActivityFooter>
-                <NextButton
-                  type="submit"
-                  activityName={"CompleteActivity" as never}
-                  disabled={selectedItem === null}
-                  params={{ form }}
-                ></NextButton>
-              </ActivityFooter>
-            </Suspense>
-          </RetryErrorBoundary>
+          <ReservationList
+            reservationList={reservationList}
+            selectedItem={selectedItem}
+            onSelect={handleSelectReservation}
+          />
+          <ActivityFooter>
+            <NextButton
+              type="submit"
+              activityName={"CompleteActivity" as never}
+              disabled={selectedItem === null}
+              params={{ form }}
+            ></NextButton>
+          </ActivityFooter>
         </ActivityContent>
       </Activity>
     </AppScreen>

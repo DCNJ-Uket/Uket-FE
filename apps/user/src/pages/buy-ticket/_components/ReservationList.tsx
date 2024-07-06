@@ -1,16 +1,15 @@
-import { useQueryReservationList } from "@/hooks/queries/useQueryReservationList";
+import { ReservationInfo } from "@/types/showType";
 
 import TimeItem from "./TimeItem";
 
 interface ReservationListProps {
-  showId: string;
+  reservationList: ReservationInfo[];
   selectedItem: number | null;
   onSelect: (id: number) => void;
 }
 
 const ReservationList = (props: ReservationListProps) => {
-  const { showId, selectedItem, onSelect } = props;
-  const { data: reservationList } = useQueryReservationList(showId);
+  const { reservationList, selectedItem, onSelect } = props;
 
   return (
     <div className="flex flex-col gap-4 px-[22px]">
