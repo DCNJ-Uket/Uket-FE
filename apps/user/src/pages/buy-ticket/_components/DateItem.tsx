@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
-import { cn } from "@uket/ui/lib/utils";
 
 import { useFormatTime } from "@/hooks/useFormatTime";
 
 import TicketQuantityItem from "./TicketQuantityItem";
-import CircleButton from "./CircleButton";
+import TicketHeader from "./TicketHeader";
+import TicketFooter from "./TicketFooter";
+import TicketDivider from "./TicketDivider";
+import TicketContainer from "./TicketContainer";
+import Overlay from "./Overlay";
 
 interface DateItemProps {
   name: string;
@@ -31,17 +34,12 @@ const DateItem = (props: DateItemProps) => {
   const [isSoldOut, setIsSoldOut] = useState(false);
 
   useEffect(() => {
-    if (totalTicketCount === 0) {
-      setIsSoldOut(true);
-    } else {
-      setIsSoldOut(false);
-    }
+    setIsSoldOut(totalTicketCount === 0);
   }, [totalTicketCount]);
 
   useEffect(() => {
     const currentTime = new Date().getTime();
     const ticketingTime = new Date(ticketingDate).getTime();
-
     setIsDisabled(currentTime < ticketingTime);
   }, [ticketingDate]);
 
@@ -54,35 +52,26 @@ const DateItem = (props: DateItemProps) => {
   return (
     <div className="relative">
       {isDisabled && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center text-xs font-bold text-red-500">
-          {formatTicketingDate} {formatTicketingTime}부터 예매 가능합니다.
-        </div>
+        <Overlay
+          message={`${formatTicketingDate} ${formatTicketingTime}부터 예매 가능합니다.`}
+        />
       )}
-      {isSoldOut && (
-        <div className="absolute inset-y-0 right-3 z-50 flex w-12 items-center justify-center bg-[#D9D9D9]">
-          <div className="rotate-90 text-xs font-bold text-[#FD724F]">
-            SOLDOUT
-          </div>
-        </div>
-      )}
-      <div
-        className={cn(
-          "z-40 flex w-full flex-col gap-[9px] rounded-lg bg-white px-5 pb-[15px] pt-[17px] shadow-lg",
-          (isDisabled || isSoldOut) &&
-            "pointer-events-none bg-[#D9D9D9] opacity-60",
-        )}
-        onClick={onSelect}
+      {isSoldOut && <Overlay message="SOLDOUT" soldOut />}
+
+      <TicketContainer
+        isDisabled={isDisabled}
+        isSoldOut={isSoldOut}
+        onSelect={onSelect}
       >
-        <div className="flex justify-between">
-          <div className="text-[42px] font-black">{name}</div>
-          <div className="self-center">
-            <CircleButton isSelected={isSelected} />
-          </div>
-        </div>
+        <TicketHeader
+          title={name}
+          fontStyle="text-[42px] font-black"
+          isSelected={isSelected}
+        />
 
-        <div className="my-[1%] w-full border-[0.5px] border-[#CCCCCC]"></div>
+        <TicketDivider />
 
-        <div className="flex gap-10 text-xs">
+        <TicketFooter>
           <div className="flex gap-2">
             <p className="font-medium">일시</p>
             <div>
@@ -97,8 +86,8 @@ const DateItem = (props: DateItemProps) => {
             amount={totalTicketCount}
             color="5E5E6E"
           />
-        </div>
-      </div>
+        </TicketFooter>
+      </TicketContainer>
     </div>
   );
 };
