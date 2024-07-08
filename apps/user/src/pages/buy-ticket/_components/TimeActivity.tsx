@@ -1,10 +1,14 @@
 import { useSearchParams } from "react-router-dom";
+import { FallbackProps } from "react-error-boundary";
+import { Suspense } from "react";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
+import BuyTicketErrorFallback from "@/components/fallback/BuyTicketErrorFallback";
+import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
+
 import { useReservationSelection } from "@/hooks/useReservationSelection";
 import { useFormatTime } from "@/hooks/useFormatTime";
-import { useQueryReservationList } from "@/hooks/queries/useQueryReservationList";
 
 import SelectHeader from "./SelectHeader";
 import ReservationList from "./ReservationList";
@@ -24,7 +28,7 @@ interface TimeParams extends ActivityParams {
 }
 
 const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
-  const { form, showDate, reservationUserType } = params;
+  const { form, reservationUserType, showDate } = params;
 
   const [searchParams] = useSearchParams();
   const univName = searchParams.get("univName");
@@ -36,11 +40,6 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
     selectedEndTime,
     handleSelectReservation,
   } = useReservationSelection(form);
-
-  const { data: reservationList } = useQueryReservationList(
-    showId,
-    reservationUserType,
-  );
 
   const { formatTime: formatStartTime } = useFormatTime(selectedStartTime);
   const { formatTime: formatEndTime } = useFormatTime(selectedEndTime);
@@ -57,17 +56,24 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
             formatShowDate={showDate}
             formatSelectTime={formatSelectTime}
           />
-
           <ActivityHeader className="px-[22px]">
             <HeaderItem step={"02"} content={"예매 시간을 선택해 주세요."} />
           </ActivityHeader>
-
-          <ReservationList
-            reservationList={reservationList}
-            selectedItem={selectedItem}
-            onSelect={handleSelectReservation}
-          />
-          <ActivityFooter>
+          <RetryErrorBoundary
+            fallbackComponent={(props: FallbackProps) => (
+              <BuyTicketErrorFallback {...props} />
+            )}
+          >
+            <Suspense>
+              <ReservationList
+                showId={showId}
+                selectedItem={selectedItem}
+                onSelect={handleSelectReservation}
+                reservationUserType={reservationUserType}
+              />
+            </Suspense>
+          </RetryErrorBoundary>
+          <ActivityFooter className="z-50">
             <NextButton
               type="submit"
               activityName={"CompleteActivity" as never}

@@ -1,12 +1,17 @@
+import { FallbackProps } from "react-error-boundary";
+import { Suspense } from "react";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
+import BuyTicketErrorFallback from "@/components/fallback/BuyTicketErrorFallback";
+import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
+
 import { useTicketStackForm } from "@/hooks/useTicketStackForm";
 import { useShowSelection } from "@/hooks/useShowSelections";
+import useReservationUserType from "@/hooks/useReservationUserType";
 import useItemSelect from "@/hooks/useItemSelect";
 import { useFormatTime } from "@/hooks/useFormatTime";
 import useDateTicketParams from "@/hooks/useDateTicketParams";
-import { useQueryShowList } from "@/hooks/queries/useQueryShowList";
 
 import ShowList from "./ShowList";
 import SelectHeader from "./SelectHeader";
@@ -22,8 +27,8 @@ import {
 const DateActivity: ActivityComponentType = () => {
   const { univName, univId, eventId, setTicketParams } = useDateTicketParams();
 
-  const { data } = useQueryShowList(eventId);
-  const { reservationUserType, shows } = data;
+  const { reservationUserType, handleReservationUserType } =
+    useReservationUserType();
 
   const { form } = useTicketStackForm();
   form.setValue("universityId", parseInt(univId!, 10));
@@ -63,24 +68,30 @@ const DateActivity: ActivityComponentType = () => {
             reservationUserType={reservationUserType}
             formatShowDate={formatShowDate}
           />
-
           <ActivityHeader className="px-[22px]">
             <HeaderItem step={"01"} content={"예매 날짜를 선택해 주세요."} />
           </ActivityHeader>
-
-          <ShowList
-            shows={shows}
-            selectedItem={selectedItem}
-            onSelect={handleSelectDate}
-          />
-
-          <ActivityFooter>
+          <RetryErrorBoundary
+            fallbackComponent={(props: FallbackProps) => (
+              <BuyTicketErrorFallback {...props} />
+            )}
+          >
+            <Suspense>
+              <ShowList
+                eventId={eventId.toString()}
+                selectedItem={selectedItem}
+                onSelect={handleSelectDate}
+                onReservationType={handleReservationUserType}
+              />
+            </Suspense>
+          </RetryErrorBoundary>
+          <ActivityFooter className="z-50">
             <NextButton
               activityName={"TimeActivity" as never}
               disabled={selectedItem === null}
               params={{
                 showDate: formatShowDate,
-                reservationUserType: reservationUserType,
+                reservationUserType,
                 form,
               }}
             ></NextButton>

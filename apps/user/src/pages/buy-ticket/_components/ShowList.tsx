@@ -1,15 +1,25 @@
-import { ShowInfo } from "@/types/showType";
+import { useEffect } from "react";
+
+import { useQueryShowList } from "@/hooks/queries/useQueryShowList";
 
 import DateItem from "./DateItem";
 
 interface ShowListProps {
-  shows: ShowInfo[];
+  eventId: string;
   selectedItem: number | null;
   onSelect: (id: number, name: string, startDate: string) => void;
+  onReservationType: (reservationType: string) => void;
 }
 
 const ShowList = (props: ShowListProps) => {
-  const { shows, selectedItem, onSelect } = props;
+  const { eventId, selectedItem, onSelect, onReservationType } = props;
+
+  const { data } = useQueryShowList(eventId);
+  const { reservationUserType, shows } = data;
+
+  useEffect(() => {
+    onReservationType(reservationUserType);
+  }, [reservationUserType, onReservationType]);
 
   return (
     <div className="flex flex-col gap-4 px-[22px]">
