@@ -38,6 +38,9 @@ importers:
 
   apps/admin:
     dependencies:
+      '@hookform/resolvers':
+        specifier: ^3.3.4
+        version: 3.4.0(react-hook-form@7.51.4(react@18.3.1))
       '@tanstack/react-query':
         specifier: ^5.29.0
         version: 5.37.1(react@18.3.1)
@@ -62,6 +65,12 @@ importers:
       react-dom:
         specifier: ^18
         version: 18.3.1(react@18.3.1)
+      react-hook-form:
+        specifier: ^7.51.3
+        version: 7.51.4(react@18.3.1)
+      zod:
+        specifier: ^3.22.5
+        version: 3.23.8
     devDependencies:
       '@types/eslint':
         specifier: ^8.56.10
