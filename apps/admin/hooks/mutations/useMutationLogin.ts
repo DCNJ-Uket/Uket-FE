@@ -13,6 +13,7 @@ export const useMutationLogin = () => {
     onSuccess: ({ accessToken }: LoginResponse) => {
       setAccessToken(accessToken);
     },
+    throwOnError: false,
   });
 
   return mutation;
