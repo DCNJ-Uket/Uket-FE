@@ -1,10 +1,10 @@
 export const setAccessToken = (accessToken: string) => {
-  localStorage.setItem("accessToken", accessToken);
+  localStorage.setItem("admin-accessToken", accessToken);
 };
 
 export const getAccessToken = () => {
   try {
-    const accessToken = localStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("admin-accessToken");
 
     return accessToken ? accessToken : null;
   } catch (error) {
@@ -13,5 +13,5 @@ export const getAccessToken = () => {
 };
 
 export const clearAccessToken = () => {
-  localStorage.removeItem("accessToken");
+  localStorage.removeItem("admin-accessToken");
 };
