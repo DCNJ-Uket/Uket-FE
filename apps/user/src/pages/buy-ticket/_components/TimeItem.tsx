@@ -34,7 +34,7 @@ const TimeItem = (props: TimeItemProps) => {
   const leftCount = totalCount - reservedCount;
 
   useEffect(() => {
-    setIsSoldOut(leftCount === 0);
+    setIsSoldOut(leftCount <= 0);
   }, [leftCount]);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const TimeItem = (props: TimeItemProps) => {
   return (
     <div className="relative">
       {isDisabled && <Overlay message="티켓 예매 가능 시간이 지났습니다." />}
-      {isSoldOut && <Overlay message="SOLDOUT" soldOut />}
+      {isSoldOut && !isDisabled && <Overlay message="SOLDOUT" soldOut />}
       <TicketContainer
         isDisabled={isDisabled}
         isSoldOut={isSoldOut}

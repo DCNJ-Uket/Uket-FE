@@ -34,7 +34,7 @@ const DateItem = (props: DateItemProps) => {
   const [isSoldOut, setIsSoldOut] = useState(false);
 
   useEffect(() => {
-    setIsSoldOut(totalTicketCount === 0);
+    setIsSoldOut(totalTicketCount <= 0);
   }, [totalTicketCount]);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const DateItem = (props: DateItemProps) => {
           message={`${formatTicketingDate} ${formatTicketingTime}부터 예매 가능합니다.`}
         />
       )}
-      {isSoldOut && <Overlay message="SOLDOUT" soldOut />}
+      {isSoldOut && !isDisabled && <Overlay message="SOLDOUT" soldOut />}
 
       <TicketContainer
         isDisabled={isDisabled}
