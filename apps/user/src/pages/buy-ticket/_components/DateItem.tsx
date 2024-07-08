@@ -68,9 +68,7 @@ const DateItem = (props: DateItemProps) => {
           fontStyle="text-[42px] font-black"
           isSelected={isSelected}
         />
-
         <TicketDivider />
-
         <TicketFooter>
           <div className="flex gap-2">
             <p className="font-medium">일시</p>

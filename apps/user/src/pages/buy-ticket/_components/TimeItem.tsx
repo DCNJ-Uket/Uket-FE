@@ -60,9 +60,7 @@ const TimeItem = (props: TimeItemProps) => {
           fontStyle="text-[32px] font-extrabold"
           isSelected={isSelected}
         />
-
         <TicketDivider />
-
         <TicketFooter>
           <TicketQuantityItem
             title="남은 티켓 수량"
