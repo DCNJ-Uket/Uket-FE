@@ -2,10 +2,12 @@ import { useSearchParams } from "react-router-dom";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
+import { useReservationSelection } from "@/hooks/useReservationSelection";
 import useItemSelect from "@/hooks/useItemSelect";
+import { useFormatTime } from "@/hooks/useFormatTime";
 import { useQueryReservationList } from "@/hooks/queries/useQueryReservationList";
 
-import SelectTicketItem from "./SelectTicketItem";
+import SelectHeader from "./SelectHeader";
 import ReservationList from "./ReservationList";
 import NextButton from "./NextButton";
 import HeaderItem from "./HeaderItem";
@@ -31,9 +33,22 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
   const univName = searchParams.get("univName");
   const showId = searchParams.get("showId") as string;
 
-  const handleSelectReservation = (id: number) => {
+  const {
+    selectedStartTime,
+    setSelectedStartTme,
+    selectedEndTime,
+    setSelectedEndTme,
+  } = useReservationSelection();
+
+  const handleSelectReservation = (
+    id: number,
+    startTime: string,
+    endTime: string,
+  ) => {
     handleSelectItem(id);
     form.setValue("reservationId", id);
+    setSelectedStartTme(startTime);
+    setSelectedEndTme(endTime);
   };
 
   const { data: reservationList } = useQueryReservationList(
@@ -41,18 +56,22 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
     reservationUserType,
   );
 
+  const { formatTime: formatStartTime } = useFormatTime(selectedStartTime);
+  const { formatTime: formatEndTime } = useFormatTime(selectedEndTime);
+  const formatSelectTime =
+    selectedStartTime !== "" ? `${formatStartTime} ~ ${formatEndTime}` : "";
+
   return (
     <AppScreen appBar={{ border: false, height: "56px" }}>
       <Activity>
         <ActivityContent>
-          <div className="flex gap-5 px-[22px]">
-            <div>{univName}</div>
-            <div>{reservationUserType}</div>
-          </div>
-          <div className="flex gap-3 px-[22px] pb-4">
-            <SelectTicketItem title="선택 학교" content={univName!} />
-            <SelectTicketItem title="선택 날짜" content={showDate} />
-          </div>
+          <SelectHeader
+            univName={univName}
+            reservationUserType={reservationUserType}
+            formatShowDate={showDate}
+            formatSelectTime={formatSelectTime}
+          />
+
           <ActivityHeader className="px-[22px]">
             <HeaderItem step={"02"} content={"예매 시간을 선택해 주세요."} />
           </ActivityHeader>

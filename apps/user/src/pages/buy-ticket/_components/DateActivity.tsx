@@ -9,7 +9,7 @@ import useDateTicketParams from "@/hooks/useDateTicketParams";
 import { useQueryShowList } from "@/hooks/queries/useQueryShowList";
 
 import ShowList from "./ShowList";
-import SelectTicketItem from "./SelectTicketItem";
+import SelectHeader from "./SelectHeader";
 import NextButton from "./NextButton";
 import HeaderItem from "./HeaderItem";
 import {
@@ -49,19 +49,21 @@ const DateActivity: ActivityComponentType = () => {
   };
 
   const { formatDate } = useFormatTime(selectedShowDate);
-  const formatShowDate = `${selectedShowName} (${formatDate.slice(2)})`;
+  const formatShowDate =
+    selectedShowDate !== ""
+      ? `${selectedShowName} (${formatDate.slice(2)})`
+      : "";
 
   return (
     <AppScreen appBar={{ border: false, height: "56px" }}>
       <Activity>
         <ActivityContent>
-          <div className="flex gap-5 px-[22px]">
-            <div>{univName}</div>
-            <div>{reservationUserType}</div>
-          </div>
-          <div className="flex gap-3 px-[22px] pb-4">
-            <SelectTicketItem title="선택 학교" content={univName!} />
-          </div>
+          <SelectHeader
+            univName={univName}
+            reservationUserType={reservationUserType}
+            formatShowDate={formatShowDate}
+          />
+
           <ActivityHeader className="px-[22px]">
             <HeaderItem step={"01"} content={"예매 날짜를 선택해 주세요."} />
           </ActivityHeader>

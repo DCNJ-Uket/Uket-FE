@@ -5,7 +5,7 @@ import TimeItem from "./TimeItem";
 interface ReservationListProps {
   reservationList: ReservationInfo[];
   selectedItem: number | null;
-  onSelect: (id: number) => void;
+  onSelect: (id: number, startTime: string, endTime: string) => void;
 }
 
 const ReservationList = (props: ReservationListProps) => {
@@ -22,7 +22,7 @@ const ReservationList = (props: ReservationListProps) => {
             reservedCount={reservedCount}
             totalCount={totalCount}
             isSelected={selectedItem === id}
-            onSelect={() => onSelect(id)}
+            onSelect={() => onSelect(id, startTime, endTime)}
           />
         ),
       )}
