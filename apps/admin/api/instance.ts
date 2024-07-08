@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { getAccessToken } from "@/utils/handleToken";
 
-const BASE_URL = "";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const SERVER_VERSION = "/admin/v1";
 
 const AUTH_REQUIRED_PATH: string[] = [];
