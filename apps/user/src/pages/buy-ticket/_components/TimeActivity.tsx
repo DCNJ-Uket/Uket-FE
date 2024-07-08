@@ -3,7 +3,6 @@ import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
 import { useReservationSelection } from "@/hooks/useReservationSelection";
-import useItemSelect from "@/hooks/useItemSelect";
 import { useFormatTime } from "@/hooks/useFormatTime";
 import { useQueryReservationList } from "@/hooks/queries/useQueryReservationList";
 
@@ -27,29 +26,16 @@ interface TimeParams extends ActivityParams {
 const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
   const { form, showDate, reservationUserType } = params;
 
-  const { selectedItem, handleSelectItem } = useItemSelect();
-
   const [searchParams] = useSearchParams();
   const univName = searchParams.get("univName");
   const showId = searchParams.get("showId") as string;
 
   const {
+    selectedItem,
     selectedStartTime,
-    setSelectedStartTme,
     selectedEndTime,
-    setSelectedEndTme,
-  } = useReservationSelection();
-
-  const handleSelectReservation = (
-    id: number,
-    startTime: string,
-    endTime: string,
-  ) => {
-    handleSelectItem(id);
-    form.setValue("reservationId", id);
-    setSelectedStartTme(startTime);
-    setSelectedEndTme(endTime);
-  };
+    handleSelectReservation,
+  } = useReservationSelection(form);
 
   const { data: reservationList } = useQueryReservationList(
     showId,

@@ -1,13 +1,31 @@
 import { useState } from "react";
 
-export const useReservationSelection = (initialStart = "", initialEnd = "") => {
-  const [selectedStartTime, setSelectedStartTme] = useState(initialStart);
-  const [selectedEndTime, setSelectedEndTme] = useState(initialEnd);
+import { FormType } from "./useTicketStackForm";
+import useItemSelect from "./useItemSelect";
+
+export const useReservationSelection = (form: FormType) => {
+  const [selectedStartTime, setSelectedStartTme] = useState("");
+  const [selectedEndTime, setSelectedEndTme] = useState("");
+
+  const { selectedItem, handleSelectItem } = useItemSelect();
+
+  const handleSelectReservation = (
+    id: number,
+    startTime: string,
+    endTime: string,
+  ) => {
+    handleSelectItem(id);
+    form.setValue("reservationId", id);
+    setSelectedStartTme(startTime);
+    setSelectedEndTme(endTime);
+  };
 
   return {
+    selectedItem,
     selectedStartTime,
     setSelectedStartTme,
     selectedEndTime,
     setSelectedEndTme,
+    handleSelectReservation,
   };
 };
