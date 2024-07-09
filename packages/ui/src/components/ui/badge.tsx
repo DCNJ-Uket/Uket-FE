@@ -16,12 +16,12 @@ const badgeVariants = cva(
           "border-transparent bg-red-500 text-slate-50 hover:bg-red-500/80 dark:bg-red-900 dark:text-slate-50 dark:hover:bg-red-900/80",
         outline: "text-slate-950 dark:text-slate-50",
         banner: "border-transparent bg-[#f2f2f2c1] text-[#5E5E6E]",
-        reservation: "border-transparent bg-[#17171B] text-[#81B0FE]",
-        enter: "border-transparent bg-[#ffffff] text-[#9981FE]",
-        deposit: "border-transparent bg-[#5E5E6E] text-[#FFEF60]",
-        darkreservation: "border-transparent bg-[#81B0FE] text-[#17171B]",
-        darkenter: "border-transparent bg-[#9981FE] text-[#ffffff]",
-        darkdeposit: "border-transparent bg-[#FDD881] text-[#5E5E6E]",
+        reservation:
+          "border-transparent bg-[#17171B] text-[#81B0FE] w-22 gap-1 items-center after:content-[''] after:w-2 after:h-2 after:bg-[#81B0FE] after:rounded-full",
+        enter:
+          "border-transparent bg-[#ffffff] text-[#9981FE] w-22 gap-1 items-center after:content-[''] after:w-2 after:h-2 after:bg-[#9981FE] after:rounded-full",
+        deposit:
+          "border-transparent bg-[#5E5E6E] text-[#FFEF60] w-22 gap-1 items-center after:content-[''] after:w-2 after:h-2 after:bg-[#FFEF60] after:rounded-full",
       },
     },
     defaultVariants: {
