@@ -27,6 +27,7 @@ const LogoutModal = (props: LogoutModalProps) => {
     onLogout();
     setOpen(false);
     toast({
+      variant: "brand",
       title: "로그아웃 성공!",
     });
     navigate("/", { replace: true });
