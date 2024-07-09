@@ -4,8 +4,8 @@ import { Button } from "@uket/ui/components/ui/button";
 
 import { useQueryUserInfo } from "@/hooks/queries/useQueryUserInfo";
 
-import UnivInfo from "./UnivInfo";
-import GeneralInfo from "./GeneralInfo";
+import InfoItem from "./InfoItem";
+import InfoContainer from "./InfoContainer";
 
 import { useNavigate } from "@/router";
 
@@ -42,29 +42,33 @@ const UserInfoSection = () => {
         </Button>
       </div>
       <section className="flex flex-col gap-2">
-        <GeneralInfo
-          depositorName={userInfo.depositorName}
-          phoneNumber={userInfo.phoneNumber}
-          universityName={userInfo.universityName}
-        />
-        {userInfo.universityName !== "일반인" && (
-          <UnivInfo
-            universityName={userInfo.universityName}
-            studentMajor={userInfo.studentMajor}
-            studentCode={userInfo.studentCode}
+        <InfoContainer title="일반" isGeneralInfo>
+          <InfoItem title="이름(입금자명)" content={userInfo.depositorName} />
+          <InfoItem title="전화번호" content={userInfo.phoneNumber} />
+          <InfoItem
+            title="사용자구분"
+            content={
+              userInfo.universityName === "일반인"
+                ? userInfo.universityName
+                : "대학생"
+            }
           />
+        </InfoContainer>
+        {userInfo.universityName !== "일반인" && (
+          <InfoContainer title="학교">
+            <InfoItem title="학교" content={userInfo.universityName} />
+            <InfoItem title="학과" content={userInfo.studentMajor} />
+            <InfoItem title="학번" content={userInfo.studentCode} />
+          </InfoContainer>
         )}
-
-        <div className="flex w-full flex-col gap-2 bg-white px-6 pb-6 pt-4">
-          <div className="text-lg font-bold leading-8 text-[#17171B]">알림</div>
-          <div className="mb-3 w-full border-t-[0.3px] border-[#5E5E6E] opacity-50"></div>
+        <InfoContainer title="알림">
           <div className="flex w-full items-center justify-between">
             <div className="text-[13px] text-[#5E5E6E]">
               푸시 알람 동의 여부
             </div>
             <Switch />
           </div>
-        </div>
+        </InfoContainer>
       </section>
     </>
   );
