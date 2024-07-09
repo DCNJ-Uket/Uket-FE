@@ -39,7 +39,7 @@ const toastVariants = cva(
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: "brand",
     },
   },
 );
