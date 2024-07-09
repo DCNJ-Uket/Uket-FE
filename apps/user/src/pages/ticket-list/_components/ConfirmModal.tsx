@@ -48,26 +48,29 @@ function ConfirmModal(props: ConfirmModalProps) {
         <Button
           variant="link"
           className="cursor-pointer p-0 text-xs text-[#FD724F] underline"
+          onClick={e => e.stopPropagation()}
         >
           예매 취소
         </Button>
       </DialogTrigger>
-      <DialogContent className=" max-w-60 rounded-2xl sm:max-w-xs">
-        <section className="py-6 sm:py-12">
+      <DialogContent className="max-w-60 rounded-2xl sm:max-w-xs" isXHidden>
+        <section className="py-5 sm:py-12">
           <h1 className="text-center text-sm font-semibold">
             정말 예매를 취소하시겠어요?
           </h1>
         </section>
         <DialogFooter className="flex-row items-center justify-center gap-3">
-          <Button className="basis-1/2" onClick={() => setOpen(false)}>
+          <Button
+            className="basis-1/2 bg-[#ccc]"
+            onClick={e => {
+              e.stopPropagation();
+              setOpen(false);
+            }}
+          >
             아니오
           </Button>
           <DialogClose asChild>
-            <Button
-              variant="destructive"
-              className="basis-1/2"
-              onClick={handleCancel}
-            >
+            <Button className="basis-1/2 bg-[#FD724F]" onClick={handleCancel}>
               네, 취소할게요.
             </Button>
           </DialogClose>
