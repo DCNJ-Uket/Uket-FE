@@ -49,18 +49,21 @@ const LogoutModal = (props: LogoutModalProps) => {
           </h1>
         </section>
         <DialogFooter className="flex-row items-center justify-center gap-3">
+          <Button
+            variant="outline"
+            className="basis-1/2 border-[#5E5E6E] text-xs text-[#5E5E6E]"
+            onClick={() => setOpen(false)}
+          >
+            아니오
+          </Button>
           <DialogClose asChild>
             <Button
-              variant="destructive"
-              className="basis-1/2"
+              className="basis-1/2 bg-[#FD724F] text-xs"
               onClick={handleLogout}
             >
               네
             </Button>
           </DialogClose>
-          <Button className="basis-1/2" onClick={() => setOpen(false)}>
-            아니오
-          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
