@@ -32,7 +32,7 @@ const ActivityContent = ({
     <main className="flex h-full flex-col items-center overflow-y-scroll bg-[#F2F2F2]">
       <section
         className={cn(
-          "flex w-full grow flex-col justify-center gap-4  pt-4",
+          "flex w-full grow flex-col justify-center gap-4",
           className,
         )}
         {...props}
