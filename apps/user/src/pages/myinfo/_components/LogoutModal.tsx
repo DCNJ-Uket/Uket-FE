@@ -37,7 +37,7 @@ const LogoutModal = (props: LogoutModalProps) => {
       <DialogTrigger asChild>
         <Button
           variant="secondary"
-          className="w-full rounded-xl bg-white p-6 text-sm font-medium text-black hover:bg-slate-200 sm:w-80"
+          className="basis-1/2 rounded-lg bg-[#8989A1] text-[#F2F2F2]"
         >
           로그아웃
         </Button>
