@@ -19,30 +19,26 @@ const Nav = () => {
   }
 
   return (
-    <>
+    <nav className="container my-2 flex h-10 w-full items-center justify-between self-stretch">
       {["/", "/home"].includes(pathname) ? (
-        <nav className="container my-2 flex h-10 w-full items-center justify-between self-stretch">
-          <Logo />
-          <RetryErrorBoundary
-            resetKeys={["user-info"]}
-            fallbackComponent={(props: FallbackProps) => (
-              <LoginErrorFallback
-                className={cn("text-black", pathname === "/" && "text-white")}
-                {...props}
-              />
-            )}
-          >
-            <Profile />
-          </RetryErrorBoundary>
-        </nav>
+        <Logo />
       ) : (
-        <nav className="my-2 flex h-10 w-full items-center justify-between self-stretch pl-[14px]">
-          <Link to={previousPath}>
-            <IconBack />
-          </Link>
-        </nav>
+        <Link to={previousPath}>
+          <IconBack />
+        </Link>
       )}
-    </>
+      <RetryErrorBoundary
+        resetKeys={["user-info"]}
+        fallbackComponent={(props: FallbackProps) => (
+          <LoginErrorFallback
+            className={cn("text-black", pathname === "/" && "text-white")}
+            {...props}
+          />
+        )}
+      >
+        <Profile />
+      </RetryErrorBoundary>
+    </nav>
   );
 };
 
