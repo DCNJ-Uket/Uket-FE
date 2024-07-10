@@ -60,7 +60,7 @@ function ConfirmModal(props: ConfirmModalProps) {
           </section>
           <DialogFooter className="flex-row items-center justify-center gap-3">
             <Button
-              className="basis-1/2 bg-[#ccc]"
+              className="basis-1/2 bg-[#ccc] hover:bg-[#afafaf]"
               onClick={e => {
                 e.stopPropagation();
                 setOpen(false);
@@ -69,7 +69,7 @@ function ConfirmModal(props: ConfirmModalProps) {
               아니오
             </Button>
             <DialogClose asChild>
-              <Button className="basis-1/2 bg-[#FD724F]" onClick={handleCancel}>
+              <Button className="basis-1/2 bg-[#FD724F] hover:bg-[#ff5328]" onClick={handleCancel}>
                 네, 취소할게요.
               </Button>
             </DialogClose>
