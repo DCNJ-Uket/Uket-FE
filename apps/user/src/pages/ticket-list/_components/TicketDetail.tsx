@@ -17,7 +17,7 @@ const TicketDetail = (props: TicketDetailProps) => {
     <section className="grid auto-rows-auto grid-cols-2 gap-4">
       <GridItem title={"예매자"} content={userName} />
       <GridItem title={"입장 날짜"} content={showDate} />
-      <GridItem title={"위치(공연장)"} content={showLocation} />
+      <GridItem title={"위치(공연장)"} content={showLocation} isPlace />
       <GridItem title={"입장 시간"} content={enterTime} />
       {createdAt && userType && (
         <>
