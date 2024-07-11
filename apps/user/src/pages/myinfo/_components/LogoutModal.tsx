@@ -37,7 +37,7 @@ const LogoutModal = (props: LogoutModalProps) => {
       <DialogTrigger asChild>
         <Button
           variant="secondary"
-          className="w-full rounded-xl bg-white p-6 text-sm font-medium text-black hover:bg-slate-200 sm:w-80"
+          className="basis-1/2 rounded-lg bg-[#8989A1] text-[#F2F2F2]"
         >
           로그아웃
         </Button>
@@ -49,18 +49,21 @@ const LogoutModal = (props: LogoutModalProps) => {
           </h1>
         </section>
         <DialogFooter className="flex-row items-center justify-center gap-3">
+          <Button
+            variant="outline"
+            className="basis-1/2 border-[#5E5E6E] text-xs text-[#5E5E6E]"
+            onClick={() => setOpen(false)}
+          >
+            아니오
+          </Button>
           <DialogClose asChild>
             <Button
-              variant="destructive"
-              className="basis-1/2"
+              className="basis-1/2 bg-[#FD724F] text-xs"
               onClick={handleLogout}
             >
               네
             </Button>
           </DialogClose>
-          <Button className="basis-1/2" onClick={() => setOpen(false)}>
-            아니오
-          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
