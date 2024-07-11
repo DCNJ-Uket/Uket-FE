@@ -8,4 +8,6 @@ export {
   ScanIcon,
   LoaderCircleIcon,
   ChevronRightIcon,
+  DotIcon,
+  CircleIcon,
 } from "lucide-react";
