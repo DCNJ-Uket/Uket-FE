@@ -7,6 +7,7 @@ import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
 
 import UserIdField from "./UserIdField";
 import UnivField from "./UnivField";
+import NoUnivModal from "./NoUnivModal";
 import NextStepButton from "./NextStepButton";
 import MajorField from "./MajorField";
 import {
@@ -30,7 +31,7 @@ const UnivActivity: ActivityComponentType<UnivParams> = ({ params }) => {
           <ActivityHeader>
             <h1 className="text-2xl font-black">
               <p>학교와 학과, 학번을</p>
-              <p>입력해 주세요</p>
+              <p>입력해 주세요.</p>
             </h1>
           </ActivityHeader>
           <section className="container flex grow flex-col gap-3">
@@ -44,6 +45,9 @@ const UnivActivity: ActivityComponentType<UnivParams> = ({ params }) => {
             </RetryErrorBoundary>
             <MajorField form={form} />
             <UserIdField form={form} />
+            <footer className="mt-5 text-center">
+              <NoUnivModal form={form} />
+            </footer>
           </section>
           <ActivityFooter className="w-full">
             <NextStepButton

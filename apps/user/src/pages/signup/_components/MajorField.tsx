@@ -22,12 +22,12 @@ const MajorField = (props: MajorFieldProps) => {
       name="userMajor"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>학과</FormLabel>
+          <FormLabel className="text-desc">학과</FormLabel>
           <FormControl>
             <Input
               {...field}
               placeholder="학과 입력"
-              className="border-formInput border"
+              className="border-formInput border placeholder:font-light placeholder:text-[#8989A1]"
               autoComplete="off"
               value={field.value || ""}
             />

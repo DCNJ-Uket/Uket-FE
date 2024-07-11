@@ -63,7 +63,7 @@ const UserTypeActivity: ActivityComponentType = () => {
                           <FormLabel className="font-normal">
                             <UserTypeItem
                               title="대학생"
-                              desc="소속 학교가 있는 대학생이에요"
+                              desc="소속 학교가 있고 재학 중인 대학생이에요"
                               selected={field.value === "univ"}
                               isUnivUser
                             />

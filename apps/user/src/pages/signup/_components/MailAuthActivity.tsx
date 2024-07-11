@@ -81,7 +81,10 @@ const MailAuthActivity: ActivityComponentType<MailAuthParams> = ({
           <ActivityHeader>
             <h1 className="text-2xl font-black">
               <p>{email}로</p>
-              <p>보낸 메일에 적힌 숫자를 입력해 주세요</p>
+              <p className="flex flex-col">
+                <span>보낸 메일에 적힌 숫자를 </span>
+                <span>입력해 주세요.</span>
+              </p>
             </h1>
           </ActivityHeader>
           <section className="grow">
@@ -137,7 +140,7 @@ const MailAuthActivity: ActivityComponentType<MailAuthParams> = ({
                             <Button
                               type="button"
                               variant="link"
-                              className="px-2 text-xs font-medium underline hover:bg-slate-100"
+                              className="px-2 text-xs font-medium text-[#8989A1] underline hover:bg-slate-100"
                               onClick={() =>
                                 handleRequestAuth(() => {
                                   form.resetField("userEmailAuth");
