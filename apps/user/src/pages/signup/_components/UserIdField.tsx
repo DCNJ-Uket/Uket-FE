@@ -21,12 +21,12 @@ const UserIdField = (props: UserIdFieldProps) => {
       name="userId"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>학번</FormLabel>
+          <FormLabel className="text-desc">학번</FormLabel>
           <FormControl>
             <Input
               {...field}
               placeholder="학번"
-              className="border-formInput border"
+              className="border-formInput border placeholder:font-light placeholder:text-[#8989A1]"
               autoComplete="off"
               value={field.value || ""}
             />

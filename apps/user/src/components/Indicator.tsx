@@ -9,7 +9,7 @@ type BadgeVariant = VariantProps<typeof badgeVariants>["variant"];
 interface IndicatorBadge extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
   rounded?: boolean;
-  variant: TicketItem["ticketStatus"];
+  variant?: TicketItem["ticketStatus"];
 }
 
 const VARIANT_MAPPING: Record<string, BadgeVariant> = {
@@ -26,9 +26,10 @@ const Indicator = (props: IndicatorBadge) => {
       className={cn(
         "absolute left-6 top-2 px-2 py-1",
         rounded ? "rounded-lg" : "rounded-md",
+        !variant && "bg-[#f2f2f2c6]",
         className,
       )}
-      variant={VARIANT_MAPPING[variant] || "default"}
+      variant={variant ? VARIANT_MAPPING[variant] : "secondary"}
     >
       {title}
     </Badge>

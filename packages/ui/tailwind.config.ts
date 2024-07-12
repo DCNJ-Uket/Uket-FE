@@ -15,7 +15,7 @@ const config = {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: "1rem",
       screens: {
         "2xl": "1400px",
       },
@@ -32,6 +32,7 @@ const config = {
         buttonDisabled: "#17171B",
         error: "#FD724F",
         formInput: "#D9D9D9",
+        desc: "#5E5E6E",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
