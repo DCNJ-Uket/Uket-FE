@@ -18,7 +18,7 @@ const MyInfo = () => {
 
   return (
     <main className="relative flex h-full flex-col items-center bg-[#F2F2F2]">
-      <main className="flex h-full w-full flex-col gap-3 pb-5">
+      <main className="flex h-full w-full flex-col gap-3 pb-10">
         <RetryErrorBoundary>
           <UserInfoSection />
         </RetryErrorBoundary>
