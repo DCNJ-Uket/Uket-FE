@@ -25,7 +25,7 @@ const CompleteActivity: ActivityComponentType = () => {
     >
       <Activity>
         <ActivityContent>
-          <ActivityHeader className="relative justify-center items-center">
+          <ActivityHeader className="relative justify-center items-center grow">
             <h1 className="text-lg text-[#5E5E6E]">
               회원가입이 완료되었습니다.
             </h1>

@@ -29,7 +29,7 @@ const UnivField = (props: UnivFieldProps) => {
       name="userUniv"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>학교</FormLabel>
+          <FormLabel className="text-desc">학교</FormLabel>
           <Select
             onValueChange={value => {
               const selectedUniv = data.find(univ => univ.name === value);
@@ -41,7 +41,7 @@ const UnivField = (props: UnivFieldProps) => {
             defaultValue={field.value?.univName}
           >
             <FormControl>
-              <SelectTrigger>
+              <SelectTrigger className="border-formInput border">
                 <SelectValue placeholder="학교 선택" />
               </SelectTrigger>
             </FormControl>

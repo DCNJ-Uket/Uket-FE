@@ -66,11 +66,7 @@ const CarouselT = (props: PropType) => {
                 imgSrc={url}
                 inView={slidesInView.indexOf(index) > -1}
               />
-              <Indicator
-                title={title}
-                variant={"banner"}
-                className="left-3 top-3"
-              />
+              <Indicator title={title} className="left-3 top-3 text-desc text-xs" />
             </CardContent>
           </Card>
         </div>

@@ -40,7 +40,7 @@ const UserTypeActivity: ActivityComponentType = () => {
               <p>일반인인가요?</p>
             </h1>
           </ActivityHeader>
-          <section className="grow">
+          <section className="mt-8 grow">
             <FormField
               control={form.control}
               name="userType"
@@ -63,7 +63,7 @@ const UserTypeActivity: ActivityComponentType = () => {
                           <FormLabel className="font-normal">
                             <UserTypeItem
                               title="대학생"
-                              desc="소속 학교가 있는 대학생이에요"
+                              desc="소속 학교가 있고 재학 중인 대학생이에요"
                               selected={field.value === "univ"}
                               isUnivUser
                             />

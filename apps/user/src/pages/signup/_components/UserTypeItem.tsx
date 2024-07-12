@@ -30,9 +30,9 @@ const UserTypeItem = (props: UserTypeItemProps) => {
           )}
         />
       </section>
-      <section className="flex flex-col justify-center gap-2 bg-white p-3 py-5">
-        <h1 className="font-bold">{title}</h1>
-        <h2 className="text-gray-500">{desc}</h2>
+      <section className="flex w-40 flex-col justify-center gap-2 bg-white p-3 py-3 pt-1">
+        <h1 className="text-base font-bold">{title}</h1>
+        <h2 className="text-xs text-gray-500">{desc}</h2>
       </section>
     </div>
   );
