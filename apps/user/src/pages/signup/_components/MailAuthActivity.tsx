@@ -125,12 +125,12 @@ const MailAuthActivity: ActivityComponentType<MailAuthParams> = ({
                           </div>
                         </FormControl>
                         {error && (
-                          <FormMessage className="text-error text-xs">
+                          <FormMessage className="text-error pl-2 text-xs">
                             인증번호가 일치하지 않습니다.
                           </FormMessage>
                         )}
                         {isAuthSuccess && (
-                          <span className="text-brand text-xs">
+                          <span className="text-brand pl-2 text-xs">
                             인증되었습니다!
                           </span>
                         )}

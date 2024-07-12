@@ -40,7 +40,7 @@ const UserTypeActivity: ActivityComponentType = () => {
               <p>일반인인가요?</p>
             </h1>
           </ActivityHeader>
-          <section className="grow">
+          <section className="mt-8 grow">
             <FormField
               control={form.control}
               name="userType"
