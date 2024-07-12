@@ -12,7 +12,7 @@ const InfoContainer = (props: InfoContainerProps) => {
         <div className="text-lg font-bold text-[#17171B]">{title}</div>
       </div>
       <div className="mb-3 w-full border-t-[0.3px] border-[#5E5E6E] opacity-50"></div>
-      <div className="flex flex-col gap-3">{children}</div>
+      <div className="flex flex-col gap-[10px]">{children}</div>
     </div>
   );
 };
