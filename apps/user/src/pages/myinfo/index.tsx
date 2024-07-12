@@ -8,8 +8,6 @@ import { clearRefreshToken } from "@/utils/handleCookie";
 import UserInfoSection from "./_components/UserInfoSection";
 import LogoutModal from "./_components/LogoutModal";
 
-//TODO: 메일인증여부 추가, 회원탈퇴 modal 및 기능
-
 const MyInfo = () => {
   const logout = () => {
     clearRefreshToken("refreshToken");
