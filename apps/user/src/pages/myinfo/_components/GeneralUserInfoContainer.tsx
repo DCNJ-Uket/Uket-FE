@@ -5,13 +5,13 @@ import { useMutationUpdateInfo } from "@/hooks/mutations/useMutationUpdateInfo";
 
 import InfoItem from "./InfoItem";
 
-interface GeneralInfoContainerProps {
+interface GeneralUserInfoContainerProps {
   depositorName: string;
   phoneNumber: string;
   universityName: string;
 }
 
-const GeneralInfoContainer = (props: GeneralInfoContainerProps) => {
+const GeneralUserInfoContainer = (props: GeneralUserInfoContainerProps) => {
   const { depositorName, phoneNumber, universityName } = props;
 
   const mutation = useMutationUpdateInfo();
@@ -97,4 +97,4 @@ const GeneralInfoContainer = (props: GeneralInfoContainerProps) => {
   );
 };
 
-export default GeneralInfoContainer;
+export default GeneralUserInfoContainer;

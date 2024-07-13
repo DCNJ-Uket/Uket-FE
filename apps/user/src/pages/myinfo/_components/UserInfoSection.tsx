@@ -6,7 +6,7 @@ import { useQueryUserInfo } from "@/hooks/queries/useQueryUserInfo";
 
 import InfoItem from "./InfoItem";
 import InfoContainer from "./InfoContainer";
-import GeneralInfoContainer from "./GeneralInfoContainer";
+import GeneralUserInfoContainer from "./GeneralUserInfoContainer";
 
 import { useNavigate } from "@/router";
 
@@ -43,7 +43,7 @@ const UserInfoSection = () => {
         </Button>
       </div>
       <section className="flex flex-col gap-2">
-        <GeneralInfoContainer
+        <GeneralUserInfoContainer
           depositorName={userInfo.depositorName}
           phoneNumber={userInfo.phoneNumber}
           universityName={
