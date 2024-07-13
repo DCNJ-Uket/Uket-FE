@@ -42,7 +42,7 @@ const LogoutModal = (props: LogoutModalProps) => {
           로그아웃
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-60 rounded-2xl sm:max-w-xs">
+      <DialogContent className="max-w-60 rounded-2xl sm:max-w-xs" isXHidden>
         <section className="pb-3 pt-5 sm:py-10">
           <h1 className="text-center text-sm font-semibold">
             로그아웃 하시겠습니까?
