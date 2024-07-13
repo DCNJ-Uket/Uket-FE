@@ -6,6 +6,7 @@ import { useQueryUserInfo } from "@/hooks/queries/useQueryUserInfo";
 
 import InfoItem from "./InfoItem";
 import InfoContainer from "./InfoContainer";
+import GeneralUserInfoContainer from "./GeneralUserInfoContainer";
 
 import { useNavigate } from "@/router";
 
@@ -42,18 +43,15 @@ const UserInfoSection = () => {
         </Button>
       </div>
       <section className="flex flex-col gap-2">
-        <InfoContainer title="일반" isGeneralInfo>
-          <InfoItem title="이름(입금자명)" content={userInfo.depositorName} />
-          <InfoItem title="전화번호" content={userInfo.phoneNumber} />
-          <InfoItem
-            title="사용자구분"
-            content={
-              userInfo.universityName === "일반인"
-                ? userInfo.universityName
-                : "대학생"
-            }
-          />
-        </InfoContainer>
+        <GeneralUserInfoContainer
+          depositorName={userInfo.depositorName}
+          phoneNumber={userInfo.phoneNumber}
+          universityName={
+            userInfo.universityName === "일반인"
+              ? userInfo.universityName
+              : "대학생"
+          }
+        />
         {userInfo.universityName !== "일반인" && (
           <InfoContainer title="학교">
             <InfoItem title="학교" content={userInfo.universityName} />

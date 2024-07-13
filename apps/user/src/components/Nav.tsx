@@ -27,17 +27,20 @@ const Nav = () => {
           <IconBack />
         </Link>
       )}
-      <RetryErrorBoundary
-        resetKeys={["user-info"]}
-        fallbackComponent={(props: FallbackProps) => (
-          <LoginErrorFallback
-            className={cn("text-black", pathname === "/" && "text-white")}
-            {...props}
-          />
-        )}
-      >
-        <Profile />
-      </RetryErrorBoundary>
+
+      {["/buy-ticket", "/myinfo"].includes(pathname) ? null : (
+        <RetryErrorBoundary
+          resetKeys={["user-info"]}
+          fallbackComponent={(props: FallbackProps) => (
+            <LoginErrorFallback
+              className={cn("text-black", pathname === "/" && "text-white")}
+              {...props}
+            />
+          )}
+        >
+          <Profile />
+        </RetryErrorBoundary>
+      )}
     </nav>
   );
 };

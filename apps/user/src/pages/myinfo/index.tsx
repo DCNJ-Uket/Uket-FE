@@ -8,8 +8,6 @@ import { clearRefreshToken } from "@/utils/handleCookie";
 import UserInfoSection from "./_components/UserInfoSection";
 import LogoutModal from "./_components/LogoutModal";
 
-//TODO: 메일인증여부 추가, 회원탈퇴 modal 및 기능
-
 const MyInfo = () => {
   const logout = () => {
     clearRefreshToken("refreshToken");
@@ -18,7 +16,7 @@ const MyInfo = () => {
 
   return (
     <main className="relative flex h-full flex-col items-center bg-[#F2F2F2]">
-      <main className="flex h-full w-full flex-col gap-3 pb-5">
+      <main className="flex h-full w-full flex-col gap-3 pb-10">
         <RetryErrorBoundary>
           <UserInfoSection />
         </RetryErrorBoundary>
