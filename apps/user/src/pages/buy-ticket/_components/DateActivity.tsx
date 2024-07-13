@@ -68,23 +68,25 @@ const DateActivity: ActivityComponentType = () => {
             reservationUserType={reservationUserType}
             formatShowDate={formatShowDate}
           />
-          <ActivityHeader className="px-[22px]">
-            <HeaderItem step={"01"} content={"예매 날짜를 선택해 주세요."} />
-          </ActivityHeader>
-          <RetryErrorBoundary
-            fallbackComponent={(props: FallbackProps) => (
-              <BuyTicketErrorFallback {...props} />
-            )}
-          >
-            <Suspense>
-              <ShowList
-                eventId={eventId.toString()}
-                selectedItem={selectedItem}
-                onSelect={handleSelectDate}
-                onReservationType={handleReservationUserType}
-              />
-            </Suspense>
-          </RetryErrorBoundary>
+          <div className="flex flex-col gap-4 py-6">
+            <ActivityHeader className="px-5">
+              <HeaderItem step={"01"} content={"예매 날짜를 선택해 주세요."} />
+            </ActivityHeader>
+            <RetryErrorBoundary
+              fallbackComponent={(props: FallbackProps) => (
+                <BuyTicketErrorFallback {...props} />
+              )}
+            >
+              <Suspense>
+                <ShowList
+                  eventId={eventId.toString()}
+                  selectedItem={selectedItem}
+                  onSelect={handleSelectDate}
+                  onReservationType={handleReservationUserType}
+                />
+              </Suspense>
+            </RetryErrorBoundary>
+          </div>
           <ActivityFooter className="z-50">
             <NextButton
               activityName={"TimeActivity" as never}

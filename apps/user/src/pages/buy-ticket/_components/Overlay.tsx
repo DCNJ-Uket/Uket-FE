@@ -11,7 +11,7 @@ const Overlay = (props: OverlayProps) => {
   return (
     <div
       className={cn(
-        "absolute inset-y-0 z-50 flex items-center justify-center text-xs font-bold",
+        "absolute inset-y-0 z-40 flex items-center justify-center text-xs font-bold",
         soldOut ? "right-3 w-12 bg-[#D9D9D9]" : "inset-x-0",
       )}
     >
