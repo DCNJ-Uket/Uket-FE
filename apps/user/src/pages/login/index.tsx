@@ -6,7 +6,7 @@ import { GOOGLE_LOGIN_URL, KAKAO_LOGIN_URL } from "@/constants/auth_url";
 const LoginPage = () => {
   return (
     <main className="flex h-full flex-col items-center justify-evenly">
-      <main className="container flex h-full w-full flex-col justify-evenly">
+      <main className="container mt-6 mb-10 flex h-full w-full flex-col justify-between">
         <section className="flex w-full flex-col items-center gap-4">
           <h1 className="w-full text-2xl font-black">
             <p>학교 축제 티켓을</p>
