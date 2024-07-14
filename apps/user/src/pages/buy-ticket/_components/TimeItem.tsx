@@ -31,10 +31,11 @@ const TimeItem = (props: TimeItemProps) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isSoldOut, setIsSoldOut] = useState(false);
 
-  const leftCount = totalCount - reservedCount;
+  const leftCount =
+    totalCount - reservedCount < 0 ? 0 : totalCount - reservedCount;
 
   useEffect(() => {
-    setIsSoldOut(leftCount <= 0);
+    setIsSoldOut(leftCount === 0);
   }, [leftCount]);
 
   useEffect(() => {

@@ -29,12 +29,9 @@ const ActivityContent = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => {
   return (
-    <main className="flex h-full flex-col items-center overflow-y-scroll bg-[#F2F2F2]">
+    <main className="flex h-full grow flex-col items-center overflow-y-scroll bg-[#F2F2F2]">
       <section
-        className={cn(
-          "flex w-full grow flex-col justify-center gap-4",
-          className,
-        )}
+        className={cn("flex w-full grow flex-col justify-between", className)}
         {...props}
       >
         {children}
@@ -49,7 +46,7 @@ const ActivityFooter = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => {
   return (
-    <footer className={cn("sticky bottom-0 pt-6", className)} {...props} />
+    <footer className={cn("sticky bottom-0 pt-2", className)} {...props} />
   );
 };
 ActivityFooter.displayName = "ActivityFooter";

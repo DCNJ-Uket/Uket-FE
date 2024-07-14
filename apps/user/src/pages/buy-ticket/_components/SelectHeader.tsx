@@ -12,7 +12,7 @@ const SelectHeader = (props: SelectHeaderProps) => {
     props;
 
   return (
-    <div className="flex flex-col gap-2 bg-white pt-3">
+    <div className="sticky left-0 top-0 z-50 flex flex-col gap-2 bg-white">
       <div className="flex items-center gap-2 px-[22px]">
         <div className="text-lg font-bold">{univName}</div>
         <div className="text-sm font-semibold text-[#724FFD]">

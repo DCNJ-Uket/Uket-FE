@@ -56,23 +56,25 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
             formatShowDate={showDate}
             formatSelectTime={formatSelectTime}
           />
-          <ActivityHeader className="px-[22px]">
-            <HeaderItem step={"02"} content={"예매 시간을 선택해 주세요."} />
-          </ActivityHeader>
-          <RetryErrorBoundary
-            fallbackComponent={(props: FallbackProps) => (
-              <BuyTicketErrorFallback {...props} />
-            )}
-          >
-            <Suspense>
-              <ReservationList
-                showId={showId}
-                selectedItem={selectedItem}
-                onSelect={handleSelectReservation}
-                reservationUserType={reservationUserType}
-              />
-            </Suspense>
-          </RetryErrorBoundary>
+          <div className="flex flex-col gap-4 py-6">
+            <ActivityHeader className="px-5 ">
+              <HeaderItem step={"02"} content={"예매 시간을 선택해 주세요."} />
+            </ActivityHeader>
+            <RetryErrorBoundary
+              fallbackComponent={(props: FallbackProps) => (
+                <BuyTicketErrorFallback {...props} />
+              )}
+            >
+              <Suspense>
+                <ReservationList
+                  showId={showId}
+                  selectedItem={selectedItem}
+                  onSelect={handleSelectReservation}
+                  reservationUserType={reservationUserType}
+                />
+              </Suspense>
+            </RetryErrorBoundary>
+          </div>
           <ActivityFooter className="z-50">
             <NextButton
               type="submit"
