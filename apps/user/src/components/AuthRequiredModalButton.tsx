@@ -42,7 +42,7 @@ const AuthRequiredModalButton = (props: AuthRequiredModalButtonProps) => {
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-72 rounded-2xl sm:max-w-xs" isXHidden>
-        <DialogHeader className="sm:text-center">
+        <DialogHeader className="sm:text-center pt-10 pb-5">
           <DialogTitle>로그인 후 이용 가능합니다.</DialogTitle>
         </DialogHeader>
         <DialogFooter className="w-full flex-row justify-center gap-3 sm:flex-row">
