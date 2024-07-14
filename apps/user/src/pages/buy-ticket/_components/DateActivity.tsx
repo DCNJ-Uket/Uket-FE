@@ -25,7 +25,8 @@ import {
 } from "./Activity";
 
 const DateActivity: ActivityComponentType = () => {
-  const { univName, univId, eventId, setTicketParams } = useDateTicketParams();
+  const { univName, univId, eventId, showId, handleShowId } =
+    useDateTicketParams();
 
   const { reservationUserType, handleReservationUserType } =
     useReservationUserType();
@@ -42,13 +43,9 @@ const DateActivity: ActivityComponentType = () => {
 
   const { selectedItem, handleSelectItem } = useItemSelect();
 
-  const handleTicketParams = (eventId: string, showId: number) => {
-    setTicketParams(eventId, showId);
-  };
-
   const handleSelectDate = (id: number, name: string, startDate: string) => {
     handleSelectItem(id);
-    handleTicketParams(eventId, id);
+    handleShowId(id);
     setSelectedShowDate(startDate);
     setSelectedShowName(name);
   };
@@ -92,6 +89,8 @@ const DateActivity: ActivityComponentType = () => {
               activityName={"TimeActivity" as never}
               disabled={selectedItem === null}
               params={{
+                univName: univName,
+                showId: showId,
                 showDate: formatShowDate,
                 reservationUserType,
                 form,

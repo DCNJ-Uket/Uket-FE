@@ -1,4 +1,3 @@
-import { useSearchParams } from "react-router-dom";
 import { FallbackProps } from "react-error-boundary";
 import { Suspense } from "react";
 import { ActivityComponentType } from "@stackflow/react";
@@ -23,16 +22,14 @@ import {
 } from "./Activity";
 
 interface TimeParams extends ActivityParams {
+  univName: string;
+  showId: string;
   showDate: string;
   reservationUserType: string;
 }
 
 const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
-  const { form, reservationUserType, showDate } = params;
-
-  const [searchParams] = useSearchParams();
-  const univName = searchParams.get("univName");
-  const showId = searchParams.get("showId") as string;
+  const { form, reservationUserType, showDate, univName, showId } = params;
 
   const {
     selectedItem,
