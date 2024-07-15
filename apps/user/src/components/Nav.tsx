@@ -28,7 +28,7 @@ const Nav = () => {
         </Link>
       )}
 
-      {["/buy-ticket", "/myinfo"].includes(pathname) ? null : (
+      {["/buy-ticket", "/myinfo", "/login"].includes(pathname) ? null : (
         <RetryErrorBoundary
           resetKeys={["user-info"]}
           fallbackComponent={(props: FallbackProps) => (
