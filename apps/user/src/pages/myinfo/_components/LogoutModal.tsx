@@ -35,7 +35,7 @@ const LogoutModal = (props: LogoutModalProps) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="basis-1/2 rounded-lg bg-[#8989A1] text-[#F2F2F2] hover:bg-red-500/90">
+        <Button className="hover:bg-brandHover basis-1/2 rounded-lg bg-[#8989A1] text-[#F2F2F2]">
           로그아웃
         </Button>
       </DialogTrigger>
