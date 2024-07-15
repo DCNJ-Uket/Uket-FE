@@ -7,9 +7,7 @@ import {
   FormMessage,
 } from "@uket/ui/components/ui/form";
 import { ActivityComponentType } from "@stackflow/react";
-import { AppScreen } from "@stackflow/plugin-basic-ui";
-
-import Logo from "@/components/Logo";
+import { AppScreen, IconBack } from "@stackflow/plugin-basic-ui";
 
 import { validateForm } from "../../../utils/vaildateForm";
 import { useStackForm } from "../../../hooks/useStackForm";
@@ -22,6 +20,8 @@ import {
   ActivityHeader,
 } from "./Activity";
 
+import { Link } from "@/router";
+
 const UserTypeActivity: ActivityComponentType = () => {
   const { form } = useStackForm();
 
@@ -29,7 +29,11 @@ const UserTypeActivity: ActivityComponentType = () => {
     <AppScreen
       appBar={{
         border: false,
-        renderLeft: () => <Logo onActivity />,
+        renderLeft: () => (
+          <Link to={"/login"} className="px-1.5">
+            <IconBack />
+          </Link>
+        ),
       }}
     >
       <Activity>
