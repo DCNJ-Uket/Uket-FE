@@ -45,6 +45,12 @@ const GeneralUserInfoContainer = (props: GeneralUserInfoContainerProps) => {
     );
   };
 
+  const handleCancel = () => {
+    setEditedDepositorName(depositorName);
+    setEditedPhoneNumber(phoneNumber);
+    setIsEdit(false);
+  };
+
   return (
     <div className="flex w-full flex-col gap-2 bg-white px-6 pb-6 pt-4">
       <div className="flex h-8 items-center justify-between">
@@ -63,7 +69,7 @@ const GeneralUserInfoContainer = (props: GeneralUserInfoContainerProps) => {
             <Button
               variant="link"
               className="cursor-pointer p-0 pr-px text-sm  text-[#8989A1] underline"
-              onClick={handleIsEdit}
+              onClick={handleCancel}
             >
               취소
             </Button>
@@ -81,13 +87,13 @@ const GeneralUserInfoContainer = (props: GeneralUserInfoContainerProps) => {
       <div className="flex flex-col gap-[10px]">
         <InfoItem
           title="이름(입금자명)"
-          content={depositorName}
+          content={editedDepositorName}
           isEdit={isEdit}
           onChange={handleDepositorNameChange}
         />
         <InfoItem
           title="전화번호"
-          content={phoneNumber}
+          content={editedPhoneNumber}
           isEdit={isEdit}
           onChange={handlePhoneNumberChange}
         />
