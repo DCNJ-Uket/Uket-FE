@@ -13,12 +13,14 @@ const InfoItem = (props: InfoItemProps) => {
       <div className="flex items-center">{title}</div>
       {isEdit ? (
         <input
-          className="box-border h-full rounded bg-[#F2F2F2] pl-1.5 font-semibold"
+          className="box-border h-full rounded bg-[#F2F2F2] pl-1.5 font-semibold leading-7"
           value={content}
           onChange={onChange}
         />
       ) : (
-        <div className="flex items-center pl-1.5 font-semibold">{content}</div>
+        <div className="flex items-center pl-1.5 font-semibold leading-7">
+          {content}
+        </div>
       )}
     </div>
   );
