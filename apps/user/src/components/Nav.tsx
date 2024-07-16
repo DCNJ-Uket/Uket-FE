@@ -12,7 +12,7 @@ import RetryErrorBoundary from "./error/RetryErrorBoundary";
 
 const Nav = () => {
   const { pathname } = useLocation();
-  const previousPath = usePreviousPath();
+  const [previousPath, popPreviousPath] = usePreviousPath();
 
   if (pathname === "/signup") {
     return null;
@@ -23,7 +23,7 @@ const Nav = () => {
       {["/", "/home"].includes(pathname) ? (
         <Logo />
       ) : (
-        <Link to={previousPath}>
+        <Link to={previousPath} onClick={popPreviousPath}>
           <IconBack />
         </Link>
       )}
