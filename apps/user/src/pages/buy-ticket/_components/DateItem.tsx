@@ -46,17 +46,11 @@ const DateItem = (props: DateItemProps) => {
   const { formatDate: formatShowDate, formatTime: formatStartTime } =
     useFormatTime(startDate);
   const { formatTime: formatEndTime } = useFormatTime(endDate);
-  const { formatDate: formatTicketingDate, formatTime: formatTicketingTime } =
-    useFormatTime(ticketingDate);
 
   return (
     <div className="relative">
-      {isDisabled && (
-        <Overlay
-          message={`${formatTicketingDate} ${formatTicketingTime}부터 예매 가능합니다.`}
-        />
-      )}
-      {isSoldOut && !isDisabled && <Overlay message="SOLDOUT" soldOut />}
+      {isDisabled && <Overlay />}
+      {isSoldOut && !isDisabled && <Overlay soldOut />}
 
       <TicketContainer
         isDisabled={isDisabled}

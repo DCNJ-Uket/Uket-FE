@@ -1,21 +1,15 @@
-import { cn } from "@uket/ui/lib/utils";
-
 interface OverlayProps {
-  message: string;
   soldOut?: boolean;
 }
 
 const Overlay = (props: OverlayProps) => {
-  const { message, soldOut } = props;
+  const { soldOut } = props;
+
+  const message = soldOut ? "Sold Out" : "Unavailable";
 
   return (
-    <div
-      className={cn(
-        "absolute inset-y-0 z-40 flex items-center justify-center text-xs font-bold",
-        soldOut ? "right-3 w-12 bg-[#D9D9D9]" : "inset-x-0",
-      )}
-    >
-      <div className={cn("text-[#FD724F]", soldOut && "rotate-90")}>
+    <div className="absolute inset-y-0 right-3 z-40 flex w-12 items-center justify-center bg-[#D9D9D9] text-xs font-bold">
+      <div className="rotate-90 whitespace-nowrap text-[#FD724F]">
         {message}
       </div>
     </div>
