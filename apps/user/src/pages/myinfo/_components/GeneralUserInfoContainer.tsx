@@ -67,8 +67,7 @@ const GeneralUserInfoContainer = (props: GeneralUserInfoContainerProps) => {
     if (!phoneNumberRegex.test(editedPhoneNumber)) {
       setErrors(prev => ({
         ...prev,
-        phoneNumber:
-          "전화번호 형식이 올바르지 않습니다. 000-0000-0000 형식으로 입력하세요.",
+        phoneNumber: "010-1234-5678 혹은 01012345678 형식으로 입력하세요.",
       }));
       return;
     }
@@ -87,6 +86,7 @@ const GeneralUserInfoContainer = (props: GeneralUserInfoContainerProps) => {
   const handleCancel = () => {
     setEditedDepositorName(depositorName);
     setEditedPhoneNumber(phoneNumber);
+    setErrors({ depositorName: "", phoneNumber: "" });
     setIsEdit(false);
   };
 
