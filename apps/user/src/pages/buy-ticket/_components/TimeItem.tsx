@@ -49,8 +49,8 @@ const TimeItem = (props: TimeItemProps) => {
 
   return (
     <div className="relative">
-      {isDisabled && <Overlay message="티켓 예매 가능 시간이 지났습니다." />}
-      {isSoldOut && !isDisabled && <Overlay message="SOLDOUT" soldOut />}
+      {isDisabled && <Overlay />}
+      {isSoldOut && !isDisabled && <Overlay soldOut />}
       <TicketContainer
         isDisabled={isDisabled}
         isSoldOut={isSoldOut}

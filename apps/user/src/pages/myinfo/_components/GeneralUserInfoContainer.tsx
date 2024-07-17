@@ -14,6 +14,9 @@ interface GeneralUserInfoContainerProps {
 const GeneralUserInfoContainer = (props: GeneralUserInfoContainerProps) => {
   const { depositorName, phoneNumber, universityName } = props;
 
+  const depositorNameRegex = /^[가-힣]{2,4}|[a-zA-Z]{2,10}$/;
+  const phoneNumberRegex = /^\d{3}-?\d{4}-?\d{4}$/;
+
   const mutation = useMutationUpdateInfo();
 
   const [isEdit, setIsEdit] = useState(false);
@@ -21,28 +24,70 @@ const GeneralUserInfoContainer = (props: GeneralUserInfoContainerProps) => {
     setIsEdit(!isEdit);
   };
 
-  const [editedDepositorName, setEditedDepositorName] = useState(depositorName);
-  const [editedPhoneNumber, setEditedPhoneNumber] = useState(phoneNumber);
-
-  const handleDepositorNameChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setEditedDepositorName(e.target.value);
+  const formatPhoneNumber = (value: string) => {
+    const cleaned = value.replace(/\D/g, "");
+    const match = cleaned.match(/^(\d{3})(\d{4})(\d{4})$/);
+    if (match) {
+      return `${match[1]}-${match[2]}-${match[3]}`;
+    }
+    return value;
   };
 
-  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEditedPhoneNumber(e.target.value);
+  const [editedDepositorName, setEditedDepositorName] = useState(depositorName);
+  const [editedPhoneNumber, setEditedPhoneNumber] = useState(phoneNumber);
+  const [errors, setErrors] = useState<{
+    depositorName: string;
+    phoneNumber: string;
+  }>({
+    depositorName: "",
+    phoneNumber: "",
+  });
+
+  const handleDepositorNameChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setEditedDepositorName(event.target.value);
+  };
+
+  const handlePhoneNumberChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setEditedPhoneNumber(event.target.value);
   };
 
   const handleUpdate = () => {
+    if (!depositorNameRegex.test(editedDepositorName)) {
+      setErrors(prev => ({
+        ...prev,
+        depositorName: "입금자명은 한글 또는 영문만 가능합니다.",
+      }));
+      return;
+    }
+
+    if (!phoneNumberRegex.test(editedPhoneNumber)) {
+      setErrors(prev => ({
+        ...prev,
+        phoneNumber: "010-1234-5678 혹은 01012345678 형식으로 입력하세요.",
+      }));
+      return;
+    }
+
     mutation.mutate(
       { depositorName: editedDepositorName, phoneNumber: editedPhoneNumber },
       {
         onSuccess: () => {
           setIsEdit(false);
+          setErrors({ depositorName: "", phoneNumber: "" });
         },
       },
     );
+  };
+
+  const handleCancel = () => {
+    setEditedDepositorName(depositorName);
+    setEditedPhoneNumber(phoneNumber);
+    setErrors({ depositorName: "", phoneNumber: "" });
+    setIsEdit(false);
   };
 
   return (
@@ -63,7 +108,7 @@ const GeneralUserInfoContainer = (props: GeneralUserInfoContainerProps) => {
             <Button
               variant="link"
               className="cursor-pointer p-0 pr-px text-sm  text-[#8989A1] underline"
-              onClick={handleIsEdit}
+              onClick={handleCancel}
             >
               취소
             </Button>
@@ -81,16 +126,22 @@ const GeneralUserInfoContainer = (props: GeneralUserInfoContainerProps) => {
       <div className="flex flex-col gap-[10px]">
         <InfoItem
           title="이름(입금자명)"
-          content={depositorName}
+          content={editedDepositorName}
           isEdit={isEdit}
           onChange={handleDepositorNameChange}
         />
+        {errors.depositorName !== "" && (
+          <div className="text-[10px] text-red-500">{errors.depositorName}</div>
+        )}
         <InfoItem
           title="전화번호"
-          content={phoneNumber}
+          content={formatPhoneNumber(editedPhoneNumber)}
           isEdit={isEdit}
           onChange={handlePhoneNumberChange}
         />
+        {errors.phoneNumber !== "" && (
+          <div className="text-[10px] text-red-500">{errors.phoneNumber}</div>
+        )}
         <InfoItem title="사용자구분" content={universityName} />
       </div>
     </div>
