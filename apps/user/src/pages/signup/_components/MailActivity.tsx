@@ -38,7 +38,7 @@ const MailActivity: ActivityComponentType<MailParams> = ({ params }) => {
   });
 
   return (
-    <AppScreen appBar={{ border: false }}>
+    <AppScreen appBar={{ border: false, height: "56px" }}>
       <Activity>
         <ActivityContent>
           <ActivityHeader>
@@ -59,7 +59,7 @@ const MailActivity: ActivityComponentType<MailParams> = ({ params }) => {
                         {...field}
                         type="email"
                         placeholder="학교 메일 주소 입력하기"
-                        className="border-formInput border placeholder:text-[#8989A1] placeholder:font-light"
+                        className="border-formInput border placeholder:font-light placeholder:text-[#8989A1]"
                         value={field.value || ""}
                         autoComplete="off"
                       />

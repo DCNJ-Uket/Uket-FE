@@ -9,6 +9,7 @@ import {
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen, IconBack } from "@stackflow/plugin-basic-ui";
 
+
 import { validateForm } from "../../../utils/vaildateForm";
 import { useStackForm } from "../../../hooks/useStackForm";
 import UserTypeItem from "./UserTypeItem";
@@ -29,6 +30,7 @@ const UserTypeActivity: ActivityComponentType = () => {
     <AppScreen
       appBar={{
         border: false,
+        height: "56px",
         renderLeft: () => (
           <Link to={"/login"} className="px-1.5">
             <IconBack />
