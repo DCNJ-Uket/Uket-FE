@@ -110,10 +110,24 @@ const QRCode = (props: QRCodeProps) => {
           </footer>
         </section>
       </CardContent>
-      <CardFooter className="mx-5 mb-3 justify-center rounded-lg bg-[#FDC950] py-3">
-        <h1 className="text-sm font-bold">
-          학생증 또는 신분증을 제시해 주세요!
-        </h1>
+      <CardFooter className="mx-5 mb-3 justify-center overflow-hidden rounded-lg bg-[#FDC950] py-3">
+        <div className="inline-flex min-w-full flex-nowrap items-center">
+          <h1 className="animate-infinite-scroll min-w-full text-center text-sm font-bold">
+            <span>학생증 또는 신분증을 제시해 주세요!</span>
+          </h1>
+          <h1
+            className="animate-infinite-scroll min-w-full text-center text-sm font-bold"
+            aria-hidden={true}
+          >
+            <span>학생증 또는 신분증을 제시해 주세요!</span>
+          </h1>
+          <h1
+            className="animate-infinite-scroll min-w-full text-center text-sm font-bold"
+            aria-hidden={true}
+          >
+            <span>학생증 또는 신분증을 제시해 주세요!</span>
+          </h1>
+        </div>
       </CardFooter>
     </Card>
   );
