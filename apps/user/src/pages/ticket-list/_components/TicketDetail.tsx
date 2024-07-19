@@ -22,7 +22,7 @@ const TicketDetail = (props: TicketDetailProps) => {
       {createdAt && userType && (
         <>
           <GridItem title={"구매 일시"} content={createdAt} />
-          <GridItem title={"회원구분"} content={userType} />
+          <GridItem title={"좌석구분"} content={userType} />
         </>
       )}
     </section>
