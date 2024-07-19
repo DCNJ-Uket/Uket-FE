@@ -25,7 +25,7 @@ const UnivActivity: ActivityComponentType<UnivParams> = ({ params }) => {
   const { form } = params;
 
   return (
-    <AppScreen appBar={{ border: false }}>
+    <AppScreen appBar={{ border: false, height: "56px" }}>
       <Activity>
         <ActivityContent className="gap-10">
           <ActivityHeader>

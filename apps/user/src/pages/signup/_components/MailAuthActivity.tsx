@@ -10,6 +10,7 @@ import { Button } from "@uket/ui/components/ui/button";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
+
 import { useTimer } from "@/hooks/useTimer";
 import { useMutationVerifyEmailAuth } from "@/hooks/mutations/useMutationVerifyEmailAuth";
 import { useMutationRequestEmailAuth } from "@/hooks/mutations/useMutationRequestEmailAuth";
@@ -75,7 +76,7 @@ const MailAuthActivity: ActivityComponentType<MailAuthParams> = ({
   };
 
   return (
-    <AppScreen appBar={{ border: false }}>
+    <AppScreen appBar={{ border: false, height: "56px" }}>
       <Activity>
         <ActivityContent>
           <ActivityHeader>

@@ -25,7 +25,7 @@ const PhoneActivity: ActivityComponentType<PhoneParams> = ({ params }) => {
   }, [form]);
 
   return (
-    <AppScreen appBar={{ border: false }}>
+    <AppScreen appBar={{ border: false, height: "56px" }}>
       <Activity>
         <ActivityContent>
           <ActivityHeader>
