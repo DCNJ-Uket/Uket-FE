@@ -1,4 +1,4 @@
-import { useSuspenseQueries } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { TicketItem } from "@/types/ticketType";
 
@@ -6,34 +6,18 @@ import { createBlobURL } from "@/utils/handleTicket";
 
 import { getTicketQRCode } from "@/api/ticket";
 
-export const useQueryTicketQRCode = (ticketList: TicketItem[]) => {
-  const queries = ticketList.map(({ ticketId }) => ({
+export const useQueryTicketQRCode = (ticketId: TicketItem["ticketId"]) => {
+  const { data, error, refetch } = useQuery({
     queryKey: ["qrcode", ticketId],
     queryFn: () => getTicketQRCode(ticketId),
-  }));
-
-  const query = useSuspenseQueries({
-    queries,
-    combine: results => {
-      const data = results.reduce<{ [key: number]: string }>(
-        (acc, result, index) => {
-          acc[ticketList[index].ticketId] = createBlobURL(result.data);
-          return acc;
-        },
-        {},
-      );
-
-      return {
-        ...results,
-        data,
-        error: results.find(result => result.isError),
-      };
+    select: data => {
+      return createBlobURL(data);
     },
   });
 
-  if (query.error) {
-    throw query.error;
+  if (error) {
+    throw error;
   }
 
-  return { data: query.data };
+  return { data, refetch };
 };
