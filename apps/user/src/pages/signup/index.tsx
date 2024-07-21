@@ -17,7 +17,7 @@ const SignUpPage = () => {
   const { state: isUnRegistered } = useLocation();
 
   if (!isUnRegistered) {
-    return <Navigate to={"/"} replace />;
+    return <Navigate to="/" replace />;
   }
 
   return (

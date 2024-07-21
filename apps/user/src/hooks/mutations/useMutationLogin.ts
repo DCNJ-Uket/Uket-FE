@@ -24,7 +24,7 @@ export const useMutationLogin = () => {
         });
       } else {
         navigate("/signup", {
-          state: { isUnRegistered: false },
+          state: { isUnRegistered: true },
           replace: true,
         });
       }
