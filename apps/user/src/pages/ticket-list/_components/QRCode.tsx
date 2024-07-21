@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { Separator } from "@uket/ui/components/ui/separator";
+import { RefreshCwIcon } from "@uket/ui/components/ui/icon";
 import {
   Card,
   CardContent,
@@ -8,15 +9,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@uket/ui/components/ui/card";
+import { Button } from "@uket/ui/components/ui/button";
 import { useQueryClient } from "@tanstack/react-query";
 
 import Indicator from "@/components/Indicator";
 
-import {
-  MyTicketListInfoResponse,
-  QRCodeType,
-  TicketItem,
-} from "@/types/ticketType";
+import { useQueryTicketQRCode } from "@/hooks/queries/useQueryTicketQRCode";
+
+import { MyTicketListInfoResponse, TicketItem } from "@/types/ticketType";
 
 import { formatDate } from "@/utils/handleTicket";
 
@@ -26,12 +26,13 @@ import ConfirmModal from "./ConfirmModal";
 
 interface QRCodeProps {
   id: TicketItem["ticketId"];
-  qrCode: QRCodeType;
 }
 
 const QRCode = (props: QRCodeProps) => {
-  const { id, qrCode } = props;
+  const { id } = props;
 
+  const { data: qrcode, refetch } = useQueryTicketQRCode(id);
+  
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData<MyTicketListInfoResponse>([
     "my-ticket-list",
@@ -57,13 +58,15 @@ const QRCode = (props: QRCodeProps) => {
     showLocation,
     universityName,
     ticketStatus,
-    ticketNo,
     userType,
     showName,
     eventName,
     createdAt,
   } = ticket;
 
+  const handleReissueQRCode = () => {
+    refetch();
+  };
   return (
     <Card className="border-none shadow-none">
       <CardHeader className="gap-3">
@@ -79,13 +82,15 @@ const QRCode = (props: QRCodeProps) => {
         </CardTitle>
         <CardDescription className="flex flex-col items-center justify-center">
           <img
-            src={qrCode}
+            src={qrcode}
             alt="qrcode"
             width={100}
             height={100}
             className="aspect-square h-36 w-36 scale-125"
           />
-          <span className="z-50 text-xs text-[#7250FD]">{ticketNo}</span>
+          <Button variant="ghost" size="icon" className="z-50 rounded-full">
+            <RefreshCwIcon className="h-5 w-5" onClick={handleReissueQRCode} />
+          </Button>
         </CardDescription>
       </CardHeader>
       <CardContent>
