@@ -1,13 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(request: NextRequest) {
+  const cookie = request.cookies.get("admin-accessToken");
   if (request.nextUrl.pathname === "/") {
-    const cookie = request.cookies.get("admin-accessToken");
-
-    if (cookie !== undefined) {
+    if (cookie) {
       return NextResponse.redirect(new URL("/qr-scan", request.nextUrl.origin));
     } else {
       return NextResponse.next();
+    }
+  } else {
+    if (!cookie) {
+      return NextResponse.redirect(new URL("/", request.nextUrl.origin));
     }
   }
 }
