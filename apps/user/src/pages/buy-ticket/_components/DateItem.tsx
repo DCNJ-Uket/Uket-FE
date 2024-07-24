@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
-import { cn } from "@uket/ui/lib/utils";
 
 import { useFormatTime } from "@/hooks/useFormatTime";
 
 import TicketQuantityItem from "./TicketQuantityItem";
-import CircleButton from "./CircleButton";
+import TicketHeader from "./TicketHeader";
+import TicketFooter from "./TicketFooter";
+import TicketDivider from "./TicketDivider";
+import TicketContainer from "./TicketContainer";
+import Overlay from "./Overlay";
 
 interface DateItemProps {
   name: string;
@@ -28,48 +31,39 @@ const DateItem = (props: DateItemProps) => {
   } = props;
 
   const [isDisabled, setIsDisabled] = useState(false);
+  const [isSoldOut, setIsSoldOut] = useState(false);
+
+  useEffect(() => {
+    setIsSoldOut(totalTicketCount <= 0);
+  }, [totalTicketCount]);
 
   useEffect(() => {
     const currentTime = new Date().getTime();
     const ticketingTime = new Date(ticketingDate).getTime();
-
-    if (currentTime < ticketingTime) {
-      setIsDisabled(true);
-    } else {
-      setIsDisabled(false);
-    }
+    setIsDisabled(currentTime < ticketingTime);
   }, [ticketingDate]);
 
   const { formatDate: formatShowDate, formatTime: formatStartTime } =
     useFormatTime(startDate);
   const { formatTime: formatEndTime } = useFormatTime(endDate);
-  const { formatDate: formatTicketingDate, formatTime: formatTicketingTime } =
-    useFormatTime(ticketingDate);
 
   return (
     <div className="relative">
-      {isDisabled && (
-        <div className="absolute inset-0 flex items-center justify-center text-xs font-bold text-red-500">
-          {formatTicketingDate} {formatTicketingTime}부터 예매 가능합니다.
-        </div>
-      )}
-      <div
-        className={cn(
-          "flex w-full flex-col gap-[9px] rounded-lg bg-white px-5 pb-[15px] pt-[17px] shadow-lg",
-          isDisabled && "pointer-events-none bg-[#5E5E6E] opacity-25",
-        )}
-        onClick={onSelect}
+      {isDisabled && <Overlay />}
+      {isSoldOut && !isDisabled && <Overlay soldOut />}
+
+      <TicketContainer
+        isDisabled={isDisabled}
+        isSoldOut={isSoldOut}
+        onSelect={onSelect}
       >
-        <div className="flex justify-between">
-          <div className="text-[42px] font-black">{name}</div>
-          <div className="self-center">
-            <CircleButton isSelected={isSelected} />
-          </div>
-        </div>
-
-        <div className="my-[1%] w-full border-[0.5px] border-[#CCCCCC]"></div>
-
-        <div className="flex gap-10 text-xs">
+        <TicketHeader
+          title={name}
+          fontStyle="text-[42px] font-black"
+          isSelected={isSelected}
+        />
+        <TicketDivider />
+        <TicketFooter>
           <div className="flex gap-2">
             <p className="font-medium">일시</p>
             <div>
@@ -84,8 +78,8 @@ const DateItem = (props: DateItemProps) => {
             amount={totalTicketCount}
             color="5E5E6E"
           />
-        </div>
-      </div>
+        </TicketFooter>
+      </TicketContainer>
     </div>
   );
 };

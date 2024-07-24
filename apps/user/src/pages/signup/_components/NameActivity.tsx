@@ -24,17 +24,15 @@ const NameActivity: ActivityComponentType<NameParmas> = ({ params }) => {
   const { form } = params;
 
   return (
-    <AppScreen appBar={{ border: false }}>
+    <AppScreen appBar={{ border: false, height: "56px" }}>
       <Activity>
         <ActivityContent>
           <ActivityHeader>
             <h1 className="text-2xl font-black">
               <p>입금자명 확인을 위해</p>
-              <p>성함을 입력해주세요</p>
+              <p>성함을 입력해 주세요.</p>
             </h1>
-            <h2 className="text-gray-500">
-              예금주명과 동일하게 작성해 주세요.
-            </h2>
+            <h2 className="text-desc">예금주명과 동일하게 작성해 주세요.</h2>
           </ActivityHeader>
           <section className="grow">
             <FormField
@@ -46,7 +44,7 @@ const NameActivity: ActivityComponentType<NameParmas> = ({ params }) => {
                     <FormControl>
                       <Input
                         placeholder="예금주명"
-                        className="border-formInput border"
+                        className="border-formInput border placeholder:font-light placeholder:text-[#8989A1]"
                         autoComplete="off"
                         {...field}
                       />

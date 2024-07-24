@@ -9,6 +9,7 @@ export type ShowInfo = {
 };
 
 export type ShowInfoResponse = {
+  reservationUserType: string;
   universityName: string;
   shows: ShowInfo[];
 };

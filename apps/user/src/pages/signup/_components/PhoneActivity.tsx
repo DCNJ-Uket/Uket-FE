@@ -25,15 +25,15 @@ const PhoneActivity: ActivityComponentType<PhoneParams> = ({ params }) => {
   }, [form]);
 
   return (
-    <AppScreen appBar={{ border: false }}>
+    <AppScreen appBar={{ border: false, height: "56px" }}>
       <Activity>
         <ActivityContent>
           <ActivityHeader>
             <h1 className="text-2xl font-black">
-              <p>전화번호를 입력해 주세요</p>
+              <p>전화번호를 입력해 주세요.</p>
             </h1>
-            <h2 className="text-gray-500">
-              <p>하이픈(-)없이 숫자로만 입력해 주세요.</p>
+            <h2 className="text-desc">
+              <p>하이픈(-) 없이 숫자로만 입력해 주세요.</p>
             </h2>
           </ActivityHeader>
           <section className="grow">
@@ -51,8 +51,8 @@ const PhoneActivity: ActivityComponentType<PhoneParams> = ({ params }) => {
                         <Input
                           {...field}
                           type="tel"
-                          placeholder="전화번호를 입력해 주세요"
-                          className="border-formInput border"
+                          placeholder="e.g. 01012345678"
+                          className="border-formInput border placeholder:font-light placeholder:text-[#8989A1]"
                           autoComplete="off"
                           value={field.value || ""}
                         />

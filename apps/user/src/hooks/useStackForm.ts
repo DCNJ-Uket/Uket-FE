@@ -18,7 +18,12 @@ export const FormSchema = z
     userPhone: z.string().regex(EXP.phone),
     userEmail: z.string().regex(EXP.email).optional(),
     userId: z.string().optional(),
-    userUniv: z.string().optional(),
+    userUniv: z
+      .object({
+        univName: z.string(),
+        univId: z.number(),
+      })
+      .optional(),
     userMajor: z.string().optional(),
     userEmailAuth: z.string().optional(),
   })
@@ -46,12 +51,24 @@ export const useStackForm = () => {
     defaultValues: {
       userName: "",
       userPhone: "",
+      userUniv: {
+        univName: "",
+        univId: 0,
+      },
     },
     mode: "onChange",
   });
 
   const onSubmit = async (data: FormSchemaType) => {
-    const { userType, userName, userPhone, userUniv, userId, userMajor } = data;
+    const {
+      userType,
+      userName,
+      userPhone,
+      userUniv,
+      userId,
+      userMajor,
+      userEmail,
+    } = data;
 
     await mutateAsync({
       userType,
@@ -60,6 +77,7 @@ export const useStackForm = () => {
       userUniv,
       userId,
       userMajor,
+      userEmail,
     });
   };
 

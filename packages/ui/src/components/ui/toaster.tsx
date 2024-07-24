@@ -10,8 +10,13 @@ import {
 } from "@ui/components/ui/toast"
 import { useToast } from "@ui/components/ui/use-toast"
 
-export function Toaster() {
+interface ToasterProps {
+  className?:string;
+}
+
+export function Toaster(props: ToasterProps){
   const { toasts } = useToast()
+  const {className}=props;
 
   return (
     <ToastProvider>
@@ -29,7 +34,7 @@ export function Toaster() {
           </Toast>
         )
       })}
-      <ToastViewport />
+      <ToastViewport className={className}/>
     </ToastProvider>
   )
 }

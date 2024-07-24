@@ -17,7 +17,7 @@ const Logo = (props: LogoProps) => {
   const imgSrc = ["/"].includes(pathname) ? LandingLogoImage : LogoImage;
 
   return (
-    <Link to="/" className={cn(onActivity ? "pl-6 pt-2" : "")}>
+    <Link to="/" className={cn(onActivity ? "pl-3 pt-2" : "")}>
       <img src={imgSrc} width={62} loading="lazy" alt="로고" />
     </Link>
   );

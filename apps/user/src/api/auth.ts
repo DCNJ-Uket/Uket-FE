@@ -28,6 +28,7 @@ export const signup = async ({
   userUniv,
   userId,
   userMajor,
+  userEmail,
 }: Partial<FormSchemaType>) => {
   const isUnivStudent = userType === "univ";
   const baseBody = {
@@ -36,7 +37,8 @@ export const signup = async ({
   };
   const univBody = {
     ...baseBody,
-    university: userUniv,
+    university: userUniv?.univName,
+    universityEmail: userEmail,
     studentMajor: userMajor,
     studentCode: userId,
   };

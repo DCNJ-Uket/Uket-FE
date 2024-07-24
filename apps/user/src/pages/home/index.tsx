@@ -4,7 +4,7 @@ import { Suspense, useState } from "react";
 import { Separator } from "@uket/ui/components/ui/separator";
 
 import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
-import BrandButton from "@/components/BrandButton";
+import AuthRequiredModalButton from "@/components/AuthRequiredModalButton";
 
 import UnivSelector from "./_components/UnivSelector";
 import FestivalSection from "./_components/FestivalSection";
@@ -15,6 +15,7 @@ import FestivalSectionSuspenseFallback from "./_components/fallback/FestivalSect
 import { useNavigate } from "@/router";
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const univId = searchParams.get("id");
   const univName = searchParams.get("select-univ");
@@ -31,8 +32,6 @@ const HomePage = () => {
     setEventId(id);
   };
 
-  const navigate = useNavigate();
-
   const handleBuyTicketNavigate = () => {
     if (eventId !== -1) {
       navigate({
@@ -40,10 +39,6 @@ const HomePage = () => {
         search: `?univName=${univName}&univId=${univId}&eventId=${eventId}`,
       });
     }
-  };
-
-  const handleMyTicketNavigate = () => {
-    navigate("/ticket-list");
   };
 
   return (
@@ -75,14 +70,14 @@ const HomePage = () => {
           </RetryErrorBoundary>
         </section>
         <footer className="mb-3 flex w-full items-center justify-center gap-3 bg-white">
-          <BrandButton
-            brand="secondary"
+          <AuthRequiredModalButton
             title="내 티켓 확인"
-            onClick={handleMyTicketNavigate}
+            path="/ticket-list"
+            variant="brandsub"
           />
-          <BrandButton
-            brand="primary"
+          <AuthRequiredModalButton
             title="예매하기"
+            variant="brand"
             onClick={handleBuyTicketNavigate}
           />
         </footer>

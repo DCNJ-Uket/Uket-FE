@@ -1,13 +1,15 @@
-import { useSearchParams } from "react-router-dom";
+import { FallbackProps } from "react-error-boundary";
 import { Suspense } from "react";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
+import BuyTicketErrorFallback from "@/components/fallback/BuyTicketErrorFallback";
 import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
 
-import useItemSelect from "@/hooks/useItemSelect";
+import { useReservationSelection } from "@/hooks/useReservationSelection";
+import { useFormatTime } from "@/hooks/useFormatTime";
 
-import SelectTicketItem from "./SelectTicketItem";
+import SelectHeader from "./SelectHeader";
 import ReservationList from "./ReservationList";
 import NextButton from "./NextButton";
 import HeaderItem from "./HeaderItem";
@@ -20,52 +22,64 @@ import {
 } from "./Activity";
 
 interface TimeParams extends ActivityParams {
+  univName: string;
+  showId: string;
   showDate: string;
+  reservationUserType: string;
 }
 
 const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
-  const { form, showDate } = params;
+  const { form, reservationUserType, showDate, univName, showId } = params;
 
-  const { selectedItem, handleSelectItem } = useItemSelect();
+  const {
+    selectedItem,
+    selectedStartTime,
+    selectedEndTime,
+    handleSelectReservation,
+  } = useReservationSelection(form);
 
-  const [searchParams] = useSearchParams();
-  const univName = searchParams.get("univName");
-  const showId = searchParams.get("showId") as string;
-
-  const handleSelectReservation = (id: number) => {
-    handleSelectItem(id);
-    form.setValue("reservationId", id);
-  };
+  const { formatTime: formatStartTime } = useFormatTime(selectedStartTime);
+  const { formatTime: formatEndTime } = useFormatTime(selectedEndTime);
+  const formatSelectTime =
+    selectedStartTime !== "" ? `${formatStartTime} ~ ${formatEndTime}` : "";
 
   return (
     <AppScreen appBar={{ border: false, height: "56px" }}>
       <Activity>
         <ActivityContent>
-          <div className="flex gap-3 px-[22px] pb-4">
-            <SelectTicketItem title="선택 학교" content={univName!} />
-            <SelectTicketItem title="선택 날짜" content={showDate} />
+          <SelectHeader
+            univName={univName}
+            reservationUserType={reservationUserType}
+            formatShowDate={showDate}
+            formatSelectTime={formatSelectTime}
+          />
+          <div className="flex flex-col gap-4 py-6">
+            <ActivityHeader className="px-5 ">
+              <HeaderItem step={"02"} content={"예매 시간을 선택해 주세요."} />
+            </ActivityHeader>
+            <RetryErrorBoundary
+              fallbackComponent={(props: FallbackProps) => (
+                <BuyTicketErrorFallback {...props} />
+              )}
+            >
+              <Suspense>
+                <ReservationList
+                  showId={showId}
+                  selectedItem={selectedItem}
+                  onSelect={handleSelectReservation}
+                  reservationUserType={reservationUserType}
+                />
+              </Suspense>
+            </RetryErrorBoundary>
           </div>
-          <ActivityHeader className="px-[22px]">
-            <HeaderItem step={"02"} content={"예매 시간을 선택해 주세요."} />
-          </ActivityHeader>
-
-          <RetryErrorBoundary>
-            <Suspense>
-              <ReservationList
-                showId={showId}
-                selectedItem={selectedItem}
-                onSelect={handleSelectReservation}
-              />
-              <ActivityFooter>
-                <NextButton
-                  type="submit"
-                  activityName={"CompleteActivity" as never}
-                  disabled={selectedItem === null}
-                  params={{ form }}
-                ></NextButton>
-              </ActivityFooter>
-            </Suspense>
-          </RetryErrorBoundary>
+          <ActivityFooter className="z-50">
+            <NextButton
+              type="submit"
+              activityName={"CompleteActivity" as never}
+              disabled={selectedItem === null}
+              params={{ form }}
+            ></NextButton>
+          </ActivityFooter>
         </ActivityContent>
       </Activity>
     </AppScreen>

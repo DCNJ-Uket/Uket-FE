@@ -18,6 +18,7 @@ export const useMutationSignup = () => {
       userUniv,
       userId,
       userMajor,
+      userEmail,
     }: Partial<FormSchemaType>) =>
       signup({
         userType,
@@ -26,6 +27,7 @@ export const useMutationSignup = () => {
         userUniv,
         userId,
         userMajor,
+        userEmail,
       }),
     onSuccess: ({ accessToken, refreshToken }: AuthResponse) => {
       setAccessToken(accessToken);

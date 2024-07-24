@@ -12,33 +12,48 @@ import RetryErrorBoundary from "./error/RetryErrorBoundary";
 
 const Nav = () => {
   const { pathname } = useLocation();
-  const previousPath = usePreviousPath();
+  const [previousPath, popPreviousPath] = usePreviousPath();
+
+  if (pathname === "/signup") {
+    return null;
+  }
+
+  const showLogo = ["/", "/home"].includes(pathname);
+  const showProfile = !["/buy-ticket", "/myinfo", "/login"].includes(pathname);
 
   return (
-    <>
-      {["/", "/home"].includes(pathname) ? (
-        <nav className="container my-2 flex h-10 w-full items-center justify-between self-stretch">
-          <Logo />
-          <RetryErrorBoundary
-            resetKeys={["user-info"]}
-            fallbackComponent={(props: FallbackProps) => (
-              <LoginErrorFallback
-                className={cn("text-black", pathname === "/" && "text-white")}
-                {...props}
-              />
-            )}
-          >
-            <Profile />
-          </RetryErrorBoundary>
-        </nav>
-      ) : (
-        <nav className="my-2 flex h-10 w-full items-center justify-between self-stretch pl-[14px]">
-          <Link to={previousPath}>
-            <IconBack />
-          </Link>
-        </nav>
+    <nav
+      className={cn(
+        "my-2 flex h-10 w-full items-center justify-between self-stretch",
+        {
+          container: showLogo,
+          "px-3.5": !showLogo,
+        },
       )}
-    </>
+    >
+      {showLogo ? (
+        <>
+          <Logo />
+          {showProfile && (
+            <RetryErrorBoundary
+              resetKeys={["user-info"]}
+              fallbackComponent={(props: FallbackProps) => (
+                <LoginErrorFallback
+                  className={cn("text-black", pathname === "/" && "text-white")}
+                  {...props}
+                />
+              )}
+            >
+              <Profile />
+            </RetryErrorBoundary>
+          )}
+        </>
+      ) : (
+        <Link to={previousPath} onClick={popPreviousPath}>
+          <IconBack />
+        </Link>
+      )}
+    </nav>
   );
 };
 

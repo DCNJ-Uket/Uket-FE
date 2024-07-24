@@ -9,3 +9,8 @@ export type UserInfoResponse = {
   studentCode: string;
   universityEmail: string;
 };
+
+export type UserInfoUpdateRequest = {
+  depositorName: string;
+  phoneNumber: string;
+};

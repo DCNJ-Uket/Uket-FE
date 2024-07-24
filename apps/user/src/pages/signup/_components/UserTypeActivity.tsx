@@ -7,9 +7,8 @@ import {
   FormMessage,
 } from "@uket/ui/components/ui/form";
 import { ActivityComponentType } from "@stackflow/react";
-import { AppScreen } from "@stackflow/plugin-basic-ui";
+import { AppScreen, IconBack } from "@stackflow/plugin-basic-ui";
 
-import Logo from "@/components/Logo";
 
 import { validateForm } from "../../../utils/vaildateForm";
 import { useStackForm } from "../../../hooks/useStackForm";
@@ -22,6 +21,8 @@ import {
   ActivityHeader,
 } from "./Activity";
 
+import { Link } from "@/router";
+
 const UserTypeActivity: ActivityComponentType = () => {
   const { form } = useStackForm();
 
@@ -29,7 +30,12 @@ const UserTypeActivity: ActivityComponentType = () => {
     <AppScreen
       appBar={{
         border: false,
-        renderLeft: () => <Logo onActivity />,
+        height: "56px",
+        renderLeft: () => (
+          <Link to={"/login"} className="px-1.5">
+            <IconBack />
+          </Link>
+        ),
       }}
     >
       <Activity>
@@ -40,7 +46,7 @@ const UserTypeActivity: ActivityComponentType = () => {
               <p>일반인인가요?</p>
             </h1>
           </ActivityHeader>
-          <section className="grow">
+          <section className="mt-8 grow">
             <FormField
               control={form.control}
               name="userType"
@@ -63,7 +69,7 @@ const UserTypeActivity: ActivityComponentType = () => {
                           <FormLabel className="font-normal">
                             <UserTypeItem
                               title="대학생"
-                              desc="소속 학교가 있는 대학생이에요"
+                              desc="소속 학교가 있고 재학 중인 대학생이에요"
                               selected={field.value === "univ"}
                               isUnivUser
                             />

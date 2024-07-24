@@ -7,4 +7,7 @@ export {
   SwitchCameraIcon,
   ScanIcon,
   LoaderCircleIcon,
+  ChevronRightIcon,
+  DotIcon,
+  CircleIcon,
 } from "lucide-react";
