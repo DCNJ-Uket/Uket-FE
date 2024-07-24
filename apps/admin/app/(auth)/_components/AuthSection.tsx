@@ -62,7 +62,11 @@ function AuthSection() {
               />
             </div>
             <div className="space-y-4">
-              {error && <p className="text-center text-xs">{error}</p>}
+              {error && (
+                <p className="text-center text-xs text-[#FD7250] sm:text-left">
+                  {error}
+                </p>
+              )}
               <Button
                 type="submit"
                 className="bg-brand hover:bg-brandHover w-full rounded-lg py-6 text-base md:max-w-24"
