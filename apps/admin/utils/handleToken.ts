@@ -1,10 +1,18 @@
-export const setAccessToken = (accessToken: string) => {
-  localStorage.setItem("admin-accessToken", accessToken);
+"use server";
+
+import { cookies } from "next/headers";
+
+export const setAccessToken = async (accessToken: string) => {
+  cookies().set({
+    name: "admin-accessToken",
+    value: accessToken,
+    maxAge: 60 * 60 * 6,
+  });
 };
 
-export const getAccessToken = () => {
+export const getAccessToken = async () => {
   try {
-    const accessToken = localStorage.getItem("admin-accessToken");
+    const accessToken = cookies().get("admin-accessToken")?.value;
 
     return accessToken ? accessToken : null;
   } catch (error) {
@@ -12,6 +20,6 @@ export const getAccessToken = () => {
   }
 };
 
-export const clearAccessToken = () => {
-  localStorage.removeItem("admin-accessToken");
+export const clearAccessToken = async () => {
+  cookies().delete("admin-accessToken");
 };

@@ -20,12 +20,12 @@ export const instance = axios.create({
   },
 });
 
-instance.interceptors.request.use(config => {
+instance.interceptors.request.use(async config => {
   if (
     config.url &&
     (AUTH_REQUIRED_PATH.includes(config.url) || isDynamicUrlMatched(config.url))
   ) {
-    const accessToken = getAccessToken();
+    const accessToken = await getAccessToken();
 
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
