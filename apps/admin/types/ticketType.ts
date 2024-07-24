@@ -6,4 +6,5 @@ export type TicketQrCodeResponse = {
   userId: number;
   userName: string;
   status: string;
+  msg: string;
 };
