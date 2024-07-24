@@ -41,7 +41,9 @@ export const useLoginForm = () => {
     onSubmit,
     error:
       error && isAxiosError(error)
-        ? LOGIN_ERROR[error.response?.status as keyof typeof LOGIN_ERROR]
+        ? LOGIN_ERROR[error.response?.status as keyof typeof LOGIN_ERROR][
+            error.response?.data.code
+          ].title
         : null,
   };
 };
