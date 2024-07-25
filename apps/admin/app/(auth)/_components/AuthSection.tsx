@@ -38,7 +38,6 @@ function AuthSection() {
                     <FormControl>
                       <Input id="id" placeholder="아이디" {...field} />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -56,14 +55,13 @@ function AuthSection() {
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
             <div className="space-y-4">
               {error && (
-                <p className="text-center text-xs text-[#FD7250] sm:text-left">
+                <p className="text-center text-sm text-[#FD7250] sm:text-left">
                   {error}
                 </p>
               )}
