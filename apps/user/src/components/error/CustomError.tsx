@@ -1,5 +1,7 @@
 import { cn } from "@uket/ui/lib/utils";
 
+import LogoImage from "/logo.png";
+
 export interface ErrorProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const ErrorHeader = (props: ErrorProps) => {
@@ -14,7 +16,14 @@ const ErrorHeader = (props: ErrorProps) => {
 const ErrorTitle = (props: ErrorProps) => {
   const { className, children, ...rest } = props;
   return (
-    <h1 className={cn("text-lg font-bold", className)} {...rest}>
+    <h1
+      className={cn(
+        "flex flex-col items-center justify-center gap-9  text-lg font-bold",
+        className,
+      )}
+      {...rest}
+    >
+      <img src={LogoImage} alt="logo" loading="lazy" width={82} />
       {children}
     </h1>
   );

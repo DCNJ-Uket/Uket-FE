@@ -1,8 +1,6 @@
 import { FallbackProps } from "react-error-boundary";
 import { Button } from "@uket/ui/components/ui/button";
 
-
-import Logo from "../Logo";
 import {
   ErrorContainer,
   ErrorDescription,
@@ -12,7 +10,11 @@ import {
 
 import { useNavigate } from "@/router";
 
-const BuyTicketErrorFallback = (props: FallbackProps) => {
+interface UnivListErrorFallbackProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    FallbackProps {}
+
+const UnivListErrorFallback = (props: UnivListErrorFallbackProps) => {
   const navigate = useNavigate();
   const { resetErrorBoundary } = props;
 
@@ -23,24 +25,22 @@ const BuyTicketErrorFallback = (props: FallbackProps) => {
 
   return (
     <ErrorContainer className="flex-col gap-10">
-      <Logo />
       <ErrorHeader className="text-center">
-        <ErrorTitle className="text-xl">잠시 후 다시 시도해 주세요!</ErrorTitle>
-        <ErrorDescription className="pt-3">
-          티켓 예매 과정에 에러가 발생했습니다. <br />
-          잠시 후 다시 시도해 주세요.
-        </ErrorDescription>
+        <ErrorTitle className="text-xl">
+          대학교 목록을 불러오지 못했어요.
+        </ErrorTitle>
+        <ErrorDescription>다시 시도해 주세요.</ErrorDescription>
       </ErrorHeader>
-      <footer className="flex w-full flex-col gap-2 px-5">
+      <footer className="flex w-full flex-col gap-2">
         <Button
           onClick={resetErrorBoundary}
-          className="rounded-xl border border-[#5E5E6E] bg-[#5E5E6E] py-6 text-sm font-bold hover:bg-[#777784]"
+          className="rounded-xl border border-[#5E5E6E] bg-[#5E5E6E] py-6 text-xs font-bold hover:bg-[#777784]"
         >
           다시 시도
         </Button>
         <Button
           onClick={back}
-          className="rounded-xl border border-[#5E5E6E] bg-white py-6 text-sm font-bold text-[#5E5E6E] hover:bg-slate-100"
+          className="rounded-xl border border-[#5E5E6E] bg-white py-6 text-xs font-bold text-[#5E5E6E] hover:bg-slate-100"
         >
           이전 페이지로
         </Button>
@@ -49,4 +49,4 @@ const BuyTicketErrorFallback = (props: FallbackProps) => {
   );
 };
 
-export default BuyTicketErrorFallback;
+export default UnivListErrorFallback;

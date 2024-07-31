@@ -28,10 +28,10 @@ const CriticalErrorBoundary = ({ children }: { children: React.ReactNode }) => {
     <ErrorBoundary
       onReset={reset}
       FallbackComponent={({ resetErrorBoundary }) => (
-        <ErrorContainer className="container flex-col gap-10">
+        <ErrorContainer className="container h-dvh flex-col gap-10">
           <ErrorHeader className="mt-16 flex grow flex-col justify-center space-y-3 text-center">
             <ErrorTitle className="text-2xl font-black">
-              잠시 후 다시 시도해 주세요!
+              <span>잠시 후 다시 시도해 주세요!</span>
             </ErrorTitle>
             <ErrorDescription className="container flex flex-col text-center">
               <span>이용에 불편을 드려 죄송합니다.</span>
@@ -43,13 +43,13 @@ const CriticalErrorBoundary = ({ children }: { children: React.ReactNode }) => {
           <footer className="mb-10 flex w-full flex-col justify-end gap-2">
             <Button
               onClick={() => home(resetErrorBoundary)}
-              className="rounded-xl border border-[#5E5E6E] bg-[#5E5E6E] py-6 text-xs font-bold hover:bg-[#757583]"
+              className="rounded-xl border border-[#5E5E6E] bg-[#5E5E6E] py-6 text-sm font-bold hover:bg-[#757583]"
             >
               홈 화면으로
             </Button>
             <Button
               onClick={back}
-              className="rounded-xl border border-[#5E5E6E] bg-white py-6 text-xs font-bold text-[#5E5E6E] hover:bg-slate-100"
+              className="rounded-xl border border-[#5E5E6E] bg-white py-6 text-sm font-bold text-[#5E5E6E] hover:bg-slate-100"
             >
               이전 페이지로
             </Button>
