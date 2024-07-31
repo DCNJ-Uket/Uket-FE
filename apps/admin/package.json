@@ -11,11 +11,17 @@
   "packageManager": "pnpm@9.1.1+sha256.9551e803dcb7a1839fdf5416153a844060c7bce013218ce823410532504ac10b",
   "package-manager-strict": false,
   "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
+    "@tanstack/react-query": "^5.29.0",
+    "@tanstack/react-query-devtools": "^5.29.0",
     "@uket/ui": "workspace:*",
     "@yudiel/react-qr-scanner": "^2.0.4",
+    "axios": "^1.6.8",
     "next": "14.2.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hook-form": "^7.51.3",
+    "zod": "^3.22.5"
   },
   "devDependencies": {
     "@types/eslint": "^8.56.10",

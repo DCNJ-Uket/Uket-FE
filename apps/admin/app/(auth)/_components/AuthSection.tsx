@@ -1,32 +1,76 @@
+"use client";
+
 import React from "react";
-import { Label } from "@ui/components/ui/label";
 import { Input } from "@ui/components/ui/input";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@ui/components/ui/form";
 import { Button } from "@ui/components/ui/button";
 
+import { useLoginForm } from "@/hooks/useLoginForm";
+
 function AuthSection() {
+  const { form, onSubmit, error } = useLoginForm();
+
   return (
-    <section className="flex grow flex-col justify-center gap-11">
+    <section className="mt-16 flex grow flex-col gap-11">
       <header>
         <h1 className="text-2xl font-black">관리자 로그인</h1>
       </header>
       <main className="flex flex-col gap-10">
-        <div className="flex flex-col gap-3">
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="id" className="text-[#5E5E6E]">
-              ID
-            </Label>
-            <Input id="id" placeholder="아이디" />
-          </div>
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="pw" className="text-[#5E5E6E]">
-              PW
-            </Label>
-            <Input id="pw" type="password" placeholder="비밀번호" />
-          </div>
-        </div>
-        <Button className="bg-brand hover:bg-brandHover w-full rounded-lg py-6 text-base md:max-w-24">
-          로그인
-        </Button>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-col gap-5"
+          >
+            <div className="flex flex-col gap-3">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem className="grid w-full items-center gap-1.5 sm:max-w-xs">
+                    <FormLabel className="text-[#5E5E6E]">ID</FormLabel>
+                    <FormControl>
+                      <Input id="id" placeholder="아이디" {...field} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem className="grid w-full items-center gap-1.5 sm:max-w-xs">
+                    <FormLabel className="text-[#5E5E6E]">PW</FormLabel>
+                    <FormControl>
+                      <Input
+                        id="pw"
+                        type="password"
+                        placeholder="비밀번호"
+                        {...field}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="space-y-4">
+              <p className="h-5 text-center text-sm text-[#FD7250] sm:text-left">
+                {error && error}
+              </p>
+              <Button
+                type="submit"
+                className="bg-brand hover:bg-brandHover w-full rounded-lg py-6 text-base md:max-w-24"
+              >
+                로그인
+              </Button>
+            </div>
+          </form>
+        </Form>
       </main>
     </section>
   );
