@@ -11,6 +11,7 @@ import {
 import { useQueryClient } from "@tanstack/react-query";
 
 import Indicator from "@/components/Indicator";
+import Image from "@/components/Image";
 
 import {
   MyTicketListInfoResponse,
@@ -78,7 +79,7 @@ const QRCode = (props: QRCodeProps) => {
           </div>
         </CardTitle>
         <CardDescription className="flex flex-col items-center justify-center">
-          <img
+          <Image
             src={qrCode}
             alt="qrcode"
             width={100}

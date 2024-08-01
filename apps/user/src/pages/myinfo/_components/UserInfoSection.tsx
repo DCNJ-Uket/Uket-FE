@@ -1,6 +1,7 @@
 import { Switch } from "@uket/ui/components/ui/switch";
 import { Button } from "@uket/ui/components/ui/button";
 
+import Image from "@/components/Image";
 
 import { useQueryUserInfo } from "@/hooks/queries/useQueryUserInfo";
 
@@ -23,7 +24,7 @@ const UserInfoSection = () => {
       <div className="flex w-full flex-col items-start gap-5 bg-white px-7 pb-7 pt-5">
         <div className="flex items-center gap-6">
           <div className="relative h-14 w-14">
-            <img
+            <Image
               src={userInfo.profileImage}
               alt="프로필 이미지"
               width={100}
