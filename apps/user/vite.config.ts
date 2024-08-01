@@ -21,6 +21,7 @@ export default defineConfig({
         plugins: {
           png: imageminWebp(),
         },
+        skipIfLargerThan: "original",
       },
     }),
   ],
@@ -28,6 +29,7 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"),
       "@ui": path.resolve(__dirname, "../../packages/ui/src"),
+      "@dist": path.resolve(__dirname, "./dist"),
     },
   },
   build: {
