@@ -105,10 +105,6 @@ const config = {
         "ping-dealy": "ping-delay 3s cubic-bezier(0, 0, 0.2, 1) infinite",
         "rotate-axis": "rotate-axis 4.5s linear infinite",
       },
-      backgroundImage: {
-        "landing-pattern":
-          "url('/landingBg.png'), linear-gradient(171.65deg, #6343E1 5.82%, #000000 81.67%)",
-      },
     },
   },
   plugins: [tailwindcssAnimate],
