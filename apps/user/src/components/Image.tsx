@@ -4,14 +4,9 @@ interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {}
 
 const Image = (props: ImageProps) => {
   const { src, ...rest } = props;
-  const imgUrl =
-    import.meta.env.MODE === "development"
-      ? src
-      : `${src}.webp` !== undefined
-        ? `${src}.webp`
-        : `${src}`;
+  const imgUrl = import.meta.env.MODE === "development" ? src : `${src}.webp`;
 
-  const imgSrc = new URL(imgUrl || "", import.meta.url).href;
+  const imgSrc = new URL(imgUrl || src!, import.meta.url).href;
 
   return <img src={imgSrc} {...rest} />;
 };
