@@ -3,18 +3,22 @@
 import React from "react";
 import { Scanner } from "@yudiel/react-qr-scanner";
 
+import { useScan } from "@/hooks/useScan";
+
 import QRFinderIcon from "./QRFinderIcon";
 
-// TODO: onScan에 실제 스캔 후 동작할 함수 연결
 const QRScanner = () => {
+  const { handleQRScan } = useScan();
+
   return (
     <div className="relative h-full">
       <Scanner
         formats={["qr_code"]}
-        onScan={result => result}
+        onScan={handleQRScan}
         classNames={{ video: "object-cover" }}
         styles={{ finderBorder: 1 }}
         components={{ finder: false }}
+        allowMultiple
       >
         <QRFinderIcon />
         <h1 className="absolute left-0 top-6 w-full text-2xl font-bold text-white sm:text-3xl">
