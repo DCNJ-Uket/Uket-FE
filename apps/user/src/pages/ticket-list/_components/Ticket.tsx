@@ -9,7 +9,7 @@ import { AspectRatio } from "@uket/ui/components/ui/aspect-ratio";
 
 import Indicator from "@/components/Indicator";
 
-import { QRCodeType, TicketItem } from "@/types/ticketType";
+import { TicketItem } from "@/types/ticketType";
 
 import TicketHeader from "./TicketHeader";
 import TicketDetail from "./TicketDetail";
@@ -20,7 +20,6 @@ const ConfirmModal = lazy(() => import("./ConfirmModal"));
 
 interface TicketProps {
   ticket: TicketItem;
-  qrCode: QRCodeType;
 }
 
 const Ticket = (props: TicketProps) => {
@@ -38,7 +37,6 @@ const Ticket = (props: TicketProps) => {
       eventName,
       ticketId,
     },
-    qrCode,
   } = props;
 
   return (
@@ -88,7 +86,7 @@ const Ticket = (props: TicketProps) => {
         </Card>
       </DialogTrigger>
       <DialogContent className="max-w-xs rounded-lg p-0 sm:max-w-md">
-        <QRCode qrCode={qrCode} id={ticketId} />
+        <QRCode id={ticketId} />
       </DialogContent>
     </Dialog>
   );

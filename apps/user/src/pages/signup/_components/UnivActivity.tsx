@@ -1,3 +1,4 @@
+import { useWatch } from "react-hook-form";
 import { FallbackProps } from "react-error-boundary";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
@@ -20,9 +21,16 @@ import {
 
 interface UnivParams extends ActivityParams {}
 
-// TODO: 버튼 비활성화 로직 추가
 const UnivActivity: ActivityComponentType<UnivParams> = ({ params }) => {
   const { form } = params;
+  const inputValues = useWatch({
+    control: form.control,
+    name: ["userUniv.univName", "userMajor", "userId"],
+  });
+
+  const isAllFieldFilledOut = (arr: string[]) => {
+    return arr.every(field => field !== undefined && field !== "");
+  };
 
   return (
     <AppScreen appBar={{ border: false, height: "56px" }}>
@@ -53,7 +61,7 @@ const UnivActivity: ActivityComponentType<UnivParams> = ({ params }) => {
             <NextStepButton
               activityName={"MailActivity" as never}
               params={{ form }}
-              disabled={false}
+              disabled={!isAllFieldFilledOut(inputValues)}
             />
           </ActivityFooter>
         </ActivityContent>

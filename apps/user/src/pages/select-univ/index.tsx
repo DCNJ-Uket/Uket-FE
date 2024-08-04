@@ -1,7 +1,9 @@
+import { FallbackProps } from "react-error-boundary";
 import { Suspense } from "react";
 import { cn } from "@uket/ui/lib/utils";
 import { Button } from "@uket/ui/components/ui/button";
 
+import UnivListErrorFallback from "@/components/fallback/UnivListErrorFallback";
 import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
 
 import { useSelectUniversity } from "@/hooks/useSelectUniversity";
@@ -22,7 +24,11 @@ const SelectUnivPage = () => {
           <p>학교를 선택해 주세요.</p>
         </header>
         <section className="grow">
-          <RetryErrorBoundary>
+          <RetryErrorBoundary
+            fallbackComponent={(props: FallbackProps) => (
+              <UnivListErrorFallback {...props} />
+            )}
+          >
             <Suspense fallback={<UnivListFallback />}>
               <UnivList
                 selectedUnivId={selectedUnivId}

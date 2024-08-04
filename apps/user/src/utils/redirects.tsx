@@ -3,7 +3,7 @@ import { getRefreshToken } from "./handleCookie";
 
 import { Navigate, Path } from "@/router";
 
-const PRIVATE: Path[] = ["/buy-ticket", "/ticket-list", "/signup"];
+const PRIVATE: Path[] = ["/buy-ticket", "/ticket-list", "/signup", "/myinfo"];
 const PUBLIC_REGEX = /^\/login(?:\/([^/]+))?$/;
 
 const Redirects = ({ children }: { children: React.ReactNode }) => {
@@ -14,9 +14,9 @@ const Redirects = ({ children }: { children: React.ReactNode }) => {
 
   const unAuthedOnPrivatepath =
     !isAuthenticated && PRIVATE.includes(location.pathname as Path);
-  const authedOnPublicPath = isAuthenticated && isValidLoginPath;
+  const authedOnLoginPath = isAuthenticated && isValidLoginPath;
 
-  if (authedOnPublicPath) return <Navigate to="/" replace />;
+  if (authedOnLoginPath) return <Navigate to="/" replace />;
   if (unAuthedOnPrivatepath) return <Navigate to="/login" replace />;
   return children;
 };

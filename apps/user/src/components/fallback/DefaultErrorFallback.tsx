@@ -21,7 +21,7 @@ const DefaultErrorFallback = (props: FallbackProps) => {
   };
 
   return (
-    <ErrorContainer className="flex-col gap-10">
+    <ErrorContainer className="container flex-col justify-around gap-10">
       <ErrorHeader className="text-center">
         <ErrorTitle className="text-xl">잠시 후 다시 시도해 주세요!</ErrorTitle>
         <ErrorDescription>{errorMessage}</ErrorDescription>
