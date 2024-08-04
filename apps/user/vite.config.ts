@@ -1,3 +1,5 @@
+/// <reference types="vitest" />
+
 import path from "path";
 
 import mkcert from "vite-plugin-mkcert";
@@ -28,5 +30,10 @@ export default defineConfig({
         handler(level, log);
       },
     },
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/test/setup.ts'
   },
 });

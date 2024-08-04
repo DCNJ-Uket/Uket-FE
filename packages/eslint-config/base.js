@@ -9,7 +9,6 @@ module.exports = {
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "prettier",
-    "eslint-config-turbo",
   ],
   ignorePatterns: ["dist/", ".eslintrc.cjs", ".*.js", "node_modules/"],
   parser: "@typescript-eslint/parser",
