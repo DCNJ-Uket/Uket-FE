@@ -11,7 +11,8 @@ import {
 
 import WelecomeImage from "/signupComplete.png";
 
-// TODO: 다음 Stack 이동 로직 변경
+import Image from "@/components/Image";
+
 const CompleteActivity: ActivityComponentType = () => {
   return (
     <AppScreen
@@ -25,18 +26,18 @@ const CompleteActivity: ActivityComponentType = () => {
     >
       <Activity>
         <ActivityContent>
-          <ActivityHeader className="relative justify-center items-center grow">
+          <ActivityHeader className="relative grow items-center justify-center">
             <h1 className="text-lg text-[#5E5E6E]">
               회원가입이 완료되었습니다.
             </h1>
-            <h2 className="text-2xl font-black text-center">
+            <h2 className="text-center text-2xl font-black">
               <p>이제 학교 축제 티켓을</p>
               <p>예매하러 가볼까요?</p>
             </h2>
-            <img
+            <Image
               src={WelecomeImage}
               alt="가입 완료 이미지"
-              className="absolute h-full animate-ping-dealy"
+              className="animate-ping-dealy absolute h-full"
             />
           </ActivityHeader>
           <ActivityFooter className="z-10">

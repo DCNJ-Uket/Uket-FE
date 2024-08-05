@@ -1,6 +1,8 @@
 import { cn } from "@uket/ui/lib/utils";
 import { Skeleton } from "@uket/ui/components/ui/skeleton";
 
+import Image from "@/components/Image";
+
 import { FestivalUniversity } from "@/types/univType";
 
 interface UnivItemProps extends Pick<FestivalUniversity, "logoUrl" | "name"> {
@@ -11,7 +13,7 @@ interface UnivItemProps extends Pick<FestivalUniversity, "logoUrl" | "name"> {
 const UnivItem = (props: UnivItemProps) => {
   const { isSelected, onSelect, name, logoUrl } = props;
   const univLogo = logoUrl ? (
-    <img
+    <Image
       src={logoUrl}
       alt={name}
       width={200}

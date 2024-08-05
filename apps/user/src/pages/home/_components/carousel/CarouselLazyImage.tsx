@@ -1,6 +1,8 @@
 import { useState, useCallback } from "react";
 import { Skeleton } from "@uket/ui/components/ui/skeleton";
 
+import Image from "@/components/Image";
+
 interface LazyLoadImageProps {
   imgSrc: string;
   inView: boolean;
@@ -18,7 +20,7 @@ export const LazyLoadImage = (props: LazyLoadImageProps) => {
     <>
       {!hasLoaded && <Skeleton className="h-full w-full" />}
       {inView && (
-        <img
+        <Image
           className="block h-full w-full rounded-lg bg-gray-100 object-cover"
           onLoad={setLoaded}
           src={imgSrc}

@@ -1,7 +1,9 @@
 import { useLocation } from "react-router-dom";
 import { cn } from "@uket/ui/lib/utils";
 
-import LandingLogoImage from "../../public/landingLogo.png";
+import LandingLogoImage from "/landingLogo.png";
+
+import Image from "./Image";
 
 import { Link } from "@/router";
 
@@ -18,7 +20,7 @@ const Logo = (props: LogoProps) => {
 
   return (
     <Link to="/" className={cn(onActivity ? "pl-3 pt-2" : "")}>
-      <img src={imgSrc} width={62} loading="lazy" alt="로고" />
+      <Image src={imgSrc} width={62} loading="lazy" alt="로고" />
     </Link>
   );
 };

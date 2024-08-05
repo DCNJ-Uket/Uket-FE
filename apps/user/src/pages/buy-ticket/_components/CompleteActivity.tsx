@@ -13,6 +13,8 @@ import {
 import CompleteBackgroudImg from "/ticketingComplete.png";
 import Ticketing3DImg from "/complete3DTicket.png";
 
+import Image from "@/components/Image";
+
 const CompleteActivity: ActivityComponentType = () => {
   const [searchParams] = useSearchParams();
   const univName = searchParams.get("univName");
@@ -34,7 +36,7 @@ const CompleteActivity: ActivityComponentType = () => {
       <Activity>
         <ActivityContent className=" bg-white">
           <ActivityHeader className="relative items-center justify-center overflow-hidden">
-            <img
+            <Image
               src={Ticketing3DImg}
               alt="티켓 이미지"
               className="animate-rotate-axis w-[180px]"
@@ -42,7 +44,7 @@ const CompleteActivity: ActivityComponentType = () => {
             <h1 className="mt-10 text-[23px] font-black">
               <p>예매가 완료되었습니다.</p>
             </h1>
-            <img
+            <Image
               src={CompleteBackgroudImg}
               alt="티켓팅 완료 이미지"
               className="animate-ping-dealy absolute h-full"
