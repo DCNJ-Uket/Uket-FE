@@ -42,17 +42,19 @@ const AuthRequiredModalButton = (props: AuthRequiredModalButtonProps) => {
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-72 rounded-2xl sm:max-w-xs" isXHidden>
-        <DialogHeader className="sm:text-center pt-10 pb-5">
+        <DialogHeader className="pb-5 pt-10 sm:text-center">
           <DialogTitle>로그인 후 이용 가능합니다.</DialogTitle>
         </DialogHeader>
         <DialogFooter className="w-full flex-row justify-center gap-3 sm:flex-row">
           <Button
+            data-testid="close-modal-button"
             className="border-brand text-brand grow basis-1/2 border bg-white hover:bg-slate-100"
             onClick={handleCloseModal}
           >
             취소
           </Button>
           <Button
+            data-testid="login-modal-button"
             className="bg-brand border-brand hover:bg-brandHover grow basis-1/2 border text-white"
             onClick={handleRedirectToLogin}
           >
