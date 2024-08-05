@@ -3,9 +3,11 @@ import { Button } from "@uket/ui/components/ui/button";
 import Nav from "@/components/Nav";
 import AuthRequiredModalButton from "@/components/AuthRequiredModalButton";
 
-import { Link } from "@/router";
+import { useNavigate } from "@/router";
 
-const MainPage = () => {
+const LandingPage = () => {
+  const navigate = useNavigate();
+
   return (
     <main className="landing-container flex h-full flex-col items-center justify-evenly">
       <header className="sticky left-0 top-0 z-10 w-full">
@@ -19,14 +21,13 @@ const MainPage = () => {
           </h1>
         </section>
         <section className="mb-5 flex w-full flex-col items-center justify-center gap-2">
-          <Link to="/select-univ" className="block w-full text-center">
-            <Button
-              variant="secondary"
-              className="w-full rounded-xl bg-white p-7 text-base font-bold text-black hover:bg-slate-200 sm:w-80"
-            >
-              축제 예매하기
-            </Button>
-          </Link>
+          <Button
+            variant="secondary"
+            className="w-full rounded-xl bg-white p-7 text-base font-bold text-black hover:bg-slate-200 sm:w-80"
+            onClick={() => navigate("/select-univ")}
+          >
+            축제 예매하기
+          </Button>
           <AuthRequiredModalButton
             title="내 티켓 확인하기"
             path="/ticket-list"
@@ -38,4 +39,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default LandingPage;
