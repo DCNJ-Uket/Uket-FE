@@ -16,16 +16,16 @@ export const FormSchema = z
     }),
     userName: z.string().regex(EXP.name),
     userPhone: z.string().regex(EXP.phone),
-    userEmail: z.string().regex(EXP.email).optional(),
-    userId: z.string().optional(),
+    userEmail: z.string().regex(EXP.email),
+    userId: z.string(),
     userUniv: z
       .object({
         univName: z.string(),
         univId: z.number(),
       })
-      .optional(),
-    userMajor: z.string().optional(),
-    userEmailAuth: z.string().optional(),
+      ,
+    userMajor: z.string(),
+    userEmailAuth: z.string(),
   })
   .refine(data => {
     if (data.userType === "no_univ") return true;

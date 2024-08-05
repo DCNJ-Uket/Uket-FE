@@ -7,7 +7,7 @@ interface ValidationFunctionProps {
 export const EXP: Record<ValidateExp, RegExp> = {
   name: /^(?![ㄱ-ㅎㅏ-ㅣ]+$)([가-힣A-Za-z]{2,})$/,
   phone: /^01[0-9]\d{8}$/,
-  email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+  email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
   type: /^(univ|no_univ)$/,
 };
 

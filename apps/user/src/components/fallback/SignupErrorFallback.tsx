@@ -29,7 +29,7 @@ const SignupErrorFallback = (props: SignupErrorFallbackProps) => {
         <Link to="/" replace className="flex justify-center">
           <Button
             onClick={resetErrorBoundary}
-            className="rounded-xl border border-[#5E5E6E] bg-[#5E5E6E] py-6 text-xs font-bold hover:bg-[#777784]"
+            className="rounded-xl border border-[#5E5E6E] bg-[#5E5E6E] py-6 text-sm font-bold hover:bg-[#777784]"
           >
             홈 화면으로
           </Button>

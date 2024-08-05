@@ -8,7 +8,6 @@ import Image from "./Image";
 
 import { useNavigate } from "@/router";
 
-// TODO: 추후 디자인에 맞춰서 Drawer 또는 페이지로 변경
 const Profile = () => {
   const { data: userInfo } = useQueryUserInfo();
   const { pathname } = useLocation();

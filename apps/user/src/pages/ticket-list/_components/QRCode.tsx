@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { Separator } from "@uket/ui/components/ui/separator";
+import { RefreshCwIcon } from "@uket/ui/components/ui/icon";
 import {
   Card,
   CardContent,
@@ -8,16 +9,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@uket/ui/components/ui/card";
+import { Button } from "@uket/ui/components/ui/button";
 import { useQueryClient } from "@tanstack/react-query";
 
 import Indicator from "@/components/Indicator";
 import Image from "@/components/Image";
 
-import {
-  MyTicketListInfoResponse,
-  QRCodeType,
-  TicketItem,
-} from "@/types/ticketType";
+import { useQueryTicketQRCode } from "@/hooks/queries/useQueryTicketQRCode";
+
+import { MyTicketListInfoResponse, TicketItem } from "@/types/ticketType";
 
 import { formatDate } from "@/utils/handleTicket";
 
@@ -27,12 +27,13 @@ import ConfirmModal from "./ConfirmModal";
 
 interface QRCodeProps {
   id: TicketItem["ticketId"];
-  qrCode: QRCodeType;
 }
 
 const QRCode = (props: QRCodeProps) => {
-  const { id, qrCode } = props;
+  const { id } = props;
 
+  const { data: qrcode, refetch } = useQueryTicketQRCode(id);
+  
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData<MyTicketListInfoResponse>([
     "my-ticket-list",
@@ -58,13 +59,15 @@ const QRCode = (props: QRCodeProps) => {
     showLocation,
     universityName,
     ticketStatus,
-    ticketNo,
     userType,
     showName,
     eventName,
     createdAt,
   } = ticket;
 
+  const handleReissueQRCode = () => {
+    refetch();
+  };
   return (
     <Card className="border-none shadow-none">
       <CardHeader className="gap-3">
@@ -86,7 +89,9 @@ const QRCode = (props: QRCodeProps) => {
             height={100}
             className="aspect-square h-36 w-36 scale-125"
           />
-          <span className="z-50 text-xs text-[#7250FD]">{ticketNo}</span>
+          <Button variant="ghost" size="icon" className="z-50 rounded-full">
+            <RefreshCwIcon className="h-5 w-5" onClick={handleReissueQRCode} />
+          </Button>
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -111,10 +116,24 @@ const QRCode = (props: QRCodeProps) => {
           </footer>
         </section>
       </CardContent>
-      <CardFooter className="mx-5 mb-3 justify-center rounded-lg bg-[#FDC950] py-3">
-        <h1 className="text-sm font-bold">
-          학생증 또는 신분증을 제시해 주세요!
-        </h1>
+      <CardFooter className="mx-5 mb-3 justify-center overflow-hidden rounded-lg bg-[#FDC950] py-3">
+        <div className="inline-flex min-w-full flex-nowrap items-center">
+          <h1 className="animate-infinite-scroll min-w-full text-center text-sm font-bold">
+            <span>학생증 또는 신분증을 제시해 주세요!</span>
+          </h1>
+          <h1
+            className="animate-infinite-scroll min-w-full text-center text-sm font-bold"
+            aria-hidden={true}
+          >
+            <span>학생증 또는 신분증을 제시해 주세요!</span>
+          </h1>
+          <h1
+            className="animate-infinite-scroll min-w-full text-center text-sm font-bold"
+            aria-hidden={true}
+          >
+            <span>학생증 또는 신분증을 제시해 주세요!</span>
+          </h1>
+        </div>
       </CardFooter>
     </Card>
   );

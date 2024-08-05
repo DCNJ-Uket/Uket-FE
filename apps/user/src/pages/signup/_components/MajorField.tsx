@@ -26,7 +26,7 @@ const MajorField = (props: MajorFieldProps) => {
           <FormControl>
             <Input
               {...field}
-              placeholder="학과 입력"
+              placeholder="e.g. 컴퓨터공학과"
               className="border-formInput border placeholder:font-light placeholder:text-[#8989A1]"
               autoComplete="off"
               value={field.value || ""}

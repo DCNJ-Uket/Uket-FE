@@ -65,13 +65,15 @@ const NoUnivModal = (props: NoUnivModalProps) => {
               닫기
             </Button>
           </DialogClose>
-          <Button
-            type="submit"
-            className="border-brand bg-brand hover:bg-brandHover basis-1/2 border text-white"
-            onClick={handleSignup}
-          >
-            일반인 회원가입
-          </Button>
+          <DialogClose asChild>
+            <Button
+              type="submit"
+              className="border-brand bg-brand hover:bg-brandHover basis-1/2 border text-white"
+              onClick={handleSignup}
+            >
+              일반인 회원가입
+            </Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
