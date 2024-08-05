@@ -1,6 +1,12 @@
 import { BrowserRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
-import { act, render, renderHook, screen } from "@testing-library/react";
+import {
+  act,
+  render,
+  renderHook,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 
 import { useControlRedirect } from "@/hooks/useControlRedirect";
 import { useQueryUserInfo } from "@/hooks/queries/useQueryUserInfo";
@@ -210,6 +216,77 @@ describe("ftr 1, LandingPage 테스트", () => {
         result.current.handleOpenModalOrRedirect({ path: "/ticket-list" });
       });
       expect(navigate).toHaveBeenCalledWith({ pathname: "/ticket-list" });
+    });
+  });
+
+  describe("로그인 및 회원가입 유도 모달", () => {
+    it("모달의 로그인 버튼 클릭 시, 로그인 페이지로 이동하는가?", async () => {
+      vi.isMockFunction(getAccessToken) && getAccessToken.mockReturnValue(null);
+      vi.isMockFunction(getRefreshToken) &&
+        getRefreshToken.mockReturnValue(null);
+
+      const navigate = vi.fn();
+      vi.isMockFunction(useNavigate) && useNavigate.mockReturnValue(navigate);
+
+      const { result } = renderHook(() => useControlRedirect());
+
+      render(
+        <BrowserRouter>
+          <LandingPage />
+        </BrowserRouter>,
+      );
+
+      const ticketButton = screen.getByText("내 티켓 확인하기");
+      await userEvent.click(ticketButton);
+
+      act(() => {
+        result.current.handleOpenModalOrRedirect({ path: "/ticket-list" });
+      });
+
+      await waitFor(() => screen.getByTestId("login-modal-button"));
+
+      const loginButton = screen.getByTestId("login-modal-button");
+      await userEvent.click(loginButton);
+
+      act(() => {
+        result.current.handleRedirectToLogin();
+      });
+
+      expect(navigate).toHaveBeenCalledWith("/login");
+    });
+    it("취소 버튼 클릭 시, 모달이 닫히는가?", async () => {
+      vi.isMockFunction(getAccessToken) && getAccessToken.mockReturnValue(null);
+      vi.isMockFunction(getRefreshToken) &&
+        getRefreshToken.mockReturnValue(null);
+
+      const navigate = vi.fn();
+      vi.isMockFunction(useNavigate) && useNavigate.mockReturnValue(navigate);
+
+      const { result } = renderHook(() => useControlRedirect());
+
+      render(
+        <BrowserRouter>
+          <LandingPage />
+        </BrowserRouter>,
+      );
+
+      const ticketButton = screen.getByText("내 티켓 확인하기");
+      await userEvent.click(ticketButton);
+
+      act(() => {
+        result.current.handleOpenModalOrRedirect({ path: "/ticket-list" });
+      });
+
+      await waitFor(() => screen.getByTestId("close-modal-button"));
+
+      const closeButton = screen.getByTestId("close-modal-button");
+      await userEvent.click(closeButton);
+
+      act(() => {
+        result.current.handleCloseModal();
+      });
+
+      expect(result.current.isModalOpen).toBe(false);
     });
   });
 });
