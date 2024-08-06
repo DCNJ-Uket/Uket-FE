@@ -5,11 +5,22 @@ import AuthRequiredModalButton from "@/components/AuthRequiredModalButton";
 
 import { useNavigate } from "@/router";
 
+import Image from "@/components/Image";
+
+import LandingBgImage from "/landingBg.png";
 const LandingPage = () => {
   const navigate = useNavigate();
 
   return (
-    <main className="landing-container flex h-full flex-col items-center justify-evenly">
+    <main className="relative flex h-full flex-col items-center justify-evenly">
+      <div className="absolute -z-10 flex h-full w-full items-center justify-center bg-[linear-gradient(171.65deg,_#6343E1_5.82%,_#000000_81.67%)]">
+        <Image
+          src={LandingBgImage}
+          alt="landing image"
+          width={800}
+          className="bg-contain bg-center bg-no-repeat"
+        />
+      </div>
       <header className="sticky left-0 top-0 z-10 w-full">
         <Nav />
       </header>

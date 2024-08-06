@@ -110,10 +110,6 @@ const config = {
         "rotate-axis": "rotate-axis 4.5s linear infinite",
         "infinite-scroll": "infinite-scroll 10s linear infinite",
       },
-      backgroundImage: {
-        "landing-pattern":
-          "url('/landingBg.png'), linear-gradient(171.65deg, #6343E1 5.82%, #000000 81.67%)",
-      },
     },
   },
   plugins: [tailwindcssAnimate],

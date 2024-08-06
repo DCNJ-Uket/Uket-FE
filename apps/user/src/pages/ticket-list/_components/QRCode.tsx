@@ -13,6 +13,7 @@ import { Button } from "@uket/ui/components/ui/button";
 import { useQueryClient } from "@tanstack/react-query";
 
 import Indicator from "@/components/Indicator";
+import Image from "@/components/Image";
 
 import { useQueryTicketQRCode } from "@/hooks/queries/useQueryTicketQRCode";
 
@@ -81,7 +82,7 @@ const QRCode = (props: QRCodeProps) => {
           </div>
         </CardTitle>
         <CardDescription className="flex flex-col items-center justify-center">
-          <img
+          <Image
             src={qrcode}
             alt="qrcode"
             width={100}

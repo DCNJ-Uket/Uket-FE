@@ -4,6 +4,8 @@ import { Button } from "@uket/ui/components/ui/button";
 
 import { useQueryUserInfo } from "@/hooks/queries/useQueryUserInfo";
 
+import Image from "./Image";
+
 import { useNavigate } from "@/router";
 
 const Profile = () => {
@@ -24,7 +26,7 @@ const Profile = () => {
         >
           <div className="flex items-center gap-3">
             <div className="relative h-6 w-6">
-              <img
+              <Image
                 src={userInfo.profileImage}
                 alt="프로필 이미지"
                 width={100}

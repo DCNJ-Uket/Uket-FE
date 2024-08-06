@@ -74,9 +74,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-@layer components {
-  .landing-container {
-    @apply bg-landing-pattern bg-contain bg-center bg-no-repeat;
-  }
-}
