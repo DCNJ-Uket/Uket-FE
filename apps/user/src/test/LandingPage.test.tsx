@@ -122,7 +122,6 @@ describe("ftr 1, LandingPage 테스트", () => {
     });
   });
 
-  // TODO: 이미지 expect 추가
   describe("서비스 소개", () => {
     it("슬로건/카피, 이미지가 출력 되는가?", () => {
       render(
@@ -131,6 +130,7 @@ describe("ftr 1, LandingPage 테스트", () => {
         </BrowserRouter>,
       );
 
+      expect(screen.getByAltText("landing image")).toBeInTheDocument();
       expect(screen.getByText("학교 축제 공연 감상,")).toBeInTheDocument();
       expect(screen.getByText("기다림 없이 UKET")).toBeInTheDocument();
     });
