@@ -5,28 +5,12 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@ui/lib/utils";
 
-// TODO: 실제 링크로 대체
-const links = [
-  {
-    href: "/qr-scan",
-    title: "QR 스캔하기",
-  },
-  {
-    href: "#축제",
-    title: "축제 정보 관리",
-  },
-  {
-    href: "#입금",
-    title: "입금 내역 확인",
-  },
-  {
-    href: "#예매",
-    title: "예매 내역 확인",
-  },
-];
+import { LINKS } from "@/constants/link";
 
 const Footer = () => {
   const pathname = usePathname();
+
+  const links = LINKS;
 
   return (
     <div className="flex h-14">

@@ -8,23 +8,12 @@ import { cn } from "@ui/lib/utils";
 
 import LogoImage from "/public/logo.png";
 
-const links = [
-  {
-    href: "/qr-scan",
-    title: "QR 스캔하기",
-  },
-  {
-    href: "#예매",
-    title: "예매 내역 관리",
-  },
-  {
-    href: "#실시간",
-    title: "실시간 입장 조회",
-  },
-];
+import { LINKS } from "@/constants/link";
 
 const SideNav = () => {
   const pathname = usePathname();
+
+  const links = LINKS;
 
   return (
     <div className="flex h-full w-64 flex-col gap-5 bg-gray-100 px-5 py-10">
