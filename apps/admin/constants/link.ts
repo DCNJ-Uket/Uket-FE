@@ -9,11 +9,11 @@ export const LINKS: LinkDetail[] = [
     title: "QR 스캔하기",
   },
   {
-    href: "#예매",
+    href: "/booking-manage",
     title: "예매 내역 관리",
   },
   {
-    href: "#실시간",
+    href: "/entry-check",
     title: "실시간 입장 조회",
   },
 ];
