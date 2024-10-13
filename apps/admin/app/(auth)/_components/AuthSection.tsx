@@ -13,6 +13,8 @@ import {
 } from "@ui/components/ui/form";
 import { Button } from "@ui/components/ui/button";
 
+import AdminLogo from "@/components/AdminLogo";
+
 import { useLoginForm } from "@/hooks/useLoginForm";
 
 function AuthSection() {
@@ -25,9 +27,13 @@ function AuthSection() {
         isBrowser && "mt-36 items-center",
       )}
     >
-      <header>
-        <h1 className="text-2xl font-black">관리자 로그인</h1>
-      </header>
+      {isBrowser ? (
+        <AdminLogo logo_style="w-32" font_style="text-lg" />
+      ) : (
+        <header>
+          <h1 className="text-2xl font-black">관리자 로그인</h1>
+        </header>
+      )}
       <main className="flex flex-col gap-10">
         <Form {...form}>
           <form
