@@ -28,7 +28,7 @@ function AuthSection() {
       )}
     >
       {isBrowser ? (
-        <AdminLogo logo_style="w-32" font_style="text-lg" />
+        <AdminLogo logo_style="w-32" font_style="text-lg font-medium" />
       ) : (
         <header>
           <h1 className="text-2xl font-black">관리자 로그인</h1>

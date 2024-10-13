@@ -6,7 +6,7 @@ interface LinkDetail {
 export const LINKS: LinkDetail[] = [
   {
     href: "/qr-scan",
-    title: "QR 스캔하기",
+    title: "QR 스캔",
   },
   {
     href: "/booking-manage",
