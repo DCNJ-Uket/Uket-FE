@@ -1,5 +1,6 @@
+import GreetingHeader from "@/components/GreetingHeader";
+
 import QRReaderSection from "./_components/QRReaderSection";
-import GreetingHeader from "./_components/GreetingHeader";
 
 export default function QRReadPage() {
   return (
