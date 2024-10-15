@@ -2,14 +2,15 @@ import { isBrowser } from "react-device-detect";
 
 import GreetingHeader from "@/components/GreetingHeader";
 
+import ManageSection from "./_components/ManageSection";
+
 export default function BookingManagePage() {
   return (
     <main className="flex h-full flex-col">
       {isBrowser ? (
-        <>
-          <h1 className="py-5 pl-7 text-xl font-bold">예매 내역 관리</h1>
-          <section className="grow">룰루</section>
-        </>
+        <main className="flex h-full flex-col">
+          <ManageSection />
+        </main>
       ) : (
         <>
           <GreetingHeader />
