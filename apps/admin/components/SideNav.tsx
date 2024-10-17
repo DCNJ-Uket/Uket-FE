@@ -52,8 +52,8 @@ const SideNav = () => {
   const links = [LINKS[1], LINKS[2], LINKS[0]];
 
   return (
-    <div className="flex h-full w-64 flex-col gap-5 px-6 pb-20 pt-10">
-      <AdminLogo logo_style="w-24" font_style="font-medium" />
+    <div className="flex h-full w-52 flex-col gap-5 px-6 pb-20 pt-10">
+      <AdminLogo logo_style="w-24" font_style="font-medium text-xs" />
       <div className="text-sm">
         <p className="text-brand">건국대학교</p>
         <p className="text-[#5E5E6E]">관리자님, 안녕하세요.</p>
