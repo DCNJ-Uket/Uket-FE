@@ -1,28 +1,28 @@
+import { useState } from "react";
+
+import Pagination from "@/components/Pagination";
+
 import BookingItem from "./BookingItem";
 
 function BookingList() {
-  const tickets = [
-    {
-      ticketId: 1,
-      depositorName: "김철수",
-      userType: "일반",
-      showDate: "2024-10-14",
-      phoneNumber: "010-1234-5678",
-      updateDate: "2024-10-13",
-      orderDate: "2024-10-12",
-      ticketStatus: "발급 완료",
-    },
-    {
-      ticketId: 2,
+  const generateTickets = (count: number) => {
+    const baseTicket = {
       depositorName: "이영희",
       userType: "VIP",
       showDate: "2024-10-20",
       phoneNumber: "010-9876-5432",
       updateDate: "2024-10-19",
       orderDate: "2024-10-18",
-      ticketStatus: "미발급",
-    },
-  ];
+      ticketStatus: "BEFORE_PAYMENT",
+    };
+
+    return Array.from({ length: count }, (_, index) => ({
+      ticketId: index + 1,
+      ...baseTicket,
+    }));
+  };
+
+  const tickets = generateTickets(65);
 
   const headers = [
     "입금자명",
@@ -34,13 +34,17 @@ function BookingList() {
     "티켓 상태",
   ];
 
-  // 한 페이지 최대 예약 관리 개수
-  const maxItems = 10;
+  const limit = 10;
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
+
+  const paginatedTickets = tickets.slice(offset, offset + limit);
+  const emptyRows = limit - paginatedTickets.length;
 
   return (
-    <section className="flex flex-col items-center justify-center gap-4">
+    <section className="flex flex-col items-center justify-center gap-8">
       <table
-        className="w-full border-separate border-spacing-y-4 rounded-lg bg-white px-5 text-center"
+        className="w-full border-separate border-spacing-y-4 rounded-lg bg-white px-5 py-px text-center"
         style={{
           boxShadow: "1px 1px 10px 0px #0000000F",
         }}
@@ -54,17 +58,25 @@ function BookingList() {
             ))}
           </tr>
         </thead>
-        <tbody className="">
-          {tickets.map((ticket, index) => (
-            <BookingItem key={index} ticket={ticket} />
+        <tbody>
+          {paginatedTickets.map(ticket => (
+            <BookingItem key={ticket.ticketId} ticket={ticket} />
           ))}
-          {Array.from({ length: maxItems - tickets.length }).map((_, index) => (
-            <tr key={`empty-${index}`} className="h-[30px]">
-              <td colSpan={headers.length}></td>
-            </tr>
-          ))}
+
+          {emptyRows > 0 &&
+            Array.from({ length: emptyRows }).map((_, index) => (
+              <tr key={`empty-${index}`} className="h-[30px]">
+                <td colSpan={headers.length}></td>
+              </tr>
+            ))}
         </tbody>
       </table>
+      <Pagination
+        total={tickets.length}
+        limit={limit}
+        page={page}
+        setPage={setPage}
+      />
     </section>
   );
 }

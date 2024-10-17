@@ -1,5 +1,7 @@
 import { TicketResponse } from "@/types/ticketType";
 
+import TicketStatus from "./TicketStatus";
+
 interface BookingItemProps {
   ticket: TicketResponse;
 }
@@ -15,7 +17,9 @@ function BookingItem(props: BookingItemProps) {
       <td>{ticket.phoneNumber}</td>
       <td>{ticket.updateDate}</td>
       <td>{ticket.orderDate}</td>
-      <td>{ticket.ticketStatus}</td>
+      <td className="flex items-center justify-center">
+        <TicketStatus status={ticket.ticketStatus} />
+      </td>
     </tr>
   );
 }
