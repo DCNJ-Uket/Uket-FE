@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import {
   Select,
   SelectContent,
@@ -7,7 +7,7 @@ import {
   SelectValue,
 } from "@ui/components/ui/select";
 
-import { TICKET_STATUS } from "@/constants/ticketstatus";
+import { TICKET_STATUS } from "@/constants/ticketStatus";
 
 interface TicketStatusProps {
   status: string;
@@ -20,7 +20,10 @@ function TicketStatus(props: TicketStatusProps) {
 
   const [selectedValue, setSelectedValue] = useState(status);
 
-  const currentItem = ticketStatus.find(item => item.value === selectedValue)!;
+  const currentItem = useMemo(
+    () => ticketStatus.find(item => item.value === selectedValue)!,
+    [selectedValue, ticketStatus],
+  );
 
   const handleSelectChange = (value: string) => {
     setSelectedValue(value);
