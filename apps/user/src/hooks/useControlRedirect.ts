@@ -1,7 +1,8 @@
+import { useLocation } from "react-router-dom";
 import { useState } from "react";
 
 import { getAccessToken } from "@/utils/handleToken";
-import { getRefreshToken } from "@/utils/handleCookie";
+import { getRefreshToken, setCookie } from "@/utils/handleCookie";
 
 import { Path, useNavigate } from "@/router";
 
@@ -13,7 +14,7 @@ interface RedirectAndModalPath {
 export const useControlRedirect = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-
+  const { pathname, search } = useLocation();
   const handleOpenModalOrRedirect = ({
     path,
     onCustomClick,
@@ -35,6 +36,7 @@ export const useControlRedirect = () => {
 
   const handleRedirectToLogin = () => {
     handleCloseModal();
+    setCookie('login_redirect_url', pathname + search)
     navigate("/login");
   };
 
