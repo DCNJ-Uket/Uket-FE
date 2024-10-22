@@ -6,10 +6,11 @@ import { cn } from "@uket/ui/lib/utils";
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   isIcon?: boolean;
+  iconClick?: () => void;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, isIcon, ...props }, ref) => {
+  ({ className, type, isIcon, iconClick, ...props }, ref) => {
     return (
       <div className="relative w-full">
         <input
@@ -23,7 +24,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           {...props}
         />
         {isIcon && (
-          <Search className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-gray-500" />
+          <Search
+            onClick={iconClick}
+            className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-gray-500"
+          />
         )}
       </div>
     );

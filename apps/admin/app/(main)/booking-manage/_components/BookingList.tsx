@@ -2,13 +2,16 @@ import { useState } from "react";
 
 import Pagination from "@/components/Pagination";
 
-import { useQueryTicketList } from "@/hooks/queries/useQueryTicketList";
+import { TicketResponse } from "@/types/ticketType";
 
 import BookingItem from "./BookingItem";
 
-function BookingList() {
-  const { data } = useQueryTicketList();
-  const tickets = data.content;
+interface BookingListProps {
+  tickets: TicketResponse[];
+}
+
+function BookingList(props: BookingListProps) {
+  const { tickets } = props;
 
   const headers = [
     "입금자명",
