@@ -18,19 +18,19 @@ function TicketStatus(props: TicketStatusProps) {
 
   const ticketStatus = TICKET_STATUS;
 
-  const [selectedValue, setSelectedValue] = useState(status);
+  const [selectedText, setSelectedText] = useState(status);
 
   const currentItem = useMemo(
-    () => ticketStatus.find(item => item.value === selectedValue)!,
-    [selectedValue, ticketStatus],
+    () => ticketStatus.find(item => item.text === selectedText)!,
+    [selectedText, ticketStatus],
   );
 
-  const handleSelectChange = (value: string) => {
-    setSelectedValue(value);
+  const handleSelectChange = (text: string) => {
+    setSelectedText(text);
   };
 
   return (
-    <Select defaultValue={currentItem.value} onValueChange={handleSelectChange}>
+    <Select defaultValue={currentItem.text} onValueChange={handleSelectChange}>
       <SelectTrigger
         className="h-7 max-w-28 gap-2 rounded-lg px-2 py-px leading-tight text-[#2F2F37]"
         style={{ backgroundColor: currentItem.color }}
@@ -39,7 +39,7 @@ function TicketStatus(props: TicketStatusProps) {
       </SelectTrigger>
       <SelectContent>
         {ticketStatus.map(item => (
-          <SelectItem key={item.value} value={item.value}>
+          <SelectItem key={item.value} value={item.text}>
             {item.text}
           </SelectItem>
         ))}

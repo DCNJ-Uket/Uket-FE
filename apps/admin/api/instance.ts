@@ -6,7 +6,10 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const SERVER_VERSION = "/admin/v1";
 
 const AUTH_REQUIRED_PATH: string[] = [];
-const DYNAMIC_AUTH_REQUIRED_PATH = [/\/ticket\/[^/]+\/enter/];
+const DYNAMIC_AUTH_REQUIRED_PATH = [
+  /\/ticket\/[^/]+\/enter/,
+  /^\/ticket(\/.*)?$/,
+];
 
 const isDynamicUrlMatched = (url: string): boolean => {
   return DYNAMIC_AUTH_REQUIRED_PATH.some(path => path.test(url));

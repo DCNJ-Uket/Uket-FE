@@ -2,27 +2,13 @@ import { useState } from "react";
 
 import Pagination from "@/components/Pagination";
 
+import { useQueryTicketList } from "@/hooks/queries/useQueryTicketList";
+
 import BookingItem from "./BookingItem";
 
 function BookingList() {
-  const generateTickets = (count: number) => {
-    const baseTicket = {
-      depositorName: "이영희",
-      userType: "VIP",
-      showDate: "2024-10-20",
-      phoneNumber: "010-9876-5432",
-      updateDate: "2024-10-19",
-      orderDate: "2024-10-18",
-      ticketStatus: "BEFORE_PAYMENT",
-    };
-
-    return Array.from({ length: count }, (_, index) => ({
-      ticketId: index + 1,
-      ...baseTicket,
-    }));
-  };
-
-  const tickets = generateTickets(65);
+  const { data } = useQueryTicketList();
+  const tickets = data.content;
 
   const headers = [
     "입금자명",

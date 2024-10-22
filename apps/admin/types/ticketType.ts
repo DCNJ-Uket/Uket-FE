@@ -12,10 +12,21 @@ export type TicketQrCodeResponse = {
 export type TicketResponse = {
   ticketId: number;
   depositorName: string;
-  showDate: string;
+  telephone: string;
+  showTime: string;
   orderDate: string;
   updateDate: string;
   ticketStatus: string;
   userType: string;
-  phoneNumber: string;
+};
+
+export type TicketListResponse = {
+  content: TicketResponse[];
+  pageNumber: number;
+  pageSize: number;
+  first: boolean;
+  last: boolean;
+  totalElements: number;
+  totalPages: number;
+  empty: boolean;
 };
