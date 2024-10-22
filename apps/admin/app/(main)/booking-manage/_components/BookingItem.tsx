@@ -1,3 +1,5 @@
+import { useFormat } from "@/hooks/useFormat";
+
 import { TicketResponse } from "@/types/ticketType";
 
 import TicketStatus from "./TicketStatus";
@@ -9,14 +11,22 @@ interface BookingItemProps {
 function BookingItem(props: BookingItemProps) {
   const { ticket } = props;
 
+  const { handleFormatDate, handleFormatPhone } = useFormat();
+
+  const formatShowTime = handleFormatDate(ticket.showTime);
+  const formatUpdateDate = handleFormatDate(ticket.updatedDate);
+  const formatOrderDate = handleFormatDate(ticket.orderDate);
+
+  const formatPhone = handleFormatPhone(ticket.telephone);
+
   return (
-    <tr className="h-[30px] text-base">
+    <tr className="h-8 text-base font-medium text-[#5E5E6E]">
       <td>{ticket.depositorName}</td>
       <td>{ticket.userType}</td>
-      <td>{ticket.showTime}</td>
-      <td>{ticket.telephone}</td>
-      <td>{ticket.updateDate}</td>
-      <td>{ticket.orderDate}</td>
+      <td>{formatShowTime}</td>
+      <td>{formatPhone}</td>
+      <td>{formatUpdateDate}</td>
+      <td>{formatOrderDate}</td>
       <td className="flex items-center justify-center">
         <TicketStatus status={ticket.ticketStatus} />
       </td>

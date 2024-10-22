@@ -15,7 +15,7 @@ export type TicketResponse = {
   telephone: string;
   showTime: string;
   orderDate: string;
-  updateDate: string;
+  updatedDate: string;
   ticketStatus: string;
   userType: string;
 };
