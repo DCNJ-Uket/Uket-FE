@@ -68,3 +68,10 @@ export const getSearchRequest = (searchType: string, value: string) => {
 
   return searchRequest;
 };
+
+export type ChangeTicketParams = {
+  ticketId: number;
+  status: string;
+};
+
+export type ChangeTicketResponse = ChangeTicketParams;

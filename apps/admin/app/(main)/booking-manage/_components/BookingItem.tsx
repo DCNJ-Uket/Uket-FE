@@ -28,7 +28,11 @@ function BookingItem(props: BookingItemProps) {
       <td>{formatUpdateDate}</td>
       <td>{formatOrderDate}</td>
       <td className="flex items-center justify-center">
-        <TicketStatus status={ticket.ticketStatus} />
+        <TicketStatus
+          id={ticket.ticketId}
+          status={ticket.ticketStatus}
+          userName={ticket.depositorName}
+        />
       </td>
     </tr>
   );

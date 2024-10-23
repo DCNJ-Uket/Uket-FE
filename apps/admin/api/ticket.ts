@@ -1,4 +1,6 @@
 import {
+  ChangeTicketParams,
+  ChangeTicketResponse,
   getSearchRequest,
   TicketListResponse,
   TicketQrCodeResponse,
@@ -28,6 +30,17 @@ export const getSearchTicket = async (searchType: string, value: string) => {
       [searchRequest.type]: searchRequest.value,
     },
   });
+
+  return data;
+};
+
+export const changeTicketStatus = async ({
+  ticketId,
+  status,
+}: ChangeTicketParams) => {
+  const { data } = await instance.patch<ChangeTicketResponse>(
+    `/ticket/${ticketId}/status/${status}`,
+  );
 
   return data;
 };
