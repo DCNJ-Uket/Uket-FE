@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -22,18 +22,12 @@ function SearchSection(props: SearchSectionProps) {
   const [searchType, setSearchType] = useState("PHONE_NUMBER");
   const [inputValue, setInputValue] = useState("");
 
-  const { data, refetch } = useQueryTicketSearch(searchType, inputValue);
+  const { refetch } = useQueryTicketSearch(searchType, inputValue);
 
   const handleIconClick = () => {
     refetch().then(response => handleTickets(response.data!));
     setInputValue("");
   };
-
-  useEffect(() => {
-    if (data) {
-      handleTickets(data);
-    }
-  }, [data, handleTickets]);
 
   return (
     <section
