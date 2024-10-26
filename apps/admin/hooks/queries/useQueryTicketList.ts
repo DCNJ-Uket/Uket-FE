@@ -3,7 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { getTicketList } from "@/api/ticket";
 
 export const useQueryTicketList = () => {
-  const { data, error } = useSuspenseQuery({
+  const { data, error, refetch } = useSuspenseQuery({
     queryKey: ["ticket-list"],
     queryFn: () => getTicketList(),
   });
@@ -11,5 +11,5 @@ export const useQueryTicketList = () => {
   if (error) {
     throw error;
   }
-  return { data };
+  return { data, refetch };
 };
