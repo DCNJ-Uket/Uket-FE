@@ -26,11 +26,12 @@ function SearchSection(props: SearchSectionProps) {
 
   const handleIconClick = () => {
     refetch();
+    setInputValue("");
   };
 
   useEffect(() => {
     if (data) {
-      handleTickets(data.content);
+      handleTickets(data);
     }
   }, [data, handleTickets]);
 
@@ -42,13 +43,13 @@ function SearchSection(props: SearchSectionProps) {
       }}
     >
       <Select defaultValue="PHONE_NUMBER" onValueChange={setSearchType}>
-        <SelectTrigger className="bg-formInput min-w-36 gap-2 rounded-l-lg text-black">
+        <SelectTrigger className="bg-formInput min-w-48 gap-2 rounded-l-lg text-black">
           <SelectValue placeholder="전화번호 뒷자리" />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="PHONE_NUMBER">전화번호 뒷자리</SelectItem>
           <SelectItem value="USER_NAME">입금자명</SelectItem>
-          <SelectItem value="SHOW_DATE">티켓 날짜</SelectItem>
+          <SelectItem value="SHOW_DATE">티켓 날짜(YY.MM.DD)</SelectItem>
           <SelectItem value="RESERVATION_USER_TYPE">사용자 구분</SelectItem>
           <SelectItem value="STATUS">티켓 상태</SelectItem>
         </SelectContent>
