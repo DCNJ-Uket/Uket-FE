@@ -25,7 +25,7 @@ function SearchSection(props: SearchSectionProps) {
   const { data, refetch } = useQueryTicketSearch(searchType, inputValue);
 
   const handleIconClick = () => {
-    refetch();
+    refetch().then(response => handleTickets(response.data!));
     setInputValue("");
   };
 
