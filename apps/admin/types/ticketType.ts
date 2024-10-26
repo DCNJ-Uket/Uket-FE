@@ -47,9 +47,12 @@ export const getSearchRequest = (searchType: string, value: string) => {
     searchRequest.value = value;
   } else if (searchType === "STATUS") {
     searchRequest.type = "status";
-    searchRequest.value = TICKET_STATUS.find(
-      status => status.text === value,
-    )!.value;
+    const request_value = TICKET_STATUS.find(status => status.text === value);
+    if (request_value === undefined) {
+      return null;
+    } else {
+      searchRequest.value = request_value.value;
+    }
   } else if (searchType === "USER_NAME") {
     searchRequest.type = "userName";
     searchRequest.value = value;
@@ -57,13 +60,22 @@ export const getSearchRequest = (searchType: string, value: string) => {
     searchRequest.type = "showDate";
 
     const dateParts = value.split(".");
-    const year = `20${dateParts[0]}`;
-    const month = dateParts[1].padStart(2, "0");
-    const day = dateParts[2].padStart(2, "0");
-    searchRequest.value = `${year}-${month}-${day}`;
+    if (dateParts.length === 3) {
+      const year = `20${dateParts[0]}`;
+      const month = dateParts[1].padStart(2, "0");
+      const day = dateParts[2].padStart(2, "0");
+      searchRequest.value = `${year}-${month}-${day}`;
+    } else {
+      return null;
+    }
   } else if (searchType === "RESERVATION_USER_TYPE") {
     searchRequest.type = "reservationUserType";
-    searchRequest.value = USER_TYPE.find(type => type.text === value)!.value;
+    const request_value = USER_TYPE.find(type => type.text === value);
+    if (request_value === undefined) {
+      return null;
+    } else {
+      searchRequest.value = request_value.value;
+    }
   }
 
   return searchRequest;

@@ -9,7 +9,7 @@ import BookingList from "./BookingList";
 
 function ManageSection() {
   const { data } = useQueryTicketList();
-  const [tickets, setTickets] = useState(data.content);
+  const [tickets, setTickets] = useState(data);
 
   return (
     <section className="flex grow flex-col gap-8 bg-[#F2F2F2] pl-16 pr-20 pt-20">
