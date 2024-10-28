@@ -8,8 +8,7 @@ const ThreeChevrons = () => {
       src={ChevronsImage}
       alt="화살표"
       width={18}
-      height={10}
-      className="object-cover"
+      className="h-auto object-cover"
     />
   );
 };

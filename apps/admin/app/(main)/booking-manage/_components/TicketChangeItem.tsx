@@ -13,7 +13,7 @@ function TicketChangeItem(props: TicketChangeItemProps) {
   const color = TICKET_STATUS.find(item => item.text === status)!.color;
 
   return (
-    <p className="flex items-center gap-1.5">
+    <span className="flex items-center gap-1.5">
       <span
         className={cn("text-[13px] text-black", before && "text-[#8989A1]")}
       >
@@ -23,7 +23,7 @@ function TicketChangeItem(props: TicketChangeItemProps) {
         className="h-4 w-4 rounded-full"
         style={{ backgroundColor: color }}
       ></span>
-    </p>
+    </span>
   );
 }
 
