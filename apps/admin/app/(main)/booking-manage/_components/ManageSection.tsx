@@ -1,18 +1,58 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+import { useQueryTicketSearch } from "@/hooks/queries/useQueryTicketSearch";
 import { useQueryTicketList } from "@/hooks/queries/useQueryTicketList";
+
+import { TicketResponse } from "@/types/ticketType";
 
 import SearchSection from "./SearchSection";
 import BookingList from "./BookingList";
 
 function ManageSection() {
-  const { data, refetch } = useQueryTicketList();
-  const [tickets, setTickets] = useState(data);
+  const [page, setPage] = useState(1);
+  const [isSearch, setIsSearch] = useState(false);
+  const [searchType, setSearchType] = useState("PHONE_NUMBER");
+  const [searchInputValue, setSearchInputValue] = useState("");
+
+  const { data: listData } = useQueryTicketList(page, { enabled: !isSearch });
+  const { data: searchData } = useQueryTicketSearch(
+    searchType,
+    searchInputValue,
+    page,
+    {
+      enabled: isSearch,
+    },
+  );
+
+  const [tickets, setTickets] = useState<TicketResponse[]>([]);
+  const [totalPages, setTotalPages] = useState(0);
+
+  useEffect(() => {
+    const data = isSearch ? searchData : listData;
+    if (data) {
+      setTickets(data.content);
+      setTotalPages(data.totalPages);
+    }
+  }, [isSearch, listData, searchData]);
 
   const handleViewAllTicket = () => {
-    refetch().then(response => setTickets(response.data!));
+    setIsSearch(false);
+    setPage(1);
+  };
+
+  const handlePage = (page: number) => {
+    setPage(page);
+  };
+
+  const handleTicketSearch = (type: string, value: string) => {
+    if (value.length > 0) {
+      setSearchType(type);
+      setSearchInputValue(value);
+      setIsSearch(true);
+      setPage(1);
+    }
   };
 
   return (
@@ -27,9 +67,14 @@ function ManageSection() {
             전체 내역 보기
           </p>
         </div>
-        <SearchSection handleTickets={setTickets} />
+        <SearchSection handleTicketSearch={handleTicketSearch} />
       </div>
-      <BookingList tickets={tickets} />
+      <BookingList
+        tickets={tickets}
+        handlePage={handlePage}
+        page={page}
+        totalPages={totalPages}
+      />
     </section>
   );
 }

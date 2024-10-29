@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import Pagination from "@/components/Pagination";
 
 import { TicketResponse } from "@/types/ticketType";
@@ -8,10 +6,13 @@ import BookingItem from "./BookingItem";
 
 interface BookingListProps {
   tickets: TicketResponse[];
+  page: number;
+  handlePage: (page: number) => void;
+  totalPages: number;
 }
 
 function BookingList(props: BookingListProps) {
-  const { tickets } = props;
+  const { tickets, page, handlePage, totalPages } = props;
 
   const headers = [
     "입금자명",
@@ -24,11 +25,7 @@ function BookingList(props: BookingListProps) {
   ];
 
   const limit = 10;
-  const [page, setPage] = useState(1);
-  const offset = (page - 1) * limit;
-
-  const paginatedTickets = tickets.slice(offset, offset + limit);
-  const emptyRows = limit - paginatedTickets.length;
+  const emptyRows = limit - tickets.length;
 
   return (
     <section className="flex flex-col items-center justify-center gap-8">
@@ -48,7 +45,7 @@ function BookingList(props: BookingListProps) {
           </tr>
         </thead>
         <tbody>
-          {paginatedTickets.map(ticket => (
+          {tickets.map(ticket => (
             <BookingItem key={ticket.ticketId} ticket={ticket} />
           ))}
 
@@ -60,12 +57,7 @@ function BookingList(props: BookingListProps) {
             ))}
         </tbody>
       </table>
-      <Pagination
-        total={tickets.length}
-        limit={limit}
-        page={page}
-        setPage={setPage}
-      />
+      <Pagination totalPages={totalPages} page={page} handlePage={handlePage} />
     </section>
   );
 }

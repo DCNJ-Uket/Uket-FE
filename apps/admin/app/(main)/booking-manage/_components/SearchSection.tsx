@@ -8,24 +8,18 @@ import {
 } from "@ui/components/ui/select";
 import { Input } from "@ui/components/ui/input";
 
-import { useQueryTicketSearch } from "@/hooks/queries/useQueryTicketSearch";
-
-import { TicketResponse } from "@/types/ticketType";
-
 interface SearchSectionProps {
-  handleTickets: (tickets: TicketResponse[]) => void;
+  handleTicketSearch: (type: string, value: string) => void;
 }
 
 function SearchSection(props: SearchSectionProps) {
-  const { handleTickets } = props;
+  const { handleTicketSearch } = props;
 
-  const [searchType, setSearchType] = useState("PHONE_NUMBER");
+  const [type, setType] = useState("PHONE_NUMBER");
   const [inputValue, setInputValue] = useState("");
 
-  const { refetch } = useQueryTicketSearch(searchType, inputValue);
-
   const handleIconClick = () => {
-    refetch().then(response => handleTickets(response.data!));
+    handleTicketSearch(type, inputValue);
     setInputValue("");
   };
 
@@ -36,7 +30,7 @@ function SearchSection(props: SearchSectionProps) {
         boxShadow: "1px 1px 10px 0px #0000000F",
       }}
     >
-      <Select defaultValue="PHONE_NUMBER" onValueChange={setSearchType}>
+      <Select defaultValue="PHONE_NUMBER" onValueChange={setType}>
         <SelectTrigger className="bg-formInput min-w-48 gap-2 rounded-l-lg text-black">
           <SelectValue placeholder="전화번호 뒷자리" />
         </SelectTrigger>

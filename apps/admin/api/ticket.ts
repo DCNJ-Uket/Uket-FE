@@ -16,25 +16,35 @@ export const scanQrCode = async (token: string | null) => {
   return data;
 };
 
-export const getTicketList = async () => {
-  const { data } = await instance.get<TicketListResponse>(`/ticket/search/all`);
+export const getTicketList = async (page: number) => {
+  const { data } = await instance.get<TicketListResponse>(
+    `/ticket/search/all`,
+    {
+      params: { page: page },
+    },
+  );
 
-  return data.content;
+  return data;
 };
 
-export const getSearchTicket = async (searchType: string, value: string) => {
+export const getSearchTicket = async (
+  searchType: string,
+  value: string,
+  page: number,
+) => {
   const searchRequest = getSearchRequest(searchType, value);
   if (searchRequest !== null) {
     const { data } = await instance.get<TicketListResponse>(`/ticket/search`, {
       params: {
         searchType: searchType,
         [searchRequest.type]: searchRequest.value,
+        page: page,
       },
     });
 
-    return data.content;
+    return data;
   } else {
-    return [];
+    return { content: [], totalPages: 0 };
   }
 };
 
