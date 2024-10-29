@@ -43,7 +43,7 @@ export const getSearchRequest = (searchType: string, value: string) => {
   const searchRequest: SearchRequest = { type: "", value: "" };
 
   if (searchType === "PHONE_NUMBER") {
-    searchRequest.type = "phoneNumber";
+    searchRequest.type = "phoneNumberLastFourDigits";
     searchRequest.value = value;
   } else if (searchType === "STATUS") {
     searchRequest.type = "status";
