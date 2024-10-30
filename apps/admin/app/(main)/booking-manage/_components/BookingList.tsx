@@ -46,7 +46,7 @@ function BookingList(props: BookingListProps) {
         </thead>
         <tbody>
           {tickets.map(ticket => (
-            <BookingItem key={ticket.ticketId} ticket={ticket} />
+            <BookingItem key={ticket.ticketId} ticket={ticket} page={page} />
           ))}
 
           {emptyRows > 0 &&

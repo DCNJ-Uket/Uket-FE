@@ -6,10 +6,11 @@ import TicketStatus from "./TicketStatus";
 
 interface BookingItemProps {
   ticket: TicketResponse;
+  page: number;
 }
 
 function BookingItem(props: BookingItemProps) {
-  const { ticket } = props;
+  const { ticket, page } = props;
 
   const { handleFormatDate } = useFormat();
 
@@ -30,6 +31,7 @@ function BookingItem(props: BookingItemProps) {
           id={ticket.ticketId}
           status={ticket.ticketStatus}
           userName={ticket.depositorName}
+          page={page}
         />
       </td>
     </tr>

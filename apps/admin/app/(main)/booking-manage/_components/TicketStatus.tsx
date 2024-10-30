@@ -17,10 +17,11 @@ interface TicketStatusProps {
   id: number;
   status: string;
   userName: string;
+  page: number;
 }
 
 function TicketStatus(props: TicketStatusProps) {
-  const { id, status, userName } = props;
+  const { id, status, userName, page } = props;
 
   const ticketStatus = TICKET_STATUS;
 
@@ -38,7 +39,7 @@ function TicketStatus(props: TicketStatusProps) {
     setOpenDialog(true);
   };
 
-  const mutation = useMutationChangeTicketStatus();
+  const mutation = useMutationChangeTicketStatus(page);
 
   const handleConfirmChange = () => {
     const newTicketValue = ticketStatus.find(
