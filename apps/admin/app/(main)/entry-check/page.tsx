@@ -2,14 +2,15 @@ import { isBrowser } from "react-device-detect";
 
 import GreetingHeader from "@/components/GreetingHeader";
 
+import EntryCheckSection from "./_components/EntryCheckSection";
+
 export default function EntryCheckPage() {
   return (
     <main className="flex h-full flex-col">
       {isBrowser ? (
-        <>
-          <h1 className="py-5 pl-7 text-xl font-bold">실시간 입장 조회</h1>
-          <section className="grow">룰루</section>
-        </>
+        <main className="flex h-full flex-col">
+          <EntryCheckSection />
+        </main>
       ) : (
         <>
           <GreetingHeader />
