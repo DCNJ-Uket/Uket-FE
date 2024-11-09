@@ -42,10 +42,6 @@ function ManageSection() {
     setPage(1);
   };
 
-  const handlePage = (page: number) => {
-    setPage(page);
-  };
-
   const handleTicketSearch = (type: string, value: string) => {
     if (value.length > 0) {
       setSearchType(type);
@@ -71,7 +67,7 @@ function ManageSection() {
       </div>
       <BookingList
         tickets={tickets}
-        handlePage={handlePage}
+        setPage={setPage}
         page={page}
         totalPages={totalPages}
       />

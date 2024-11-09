@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { cn } from "@ui/lib/utils";
 import {
   ChevronLeftIcon,
@@ -5,65 +6,103 @@ import {
   ChevronsLeftIcon,
   ChevronsRightIcon,
 } from "@ui/components/ui/icon";
+import { Button } from "@ui/components/ui/button";
 
 interface PaginationProps {
   totalPages: number;
   page: number;
-  handlePage: (page: number) => void;
+  setPage: (page: number) => void;
 }
 
 function Pagination(props: PaginationProps) {
-  const { totalPages, page, handlePage } = props;
+  const { totalPages, page, setPage } = props;
+  const maxButtons = 5;
+  const [pageGroup, setPageGroup] = useState(0);
 
-  const maxVisiblePages = 5;
+  const handleFirst = () => {
+    setPageGroup(0);
+    setPage(1);
+  };
 
-  const currentGroup = Math.floor((page - 1) / maxVisiblePages);
-  const startPage = currentGroup * maxVisiblePages + 1;
-  const endPage = Math.min(startPage + maxVisiblePages - 1, totalPages);
+  const handleLast = () => {
+    const lastGroup = Math.floor((totalPages - 1) / maxButtons);
+    setPageGroup(lastGroup);
+    setPage(totalPages);
+  };
+
+  const handleNextGroup = () => {
+    if ((pageGroup + 1) * maxButtons < totalPages) {
+      setPageGroup(prev => prev + 1);
+      setPage((pageGroup + 1) * maxButtons + 1);
+    }
+  };
+
+  const handlePrevGroup = () => {
+    if (pageGroup > 0) {
+      setPageGroup(prev => prev - 1);
+      setPage(Math.max(pageGroup * maxButtons, 1));
+    }
+  };
+
+  const startPage = pageGroup * maxButtons;
+  const endPage = Math.min(startPage + maxButtons, totalPages);
+  const pageNumbers = Array.from(
+    { length: endPage - startPage },
+    (_, index) => startPage + index,
+  );
 
   return (
-    <nav className="flex items-center justify-center gap-10 text-base font-light text-[#5E5E6E]">
-      <div className="flex items-center justify-center gap-3">
-        <button
-          onClick={() => handlePage(startPage - maxVisiblePages)}
-          disabled={startPage <= 1}
+    <div className="flex items-center justify-center space-x-6">
+      {pageGroup > 0 && (
+        <div className="space-x-2">
+          <Button
+            variant="ghost"
+            onClick={handleFirst}
+            className="p-0 text-sm font-light text-[#5E5E6E] hover:bg-inherit"
+          >
+            <ChevronsLeftIcon className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="ghost"
+            onClick={handlePrevGroup}
+            className="p-0 text-sm font-light text-[#5E5E6E] hover:bg-inherit"
+          >
+            <ChevronLeftIcon className="h-4 w-4" />
+          </Button>
+        </div>
+      )}
+      {pageNumbers.map(pageNum => (
+        <Button
+          key={pageNum}
+          variant="ghost"
+          onClick={() => setPage(pageNum + 1)}
+          className={cn(
+            "p-0 text-sm font-light text-[#5E5E6E] hover:bg-inherit",
+            page === pageNum + 1 && "font-semibold text-[#17171B]",
+          )}
         >
-          <ChevronsLeftIcon strokeWidth={1} />
-        </button>
-        <button onClick={() => handlePage(page - 1)} disabled={page === 1}>
-          <ChevronLeftIcon strokeWidth={1} />
-        </button>
-      </div>
-      <div className="flex items-center justify-center gap-7">
-        {Array.from({ length: endPage - startPage + 1 }).map((_, i) => {
-          const pageNumber = startPage + i;
-          return (
-            <button
-              key={pageNumber}
-              onClick={() => handlePage(pageNumber)}
-              aria-current={page === pageNumber ? "page" : undefined}
-              className={cn(page === pageNumber && "font-bold text-[#17171B]")}
-            >
-              {pageNumber}
-            </button>
-          );
-        })}
-      </div>
-      <div className="flex items-center justify-center gap-3">
-        <button
-          onClick={() => handlePage(page + 1)}
-          disabled={page === totalPages}
-        >
-          <ChevronRightIcon strokeWidth={1} />
-        </button>
-        <button
-          onClick={() => handlePage(startPage + maxVisiblePages)}
-          disabled={endPage >= totalPages}
-        >
-          <ChevronsRightIcon strokeWidth={1} />
-        </button>
-      </div>
-    </nav>
+          {pageNum + 1}
+        </Button>
+      ))}
+      {endPage < totalPages && (
+        <div className="space-x-2">
+          <Button
+            variant="ghost"
+            onClick={handleNextGroup}
+            className="p-0 text-sm font-light text-[#5E5E6E] hover:bg-inherit"
+          >
+            <ChevronRightIcon className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="ghost"
+            onClick={handleLast}
+            className="p-0 text-sm font-light text-[#5E5E6E] hover:bg-inherit"
+          >
+            <ChevronsRightIcon className="h-4 w-4" />
+          </Button>
+        </div>
+      )}
+    </div>
   );
 }
 
