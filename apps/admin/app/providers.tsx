@@ -15,7 +15,6 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       new QueryClient({
         defaultOptions: {
           queries: {
-            refetchOnMount: false,
             refetchOnWindowFocus: false,
             refetchInterval: false,
             staleTime: 1000 * 60 * 10,
