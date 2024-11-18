@@ -25,7 +25,7 @@ const TicketListSection = () => {
           myTicketList.map(ticket => (
             <CarouselItem
               key={ticket.ticketId}
-              className="basis-11/12 pb-2 pl-2 sm:basis-1/2 sm:pl-10 md:basis-1/2 lg:basis-1/3 xl:basis-1/3 2xl:basis-1/3"
+              className="basis-4/5 pb-2 pl-2"
             >
               <div className="p-1">
                 <Ticket ticket={ticket} />

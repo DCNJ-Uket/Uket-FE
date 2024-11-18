@@ -12,7 +12,7 @@ const UnivList = (props: UnivListProps) => {
   const { data: univList } = useQueryFestivalUnivList();
 
   return (
-    <main className="grid grow auto-rows-min grid-cols-3 gap-3 md:grid-cols-6">
+    <main className="grid grow auto-rows-min grid-cols-3 gap-3 md:grid-cols-4">
       {univList.map(({ id, name, logoUrl }) => (
         <UnivItem
           key={id}

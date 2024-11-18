@@ -83,7 +83,7 @@ const QRCode = (props: QRCodeProps) => {
         </CardTitle>
         <CardDescription className="flex flex-col items-center justify-center">
           <Image
-            src={qrCode}
+            src={qrcode}
             alt="qrcode"
             width={100}
             height={100}

@@ -11,19 +11,21 @@ const App = () => {
 
   return (
     <CriticalErrorBoundary>
-      <section className="relative flex h-dvh w-screen flex-col">
-        {!["/"].includes(pathname) && (
-          <header className="sticky left-0 top-0 z-10 bg-white">
-            <Nav />
-          </header>
-        )}
-        <main className="w-full grow">
-          <Redirects>
-            <Outlet />
-          </Redirects>
-        </main>
+      <section className="relative flex h-dvh w-screen flex-col items-center">
+        <div className="h-full w-full sm:w-[500px] flex flex-col">
+          {!["/"].includes(pathname) && (
+            <header className="left-0 top-0 z-10 bg-white">
+              <Nav />
+            </header>
+          )}
+          <main className="w-full grow">
+            <Redirects>
+              <Outlet />
+            </Redirects>
+          </main>
+        </div>
+        <Toaster className="bottom-0 right-0" />
       </section>
-      <Toaster className="bottom-0 right-0" />
     </CriticalErrorBoundary>
   );
 };

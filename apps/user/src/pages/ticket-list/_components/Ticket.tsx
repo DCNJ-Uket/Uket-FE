@@ -39,7 +39,7 @@ const Ticket = (props: TicketProps) => {
       ticketId,
     },
   } = props;
-
+  
   return (
     <Dialog>
       <DialogTrigger className="text-start">

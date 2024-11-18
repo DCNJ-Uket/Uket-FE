@@ -29,7 +29,7 @@ const ActivityContent = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => {
   return (
-    <main className="flex h-full grow flex-col items-center overflow-y-scroll bg-[#F2F2F2]">
+    <main className="flex h-full w-full grow flex-col items-center overflow-y-scroll bg-[#F2F2F2]">
       <section
         className={cn("flex w-full grow flex-col justify-between", className)}
         {...props}

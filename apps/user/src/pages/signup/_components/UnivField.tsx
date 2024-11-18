@@ -41,7 +41,7 @@ const UnivField = (props: UnivFieldProps) => {
             defaultValue={field.value?.univName}
           >
             <FormControl>
-              <SelectTrigger className="border-formInput border">
+              <SelectTrigger className="border-formInput border rounded-lg">
                 <SelectValue placeholder="학교 선택" />
               </SelectTrigger>
             </FormControl>

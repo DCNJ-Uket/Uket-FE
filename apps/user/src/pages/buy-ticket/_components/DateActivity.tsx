@@ -59,7 +59,7 @@ const DateActivity: ActivityComponentType = () => {
   return (
     <AppScreen appBar={{ border: false, height: "56px" }}>
       <Activity>
-        <ActivityContent>
+        <ActivityContent className="">
           <SelectHeader
             univName={univName}
             reservationUserType={reservationUserType}

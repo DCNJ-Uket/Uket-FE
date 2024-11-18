@@ -28,7 +28,7 @@ const UnivSelector = (props: UnivSelectorProps) => {
       defaultValue={currentUniv || undefined}
       onValueChange={handleSelect}
     >
-      <SelectTrigger className="mt-3 w-full border-[#8989A1]">
+      <SelectTrigger className="mt-3 w-full rounded-lg border border-[#8989A1]">
         <SelectValue placeholder="대학교" />
       </SelectTrigger>
       <SelectContent>
