@@ -1,23 +1,21 @@
 import React from "react";
-import { Button } from "@ui/components/ui/button";
 
 import AdminLogo from "@/components/AdminLogo";
 
 import { useProfile } from "@/hooks/useProfile";
 
+import { isMobile } from "@/utils/isMobile";
+
+import LogoutModal from "./LogoutModal";
+
 const Nav = async () => {
   const { isAuthenticated } = await useProfile();
+  const mobile = isMobile();
 
   return (
     <nav className="flex items-center justify-between">
       <AdminLogo />
-      {isAuthenticated && (
-        <aside>
-          <Button variant="link" className="px-0 text-xs text-[#5E5E6E]">
-            로그아웃
-          </Button>
-        </aside>
-      )}
+      {isAuthenticated && <LogoutModal isMobile={mobile} />}
     </nav>
   );
 };

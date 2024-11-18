@@ -4,11 +4,12 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@ui/lib/utils";
-import { Button } from "@ui/components/ui/button";
 
 import AdminLogo from "@/components/AdminLogo";
 
 import { LINKS } from "@/constants/link";
+
+import LogoutModal from "./LogoutModal";
 
 interface NavItemProps {
   href: string;
@@ -48,7 +49,6 @@ const NavItem = (props: NavItemProps) => {
 
 const SideNav = () => {
   const pathname = usePathname();
-
   const links = [LINKS[1], LINKS[2], LINKS[0]];
 
   return (
@@ -69,9 +69,7 @@ const SideNav = () => {
           />
         ))}
       </div>
-      <Button variant={"outline"} className="border-[#8989A1] text-[#8989A1]">
-        로그아웃
-      </Button>
+      <LogoutModal isMobile={false} />
     </div>
   );
 };
