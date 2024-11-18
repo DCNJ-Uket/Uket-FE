@@ -1,6 +1,5 @@
 "use client";
 
-import { isBrowser } from "react-device-detect";
 import React from "react";
 import { cn } from "@ui/lib/utils";
 import { Input } from "@ui/components/ui/input";
@@ -13,7 +12,6 @@ import {
 } from "@ui/components/ui/form";
 import { Button } from "@ui/components/ui/button";
 
-import AdminLogo from "@/components/AdminLogo";
 
 import { useLoginForm } from "@/hooks/useLoginForm";
 
@@ -21,19 +19,7 @@ function AuthSection() {
   const { form, onSubmit, error } = useLoginForm();
 
   return (
-    <section
-      className={cn(
-        "mt-16 flex grow flex-col gap-11",
-        isBrowser && "mt-36 items-center",
-      )}
-    >
-      {isBrowser ? (
-        <AdminLogo logo_style="w-32" font_style="text-lg font-medium" />
-      ) : (
-        <header>
-          <h1 className="text-2xl font-black">관리자 로그인</h1>
-        </header>
-      )}
+    <section className={cn("mt-16 flex grow flex-col gap-11")}>
       <main className="flex flex-col gap-10">
         <Form {...form}>
           <form

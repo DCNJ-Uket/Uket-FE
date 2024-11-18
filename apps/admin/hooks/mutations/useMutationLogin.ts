@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 
 import { LoginRequestParams, LoginResponse } from "@/types/authType";
@@ -5,7 +6,7 @@ import { LoginRequestParams, LoginResponse } from "@/types/authType";
 import { setAccessToken } from "@/utils/handleToken";
 
 import { login } from "@/api/auth";
-import { useRouter } from "next/navigation";
+
 
 export const useMutationLogin = () => {
   const router = useRouter();

@@ -10,7 +10,7 @@ import { LINKS } from "@/constants/link";
 const Footer = () => {
   const pathname = usePathname();
 
-  const links = LINKS;
+  const links = [LINKS[2], LINKS[0], LINKS[1]];
 
   return (
     <div className="flex h-14">
