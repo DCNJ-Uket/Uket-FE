@@ -59,7 +59,7 @@ const HomePage = () => {
             </Suspense>
           </RetryErrorBoundary>
         </header>
-        <section className="grow">
+        <section className="grow mb-5">
           <RetryErrorBoundary resetKeys={[univId]}>
             <Suspense fallback={<FestivalSectionSuspenseFallback />}>
               <FestivalSection
@@ -69,7 +69,7 @@ const HomePage = () => {
             </Suspense>
           </RetryErrorBoundary>
         </section>
-        <footer className="mb-3 flex w-full items-center justify-center gap-3 bg-white">
+        <footer className="sticky bottom-5 z-10 mb-3 flex w-full items-center justify-center gap-3">
           <AuthRequiredModalButton
             title="내 티켓 확인"
             path="/ticket-list"
