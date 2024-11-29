@@ -9,7 +9,7 @@ import {
 import { instance } from "./instance";
 
 export const scanQrCode = async (token: string | null) => {
-  const { data } = await instance.get<TicketQrCodeResponse>(
+  const { data } = await instance.post<TicketQrCodeResponse>(
     `/ticket/${token}/enter`,
   );
 
