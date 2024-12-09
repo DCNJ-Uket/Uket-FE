@@ -1,0 +1,13 @@
+{
+  "extends": "@uket/typescript-config/vite.json",
+  "compilerOptions": {
+    /* Alias Path */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+    },
+    "types": ["kakao.maps.d.ts"]
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

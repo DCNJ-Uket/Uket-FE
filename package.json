@@ -7,9 +7,11 @@
     "build": "turbo run build",
     "build:user": "turbo run build --filter user",
     "build:admin": "turbo run build --filter admin",
+    "build:soritor": "turbo run build --filter soritor",
     "dev": "turbo run dev",
     "dev:user": "turbo run dev --filter user",
     "dev:admin": "turbo run dev --filter admin",
+    "dev:soritor": "turbo run dev --filter soritor",
     "lint": "turbo lint",
     "prepare": "husky install",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
