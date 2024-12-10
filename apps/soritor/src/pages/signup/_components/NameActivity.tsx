@@ -8,6 +8,8 @@ import {
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
+import { useStackForm } from "@/hooks/useStackForm";
+
 import { validateForm } from "../../../utils/vaildateForm";
 import NextStepButton from "./NextStepButton";
 import {
@@ -20,8 +22,8 @@ import {
 
 interface NameParmas extends ActivityParams {}
 
-const NameActivity: ActivityComponentType<NameParmas> = ({ params }) => {
-  const { form } = params;
+const NameActivity: ActivityComponentType<NameParmas> = () => {
+  const { form } = useStackForm();
 
   return (
     <AppScreen appBar={{ border: false, height: "56px" }}>

@@ -20,19 +20,11 @@ interface NextStepButtonProps
 }
 
 const NextStepButton = (props: NextStepButtonProps) => {
-  const { activityName, disabled, params, mutate, isLoading, ...rest } = props;
+  const { activityName, disabled, params, isLoading, ...rest } = props;
   const { push } = useMyFlow();
   const navigate = useNavigate();
 
   const handleClick = async () => {
-    if (mutate) {
-      try {
-        await mutate();
-      } catch (error) {
-        return;
-      }
-    }
-
     if (activityName === "MainActivity") {
       navigate("/", {
         replace: true,

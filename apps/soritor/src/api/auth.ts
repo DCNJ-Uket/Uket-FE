@@ -22,31 +22,15 @@ export const login = async ({ code, provider }: LoginRequestParams) => {
 };
 
 export const signup = async ({
-  userType,
   userName,
   userPhone,
-  userUniv,
-  userId,
-  userMajor,
-  userEmail,
 }: Partial<FormSchemaType>) => {
-  const isUnivStudent = userType === "univ";
   const baseBody = {
     depositorName: userName,
     phoneNumber: userPhone,
   };
-  const univBody = {
-    ...baseBody,
-    university: userUniv?.univName,
-    universityEmail: userEmail,
-    studentMajor: userMajor,
-    studentCode: userId,
-  };
 
-  const { data } = await instance.post(
-    "/users/register",
-    isUnivStudent ? univBody : baseBody,
-  );
+  const { data } = await instance.post("/users/register", baseBody);
 
   return data;
 };

@@ -13,13 +13,12 @@ import RetryErrorBoundary from "./error/RetryErrorBoundary";
 const Nav = () => {
   const { pathname } = useLocation();
   const [previousPath, popPreviousPath] = usePreviousPath();
+  const showLogo = ["/", "/home"].includes(pathname);
+  const showProfile = !["/buy-ticket", "/myinfo", "/login"].includes(pathname);
 
   if (pathname === "/signup") {
     return null;
   }
-
-  const showLogo = ["/", "/home"].includes(pathname);
-  const showProfile = !["/buy-ticket", "/myinfo", "/login"].includes(pathname);
 
   return (
     <nav

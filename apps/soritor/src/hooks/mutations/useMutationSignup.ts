@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { signup } from "@/api/auth";
 
@@ -11,25 +11,18 @@ import { setRefreshToken } from "@/utils/handleCookie";
 
 
 export const useMutationSignup = () => {
+  const queryClient = useQueryClient();
+
   const mutation = useMutation({
-    mutationFn: ({
-      userType,
-      userName,
-      userPhone,
-      userUniv,
-      userId,
-      userMajor,
-      userEmail,
-    }: Partial<FormSchemaType>) =>
+    mutationFn: ({ userType, userName, userPhone }: Partial<FormSchemaType>) =>
       signup({
         userType,
         userName,
         userPhone,
-        userUniv,
-        userId,
-        userMajor,
-        userEmail,
       }),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["user-info"] });
+    },
     onSuccess: ({ accessToken, refreshToken }: AuthResponse) => {
       setAccessToken(accessToken);
       setRefreshToken("refreshToken", refreshToken);

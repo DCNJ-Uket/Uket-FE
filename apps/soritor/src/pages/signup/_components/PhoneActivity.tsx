@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { Input } from "@uket/ui/components/ui/input";
 import { FormControl, FormField, FormItem } from "@uket/ui/components/ui/form";
 import { ActivityComponentType } from "@stackflow/react";
@@ -20,9 +19,6 @@ interface PhoneParams extends ActivityParams {}
 const PhoneActivity: ActivityComponentType<PhoneParams> = ({ params }) => {
   const { form } = params;
   const { onSubmit } = useStackForm();
-  const isUnivStudent = useMemo(() => {
-    return form.getValues("userType") === "univ";
-  }, [form]);
 
   return (
     <AppScreen appBar={{ border: false, height: "56px" }}>
@@ -60,12 +56,8 @@ const PhoneActivity: ActivityComponentType<PhoneParams> = ({ params }) => {
                     </FormItem>
                     <ActivityFooter>
                       <NextStepButton
-                        type={isUnivStudent ? "button" : "submit"}
-                        activityName={
-                          (isUnivStudent
-                            ? "UnivActivity"
-                            : "CompleteActivity") as never
-                        }
+                        type={"submit"}
+                        activityName={"CompleteActivity" as never}
                         params={{ form }}
                         disabled={
                           !validateForm({
