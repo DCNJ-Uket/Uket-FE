@@ -1,12 +1,11 @@
+import { LoaderCircleIcon } from "@uket/ui/components/ui/icon";
 import { Button } from "@uket/ui/components/ui/button";
-
 
 import { useNavigate } from "@/router";
 
 import { FormType, useTicketStackForm } from "@/hooks/useTicketStackForm";
 
 import { useTicketFlow } from "@/utils/useTicketFlow";
-
 
 interface NextButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -21,7 +20,7 @@ interface NextButtonProps
 const NextButton = (as: NextButtonProps) => {
   const { activityName, disabled, params, routeUrl, ...props } = as;
   const { push, pop } = useTicketFlow();
-  const { onSubmit } = useTicketStackForm();
+  const { onSubmit, isPending } = useTicketStackForm();
 
   const navigate = useNavigate();
 
@@ -32,12 +31,14 @@ const NextButton = (as: NextButtonProps) => {
       pop();
       pop();
       pop();
+      pop();
       navigate(routeUrl as any, { replace: true });
       return;
     } else if (activityName === "CompleteActivity" && form) {
       try {
         await onSubmit(form.getValues());
       } finally {
+        pop();
         pop();
         pop();
       }
@@ -53,7 +54,7 @@ const NextButton = (as: NextButtonProps) => {
       disabled={disabled}
       {...props}
     >
-      다음으로
+      {isPending ? <LoaderCircleIcon className="animate-spin" /> : "다음으로"}
     </Button>
   );
 };

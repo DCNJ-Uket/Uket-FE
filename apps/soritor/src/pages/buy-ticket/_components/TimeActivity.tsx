@@ -74,10 +74,16 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
           </div>
           <ActivityFooter className="z-50">
             <NextButton
-              type="submit"
-              activityName={"CompleteActivity" as never}
+              activityName={"QuestionActivity" as never}
               disabled={selectedItem === null}
-              params={{ form }}
+              params={{
+                univName: univName,
+                showId: showId,
+                showDate: showDate,
+                showTime: formatSelectTime,
+                reservationUserType,
+                form,
+              }}
             ></NextButton>
           </ActivityFooter>
         </ActivityContent>

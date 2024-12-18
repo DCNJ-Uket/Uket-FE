@@ -13,7 +13,7 @@ export const FormSchema = z.object({
 });
 
 export const useTicketStackForm = () => {
-  const { mutateAsync } = useMutationBuyTicket();
+  const { mutateAsync, isPending } = useMutationBuyTicket();
 
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
@@ -27,9 +27,8 @@ export const useTicketStackForm = () => {
   const onSubmit = async (data: FormSchemaType) => {
     const { universityId, reservationId } = data;
 
-    const result = await mutateAsync({ universityId, reservationId });
-    return result;
+    await mutateAsync({ universityId, reservationId });
   };
 
-  return { form, onSubmit };
+  return { form, onSubmit, isPending };
 };
