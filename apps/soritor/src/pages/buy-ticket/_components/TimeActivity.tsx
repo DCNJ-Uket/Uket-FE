@@ -25,11 +25,10 @@ interface TimeParams extends ActivityParams {
   univName: string;
   showId: string;
   showDate: string;
-  reservationUserType: string;
 }
 
 const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
-  const { form, reservationUserType, showDate, univName, showId } = params;
+  const { form, showDate, univName, showId } = params;
 
   const {
     selectedItem,
@@ -49,7 +48,6 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
         <ActivityContent>
           <SelectHeader
             univName={univName}
-            reservationUserType={reservationUserType}
             formatShowDate={showDate}
             formatSelectTime={formatSelectTime}
           />
@@ -67,7 +65,6 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
                   showId={showId}
                   selectedItem={selectedItem}
                   onSelect={handleSelectReservation}
-                  reservationUserType={reservationUserType}
                 />
               </Suspense>
             </RetryErrorBoundary>
@@ -81,7 +78,6 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
                 showId: showId,
                 showDate: showDate,
                 showTime: formatSelectTime,
-                reservationUserType,
                 form,
               }}
             ></NextButton>

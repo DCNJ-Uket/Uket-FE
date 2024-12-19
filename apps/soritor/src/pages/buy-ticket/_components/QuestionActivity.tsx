@@ -17,13 +17,12 @@ interface QuestionParams extends ActivityParams {
   showId: string;
   showDate: string;
   showTime: string;
-  reservationUserType: string;
 }
 
 const QuestionActivity: ActivityComponentType<QuestionParams> = ({
   params,
 }) => {
-  const { form, reservationUserType, showDate, univName, showTime } = params;
+  const { form, showDate, univName, showTime } = params;
 
   return (
     <AppScreen appBar={{ border: false, height: "56px" }}>
@@ -31,7 +30,6 @@ const QuestionActivity: ActivityComponentType<QuestionParams> = ({
         <ActivityContent>
           <SelectHeader
             univName={univName}
-            reservationUserType={reservationUserType}
             formatShowDate={showDate}
             formatSelectTime={showTime}
           />
