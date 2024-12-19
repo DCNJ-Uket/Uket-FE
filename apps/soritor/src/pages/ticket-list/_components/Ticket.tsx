@@ -39,7 +39,7 @@ const Ticket = (props: TicketProps) => {
       ticketId,
     },
   } = props;
-  
+
   return (
     <Dialog>
       <DialogTrigger className="text-start">
@@ -87,7 +87,7 @@ const Ticket = (props: TicketProps) => {
         </Card>
       </DialogTrigger>
       <DialogContent className="max-w-xs rounded-lg p-0 sm:max-w-md">
-        <QRCode id={ticketId} />
+        <QRCode id={ticketId} ticketStatus={ticketStatus} />
       </DialogContent>
     </Dialog>
   );
