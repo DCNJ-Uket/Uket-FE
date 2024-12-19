@@ -15,12 +15,16 @@ import Ticketing3DImg from "/complete3DTicket.png";
 
 import Image from "@/components/Image";
 
+import { handleCopyClipBoard } from "@/utils/handleCopyToClipboard";
+
 const CompleteActivity: ActivityComponentType = () => {
   const [searchParams] = useSearchParams();
   const univName = searchParams.get("univName");
   const univId = searchParams.get("univId") as string;
 
   const routeUrl = `/home?select-univ=${univName}&id=${univId}`;
+
+  const depositAccount = "국민 12345-78-9101112 UKET";
 
   return (
     <AppScreen
@@ -41,7 +45,7 @@ const CompleteActivity: ActivityComponentType = () => {
               alt="티켓 이미지"
               className="animate-rotate-axis w-[180px]"
             />
-            <div className="mt-10 flex flex-col justify-start gap-5 text-center">
+            <div className="z-20 mt-10 flex flex-col justify-start gap-5 text-center">
               <h1 className="text-[23px] font-black">
                 <p>예매 정보가 등록되었습니다.</p>
                 <p>입금 후 예매가 완료됩니다.</p>
@@ -51,9 +55,13 @@ const CompleteActivity: ActivityComponentType = () => {
               </h6>
               <div className="flex items-center gap-2">
                 <p className="text-base font-normal text-[#8989A1]">
-                  국민 12345-78-9101112 UKET
+                  {depositAccount}
                 </p>
-                <p className="text-brand decoration-brand font-bold underline decoration-solid decoration-1 underline-offset-2">
+
+                <p
+                  className="text-brand decoration-brand cursor-pointer font-bold underline decoration-solid decoration-1 underline-offset-2"
+                  onClick={() => handleCopyClipBoard(depositAccount)}
+                >
                   복사
                 </p>
               </div>
