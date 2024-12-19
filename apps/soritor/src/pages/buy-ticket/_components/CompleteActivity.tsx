@@ -41,9 +41,23 @@ const CompleteActivity: ActivityComponentType = () => {
               alt="티켓 이미지"
               className="animate-rotate-axis w-[180px]"
             />
-            <h1 className="mt-10 text-[23px] font-black">
-              <p>예매가 완료되었습니다.</p>
-            </h1>
+            <div className="mt-10 flex flex-col justify-start gap-5 text-center">
+              <h1 className="text-[23px] font-black">
+                <p>예매 정보가 등록되었습니다.</p>
+                <p>입금 후 예매가 완료됩니다.</p>
+              </h1>
+              <h6 className="text-desc text-base font-medium">
+                공연 티켓가 ₩15,000
+              </h6>
+              <div className="flex items-center gap-2">
+                <p className="text-base font-normal text-[#8989A1]">
+                  국민 12345-78-9101112 UKET
+                </p>
+                <p className="text-brand decoration-brand font-bold underline decoration-solid decoration-1 underline-offset-2">
+                  복사
+                </p>
+              </div>
+            </div>
             <Image
               src={CompleteBackgroudImg}
               alt="티켓팅 완료 이미지"
@@ -52,6 +66,7 @@ const CompleteActivity: ActivityComponentType = () => {
           </ActivityHeader>
           <ActivityFooter className="z-10">
             <NextButton
+              isLast
               activityName={"MainActivity" as never}
               routeUrl={routeUrl}
               disabled={false}
