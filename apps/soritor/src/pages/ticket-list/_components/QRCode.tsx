@@ -27,13 +27,14 @@ import ConfirmModal from "./ConfirmModal";
 
 interface QRCodeProps {
   id: TicketItem["ticketId"];
+  ticketStatus: TicketItem["ticketStatus"];
 }
 
 const QRCode = (props: QRCodeProps) => {
-  const { id } = props;
+  const { id, ticketStatus: isDepositActive } = props;
 
   const { data: qrcode, refetch } = useQueryTicketQRCode(id);
-  
+
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData<MyTicketListInfoResponse>([
     "my-ticket-list",
@@ -68,6 +69,7 @@ const QRCode = (props: QRCodeProps) => {
   const handleReissueQRCode = () => {
     refetch();
   };
+
   return (
     <Card className="border-none shadow-none">
       <CardHeader className="gap-3">
@@ -116,25 +118,15 @@ const QRCode = (props: QRCodeProps) => {
           </footer>
         </section>
       </CardContent>
-      <CardFooter className="mx-5 mb-3 justify-center overflow-hidden rounded-lg bg-[#FDC950] py-3">
-        <div className="inline-flex min-w-full flex-nowrap items-center">
-          <h1 className="animate-infinite-scroll min-w-full text-center text-sm font-bold">
-            <span>학생증 또는 신분증을 제시해 주세요!</span>
-          </h1>
-          <h1
-            className="animate-infinite-scroll min-w-full text-center text-sm font-bold"
-            aria-hidden={true}
-          >
-            <span>학생증 또는 신분증을 제시해 주세요!</span>
-          </h1>
-          <h1
-            className="animate-infinite-scroll min-w-full text-center text-sm font-bold"
-            aria-hidden={true}
-          >
-            <span>학생증 또는 신분증을 제시해 주세요!</span>
-          </h1>
-        </div>
-      </CardFooter>
+      {isDepositActive !== "입금 확인중" && (
+        <CardFooter className="mx-5 mb-3 justify-center overflow-hidden rounded-lg bg-[#FDC950] py-3">
+          <div className="inline-flex flex-nowrap items-center">
+            <h1 className="text-center text-sm text-[#5E5E6E]">
+              입장 시 신분증을 함께 제시해 주세요!
+            </h1>
+          </div>
+        </CardFooter>
+      )}
     </Card>
   );
 };

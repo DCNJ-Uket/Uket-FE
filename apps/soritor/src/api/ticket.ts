@@ -29,3 +29,9 @@ export const cancelTicket = async (ticketId: TicketItem["ticketId"]) => {
 
   return data;
 };
+
+export const getDepositUrl = async (ticketId: TicketItem["ticketId"]) => {
+  const { data } = await instance(`/tickets/${ticketId}/depositUrl`);
+
+  return data;
+};

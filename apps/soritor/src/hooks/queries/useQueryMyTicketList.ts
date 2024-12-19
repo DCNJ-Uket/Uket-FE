@@ -4,7 +4,6 @@ import { getMyTicketList } from "@/api/ticket";
 
 import { formatDate } from "@/utils/handleTicket";
 
-
 export const useQueryMyTicketList = () => {
   const { data, error } = useSuspenseQuery({
     queryKey: ["my-ticket-list"],
