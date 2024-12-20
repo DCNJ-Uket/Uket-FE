@@ -27,19 +27,15 @@ export default defineConfig({
     prerender({
       routes: ["/", "/select-univ", "/login"],
       renderer: "@prerenderer/renderer-jsdom",
-      server: {
-        port: 3000,
-        host: "localhost",
-      },
       rendererOptions: {
         maxConcurrentRoutes: 1,
         renderAfterTime: 500,
       },
       postProcess(renderedRoute) {
         renderedRoute.html = renderedRoute.html
-          .replace(/http:/i, "https:")
+          .replace(/http:/ig, "https:")
           .replace(
-            /(https:\/\/)?(localhost|127\.0\.0\.1):\d*/i,
+            /(https:\/\/)?(localhost|127\.0\.0\.1):\d*/ig,
             "https://www.uket.site/",
           );
       },
