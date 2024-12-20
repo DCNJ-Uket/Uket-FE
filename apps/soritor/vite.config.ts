@@ -35,7 +35,7 @@ export default defineConfig({
         renderedRoute.html = renderedRoute.html
           .replace(/http:/i, "https:")
           .replace(
-            /(https:\/\/)?(localhost|172\.30\.1\.19):\d*/i,
+            /(https:\/\/)?(localhost|127\.0\.0\.1):\d*/i,
             "https://uket.site/",
           );
       },
