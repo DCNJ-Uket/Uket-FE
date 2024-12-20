@@ -9,8 +9,8 @@ const LoginPage = () => {
   return (
     <main className="flex h-full flex-col items-center justify-evenly">
       <DynamicMetaTag
-        title="Uket - 로그인"
-        description="로그인을 진행해 주세요."
+        title="Uket | 로그인"
+        description="Uket 로그인 또는 회원가입하기"
       />
       <main className="container mb-10 mt-6 flex h-full w-full flex-col justify-between">
         <section className="flex w-full flex-col items-center gap-4">

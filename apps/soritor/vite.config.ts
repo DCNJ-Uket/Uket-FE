@@ -6,7 +6,9 @@ import imageminWebp from "imagemin-webp";
 import imageminPngQuant from "imagemin-pngquant";
 import react from "@vitejs/plugin-react";
 import viteImagemin from "@vheemstra/vite-plugin-imagemin";
+import prerender from "@prerenderer/rollup-plugin";
 import generouted from "@generouted/react-router/plugin";
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -22,6 +24,26 @@ export default defineConfig({
           png: imageminWebp(),
         },
         skipIfLargerThan: "original",
+      },
+    }),
+    prerender({
+      routes: ["/", "/home", "/select-univ", "/login"],
+      renderer: "@prerenderer/renderer-puppeteer",
+      server: {
+        port: 3000,
+        host: "localhost",
+      },
+      rendererOptions: {
+        maxConcurrentRoutes: 1,
+        renderAfterTime: 500,
+      },
+      postProcess(renderedRoute) {
+        renderedRoute.html = renderedRoute.html
+          .replace(/http:/i, "https:")
+          .replace(
+            /(https:\/\/)?(localhost|127\.0\.0\.1):\d*/i,
+            "https://uket.site/",
+          );
       },
     }),
   ],

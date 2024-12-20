@@ -1,7 +1,6 @@
 User-agent: *               // 모든 검색엔진 허용
 Allow: /                    // 모든 페이지 접근 허용
 Disallow: /buy-ticket
-Disallow: /login
 Disallow: /myinfo
 Disallow: /signup
 Disallow: /ticket-list
