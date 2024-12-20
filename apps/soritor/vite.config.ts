@@ -27,6 +27,10 @@ export default defineConfig({
     prerender({
       routes: ["/", "/select-univ", "/login"],
       renderer: "@prerenderer/renderer-jsdom",
+      server: {
+        port: 3000,
+        host: "localhost",
+      },
       rendererOptions: {
         maxConcurrentRoutes: 1,
         renderAfterTime: 500,
