@@ -1,6 +1,5 @@
 import path from "path";
 
-import mkcert from "vite-plugin-mkcert";
 import { defineConfig } from "vite";
 import imageminWebp from "imagemin-webp";
 import imageminPngQuant from "imagemin-pngquant";
@@ -14,7 +13,6 @@ export default defineConfig({
   plugins: [
     react(),
     generouted(),
-    mkcert(),
     viteImagemin({
       plugins: {
         png: imageminPngQuant(),
@@ -27,12 +25,8 @@ export default defineConfig({
       },
     }),
     prerender({
-      routes: ["/", "/home", "/select-univ", "/login"],
+      routes: ["/", "/select-univ", "/login"],
       renderer: "@prerenderer/renderer-puppeteer",
-      server: {
-        port: 3000,
-        host: "localhost",
-      },
       rendererOptions: {
         maxConcurrentRoutes: 1,
         renderAfterTime: 500,
@@ -41,7 +35,7 @@ export default defineConfig({
         renderedRoute.html = renderedRoute.html
           .replace(/http:/i, "https:")
           .replace(
-            /(https:\/\/)?(localhost|127\.0\.0\.1):\d*/i,
+            /(https:\/\/)?(localhost|172\.30\.1\.19):\d*/i,
             "https://uket.site/",
           );
       },
