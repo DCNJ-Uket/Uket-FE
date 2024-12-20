@@ -46,7 +46,7 @@ const HomePage = () => {
   return (
     <main className="relative flex h-full flex-col items-center">
       <DynamicMetaTag
-        title={`Uket - ${univName}`}
+        title={`Uket | ${univName}`}
         description={`${univName}에서 진행중인 공연을 확인해 보세요!`}
       />
       <Separator className="h-3 bg-[#F2F2F2]" />

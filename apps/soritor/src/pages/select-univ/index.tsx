@@ -19,7 +19,7 @@ const SelectUnivPage = () => {
   return (
     <main className="relative flex h-full flex-col items-center justify-evenly bg-[#F2F2F2]">
       <DynamicMetaTag
-        title="Uket - 공연 선택"
+        title="Uket | 공연 선택"
         description="진행 중인 공연을 확인해 보세요!"
       />
       <main className="container mb-10 mt-7 flex h-full w-full flex-col gap-10 overflow-y-scroll">
