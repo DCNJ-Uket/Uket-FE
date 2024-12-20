@@ -31,14 +31,6 @@ export default defineConfig({
         maxConcurrentRoutes: 1,
         renderAfterTime: 500,
       },
-      postProcess(renderedRoute) {
-        renderedRoute.html = renderedRoute.html
-          .replace(/http:/i, "https:")
-          .replace(
-            /(https:\/\/)?(localhost|127\.0\.0\.1):\d*/i,
-            "https://uket.site/",
-          );
-      },
     }),
   ],
   resolve: {
