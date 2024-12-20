@@ -6,6 +6,7 @@ import imageminPngQuant from "imagemin-pngquant";
 import react from "@vitejs/plugin-react";
 import viteImagemin from "@vheemstra/vite-plugin-imagemin";
 import prerender from "@prerenderer/rollup-plugin";
+import puppeteerRenderer from "@prerenderer/renderer-puppeteer";
 import generouted from "@generouted/react-router/plugin";
 
 // https://vitejs.dev/config/
@@ -26,7 +27,7 @@ export default defineConfig({
     }),
     prerender({
       routes: ["/", "/select-univ", "/login"],
-      renderer: "@prerenderer/renderer-puppeteer",
+      renderer: puppeteerRenderer,
       rendererOptions: {
         maxConcurrentRoutes: 1,
         renderAfterTime: 500,
