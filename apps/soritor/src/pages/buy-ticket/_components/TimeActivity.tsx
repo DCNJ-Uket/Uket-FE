@@ -51,8 +51,8 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
             formatShowDate={showDate}
             formatSelectTime={formatSelectTime}
           />
-          <div className="flex flex-col gap-4 py-6">
-            <ActivityHeader className="px-5 ">
+          <div className="flex grow flex-col justify-start gap-5 py-6">
+            <ActivityHeader className="px-5">
               <HeaderItem step={"02"} content={"예매 시간을 선택해 주세요."} />
             </ActivityHeader>
             <RetryErrorBoundary

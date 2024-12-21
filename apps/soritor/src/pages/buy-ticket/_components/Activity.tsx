@@ -13,10 +13,7 @@ const ActivityHeader = ({
 }: React.HTMLAttributes<HTMLDivElement>) => {
   return (
     <header
-      className={cn(
-        "container flex w-full grow flex-col gap-[1px] px-1",
-        className,
-      )}
+      className={cn("container flex w-full flex-col gap-[1px] px-1", className)}
       {...props}
     />
   );

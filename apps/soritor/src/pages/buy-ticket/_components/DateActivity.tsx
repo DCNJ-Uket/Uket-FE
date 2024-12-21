@@ -57,7 +57,7 @@ const DateActivity: ActivityComponentType = () => {
       <Activity>
         <ActivityContent className="">
           <SelectHeader univName={univName} formatShowDate={formatShowDate} />
-          <div className="flex flex-col gap-4 py-6">
+          <div className="flex grow flex-col justify-start gap-5 py-6">
             <ActivityHeader className="px-5">
               <HeaderItem step={"01"} content={"예매 날짜를 선택해 주세요."} />
             </ActivityHeader>

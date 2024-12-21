@@ -2,6 +2,7 @@ import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
 import SelectHeader from "./SelectHeader";
+import QuestionSection from "./QuestionSection";
 import NextButton from "./NextButton";
 import HeaderItem from "./HeaderItem";
 import {
@@ -33,10 +34,11 @@ const QuestionActivity: ActivityComponentType<QuestionParams> = ({
             formatShowDate={showDate}
             formatSelectTime={showTime}
           />
-          <div className="flex flex-col gap-4 py-6">
-            <ActivityHeader className="px-5 ">
+          <div className="flex grow flex-col justify-start gap-5 py-6">
+            <ActivityHeader className="px-5">
               <HeaderItem step={"03"} content={"아래 질문에 답변해 주세요."} />
             </ActivityHeader>
+            <QuestionSection />
           </div>
           <ActivityFooter className="z-50">
             <NextButton
