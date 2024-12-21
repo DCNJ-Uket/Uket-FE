@@ -24,7 +24,7 @@ const Indicator = (props: IndicatorBadge) => {
   return (
     <Badge
       className={cn(
-        "absolute left-6 top-2 px-2 py-1",
+        "absolute left-6 top-2 px-2 py-1 font-normal",
         rounded ? "rounded-lg" : "rounded-md",
         !variant && "bg-[#f2f2f2c6]",
         className,
