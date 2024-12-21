@@ -14,4 +14,5 @@ export {
   RefreshCwIcon,
   ChevronsRightIcon,
   ChevronsLeftIcon,
+  CircleX,
 } from "lucide-react";
