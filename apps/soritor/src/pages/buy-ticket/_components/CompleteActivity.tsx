@@ -38,8 +38,8 @@ const CompleteActivity: ActivityComponentType = () => {
       }}
     >
       <Activity>
-        <ActivityContent className=" bg-white">
-          <ActivityHeader className="relative items-center justify-center overflow-hidden">
+        <ActivityContent className="bg-white">
+          <ActivityHeader className="relative grow items-center justify-center overflow-hidden">
             <Image
               src={Ticketing3DImg}
               alt="티켓 이미지"
