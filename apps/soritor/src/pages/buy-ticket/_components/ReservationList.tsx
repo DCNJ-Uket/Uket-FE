@@ -6,16 +6,12 @@ interface ReservationListProps {
   showId: string;
   selectedItem: number | null;
   onSelect: (id: number, startTime: string, endTime: string) => void;
-  reservationUserType: string;
 }
 
 const ReservationList = (props: ReservationListProps) => {
-  const { showId, selectedItem, onSelect, reservationUserType } = props;
+  const { showId, selectedItem, onSelect } = props;
 
-  const { data: reservationList } = useQueryReservationList(
-    showId,
-    reservationUserType,
-  );
+  const { data: reservationList } = useQueryReservationList(showId);
 
   return (
     <div className="flex flex-col gap-4 px-[22px]">

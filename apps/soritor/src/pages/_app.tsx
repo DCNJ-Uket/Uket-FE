@@ -12,7 +12,7 @@ const App = () => {
   return (
     <CriticalErrorBoundary>
       <section className="relative flex h-dvh w-screen flex-col items-center">
-        <div className="h-full w-full sm:w-[500px] flex flex-col">
+        <div className="flex h-full w-full flex-col sm:w-[500px]">
           {!["/"].includes(pathname) && (
             <header className="left-0 top-0 z-10 bg-white">
               <Nav />
@@ -24,7 +24,7 @@ const App = () => {
             </Redirects>
           </main>
         </div>
-        <Toaster className="bottom-0 right-0" />
+        <Toaster className="bottom-0 left-1/2 -translate-x-1/2" />
       </section>
     </CriticalErrorBoundary>
   );

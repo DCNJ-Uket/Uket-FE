@@ -25,11 +25,10 @@ interface TimeParams extends ActivityParams {
   univName: string;
   showId: string;
   showDate: string;
-  reservationUserType: string;
 }
 
 const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
-  const { form, reservationUserType, showDate, univName, showId } = params;
+  const { form, showDate, univName, showId } = params;
 
   const {
     selectedItem,
@@ -49,12 +48,11 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
         <ActivityContent>
           <SelectHeader
             univName={univName}
-            reservationUserType={reservationUserType}
             formatShowDate={showDate}
             formatSelectTime={formatSelectTime}
           />
-          <div className="flex flex-col gap-4 py-6">
-            <ActivityHeader className="px-5 ">
+          <div className="flex grow flex-col justify-start gap-5 py-6">
+            <ActivityHeader className="px-5">
               <HeaderItem step={"02"} content={"예매 시간을 선택해 주세요."} />
             </ActivityHeader>
             <RetryErrorBoundary
@@ -67,17 +65,21 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
                   showId={showId}
                   selectedItem={selectedItem}
                   onSelect={handleSelectReservation}
-                  reservationUserType={reservationUserType}
                 />
               </Suspense>
             </RetryErrorBoundary>
           </div>
           <ActivityFooter className="z-50">
             <NextButton
-              type="submit"
-              activityName={"CompleteActivity" as never}
+              activityName={"QuestionActivity" as never}
               disabled={selectedItem === null}
-              params={{ form }}
+              params={{
+                univName: univName,
+                showId: showId,
+                showDate: showDate,
+                showTime: formatSelectTime,
+                form,
+              }}
             ></NextButton>
           </ActivityFooter>
         </ActivityContent>

@@ -8,7 +8,6 @@ import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
 
 import { useTicketStackForm } from "@/hooks/useTicketStackForm";
 import { useShowSelection } from "@/hooks/useShowSelections";
-import useReservationUserType from "@/hooks/useReservationUserType";
 import useItemSelect from "@/hooks/useItemSelect";
 import { useFormatTime } from "@/hooks/useFormatTime";
 import useDateTicketParams from "@/hooks/useDateTicketParams";
@@ -27,9 +26,6 @@ import {
 const DateActivity: ActivityComponentType = () => {
   const { univName, univId, eventId, showId, handleShowId } =
     useDateTicketParams();
-
-  const { reservationUserType, handleReservationUserType } =
-    useReservationUserType();
 
   const { form } = useTicketStackForm();
   form.setValue("universityId", parseInt(univId!, 10));
@@ -60,12 +56,8 @@ const DateActivity: ActivityComponentType = () => {
     <AppScreen appBar={{ border: false, height: "56px" }}>
       <Activity>
         <ActivityContent className="">
-          <SelectHeader
-            univName={univName}
-            reservationUserType={reservationUserType}
-            formatShowDate={formatShowDate}
-          />
-          <div className="flex flex-col gap-4 py-6">
+          <SelectHeader univName={univName} formatShowDate={formatShowDate} />
+          <div className="flex grow flex-col justify-start gap-5 py-6">
             <ActivityHeader className="px-5">
               <HeaderItem step={"01"} content={"예매 날짜를 선택해 주세요."} />
             </ActivityHeader>
@@ -79,7 +71,6 @@ const DateActivity: ActivityComponentType = () => {
                   eventId={eventId.toString()}
                   selectedItem={selectedItem}
                   onSelect={handleSelectDate}
-                  onReservationType={handleReservationUserType}
                 />
               </Suspense>
             </RetryErrorBoundary>
@@ -92,7 +83,6 @@ const DateActivity: ActivityComponentType = () => {
                 univName: univName,
                 showId: showId,
                 showDate: formatShowDate,
-                reservationUserType,
                 form,
               }}
             ></NextButton>

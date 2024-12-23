@@ -3,6 +3,7 @@ import { basicRendererPlugin } from "@stackflow/plugin-renderer-basic";
 import { basicUIPlugin } from "@stackflow/plugin-basic-ui";
 
 import TimeActivity from "@/pages/buy-ticket/_components/TimeActivity";
+import QuestionActivity from "@/pages/buy-ticket/_components/QuestionActivity";
 import DateActivity from "@/pages/buy-ticket/_components/DateActivity";
 import CompleteActivity from "@/pages/buy-ticket/_components/CompleteActivity";
 
@@ -19,6 +20,7 @@ export const { Stack, activities } = stackflow({
   activities: {
     DateActivity,
     TimeActivity,
+    QuestionActivity,
     CompleteActivity,
   },
   initialActivity: () => "DateActivity",
