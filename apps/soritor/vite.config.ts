@@ -26,7 +26,7 @@ export default defineConfig({
     }),
     prerender({
       routes: ["/", "/select-univ", "/login"],
-      renderer: "@prerenderer/renderer-jsdom",
+      renderer: "@prerenderer/renderer-puppeteer",
       rendererOptions: {
         maxConcurrentRoutes: 1,
         renderAfterTime: 500,
@@ -36,7 +36,7 @@ export default defineConfig({
           .replace(/http:/ig, "https:")
           .replace(
             /(https:\/\/)?(localhost|127\.0\.0\.1):\d*/ig,
-            "https://www.uket.site/",
+            "https://uket.site/",
           );
       },
     }),
