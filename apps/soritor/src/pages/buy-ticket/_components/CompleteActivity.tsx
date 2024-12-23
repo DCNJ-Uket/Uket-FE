@@ -1,4 +1,5 @@
 import { useSearchParams } from "react-router-dom";
+import { useToast } from "@uket/ui/components/ui/use-toast";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
@@ -25,6 +26,8 @@ const CompleteActivity: ActivityComponentType = () => {
   const routeUrl = `/home?select-univ=${univName}&id=${univId}`;
 
   const depositAccount = "국민 12345-78-9101112 UKET";
+
+  const { toast } = useToast();
 
   return (
     <AppScreen
@@ -60,7 +63,7 @@ const CompleteActivity: ActivityComponentType = () => {
 
                 <p
                   className="text-brand decoration-brand cursor-pointer font-bold underline decoration-solid decoration-1 underline-offset-2"
-                  onClick={() => handleCopyClipBoard(depositAccount)}
+                  onClick={() => handleCopyClipBoard(depositAccount, toast)}
                 >
                   복사
                 </p>

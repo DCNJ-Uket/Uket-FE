@@ -35,14 +35,8 @@ const NextButton = (as: NextButtonProps) => {
       pop();
       navigate(routeUrl as any, { replace: true });
       return;
-    } else if (activityName === "CompleteActivity" && form) {
-      try {
-        await onSubmit(form.getValues());
-      } finally {
-        pop();
-        pop();
-        pop();
-      }
+    } else if (activityName === "QuestionActivity" && form) {
+      await onSubmit(form.getValues());
     }
 
     push(activityName, params || {});

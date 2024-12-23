@@ -48,6 +48,7 @@ const QuestionSection = () => {
           value={outSideInputValue}
           placeholder="지인검색"
           onClick={() => setIsSheetOpen(true)}
+          readOnly
         />
       </section>
       <section className="flex flex-col gap-2 rounded-lg bg-white px-5 py-5 pt-4 shadow-lg">
