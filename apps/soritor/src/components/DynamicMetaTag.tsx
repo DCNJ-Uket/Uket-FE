@@ -4,7 +4,7 @@ interface DynamicMetaTagProps {
   title?: string;
   description?: string;
   image?: string;
-  url?: string;
+  url: string;
 }
 
 export default function DynamicMetaTag({
@@ -30,7 +30,7 @@ export default function DynamicMetaTag({
           "https://res.cloudinary.com/dhn3axbhj/image/upload/f_auto,q_auto/nt7u0nxxijucwh8jjdb8"
         }
       />
-      {url && <meta property="og:url" content={url || window.location.href} />}
+      <meta property="og:url" content={url} />
     </Helmet>
   );
 }

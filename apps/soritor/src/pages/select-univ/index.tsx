@@ -21,6 +21,7 @@ const SelectUnivPage = () => {
       <DynamicMetaTag
         title="Uket | 공연 선택"
         description="진행 중인 공연을 확인해 보세요!"
+        url="https://uket.site/select-univ"
       />
       <main className="container mb-10 mt-7 flex h-full w-full flex-col gap-10 overflow-y-scroll">
         <header className="text-[27px] font-bold">

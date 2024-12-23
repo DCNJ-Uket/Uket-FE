@@ -11,6 +11,7 @@ const LoginPage = () => {
       <DynamicMetaTag
         title="Uket | 로그인"
         description="Uket 로그인 또는 회원가입하기"
+        url="https://uket.site/login"
       />
       <main className="container mb-10 mt-6 flex h-full w-full flex-col justify-between">
         <section className="flex w-full flex-col items-center gap-4">

@@ -15,7 +15,7 @@ const MainPage = () => {
     <main className="relative flex h-full flex-col items-center justify-evenly">
       <DynamicMetaTag
         title="Uket"
-        description="Uket"
+        description="Uket을 이용해 축제/공연을 웨이팅 없이 즐겨보세요!"
         image={
           "https://res.cloudinary.com/dhn3axbhj/image/upload/f_auto,q_auto/nt7u0nxxijucwh8jjdb8"
         }
