@@ -1,5 +1,6 @@
 import path from "path";
 
+import mkcert from "vite-plugin-mkcert";
 import { defineConfig } from "vite";
 import imageminWebp from "imagemin-webp";
 import imageminPngQuant from "imagemin-pngquant";
@@ -12,6 +13,7 @@ import generouted from "@generouted/react-router/plugin";
 export default defineConfig({
   plugins: [
     react(),
+    mkcert(),
     generouted(),
     viteImagemin({
       plugins: {
@@ -33,9 +35,9 @@ export default defineConfig({
       },
       postProcess(renderedRoute) {
         renderedRoute.html = renderedRoute.html
-          .replace(/http:/ig, "https:")
+          .replace(/http:/gi, "https:")
           .replace(
-            /(https:\/\/)?(localhost|127\.0\.0\.1):\d*/ig,
+            /(https:\/\/)?(localhost|127\.0\.0\.1):\d*/gi,
             "https://uket.site/",
           );
       },
