@@ -1,12 +1,19 @@
 import { Link } from "react-router-dom";
 import { Button } from "@uket/ui/components/ui/button";
 
+import DynamicMetaTag from "@/components/DynamicMetaTag";
+
 import { GOOGLE_LOGIN_URL, KAKAO_LOGIN_URL } from "@/constants/auth_url";
 
 const LoginPage = () => {
   return (
     <main className="flex h-full flex-col items-center justify-evenly">
-      <main className="container mt-6 mb-10 flex h-full w-full flex-col justify-between">
+      <DynamicMetaTag
+        title="Uket | 로그인"
+        description="Uket 로그인 또는 회원가입하기"
+        url="https://uket.site/login"
+      />
+      <main className="container mb-10 mt-6 flex h-full w-full flex-col justify-between">
         <section className="flex w-full flex-col items-center gap-4">
           <h1 className="w-full text-2xl font-black">
             <p>학교 축제 티켓을</p>

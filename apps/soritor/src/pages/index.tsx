@@ -1,5 +1,6 @@
 import { Button } from "@uket/ui/components/ui/button";
 
+import DynamicMetaTag from "@/components/DynamicMetaTag";
 import Nav from "@/components/Nav";
 import AuthRequiredModalButton from "@/components/AuthRequiredModalButton";
 
@@ -12,6 +13,14 @@ import LandingBgImage from "/landingBg.png";
 const MainPage = () => {
   return (
     <main className="relative flex h-full flex-col items-center justify-evenly">
+      <DynamicMetaTag
+        title="Uket"
+        description="Uket을 이용해 축제/공연을 웨이팅 없이 즐겨보세요!"
+        image={
+          "https://res.cloudinary.com/dhn3axbhj/image/upload/f_auto,q_auto/nt7u0nxxijucwh8jjdb8"
+        }
+        url="https://uket.site"
+      />
       <div className="absolute -z-10 flex h-full w-full items-center justify-center bg-[linear-gradient(171.65deg,_#6343E1_5.82%,_#000000_81.67%)]">
         <Image
           src={LandingBgImage}

@@ -37,6 +37,7 @@
     "react-cookie": "^7.1.4",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^4.0.13",
+    "react-helmet-async": "^2.0.5",
     "react-hook-form": "^7.51.3",
     "react-kakao-maps-sdk": "^1.1.26",
     "react-router-dom": "^6.22.3",
@@ -46,6 +47,9 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@prerenderer/renderer-jsdom": "^1.1.9",
+    "@prerenderer/renderer-puppeteer": "^1.2.4",
+    "@prerenderer/rollup-plugin": "^0.3.12",
     "@types/eslint": "^8.56.10",
     "@types/node": "^20.12.5",
     "@types/react": "^18.3.2",
@@ -62,6 +66,7 @@
     "imagemin-webp": "^8.0.0",
     "kakao.maps.d.ts": "^0.1.39",
     "postcss": "^8.4.38",
+    "puppeteer": "^23.11.1",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.5",
     "vite": "^5.2.11"
