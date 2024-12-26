@@ -21,7 +21,11 @@ const QrcodeAndDeposit = (props: QrcodeAndDepositProps) => {
     ticketId,
     isDepositActive,
   );
-  const { data: deposit } = useQueryDepositUrl(eventId, isDepositActive);
+  const { data: deposit } = useQueryDepositUrl(
+    ticketId,
+    eventId,
+    isDepositActive,
+  );
 
   const handleReissueQRCode = () => {
     refetch();
