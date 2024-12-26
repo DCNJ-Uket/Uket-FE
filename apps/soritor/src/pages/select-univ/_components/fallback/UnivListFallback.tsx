@@ -2,7 +2,7 @@ import { Skeleton } from "@uket/ui/components/ui/skeleton";
 
 const UnivListFallback = () => {
   return (
-    <main className="grid grow auto-rows-min grid-cols-3 gap-5 md:grid-cols-6">
+    <main className="grid grow auto-rows-min grid-cols-3 gap-5 justify-items-center">
       {[...Array(9)].map((_, index) => (
         <div
           key={index}

@@ -11,13 +11,12 @@ import {
   ErrorTitle,
 } from "./CustomError";
 
-
 const CriticalErrorBoundary = ({ children }: { children: React.ReactNode }) => {
   const { reset } = useQueryErrorResetBoundary();
   const navigate = useNavigate();
 
   const back = () => {
-    navigate(-1);
+    window.location.reload();
   };
 
   const home = (callback: (...args: any[]) => void) => {
@@ -29,7 +28,7 @@ const CriticalErrorBoundary = ({ children }: { children: React.ReactNode }) => {
     <ErrorBoundary
       onReset={reset}
       FallbackComponent={({ resetErrorBoundary }) => (
-        <ErrorContainer className="container h-dvh flex-col gap-10 max-w-[500px]">
+        <ErrorContainer className="container h-dvh max-w-[500px] flex-col gap-10">
           <ErrorHeader className="mt-16 flex grow flex-col justify-center space-y-3 text-center">
             <ErrorTitle className="text-2xl font-black">
               <span>잠시 후 다시 시도해 주세요!</span>

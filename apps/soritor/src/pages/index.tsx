@@ -45,7 +45,7 @@ const MainPage = () => {
               variant="secondary"
               className="w-full rounded-xl bg-white p-7 text-base font-bold text-black hover:bg-slate-200 sm:w-80"
             >
-              축제 예매하기
+              공연 예매하기
             </Button>
           </Link>
           <AuthRequiredModalButton
