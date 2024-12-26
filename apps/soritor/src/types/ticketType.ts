@@ -9,6 +9,7 @@ export type TicketItem = {
   ticketNo: string;
   userType: string;
   showName: string;
+  eventId: number;
   eventName: string;
   ticketId: number;
   createdAt: string;
@@ -25,4 +26,11 @@ export type MyTicketQRCodeResponse = QRCodeType;
 export type CancelTicketResponse = {
   ticketId: number;
   ticketStatus: string;
+};
+
+export type DepositResponse = {
+  accountNumber: string;
+  accountOwner: string;
+  depositUrl: string;
+  ticketPrice: number;
 };

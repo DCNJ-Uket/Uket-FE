@@ -6,13 +6,13 @@ import { TicketItem } from "@/types/ticketType";
 
 
 export const useQueryDepositUrl = (
-  ticketId: TicketItem["ticketId"],
+  eventId: TicketItem["eventId"],
   ticketStatus: TicketItem["ticketStatus"],
 ) => {
   const { data, error } = useQuery({
-    queryKey: ["deposit-url", ticketId],
-    queryFn: () => getDepositUrl(ticketId),
-    enabled: !!ticketId && ticketStatus === "입금 확인중",
+    queryKey: ["deposit", eventId],
+    queryFn: () => getDepositUrl(eventId),
+    enabled: !!eventId && ticketStatus === "입금 확인중",
   });
 
   if (error) throw error;
