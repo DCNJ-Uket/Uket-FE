@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useToast } from "@uket/ui/components/ui/use-toast";
 import { RefreshCwIcon } from "@uket/ui/components/ui/icon";
 import { Button } from "@uket/ui/components/ui/button";
 
@@ -17,6 +18,8 @@ interface QrcodeAndDepositProps {
 
 const QrcodeAndDeposit = (props: QrcodeAndDepositProps) => {
   const { ticketId, eventId, ticketStatus: isDepositActive } = props;
+
+  const { toast } = useToast();
   const { data: qrcode, refetch } = useQueryTicketQRCode(
     ticketId,
     isDepositActive,
@@ -33,6 +36,9 @@ const QrcodeAndDeposit = (props: QrcodeAndDepositProps) => {
 
   const handleCopyDepositUrl = () => {
     navigator.clipboard.writeText(deposit?.accountNumber ?? "");
+    toast({
+      title: "계좌번호를 복사했어요!",
+    });
   };
 
   return (
