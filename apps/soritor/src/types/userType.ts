@@ -14,3 +14,8 @@ export type UserInfoUpdateRequest = {
   depositorName: string;
   phoneNumber: string;
 };
+
+export type DeleteUserResponse = {
+  userId: number;
+  name: string;
+};

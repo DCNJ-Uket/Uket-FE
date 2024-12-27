@@ -15,6 +15,7 @@ const SERVER_VERSION = "/api/v1";
 const AUTH_REQUIRED_PATH = [
   "/users/register",
   "/users/info",
+  "/users/delete",
   "/tickets",
   "/users/tickets",
   "/tickets/:id/cancel",
