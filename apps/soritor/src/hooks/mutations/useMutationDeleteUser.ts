@@ -14,7 +14,7 @@ export const useMutationDeleteUser = () => {
   const mutation = useMutation({
     mutationFn: () => deleteUserInfo(),
     onSuccess: (data: DeleteUserResponse) => {
-      queryClient.invalidateQueries({ queryKey: ["user-info"] });
+      queryClient.removeQueries({ queryKey: ["user-info"] });
 
       clearRefreshToken("refreshToken");
       clearAccessToken("accessToken");
