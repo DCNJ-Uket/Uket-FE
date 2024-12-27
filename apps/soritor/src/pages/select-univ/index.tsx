@@ -25,9 +25,7 @@ const SelectUnivPage = () => {
       />
       <main className="container mb-10 mt-7 flex h-full w-full flex-col gap-10 overflow-y-scroll">
         <header className="text-[27px] font-bold">
-          <p>참여하고자 하는</p>
-          <p>축제가 열리는</p>
-          <p>학교를 선택해 주세요.</p>
+          <p>원하는 공연을 찾아보세요.</p>
         </header>
         <section className="grow">
           <RetryErrorBoundary

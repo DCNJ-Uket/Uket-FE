@@ -1,4 +1,5 @@
 import {
+  DepositResponse,
   MyTicketListInfoResponse,
   MyTicketQRCodeResponse,
   TicketItem,
@@ -31,7 +32,9 @@ export const cancelTicket = async (ticketId: TicketItem["ticketId"]) => {
 };
 
 export const getDepositUrl = async (ticketId: TicketItem["ticketId"]) => {
-  const { data } = await instance(`/tickets/${ticketId}/depositUrl`);
+  const { data } = await instance.get<DepositResponse>(
+    `/events/${ticketId}/account`,
+  );
 
   return data;
 };

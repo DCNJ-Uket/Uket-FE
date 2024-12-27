@@ -16,7 +16,7 @@ import TicketHeader from "./TicketHeader";
 import TicketDetail from "./TicketDetail";
 import GridItem from "./GridItem";
 
-const QRCode = lazy(() => import("./QRCode"));
+const TicketModal = lazy(() => import("./TicketModal"));
 const ConfirmModal = lazy(() => import("./ConfirmModal"));
 
 interface TicketProps {
@@ -87,7 +87,7 @@ const Ticket = (props: TicketProps) => {
         </Card>
       </DialogTrigger>
       <DialogContent className="max-w-xs rounded-lg p-0 sm:max-w-md">
-        <QRCode id={ticketId} ticketStatus={ticketStatus} />
+        <TicketModal ticket={props.ticket} />
       </DialogContent>
     </Dialog>
   );
