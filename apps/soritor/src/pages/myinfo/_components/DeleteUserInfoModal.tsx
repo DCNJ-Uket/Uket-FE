@@ -34,6 +34,7 @@ const DeleteUserInfoModal = () => {
       onError: () => {
         toast({
           title: "회원탈퇴 실패",
+          variant: "brandDestructive",
         });
       },
     });
