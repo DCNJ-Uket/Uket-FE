@@ -27,7 +27,8 @@ export const useTicketStackForm = () => {
   const onSubmit = async (data: FormSchemaType) => {
     const { universityId, reservationId } = data;
 
-    await mutateAsync({ universityId, reservationId });
+    const response = await mutateAsync({ universityId, reservationId });
+    return response.ticket;
   };
 
   return { form, onSubmit, isPending };

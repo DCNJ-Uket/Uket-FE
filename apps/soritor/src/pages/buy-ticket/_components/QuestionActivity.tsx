@@ -15,15 +15,16 @@ import {
 
 interface QuestionParams extends ActivityParams {
   univName: string;
-  showId: string;
   showDate: string;
   showTime: string;
+  eventId: number;
+  ticketId: number;
 }
 
 const QuestionActivity: ActivityComponentType<QuestionParams> = ({
   params,
 }) => {
-  const { form, showDate, univName, showTime } = params;
+  const { showDate, univName, showTime, eventId, ticketId } = params;
 
   return (
     <AppScreen appBar={{ border: false, height: "56px" }}>
@@ -45,7 +46,10 @@ const QuestionActivity: ActivityComponentType<QuestionParams> = ({
               type="submit"
               activityName={"CompleteActivity" as never}
               disabled={false}
-              params={{ form }}
+              params={{
+                ticketId: ticketId,
+                eventId: eventId,
+              }}
             ></NextButton>
           </ActivityFooter>
         </ActivityContent>

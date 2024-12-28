@@ -10,6 +10,8 @@ import { useQueryDepositUrl } from "@/hooks/queries/useQueryDepositUrl";
 
 import { TicketItem } from "@/types/ticketType";
 
+import { handleCopyClipBoard } from "@/utils/handleCopyToClipboard";
+
 interface QrcodeAndDepositProps {
   ticketId: TicketItem["ticketId"];
   eventId: TicketItem["eventId"];
@@ -32,13 +34,6 @@ const QrcodeAndDeposit = (props: QrcodeAndDepositProps) => {
 
   const handleReissueQRCode = () => {
     refetch();
-  };
-
-  const handleCopyDepositUrl = () => {
-    navigator.clipboard.writeText(deposit?.accountNumber ?? "");
-    toast({
-      title: "계좌번호를 복사했어요!",
-    });
   };
 
   return (
@@ -88,7 +83,9 @@ const QrcodeAndDeposit = (props: QrcodeAndDepositProps) => {
               <Button
                 variant="link"
                 className="text-brand cursor-pointer px-1 font-bold"
-                onClick={handleCopyDepositUrl}
+                onClick={() =>
+                  handleCopyClipBoard(deposit?.accountNumber ?? "", toast)
+                }
               >
                 복사
               </Button>
