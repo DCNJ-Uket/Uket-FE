@@ -7,8 +7,6 @@ import { TicketResponse } from "@/types/showType";
 
 import { FormSchemaType } from "../useTicketStackForm";
 
-
-
 export const useMutationBuyTicket = () => {
   const queryClient = useQueryClient();
 
@@ -16,7 +14,7 @@ export const useMutationBuyTicket = () => {
     mutationFn: (data: FormSchemaType) => buyTicket(data),
     onSuccess: (data: TicketResponse) => {
       queryClient.invalidateQueries({ queryKey: ["my-ticket-list"] });
-      return data.success;
+      return data;
     },
   });
 

@@ -33,5 +33,6 @@ export interface TicketResponse {
   ticket: {
     userId: number;
     ticketId: number;
+    eventId: number;
   };
 }

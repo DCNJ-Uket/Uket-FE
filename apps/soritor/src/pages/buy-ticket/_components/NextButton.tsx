@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { LoaderCircleIcon } from "@uket/ui/components/ui/icon";
 import { Button } from "@uket/ui/components/ui/button";
 
@@ -13,13 +14,22 @@ interface NextButtonProps
   disabled: boolean;
   routeUrl?: string;
   isLast?: boolean;
+  depositUrl?: string;
   params?: {
-    form: FormType;
+    form?: FormType;
   } & Record<string, unknown>;
 }
 
 const NextButton = (as: NextButtonProps) => {
-  const { activityName, disabled, params, routeUrl, isLast, ...props } = as;
+  const {
+    activityName,
+    disabled,
+    params,
+    routeUrl,
+    isLast,
+    depositUrl,
+    ...props
+  } = as;
   const { push, pop } = useTicketFlow();
   const { onSubmit, isPending } = useTicketStackForm();
 
@@ -36,17 +46,21 @@ const NextButton = (as: NextButtonProps) => {
       navigate(routeUrl as any, { replace: true });
       return;
     } else if (activityName === "QuestionActivity" && form) {
-      await onSubmit(form.getValues());
+      const data = await onSubmit(form.getValues());
+      push(activityName, {
+        ...params,
+        ticketId: data.ticketId,
+        eventId: data.eventId,
+      });
+      return;
     }
 
     push(activityName, params || {});
   };
 
-  // 카카오로 연결하기는 따로 handleClick을 만들어줘야함.
-
   return (
     <>
-      {isLast ? (
+      {isLast && depositUrl ? (
         <div className="mb-5 flex w-full flex-row justify-center gap-3 px-4 sm:flex-row">
           <Button
             className="border-brand text-brand grow basis-1/2 border bg-white hover:bg-slate-100"
@@ -57,12 +71,12 @@ const NextButton = (as: NextButtonProps) => {
             나중에 하기
           </Button>
           <Button
-            className="bg-brand border-brand hover:bg-brandHover grow basis-1/2 border text-white"
-            onClick={handleClick}
-            disabled={disabled}
-            {...props}
+            asChild
+            className="bg-brand border-brand hover:bg-brandHover grow basis-1/2 border"
           >
-            카카오로 입금하기
+            <Link to={depositUrl} className="text-white">
+              카카오로 입금하기
+            </Link>
           </Button>
         </div>
       ) : (
