@@ -12,7 +12,7 @@ const MyInfo = () => {
         <RetryErrorBoundary>
           <UserInfoSection />
         </RetryErrorBoundary>
-        <div className="mt-5 flex items-center gap-4 px-5">
+        <div className="mt-auto flex items-center gap-4 px-5">
           <DeleteUserInfoModal />
           <LogoutModal />
         </div>
