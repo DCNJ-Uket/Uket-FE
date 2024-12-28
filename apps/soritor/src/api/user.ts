@@ -1,4 +1,8 @@
-import { UserInfoResponse, UserInfoUpdateRequest } from "@/types/userType";
+import {
+  UserInfoResponse,
+  UserInfoUpdateRequest,
+  DeleteUserResponse,
+} from "@/types/userType";
 
 import { instance } from "./instance";
 
@@ -16,6 +20,12 @@ export const updateUserInfo = async ({
     depositorName,
     phoneNumber,
   });
+
+  return data;
+};
+
+export const deleteUserInfo = async () => {
+  const { data } = await instance.post<DeleteUserResponse>("/users/delete");
 
   return data;
 };

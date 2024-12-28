@@ -1,19 +1,11 @@
-import { Button } from "@uket/ui/components/ui/button";
+import DeleteUserInfoModal from "@/pages/myinfo/_components/DeleteUserInfoModal";
 
 import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
-
-import { clearAccessToken } from "@/utils/handleToken";
-import { clearRefreshToken } from "@/utils/handleCookie";
 
 import UserInfoSection from "./_components/UserInfoSection";
 import LogoutModal from "./_components/LogoutModal";
 
 const MyInfo = () => {
-  const logout = () => {
-    clearRefreshToken("refreshToken");
-    clearAccessToken("accessToken");
-  };
-
   return (
     <main className="relative flex h-full flex-col items-center bg-[#F2F2F2]">
       <main className="flex h-full w-full flex-col gap-3 pb-10">
@@ -21,13 +13,8 @@ const MyInfo = () => {
           <UserInfoSection />
         </RetryErrorBoundary>
         <div className="mt-5 flex items-center gap-4 px-5">
-          <Button
-            variant="outline"
-            className="basis-1/2 rounded-lg border border-[#8989A1] text-[#8989A1]"
-          >
-            회원 탈퇴
-          </Button>
-          <LogoutModal onLogout={logout} />
+          <DeleteUserInfoModal />
+          <LogoutModal />
         </div>
       </main>
     </main>

@@ -11,38 +11,53 @@ import { Button } from "@uket/ui/components/ui/button";
 
 import { useNavigate } from "@/router";
 
-import { clearAccessToken } from "@/utils/handleToken";
-import { clearRefreshToken } from "@/utils/handleCookie";
+import { useMutationDeleteUser } from "@/hooks/mutations/useMutationDeleteUser";
 
-const LogoutModal = () => {
+const DeleteUserInfoModal = () => {
   const { toast } = useToast();
 
   const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    clearRefreshToken("refreshToken");
-    clearAccessToken("accessToken");
+  const mutation = useMutationDeleteUser();
+
+  const handleDeleteUserInfo = () => {
     setOpen(false);
-    toast({
-      title: "로그아웃 성공!",
+    mutation.mutate(undefined, {
+      onSuccess: () => {
+        toast({
+          title: "회원탈퇴 성공!",
+        });
+        navigate("/", { replace: true });
+      },
+      onError: () => {
+        toast({
+          title: "회원탈퇴 실패",
+          variant: "brandDestructive",
+        });
+      },
     });
-    navigate("/", { replace: true });
   };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="hover:bg-brandHover basis-1/2 rounded-lg bg-[#8989A1] text-[#F2F2F2]">
-          로그아웃
+        <Button
+          variant="outline"
+          className="basis-1/2 rounded-lg border border-[#8989A1] text-[#8989A1]"
+        >
+          회원 탈퇴
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-72 rounded-2xl sm:max-w-xs" isXHidden>
-        <section className="pb-3 pt-5 sm:py-10">
+        <section className="flex flex-col gap-1 pb-3 pt-5 sm:py-10">
           <h1 className="text-center text-sm font-semibold">
-            로그아웃 하시겠습니까?
+            회원 탈퇴 하시겠습니까?
           </h1>
+          <h3 className="text-desc text-center text-xs font-medium">
+            계정정보가 바로 삭제되며 복구할 수 없습니다.
+          </h3>
         </section>
         <DialogFooter className="flex-row items-center justify-center gap-3">
           <Button
@@ -55,7 +70,7 @@ const LogoutModal = () => {
           <DialogClose asChild>
             <Button
               className="basis-1/2 bg-[#FD724F] text-xs"
-              onClick={handleLogout}
+              onClick={handleDeleteUserInfo}
             >
               네
             </Button>
@@ -66,4 +81,4 @@ const LogoutModal = () => {
   );
 };
 
-export default LogoutModal;
+export default DeleteUserInfoModal;
