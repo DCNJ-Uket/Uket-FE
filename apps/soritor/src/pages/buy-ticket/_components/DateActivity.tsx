@@ -35,6 +35,8 @@ const DateActivity: ActivityComponentType = () => {
     setShowId(id);
   };
 
+  const backURL = `/home?select-univ=${univName}&id=${univId}`;
+
   const {
     selectedShowDate,
     setSelectedShowDate,
@@ -62,7 +64,7 @@ const DateActivity: ActivityComponentType = () => {
       <Activity>
         <ActivityContent>
           <nav className="flex h-14 w-full items-center self-stretch bg-white px-3.5">
-            <Link to={`/home?select-univ=${univName}&id=${univId}`}>
+            <Link to={backURL}>
               <IconBack />
             </Link>
           </nav>
