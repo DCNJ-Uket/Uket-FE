@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useToast } from "@uket/ui/components/ui/use-toast";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
@@ -31,9 +31,8 @@ const CompleteActivity: ActivityComponentType<CompleteParams> = ({
 }) => {
   const { ticketId, eventId } = params;
 
-  const [searchParams] = useSearchParams();
-  const univName = searchParams.get("univName");
-  const univId = searchParams.get("univId") as string;
+  const location = useLocation();
+  const { univName, univId } = location.state;
 
   const routeUrl = `/home?select-univ=${univName}&id=${univId}`;
 

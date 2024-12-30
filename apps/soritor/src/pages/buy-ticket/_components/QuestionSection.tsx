@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Textarea } from "@uket/ui/components/ui/textarea";
 import { Input } from "@uket/ui/components/ui/input";
 
 import PerformerSheet from "./PerformerSheet";
@@ -50,14 +49,6 @@ const QuestionSection = () => {
           onClick={() => setIsSheetOpen(true)}
           readOnly
         />
-      </section>
-      <section className="flex flex-col gap-2 rounded-lg bg-white px-5 py-5 pt-4 shadow-lg">
-        <h1 className="text-[15px] font-bold">
-          Q2. 공연 중 진행되는 라디오에 보낼 사연을
-          <br />
-          미리 제출해 주세요.
-        </h1>
-        <Textarea placeholder="사연쓰기" />
       </section>
       <PerformerSheet
         isOpen={isSheetOpen}

@@ -8,11 +8,11 @@ import LogoutModal from "./_components/LogoutModal";
 const MyInfo = () => {
   return (
     <main className="relative flex h-full flex-col items-center bg-[#F2F2F2]">
-      <main className="flex h-full w-full flex-col gap-3 pb-10">
+      <main className="flex h-full w-full flex-col gap-3">
         <RetryErrorBoundary>
           <UserInfoSection />
         </RetryErrorBoundary>
-        <div className="mt-5 flex items-center gap-4 px-5">
+        <div className="mb-5 mt-auto flex items-center gap-4 px-5">
           <DeleteUserInfoModal />
           <LogoutModal />
         </div>

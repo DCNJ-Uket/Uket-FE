@@ -13,7 +13,7 @@ const App = () => {
     <CriticalErrorBoundary>
       <section className="relative flex h-dvh w-screen flex-col items-center">
         <div className="flex h-full w-full flex-col sm:w-[500px]">
-          {!["/"].includes(pathname) && (
+          {!["/", "/buy-ticket"].includes(pathname) && (
             <header className="left-0 top-0 z-10 bg-white">
               <Nav />
             </header>
