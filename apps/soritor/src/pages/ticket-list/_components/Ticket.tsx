@@ -40,6 +40,9 @@ const Ticket = (props: TicketProps) => {
     },
   } = props;
 
+  const isTicketCancelAvailable =
+    ticketStatus === "입금 확인중" || ticketStatus === "예매 완료";
+
   return (
     <Dialog>
       <DialogTrigger className="text-start">
@@ -80,7 +83,11 @@ const Ticket = (props: TicketProps) => {
                 <div className="w-32 truncate">
                   <GridItem title="일련번호" content={ticketNo} isTicketNo />
                 </div>
-                <ConfirmModal ticketId={ticketId} />
+                {isTicketCancelAvailable ? (
+                  <ConfirmModal ticketId={ticketId} />
+                ) : (
+                  <div className="py-5"></div>
+                )}
               </aside>
             </footer>
           </CardContent>
