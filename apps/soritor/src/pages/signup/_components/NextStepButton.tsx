@@ -7,7 +7,6 @@ import { useMyFlow } from "@/utils/useMyFlow";
 
 import { FormType } from "../../../hooks/useStackForm";
 
-
 interface NextStepButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   activityName: never;
@@ -20,11 +19,15 @@ interface NextStepButtonProps
 }
 
 const NextStepButton = (props: NextStepButtonProps) => {
-  const { activityName, disabled, params, isLoading, ...rest } = props;
+  const { activityName, disabled, mutate, params, isLoading, ...rest } = props;
   const { push } = useMyFlow();
   const navigate = useNavigate();
 
   const handleClick = async () => {
+    if (mutate) {
+      await mutate();
+    }
+
     if (activityName === "MainActivity") {
       navigate("/", {
         replace: true,
