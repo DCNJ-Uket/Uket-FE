@@ -24,7 +24,7 @@ const SelectUnivPage = () => {
         url="https://uket.site/select-univ"
       />
       <main className="container mb-10 mt-7 flex h-full w-full flex-col gap-10 overflow-y-scroll">
-        <header className="text-[27px] font-bold">
+        <header className="text-[27px] font-black">
           <p>원하는 공연을 찾아보세요.</p>
         </header>
         <section className="grow">

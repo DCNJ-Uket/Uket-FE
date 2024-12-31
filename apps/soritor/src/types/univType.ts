@@ -13,6 +13,7 @@ export type FestivalUniversity = {
   id: number;
   name: string;
   logoUrl: string;
+  startDateTime: string;
 };
 
 export type FestivalUniversityResponse = {
