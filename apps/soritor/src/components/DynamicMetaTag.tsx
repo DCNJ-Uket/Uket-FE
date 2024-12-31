@@ -4,7 +4,7 @@ interface DynamicMetaTagProps {
   title?: string;
   description?: string;
   image?: string;
-  url: string;
+  url?: string;
 }
 
 export default function DynamicMetaTag({
