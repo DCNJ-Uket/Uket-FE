@@ -1,4 +1,3 @@
-import { Switch } from "@uket/ui/components/ui/switch";
 import { Button } from "@uket/ui/components/ui/button";
 
 import { useNavigate } from "@/router";
@@ -10,7 +9,6 @@ import { useQueryUserInfo } from "@/hooks/queries/useQueryUserInfo";
 import InfoItem from "./InfoItem";
 import InfoContainer from "./InfoContainer";
 import GeneralUserInfoContainer from "./GeneralUserInfoContainer";
-
 
 const UserInfoSection = () => {
   const { data: userInfo } = useQueryUserInfo();
@@ -61,14 +59,6 @@ const UserInfoSection = () => {
             <InfoItem title="학번" content={userInfo.studentCode} />
           </InfoContainer>
         )}
-        <InfoContainer title="알림">
-          <div className="flex w-full items-center justify-between">
-            <div className="text-[13px] text-[#5E5E6E]">
-              푸시 알람 동의 여부
-            </div>
-            <Switch />
-          </div>
-        </InfoContainer>
       </section>
     </>
   );

@@ -12,7 +12,6 @@ import AuthRequiredModalButton from "@/components/AuthRequiredModalButton";
 import FestivalSection from "./_components/FestivalSection";
 import FestivalSectionSuspenseFallback from "./_components/fallback/FestivalSectionSusepnseFallback";
 
-
 const HomePage = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -27,9 +26,8 @@ const HomePage = () => {
 
   const handleBuyTicketNavigate = () => {
     if (eventId !== -1) {
-      navigate({
-        pathname: "/buy-ticket",
-        search: `?univName=${univName}&univId=${univId}&eventId=${eventId}`,
+      navigate("/buy-ticket", {
+        state: { univName, univId, eventId },
       });
     }
   };
