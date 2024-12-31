@@ -19,6 +19,8 @@ const AUTH_REQUIRED_PATH = [
   "/tickets",
   "/users/tickets",
   "/tickets/:id/cancel",
+  "/terms",
+  "/terms/agreement",
 ];
 const DYNAMIC_AUTH_REQUIRED_PATH = [
   /\/events\/\d+\/shows/,
