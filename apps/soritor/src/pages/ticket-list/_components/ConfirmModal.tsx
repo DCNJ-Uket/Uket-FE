@@ -59,8 +59,7 @@ function ConfirmModal(props: ConfirmModalProps) {
               정말 예매를 취소하시겠어요?
             </DialogTitle>
             <DialogDescription className="flex flex-col text-center">
-              <span>환불 관련 문의는 축제/공연 담당자에게 </span>
-              <span>연락바랍니다.</span>
+              <span>환불 문의는 공연 담당자에게 연락바랍니다.</span>
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="flex-row items-center justify-center gap-3">
