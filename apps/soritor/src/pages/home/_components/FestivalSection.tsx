@@ -23,9 +23,9 @@ const FestivalSection = (props: FestivalSectionProps) => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-5">
       <SectionItem
-        title="축제 일정﹒라인업"
+        title="공연 정보 바로가기"
         item={<Carousel slides={data.banners} />}
       />
       <SectionItem
