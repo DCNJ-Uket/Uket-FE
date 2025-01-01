@@ -5,6 +5,7 @@ import { Button } from "@uket/ui/components/ui/button";
 import { useNavigate } from "@/router";
 
 import { FormType, useTicketStackForm } from "@/hooks/useTicketStackForm";
+import { SurveyFormType, useSurveyForm } from "@/hooks/useSurveyForm";
 
 import { useTicketFlow } from "@/utils/useTicketFlow";
 
@@ -15,6 +16,10 @@ interface NextButtonProps
   routeUrl?: string;
   isLast?: boolean;
   depositUrl?: string;
+  survey?: {
+    isSubmit: boolean;
+    form: SurveyFormType;
+  };
   params?: {
     form?: FormType;
   } & Record<string, unknown>;
@@ -28,14 +33,18 @@ const NextButton = (as: NextButtonProps) => {
     routeUrl,
     isLast,
     depositUrl,
+    survey,
     ...props
   } = as;
   const { push, pop } = useTicketFlow();
-  const { onSubmit, isPending } = useTicketStackForm();
 
   const navigate = useNavigate();
 
+  const { onSubmit, isPending } = useTicketStackForm();
   const form = params?.form;
+
+  const { onSurveySubmit, isSurveyPending } = useSurveyForm();
+  const surveyForm = survey?.form;
 
   const handleClick = async () => {
     if (activityName === "MainActivity") {
@@ -45,7 +54,13 @@ const NextButton = (as: NextButtonProps) => {
       pop();
       navigate(routeUrl as any, { replace: true });
       return;
-    } else if (activityName === "CompleteActivity" && form) {
+    } else if (activityName === "CompleteActivity" && form && surveyForm) {
+      // 질의응답 로직
+      if (survey.isSubmit) {
+        await onSurveySubmit(surveyForm.getValues());
+      }
+
+      // 티켓 예매 로직
       const data = await onSubmit(form.getValues());
       push(activityName, {
         ...params,
@@ -86,7 +101,7 @@ const NextButton = (as: NextButtonProps) => {
           disabled={disabled}
           {...props}
         >
-          {isPending ? (
+          {isPending || isSurveyPending ? (
             <LoaderCircleIcon className="animate-spin" />
           ) : (
             "다음으로"
