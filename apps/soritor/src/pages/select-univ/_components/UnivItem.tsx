@@ -11,7 +11,7 @@ interface UnivItemProps
 }
 
 const UnivItem = (props: UnivItemProps) => {
-  const { isSelected, onSelect, name, logoUrl, startDateTime } = props;
+  const { isSelected, onSelect, name, logoUrl } = props;
   const univLogo = logoUrl ? (
     <Image
       src={logoUrl}
@@ -21,7 +21,7 @@ const UnivItem = (props: UnivItemProps) => {
       className="h-full object-contain"
     />
   ) : (
-    <div className="h-full w-full rounded-lg flex items-center justify-center text-desc text-sm">
+    <div className="text-desc flex h-full w-full items-center justify-center rounded-lg text-sm">
       배너 이미지가 없어요.
     </div>
   );
@@ -40,7 +40,6 @@ const UnivItem = (props: UnivItemProps) => {
         {univLogo}
       </div>
       <header className="text-center">
-        <p className="text-desc text-sm">{startDateTime}</p>
         <p className="font-bold">{name}</p>
       </header>
     </div>
