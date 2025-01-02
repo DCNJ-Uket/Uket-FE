@@ -21,6 +21,7 @@ const AUTH_REQUIRED_PATH = [
   "/tickets/:id/cancel",
   "/terms",
   "/terms/agreement",
+  "/survey",
 ];
 const DYNAMIC_AUTH_REQUIRED_PATH = [
   /\/events\/\d+\/shows/,
@@ -28,6 +29,7 @@ const DYNAMIC_AUTH_REQUIRED_PATH = [
   /\/tickets\/\d+\/qrcode/,
   /\/tickets\/\d+\/cancel/,
   /\/events\/\d+\/account/,
+  /\/events\/\d+\/survey/,
 ];
 
 const isDynamicUrlMatched = (url: string): boolean => {
