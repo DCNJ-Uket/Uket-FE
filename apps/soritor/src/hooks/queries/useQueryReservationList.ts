@@ -11,6 +11,7 @@ export const useQueryReservationList = (
   const { data, error } = useSuspenseQuery({
     queryKey: ["reservation-info", id, userType],
     queryFn: () => getReservationList(id, userType),
+    staleTime: 0,
   });
 
   if (error) {
