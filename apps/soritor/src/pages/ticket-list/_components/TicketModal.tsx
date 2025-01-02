@@ -40,6 +40,8 @@ const TicketModal = (props: TicketModalProps) => {
       createdAt,
     },
   } = props;
+  const isTicketCancelAvailable =
+    ticketStatus === "입금 확인중" || ticketStatus === "예매 완료";
 
   return (
     <Card className="border-none shadow-none">
@@ -81,7 +83,7 @@ const TicketModal = (props: TicketModalProps) => {
           />
           <Separator className="bg-[#5E5E6E]" />
           <footer>
-            <ConfirmModal ticketId={ticketId} />
+            {isTicketCancelAvailable && <ConfirmModal ticketId={ticketId} />}
           </footer>
         </section>
       </CardContent>

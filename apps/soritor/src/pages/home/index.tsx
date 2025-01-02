@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useSearchParams } from "react-router-dom";
-import { FallbackProps } from "react-error-boundary";
 import { Suspense, useState } from "react";
 import { Separator } from "@uket/ui/components/ui/separator";
 
@@ -9,10 +9,7 @@ import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
 import DynamicMetaTag from "@/components/DynamicMetaTag";
 import AuthRequiredModalButton from "@/components/AuthRequiredModalButton";
 
-import UnivSelector from "./_components/UnivSelector";
 import FestivalSection from "./_components/FestivalSection";
-import UnivSelectorSuspenseFallback from "./_components/fallback/UnivSelectorSuspenseFallback";
-import UnivSelectorErrorFallback from "./_components/fallback/UnivSelectorErrorFallback";
 import FestivalSectionSuspenseFallback from "./_components/fallback/FestivalSectionSusepnseFallback";
 
 const HomePage = () => {
@@ -20,12 +17,6 @@ const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const univId = searchParams.get("id");
   const univName = searchParams.get("select-univ");
-
-  const handleSelectUnivItem = (id: string, name: string) => {
-    searchParams.set("select-univ", name);
-    searchParams.set("id", id);
-    setSearchParams(searchParams);
-  };
 
   //Test
   const [eventId, setEventId] = useState<number>(-1);
@@ -49,20 +40,7 @@ const HomePage = () => {
       />
       <Separator className="h-3 bg-[#F2F2F2]" />
       <main className="container mt-2 flex h-full w-full flex-col gap-3 bg-white">
-        <header>
-          <RetryErrorBoundary
-            fallbackComponent={(props: FallbackProps) => (
-              <UnivSelectorErrorFallback {...props} />
-            )}
-          >
-            <Suspense fallback={<UnivSelectorSuspenseFallback />}>
-              <UnivSelector
-                currentUniv={univName}
-                onSelect={handleSelectUnivItem}
-              />
-            </Suspense>
-          </RetryErrorBoundary>
-        </header>
+        <header className="mb-5 pt-3 text-3xl font-bold">{univName}</header>
         <section className="mb-5 grow">
           <RetryErrorBoundary resetKeys={[univId]}>
             <Suspense fallback={<FestivalSectionSuspenseFallback />}>

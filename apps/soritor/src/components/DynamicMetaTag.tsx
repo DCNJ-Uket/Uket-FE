@@ -4,7 +4,7 @@ interface DynamicMetaTagProps {
   title?: string;
   description?: string;
   image?: string;
-  url: string;
+  url?: string;
 }
 
 export default function DynamicMetaTag({
@@ -16,6 +16,7 @@ export default function DynamicMetaTag({
   return (
     <Helmet>
       <title>{title}</title>
+      <link rel="canonical" href={url || "https://uket.site/"} />
       <meta property="og:title" content={title || "Uket"} />
       <meta
         property="og:description"
