@@ -32,7 +32,7 @@ const TicketListSection = () => {
         {myTicketList.length === 0 && (
           <div className="container flex h-60 items-center justify-center text-center">
             <div className="text-lg font-bold text-gray-500">
-              예매한 티켓이 없어요..!
+              예매한 티켓이 없어요.
             </div>
           </div>
         )}
