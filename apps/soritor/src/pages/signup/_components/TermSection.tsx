@@ -29,6 +29,7 @@ const TermSection = (props: TermSectionProps) => {
             />
             <Link
               to={term.link}
+              target="_blank"
               className="flex w-full items-center justify-between"
             >
               <div className="font-medium">
