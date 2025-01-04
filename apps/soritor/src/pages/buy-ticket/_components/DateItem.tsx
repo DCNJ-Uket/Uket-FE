@@ -33,15 +33,17 @@ const DateItem = (props: DateItemProps) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isSoldOut, setIsSoldOut] = useState(false);
 
+  const { isoDate: isoTicketingDate } = useFormatTime(ticketingDate);
+
   useEffect(() => {
     setIsSoldOut(totalTicketCount <= 0);
   }, [totalTicketCount]);
 
   useEffect(() => {
     const currentTime = new Date().getTime();
-    const ticketingTime = new Date(ticketingDate).getTime();
+    const ticketingTime = new Date(isoTicketingDate).getTime();
     setIsDisabled(currentTime < ticketingTime);
-  }, [ticketingDate]);
+  }, [isoTicketingDate]);
 
   const { formatDate: formatShowDate, formatTime: formatStartTime } =
     useFormatTime(startDate);

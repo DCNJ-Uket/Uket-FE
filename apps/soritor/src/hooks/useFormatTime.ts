@@ -21,5 +21,6 @@ export const useFormatTime = (date: string) => {
   return {
     formatDate,
     formatTime,
+    isoDate: dateObject,
   };
 };
