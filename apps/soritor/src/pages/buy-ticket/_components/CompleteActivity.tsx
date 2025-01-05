@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useToast } from "@uket/ui/components/ui/use-toast";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
@@ -22,6 +22,7 @@ import { useQueryDepositUrl } from "@/hooks/queries/useQueryDepositUrl";
 import { handleCopyClipBoard } from "@/utils/handleCopyToClipboard";
 
 interface CompleteParams extends ActivityParams {
+  univName: string;
   ticketId: number;
   eventId: number;
 }
@@ -29,10 +30,10 @@ interface CompleteParams extends ActivityParams {
 const CompleteActivity: ActivityComponentType<CompleteParams> = ({
   params,
 }) => {
-  const { ticketId, eventId } = params;
+  const { univName, ticketId, eventId } = params;
 
-  const location = useLocation();
-  const { univName, univId } = location.state;
+  const [searchParams] = useSearchParams();
+  const univId = searchParams.get("univId");
 
   const routeUrl = `/home?select-univ=${univName}&id=${univId}`;
 
