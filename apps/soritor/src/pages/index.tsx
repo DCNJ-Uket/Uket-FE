@@ -35,7 +35,7 @@ const MainPage = () => {
       <main className="container flex h-full w-full flex-col justify-evenly">
         <section className="mt-10 flex w-full grow flex-col items-center gap-5">
           <h1 className="text-center text-3xl font-bold text-white">
-            <p>학교 축제 공연 감상,</p>
+            <p>당신을 위한 공연 감상,</p>
             <p>기다림 없이 UKET</p>
           </h1>
         </section>
