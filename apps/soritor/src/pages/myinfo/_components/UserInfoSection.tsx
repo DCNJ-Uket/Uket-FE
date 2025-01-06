@@ -34,7 +34,7 @@ const UserInfoSection = () => {
         </div>
         <Button
           variant="outline"
-          className="bg-brand w-full rounded-lg py-6 text-center text-sm font-semibold text-white"
+          className="bg-brand hover:bg-brandHover w-full rounded-lg py-6 text-center text-sm font-semibold text-white hover:text-white"
           onClick={() => {
             navigate("/ticket-list");
           }}
