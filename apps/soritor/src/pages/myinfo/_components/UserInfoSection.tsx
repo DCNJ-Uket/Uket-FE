@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { ExternalLink } from "@uket/ui/components/ui/icon";
 import { Button } from "@uket/ui/components/ui/button";
 
 import { useNavigate } from "@/router";
@@ -9,6 +11,8 @@ import { useQueryUserInfo } from "@/hooks/queries/useQueryUserInfo";
 import InfoItem from "./InfoItem";
 import InfoContainer from "./InfoContainer";
 import GeneralUserInfoContainer from "./GeneralUserInfoContainer";
+
+const OPEN_CHATTING = "https://open.kakao.com/me/uket";
 
 const UserInfoSection = () => {
   const { data: userInfo } = useQueryUserInfo();
@@ -59,6 +63,16 @@ const UserInfoSection = () => {
             <InfoItem title="학번" content={userInfo.studentCode} />
           </InfoContainer>
         )}
+        <div className="flex w-full flex-col gap-2 bg-white px-6 pb-6 pt-4">
+          <div className="flex h-8 items-center justify-start gap-3">
+            <div className="text-lg font-bold text-[#17171B]">
+              문의﹒제보하기
+            </div>
+            <Link to={OPEN_CHATTING} target="_blank">
+              <ExternalLink className="h-5" />
+            </Link>
+          </div>
+        </div>
       </section>
     </>
   );
