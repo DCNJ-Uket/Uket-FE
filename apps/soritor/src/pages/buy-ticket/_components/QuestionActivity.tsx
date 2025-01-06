@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
@@ -27,10 +27,11 @@ interface QuestionParams extends ActivityParams {
 const QuestionActivity: ActivityComponentType<QuestionParams> = ({
   params,
 }) => {
-  const { form, showDate, univName, showTime } = params;
+  const { form, univName, showDate, showTime } = params;
 
-  const location = useLocation();
-  const { eventId } = location.state;
+  const [searchParams] = useSearchParams();
+  const eventId = searchParams.get("eventId");
+
   const { data } = useQuerySurveyList(eventId);
   const { surveyId, surveys } = data;
 
@@ -44,7 +45,7 @@ const QuestionActivity: ActivityComponentType<QuestionParams> = ({
         { formId: surveys[0].formId, response: performer },
       ]);
     }
-  }, [performer]);
+  }, [performer, surveys, surveyForm]);
 
   return (
     <AppScreen appBar={{ border: false, height: "56px" }}>
@@ -72,6 +73,7 @@ const QuestionActivity: ActivityComponentType<QuestionParams> = ({
               activityName={"CompleteActivity" as never}
               disabled={false}
               params={{
+                univName: univName,
                 form: form,
               }}
               survey={{

@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { FallbackProps } from "react-error-boundary";
 import { Suspense, useState } from "react";
 import { ActivityComponentType } from "@stackflow/react";
@@ -24,8 +24,11 @@ import {
 } from "./Activity";
 
 const DateActivity: ActivityComponentType = () => {
-  const location = useLocation();
-  const { univName, univId, eventId } = location.state;
+  const [searchParams] = useSearchParams();
+
+  const univName = searchParams.get("univName");
+  const univId = searchParams.get("univId");
+  const eventId = searchParams.get("eventId");
 
   const { form } = useTicketStackForm();
   form.setValue("universityId", parseInt(univId!, 10));
@@ -80,7 +83,7 @@ const DateActivity: ActivityComponentType = () => {
             >
               <Suspense>
                 <ShowList
-                  eventId={eventId.toString()}
+                  eventId={eventId!.toString()}
                   selectedItem={selectedItem}
                   onSelect={handleSelectDate}
                 />

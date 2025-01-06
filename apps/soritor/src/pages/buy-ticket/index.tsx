@@ -8,7 +8,7 @@ import { Stack } from "@/utils/buyTicketFlow";
 
 const BuyTicket = () => {
   return (
-    <main className="absolute left-1/2 top-0 flex h-full -translate-x-1/2 items-center justify-center sm:w-[500px]">
+    <main className="relative flex h-full flex-col items-center justify-center">
       <RetryErrorBoundary
         fallbackComponent={(props: FallbackProps) => (
           <BuyTicketErrorFallback {...props} />

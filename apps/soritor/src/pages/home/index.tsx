@@ -18,7 +18,6 @@ const HomePage = () => {
   const univId = searchParams.get("id");
   const univName = searchParams.get("select-univ");
 
-  //Test
   const [eventId, setEventId] = useState<number>(-1);
   const handleUpdateEventId = (id: number) => {
     setEventId(id);
@@ -26,8 +25,9 @@ const HomePage = () => {
 
   const handleBuyTicketNavigate = () => {
     if (eventId !== -1) {
-      navigate("/buy-ticket", {
-        state: { univName, univId, eventId },
+      navigate({
+        pathname: "/buy-ticket",
+        search: `?univName=${univName}&univId=${univId}&eventId=${eventId}`,
       });
     }
   };
