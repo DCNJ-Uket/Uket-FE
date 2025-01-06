@@ -1,9 +1,12 @@
-import dayjs from "dayjs";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 import { getEntryList } from "@/api/entry";
 
+import { useFormat } from "@/hooks/useFormat";
+
 export const useQueryEntryList = ({ page = 1 }: { page: number }) => {
+  const { handleFormatDate } = useFormat();
+
   const {
     isPending,
     isError,
@@ -19,12 +22,8 @@ export const useQueryEntryList = ({ page = 1 }: { page: number }) => {
     placeholderData: keepPreviousData,
     select: data => {
       const newContent = data.content.map(item => {
-        const formattedEnterTime = dayjs(item.enterTime).format(
-          "YY.MM.DD HH:mm",
-        );
-        const formattedTicketDate = dayjs(item.ticketDate).format(
-          "YY.MM.DD HH:mm",
-        );
+        const formattedEnterTime = handleFormatDate(item.enterTime);
+        const formattedTicketDate = handleFormatDate(item.ticketDate);
         return {
           ...item,
           enterTime: formattedEnterTime,
