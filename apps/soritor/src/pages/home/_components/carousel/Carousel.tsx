@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   Carousel,
@@ -57,19 +58,24 @@ const CarouselT = (props: PropType) => {
       </div>
     </CarouselItem>
   ) : (
-    slides.map(({ title, url }, index) => (
+    slides.map(({ title, url, redirectUrl }, index) => (
       <CarouselItem key={url} className="basis-full">
-        <div className="p-1">
-          <Card className="border-none">
-            <CardContent className="relative h-44 rounded-lg p-0 shadow-md sm:h-80 lg:h-96">
-              <LazyLoadImage
-                imgSrc={url}
-                inView={slidesInView.indexOf(index) > -1}
-              />
-              <Indicator title={title} className="left-3 top-3 text-desc text-xs" />
-            </CardContent>
-          </Card>
-        </div>
+        <Link to={redirectUrl || "/404"} target="_blank">
+          <div className="p-1">
+            <Card className="border-none">
+              <CardContent className="relative h-44 rounded-lg p-0 shadow-md sm:h-80 lg:h-96">
+                <LazyLoadImage
+                  imgSrc={url}
+                  inView={slidesInView.indexOf(index) > -1}
+                />
+                <Indicator
+                  title={title}
+                  className="text-desc left-3 top-3 text-xs"
+                />
+              </CardContent>
+            </Card>
+          </div>
+        </Link>
       </CarouselItem>
     ))
   );
