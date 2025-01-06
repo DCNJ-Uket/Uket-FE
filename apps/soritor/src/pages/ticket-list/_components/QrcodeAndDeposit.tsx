@@ -61,7 +61,7 @@ const QrcodeAndDeposit = (props: QrcodeAndDepositProps) => {
               입금 완료 시 QR 활성화
             </h1>
             <h2>
-              <p>입급 후 예매가 완료되어 QR이 활성화됩니다.</p>
+              <p>입급 후 예매가 완료되면 QR이 활성화됩니다.</p>
               <p>입금 확인까지 시간이 다소 소요될 수 있습니다.</p>
             </h2>
             <h3>공연 티켓가 ₩{deposit.ticketPrice}</h3>
