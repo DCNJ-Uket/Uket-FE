@@ -12,6 +12,13 @@ export type TicketQrCodeResponse = {
   msg: string;
 };
 
+export type FormAnswer = {
+  formId: number;
+  answerId: number;
+  question: string;
+  answer: string;
+};
+
 export type TicketResponse = {
   ticketId: number;
   depositorName: string;
@@ -21,6 +28,7 @@ export type TicketResponse = {
   updatedDate: string;
   ticketStatus: string;
   userType: string;
+  formAnswers: FormAnswer[];
 };
 
 export type TicketListResponse = {
