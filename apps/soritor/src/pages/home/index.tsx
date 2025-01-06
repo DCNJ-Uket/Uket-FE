@@ -6,11 +6,11 @@ import { Separator } from "@uket/ui/components/ui/separator";
 import { useNavigate } from "@/router";
 
 import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
-import DynamicMetaTag from "@/components/DynamicMetaTag";
 import AuthRequiredModalButton from "@/components/AuthRequiredModalButton";
 
 import FestivalSection from "./_components/FestivalSection";
 import FestivalSectionSuspenseFallback from "./_components/fallback/FestivalSectionSusepnseFallback";
+
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -34,10 +34,6 @@ const HomePage = () => {
 
   return (
     <main className="relative flex h-full flex-col items-center">
-      <DynamicMetaTag
-        title={`Uket | ${univName}`}
-        description={`${univName}에서 진행중인 공연을 확인해 보세요!`}
-      />
       <Separator className="h-3 bg-[#F2F2F2]" />
       <main className="container mt-2 flex h-full w-full flex-col gap-3 bg-white">
         <header className="mb-5 pt-3 text-3xl font-bold">{univName}</header>
@@ -45,6 +41,7 @@ const HomePage = () => {
           <RetryErrorBoundary resetKeys={[univId]}>
             <Suspense fallback={<FestivalSectionSuspenseFallback />}>
               <FestivalSection
+                univName={univName}
                 univId={univId}
                 onUpdateEventId={handleUpdateEventId}
               />
