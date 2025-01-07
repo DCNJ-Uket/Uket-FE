@@ -33,7 +33,6 @@ const TicketModal = (props: TicketModalProps) => {
       showLocation,
       universityName,
       ticketStatus,
-      showName,
       eventId,
       eventName,
       ticketId,
@@ -71,7 +70,6 @@ const TicketModal = (props: TicketModalProps) => {
           <TicketHeader
             universityName={universityName}
             eventName={eventName}
-            showName={showName}
           />
           <Separator className="bg-[#5E5E6E]" />
           <TicketDetail

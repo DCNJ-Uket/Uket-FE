@@ -34,7 +34,6 @@ const Ticket = (props: TicketProps) => {
       universityName,
       ticketStatus,
       ticketNo,
-      showName,
       eventName,
       ticketId,
     },
@@ -68,7 +67,6 @@ const Ticket = (props: TicketProps) => {
                 <TicketHeader
                   universityName={universityName}
                   eventName={eventName}
-                  showName={showName}
                 />
                 <TicketDetail
                   userName={userName}
