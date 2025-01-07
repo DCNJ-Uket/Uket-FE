@@ -55,7 +55,7 @@ const TicketModal = (props: TicketModalProps) => {
             />
           </div>
         </CardTitle>
-        <CardDescription className="flex flex-col items-center justify-center">
+        <CardDescription className="flex flex-col items-center justify-center text-[12px] sm:text-sm">
           <RetryErrorBoundary fallbackComponent={QrCodeAndDepositErrorFallback}>
             <QrcodeAndDeposit
               ticketId={ticketId}

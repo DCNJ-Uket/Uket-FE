@@ -23,7 +23,7 @@ const TicketListSection = () => {
       >
         {myTicketList.length > 0 &&
           myTicketList.map(ticket => (
-            <CarouselItem key={ticket.ticketId} className="basis-4/5 pb-2 pl-2">
+            <CarouselItem key={ticket.ticketId} className=" basis-11/12 pb-2 pl-2">
               <div className="p-1">
                 <Ticket ticket={ticket} />
               </div>
