@@ -34,6 +34,7 @@ function BookingItem(props: BookingItemProps) {
           page={page}
         />
       </td>
+      <td>{ticket.formAnswers[0].answer}</td>
     </tr>
   );
 }

@@ -22,6 +22,7 @@ function BookingList(props: BookingListProps) {
     "업데이트 일시",
     "주문 일시",
     "티켓 상태",
+    "지인",
   ];
 
   return (
