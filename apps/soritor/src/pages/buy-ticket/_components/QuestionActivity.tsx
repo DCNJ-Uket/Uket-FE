@@ -61,6 +61,7 @@ const QuestionActivity: ActivityComponentType<QuestionParams> = ({
               <HeaderItem step={"03"} content={"아래 질문에 답변해 주세요."} />
             </ActivityHeader>
             <QuestionSection
+              isNecessary={surveys[0].isNecessary}
               performer={performer}
               setPerformer={setPerformer}
               question={surveys[0].question}
@@ -77,7 +78,6 @@ const QuestionActivity: ActivityComponentType<QuestionParams> = ({
                 form: form,
               }}
               survey={{
-                isSubmit: performer !== "",
                 form: surveyForm,
               }}
             ></NextButton>

@@ -6,6 +6,7 @@ import { OptionType } from "@/types/surveyType";
 import PerformerSheet from "./PerformerSheet";
 
 interface QuestionSectionProps {
+  isNecessary: boolean;
   performer: string;
   setPerformer: (performer: string) => void;
   question: string;
@@ -13,7 +14,8 @@ interface QuestionSectionProps {
 }
 
 const QuestionSection = (props: QuestionSectionProps) => {
-  const { performer, setPerformer, question, performerList } = props;
+  const { isNecessary, performer, setPerformer, question, performerList } =
+    props;
 
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
@@ -25,7 +27,9 @@ const QuestionSection = (props: QuestionSectionProps) => {
   return (
     <div className="flex grow flex-col justify-start gap-4 px-[22px]">
       <section className="flex flex-col gap-2 rounded-lg bg-white px-5 py-5 pt-4 shadow-lg">
-        <h1 className="text-[15px] font-bold">{question}</h1>
+        <h1 className="text-[15px] font-bold">
+          {isNecessary ? "(필수)" : "(선택)"} {question}
+        </h1>
         <Input
           isLeftIcon
           value={performer}
