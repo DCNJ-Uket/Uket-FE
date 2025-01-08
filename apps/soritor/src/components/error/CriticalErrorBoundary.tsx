@@ -16,7 +16,10 @@ const CriticalErrorBoundary = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate();
 
   const back = () => {
-    window.location.reload();
+    navigate(-1);
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
   };
 
   const home = (callback: (...args: any[]) => void) => {

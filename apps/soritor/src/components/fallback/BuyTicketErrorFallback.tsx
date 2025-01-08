@@ -1,10 +1,8 @@
 import { FallbackProps } from "react-error-boundary";
 import { Button } from "@uket/ui/components/ui/button";
 
-
 import { useNavigate } from "@/router";
 
-import Logo from "../Logo";
 import {
   ErrorContainer,
   ErrorDescription,
@@ -12,25 +10,26 @@ import {
   ErrorTitle,
 } from "../error/CustomError";
 
-
 const BuyTicketErrorFallback = (props: FallbackProps) => {
   const navigate = useNavigate();
-  const { resetErrorBoundary } = props;
+  const { error, resetErrorBoundary } = props;
+  const errorMessage = error.response.data.message;
 
   const back = () => {
     navigate(-1);
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
     resetErrorBoundary();
   };
 
   return (
     <ErrorContainer className="flex-col gap-10">
-      <Logo />
       <ErrorHeader className="text-center">
-        <ErrorTitle className="text-xl">잠시 후 다시 시도해 주세요!</ErrorTitle>
-        <ErrorDescription className="pt-3">
-          티켓 예매 과정에 에러가 발생했습니다. <br />
-          잠시 후 다시 시도해 주세요.
-        </ErrorDescription>
+        <ErrorTitle className="text-xl">
+          티켓 예매 과정에 에러가 발생했습니다.
+        </ErrorTitle>
+        <ErrorDescription className="pt-3">{errorMessage}</ErrorDescription>
       </ErrorHeader>
       <footer className="flex w-full flex-col gap-2 px-5">
         <Button
