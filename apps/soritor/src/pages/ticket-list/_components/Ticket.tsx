@@ -36,6 +36,7 @@ const Ticket = (props: TicketProps) => {
       ticketNo,
       eventName,
       ticketId,
+      backgroundImageUrl,
     },
   } = props;
 
@@ -50,11 +51,15 @@ const Ticket = (props: TicketProps) => {
             <section className="flex basis-3/4 flex-col overflow-hidden rounded-b-3xl rounded-t-xl bg-white shadow-xl">
               <header className="relative">
                 <AspectRatio ratio={16 / 9}>
-                  <Image
-                    className="h-full w-full object-cover"
-                    src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                    alt="ticket"
-                  />
+                  {backgroundImageUrl ? (
+                    <Image
+                      className="h-full w-full object-cover"
+                      src={backgroundImageUrl}
+                      alt="ticket-image"
+                    />
+                  ) : (
+                    <div className="bg-gray-100 h-full w-full"></div>
+                  )}
                 </AspectRatio>
                 <Indicator
                   variant={ticketStatus}
