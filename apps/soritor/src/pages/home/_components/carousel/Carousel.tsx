@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
@@ -9,10 +10,10 @@ import {
 import { Card, CardContent } from "@uket/ui/components/ui/card";
 
 import Indicator from "@/components/Indicator";
+import Image from "@/components/Image";
 
 import { FestivalInfo } from "@/types/univType";
 
-import { LazyLoadImage } from "./CarouselLazyImage";
 import CarouselDotButtonList from "./CarouselDotButtonList";
 
 interface PropType {
@@ -58,15 +59,16 @@ const CarouselT = (props: PropType) => {
       </div>
     </CarouselItem>
   ) : (
-    slides.map(({ title, url, redirectUrl }, index) => (
+    slides.map(({ title, url, redirectUrl }) => (
       <CarouselItem key={url} className="basis-full">
         <Link to={redirectUrl || "/404"} target="_blank">
           <div className="p-1">
             <Card className="border-none">
               <CardContent className="relative h-44 rounded-lg p-0 shadow-md sm:h-80 lg:h-96">
-                <LazyLoadImage
-                  imgSrc={url}
-                  inView={slidesInView.indexOf(index) > -1}
+                <Image
+                  src={url}
+                  className="block h-full w-full rounded-lg bg-gray-100 object-cover"
+                  alt="축제 배너"
                 />
                 <Indicator
                   title={title}
