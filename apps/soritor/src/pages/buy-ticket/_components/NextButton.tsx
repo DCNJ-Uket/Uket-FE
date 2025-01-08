@@ -89,7 +89,7 @@ const NextButton = (as: NextButtonProps) => {
             asChild
             className="bg-brand border-brand hover:bg-brandHover grow basis-1/2 border"
           >
-            <Link to={depositUrl} className="text-white">
+            <Link to={depositUrl} target="_blank" className="text-white">
               카카오로 입금하기
             </Link>
           </Button>

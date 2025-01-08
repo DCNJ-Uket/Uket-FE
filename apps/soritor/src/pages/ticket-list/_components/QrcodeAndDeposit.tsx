@@ -71,7 +71,7 @@ const QrcodeAndDeposit = (props: QrcodeAndDepositProps) => {
               asChild
               className="bg-brand hover:bg-brandHover rounded-lg text-xs"
             >
-              <Link to={deposit.depositUrl} className="font-bold">
+              <Link to={deposit.depositUrl} target="_blank" className="font-bold">
                 카카오로 입금하기
               </Link>
             </Button>
