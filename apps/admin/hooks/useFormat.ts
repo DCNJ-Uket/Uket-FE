@@ -1,6 +1,14 @@
 export const useFormat = () => {
   const handleFormatDate = (dateString: string) => {
+    const timeOffset = dateString.split("+")[1];
+
+    const [offsetHours, offsetMinutes] = String(timeOffset)
+      .split(":")
+      .map(Number);
+
     const date = new Date(dateString);
+    date.setHours(date.getHours() + offsetHours);
+    date.setMinutes(date.getMinutes() + offsetMinutes);
 
     const formatTwoDigits = (num: number) => String(num).padStart(2, "0");
 

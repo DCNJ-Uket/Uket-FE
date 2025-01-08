@@ -5,6 +5,7 @@ export type OptionType = {
 
 export type SurveyFormType = {
   formId: number;
+  isNecessary: boolean;
   formType: "TEXT" | "DROPDOWN";
   options: OptionType[];
   question: string;

@@ -17,7 +17,6 @@ interface NextButtonProps
   isLast?: boolean;
   depositUrl?: string;
   survey?: {
-    isSubmit: boolean;
     form: SurveyFormType;
   };
   params?: {
@@ -55,19 +54,17 @@ const NextButton = (as: NextButtonProps) => {
       navigate(routeUrl as any, { replace: true });
       return;
     } else if (activityName === "CompleteActivity" && form && surveyForm) {
-      // 질의응답 로직
-      if (survey.isSubmit) {
-        await onSurveySubmit(surveyForm.getValues());
-      }
-
       // 티켓 예매 로직
-      const data = await onSubmit(form.getValues());
+      const ticketData = await onSubmit(form.getValues());
+
+      // 질의 응답 제출 로직
+      await onSurveySubmit(surveyForm.getValues());
+
       push(activityName, {
         ...params,
-        ticketId: data.ticketId,
-        eventId: data.eventId,
+        ticketId: ticketData.ticketId,
+        eventId: ticketData.eventId,
       });
-      return;
     }
 
     push(activityName, params || {});
