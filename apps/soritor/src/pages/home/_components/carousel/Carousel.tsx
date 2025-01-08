@@ -64,7 +64,7 @@ const CarouselT = (props: PropType) => {
         <Link to={redirectUrl || "/404"} target="_blank">
           <div className="p-1">
             <Card className="border-none">
-              <CardContent className="relative h-44 rounded-lg p-0 shadow-md sm:h-80 lg:h-96">
+              <CardContent className="relative h-60 rounded-lg p-0 shadow-md sm:h-80 lg:h-96">
                 <Image
                   src={url}
                   className="block h-full w-full rounded-lg bg-gray-100 object-cover"
