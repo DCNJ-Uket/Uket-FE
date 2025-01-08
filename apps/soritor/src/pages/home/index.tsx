@@ -8,7 +8,9 @@ import { useNavigate } from "@/router";
 import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
 import AuthRequiredModalButton from "@/components/AuthRequiredModalButton";
 
+import SectionItem from "./_components/SectionItem";
 import FestivalSection from "./_components/FestivalSection";
+import FestivalDetailSection from "./_components/FestivalDetailSection";
 import FestivalSectionSuspenseFallback from "./_components/fallback/FestivalSectionSusepnseFallback";
 
 
@@ -37,7 +39,7 @@ const HomePage = () => {
       <Separator className="h-3 bg-[#F2F2F2]" />
       <main className="container mt-2 flex h-full w-full flex-col gap-3 bg-white">
         <header className="mb-5 pt-3 text-3xl font-bold">{univName}</header>
-        <section className="mb-5 grow">
+        <section className="mb-5 grow space-y-5">
           <RetryErrorBoundary resetKeys={[univId]}>
             <Suspense fallback={<FestivalSectionSuspenseFallback />}>
               <FestivalSection
@@ -47,6 +49,7 @@ const HomePage = () => {
               />
             </Suspense>
           </RetryErrorBoundary>
+          <SectionItem title="상세 정보" item={<FestivalDetailSection />} />
         </section>
         <footer className="sticky bottom-5 z-10 mb-3 flex w-full items-center justify-center gap-3">
           <AuthRequiredModalButton
