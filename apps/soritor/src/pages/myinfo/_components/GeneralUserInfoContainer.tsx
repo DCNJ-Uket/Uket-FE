@@ -14,7 +14,7 @@ interface GeneralUserInfoContainerProps {
 const GeneralUserInfoContainer = (props: GeneralUserInfoContainerProps) => {
   const { depositorName, phoneNumber, universityName } = props;
 
-  const depositorNameRegex = /^[가-힣]{2,4}|[a-zA-Z]{2,10}$/;
+  const depositorNameRegex = /^([가-힣]{2,4}|[a-zA-Z]{2,10})$/;
   const phoneNumberRegex = /^\d{3}-?\d{4}-?\d{4}$/;
 
   const mutation = useMutationUpdateInfo();
