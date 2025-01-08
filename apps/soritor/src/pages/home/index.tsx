@@ -14,6 +14,7 @@ import FestivalSection from "./_components/FestivalSection";
 import FestivalDetailSection from "./_components/FestivalDetailSection";
 import FestivalSectionSuspenseFallback from "./_components/fallback/FestivalSectionSusepnseFallback";
 
+// TODO: DynamicMetaTag 하드코딩 수정
 const HomePage = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -37,10 +38,10 @@ const HomePage = () => {
   return (
     <main className="relative flex h-full flex-col items-center">
       <DynamicMetaTag
-        title={`Uket | ${univName}`}
-        description={`${univName}에서 진행중인 공연을 확인해 보세요!`}
+        title={`Uket | 소리터`}
+        description={`소리터에서 진행중인 공연을 확인해 보세요!`}
         image={
-          "https://uket-image-bucket.s3.ap-northeast-2.amazonaws.com/banner/soritor/title.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250108T022114Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIA4MTWH77PARFJKT6F%2F20250108%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Expires=60&X-Amz-Signature=12899d204b66bd05a178e8274c37a4783755b5bdde1b83367f8cd4b978933009"
+          "https://res.cloudinary.com/dhn3axbhj/image/upload/f_auto,q_auto/jpuywtkkiietiuokytzu"
         }
       />
       <Separator className="h-3 bg-[#F2F2F2]" />
