@@ -72,7 +72,7 @@ const QuestionActivity: ActivityComponentType<QuestionParams> = ({
             <NextButton
               type="submit"
               activityName={"CompleteActivity" as never}
-              disabled={false}
+              disabled={performer === ""}
               params={{
                 univName: univName,
                 form: form,
