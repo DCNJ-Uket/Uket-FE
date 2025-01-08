@@ -13,6 +13,7 @@ export type TicketItem = {
   eventName: string;
   ticketId: number;
   createdAt: string;
+  backgroundImageUrl: string;
 };
 
 export type QRCodeType = string;

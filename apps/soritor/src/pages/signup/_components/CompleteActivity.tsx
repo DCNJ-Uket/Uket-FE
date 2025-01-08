@@ -31,7 +31,7 @@ const CompleteActivity: ActivityComponentType = () => {
               회원가입이 완료되었습니다.
             </h1>
             <h2 className="text-center text-2xl font-black">
-              <p>이제 학교 축제 티켓을</p>
+              <p>이제 공연 티켓을</p>
               <p>예매하러 가볼까요?</p>
             </h2>
             <Image

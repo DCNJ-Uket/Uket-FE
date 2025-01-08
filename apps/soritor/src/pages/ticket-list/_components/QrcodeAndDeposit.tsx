@@ -61,21 +61,21 @@ const QrcodeAndDeposit = (props: QrcodeAndDepositProps) => {
               입금 완료 시 QR 활성화
             </h1>
             <h2>
-              <p>입급 후 예매가 완료되어 QR이 활성화됩니다.</p>
+              <p>입급 후 예매가 완료되면 QR이 활성화됩니다.</p>
               <p>입금 확인까지 시간이 다소 소요될 수 있습니다.</p>
             </h2>
-            <h3>공연 티켓가 ₩{deposit.ticketPrice}</h3>
+            <h3>공연 티켓가 <span className="font-bold">₩{deposit.ticketPrice}</span></h3>
           </header>
           <div className="space-y-1">
             <Button
               asChild
               className="bg-brand hover:bg-brandHover rounded-lg text-xs"
             >
-              <Link to={deposit.depositUrl} className="font-bold">
+              <Link to={deposit.depositUrl} target="_blank" className="font-bold">
                 카카오로 입금하기
               </Link>
             </Button>
-            <footer className="flex items-center justify-center gap-1 text-xs">
+            <footer className="flex items-center justify-center gap-1 text-sm">
               <div>
                 <span>{deposit.accountNumber} </span>
                 <span>{deposit.accountOwner}</span>

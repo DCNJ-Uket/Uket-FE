@@ -33,7 +33,6 @@ const TicketModal = (props: TicketModalProps) => {
       showLocation,
       universityName,
       ticketStatus,
-      showName,
       eventId,
       eventName,
       ticketId,
@@ -56,7 +55,7 @@ const TicketModal = (props: TicketModalProps) => {
             />
           </div>
         </CardTitle>
-        <CardDescription className="flex flex-col items-center justify-center">
+        <CardDescription className="flex flex-col items-center justify-center text-[12px] sm:text-sm">
           <RetryErrorBoundary fallbackComponent={QrCodeAndDepositErrorFallback}>
             <QrcodeAndDeposit
               ticketId={ticketId}
@@ -71,7 +70,6 @@ const TicketModal = (props: TicketModalProps) => {
           <TicketHeader
             universityName={universityName}
             eventName={eventName}
-            showName={showName}
           />
           <Separator className="bg-[#5E5E6E]" />
           <TicketDetail

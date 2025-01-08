@@ -4,7 +4,7 @@ export type FestivalInfo = {
   startDate: string;
   endDate: string;
   location: string;
-  banners: { title: string; url: string }[];
+  banners: { title: string; url: string; redirectUrl: string }[];
 };
 
 export type FestivalInfoResponse = FestivalInfo;
