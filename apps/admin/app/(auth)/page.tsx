@@ -9,7 +9,7 @@ export default function AuthPage() {
 
   return (
     <main
-      className={cn("flex h-full flex-col", mobile ? "w-full" : "container max-w-sm")}
+      className={cn("flex h-full flex-col", mobile ? "w-full px-8" : "container max-w-sm")}
     >
       {mobile && <h1 className="font-black text-2xl">관리자 로그인</h1>}
       <AuthSection />
