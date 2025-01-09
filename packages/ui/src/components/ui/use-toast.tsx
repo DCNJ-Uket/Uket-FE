@@ -143,11 +143,6 @@ type Toast = Omit<ToasterToast, "id">;
 function toast({ ...props }: Toast) {
   const id = genId();
 
-  const update = (props: ToasterToast) =>
-    dispatch({
-      type: "UPDATE_TOAST",
-      toast: { ...props, id },
-    });
   const dismiss = () => dispatch({ type: "DISMISS_TOAST", toastId: id });
 
   dispatch({
@@ -157,16 +152,16 @@ function toast({ ...props }: Toast) {
       id,
       open: true,
       duration: TOAST_DURATION,
-      onOpenChange: open => {
-        if (!open) dismiss();
-      },
     },
   });
+
+  setTimeout(() => {
+    dismiss();
+  }, TOAST_DURATION);
 
   return {
     id: id,
     dismiss,
-    update,
   };
 }
 

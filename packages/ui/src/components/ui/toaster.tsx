@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Toast,
@@ -7,16 +7,16 @@ import {
   ToastProvider,
   ToastTitle,
   ToastViewport,
-} from "@ui/components/ui/toast"
-import { useToast } from "@ui/components/ui/use-toast"
+} from "@ui/components/ui/toast";
+import { useToast } from "@ui/components/ui/use-toast";
 
 interface ToasterProps {
-  className?:string;
+  className?: string;
 }
 
-export function Toaster(props: ToasterProps){
-  const { toasts } = useToast()
-  const {className}=props;
+export function Toaster(props: ToasterProps) {
+  const { toasts } = useToast();
+  const { className } = props;
 
   return (
     <ToastProvider>
@@ -30,11 +30,10 @@ export function Toaster(props: ToasterProps){
               )}
             </div>
             {action}
-            <ToastClose />
           </Toast>
-        )
+        );
       })}
-      <ToastViewport className={className}/>
+      <ToastViewport className={className} />
     </ToastProvider>
-  )
+  );
 }
