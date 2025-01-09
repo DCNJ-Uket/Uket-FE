@@ -55,8 +55,10 @@ const SideNav = () => {
     <div className="flex h-full w-52 flex-col gap-5 px-6 pb-20 pt-10">
       <AdminLogo logo_style="w-24" font_style="font-medium text-xs" />
       <div className="text-sm">
-        <p className="text-brand">건국대학교</p>
-        <p className="text-[#5E5E6E]">관리자님, 안녕하세요.</p>
+        <p className="text-[#5E5E6E]">
+          <span className="text-brand">관리자님,</span>
+          <span>안녕하세요.</span>
+        </p>
       </div>
       <div className="h-[0.5px] w-full bg-[#CCCCCC]"></div>
       <div className="grow py-8">
