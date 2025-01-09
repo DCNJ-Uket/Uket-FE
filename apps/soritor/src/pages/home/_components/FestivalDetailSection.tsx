@@ -50,10 +50,6 @@ const FestivalDetailSection = () => {
             </li>
             <li className="flex flex-col">
               <span>*예매는 1월 15일&#40;수&#41; 자정까지입니다.</span>
-              <span>
-                폼 작성을 하지 않거나, 미입금시 취소 된다는 점 유의해주시길
-                바랍니다.
-              </span>
             </li>
             <li>
               *환불은 1월 16일&#40;목&#41; 자정까지 가능하며&#40;100%&#41;, 당일

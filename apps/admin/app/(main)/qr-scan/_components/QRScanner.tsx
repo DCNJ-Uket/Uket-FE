@@ -19,6 +19,7 @@ const QRScanner = () => {
         styles={{ finderBorder: 1 }}
         components={{ finder: false }}
         allowMultiple
+        scanDelay={2000}
       >
         <QRFinderIcon />
         <h1 className="absolute left-0 top-6 w-full text-2xl font-bold text-white sm:text-3xl">

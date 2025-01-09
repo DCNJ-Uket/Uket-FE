@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
   CarouselApi,
@@ -60,32 +61,39 @@ const CarouselT = (props: PropType) => {
     </CarouselItem>
   ) : (
     slides.map(({ title, url, redirectUrl }) => (
-      <CarouselItem key={url} className="basis-full">
-        <Link to={redirectUrl || "/404"} target="_blank">
-          <div className="p-1">
-            <Card className="border-none">
-              <CardContent className="relative h-60 rounded-lg p-0 shadow-md sm:h-80 lg:h-96">
-                <Image
-                  src={url}
-                  className="block h-full w-full rounded-lg bg-gray-100 object-cover"
-                  alt="축제 배너"
-                />
-                <Indicator
-                  title={title}
-                  className="text-desc left-3 top-3 text-xs"
-                />
-              </CardContent>
-            </Card>
-          </div>
-        </Link>
-      </CarouselItem>
+      <>
+        <CarouselItem key={url} className="basis-full">
+          <Link to={redirectUrl || "/404"} target="_blank">
+            <div className="p-1">
+              <Card className="border-none">
+                <CardContent className="relative h-60 rounded-lg p-0 shadow-md sm:h-80 lg:h-96">
+                  <Image
+                    src={url}
+                    className="block h-full w-full rounded-lg bg-gray-100 object-cover"
+                    alt="축제 배너"
+                  />
+                  <Indicator
+                    title={title}
+                    className="text-desc left-3 top-3 text-xs"
+                  />
+                </CardContent>
+              </Card>
+            </div>
+          </Link>
+        </CarouselItem>
+      </>
     ))
   );
 
   return (
     <Carousel
       className="w-full max-w-full"
-      opts={{ align: "start" }}
+      opts={{ align: "start", loop: true }}
+      plugins={[
+        Autoplay({
+          delay: 2500,
+        }),
+      ]}
       setApi={setEmblaApi}
     >
       <CarouselContent>{slideComponent}</CarouselContent>

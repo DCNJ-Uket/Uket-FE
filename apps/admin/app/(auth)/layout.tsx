@@ -22,7 +22,7 @@ export default function WithoutNavLayout({
           <AdminLogo logo_style="w-32" font_style="text-lg font-medium" />
         </div>
       )}
-      <main className="grow">{children}</main>
+      <main className="grow w-full">{children}</main>
     </main>
   );
 }

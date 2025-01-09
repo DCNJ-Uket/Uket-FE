@@ -3,6 +3,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@ui/lib/utils";
+import { useToast } from "@ui/components/ui/use-toast";
 import {
   Dialog,
   DialogClose,
@@ -22,11 +23,15 @@ interface LogoutModalProps {
 
 export default function LogoutModal(props: LogoutModalProps) {
   const { isMobile } = props;
-
+  const { toast } = useToast();
   const router = useRouter();
   const handleLogout = () => {
     clearAccessToken();
     router.replace("/");
+    toast({
+      title: "로그아웃이 완료되었습니다.",
+      duration: 2000,
+    });
   };
 
   return (

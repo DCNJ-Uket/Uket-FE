@@ -46,7 +46,7 @@ const HomePage = () => {
       />
       <Separator className="h-3 bg-[#F2F2F2]" />
       <main className="container mt-2 flex h-full w-full flex-col gap-3 bg-white">
-        <header className="mb-5 pt-3 text-3xl font-bold">{univName}</header>
+        <header className="mb-5 pt-3 text-2xl font-bold">{univName}</header>
         <section className="mb-5 grow space-y-5">
           <RetryErrorBoundary resetKeys={[univId]}>
             <Suspense fallback={<FestivalSectionSuspenseFallback />}>

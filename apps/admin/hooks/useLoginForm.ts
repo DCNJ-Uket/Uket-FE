@@ -14,14 +14,17 @@ export type FormType = UseFormReturn<FormSchemaType, unknown, undefined>;
 
 const LoginFormSchema = z
   .object({
-    email: z.string().email({ message: "유효하지 않은 이메일입니다." }),
-    password: z.string(),
+    email: z
+      .string()
+      .email({ message: "유효하지 않은 이메일입니다." })
+      .min(1, { message: "이메일을 입력해 주세요." }),
+    password: z.string().min(1, { message: "비밀번호를 입력해 주세요." }),
   })
   .required();
 
 export const useLoginForm = () => {
   const { mutate, error } = useMutationLogin();
-
+  
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(LoginFormSchema),
     defaultValues: {

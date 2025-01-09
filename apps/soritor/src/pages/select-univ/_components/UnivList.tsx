@@ -12,15 +12,16 @@ const UnivList = (props: UnivListProps) => {
   const { data: univList } = useQueryFestivalUnivList();
 
   return (
-    <main className="grid grow auto-rows-min grid-cols-2 gap-3 md:grid-cols-2">
+    <main className="grid grow auto-rows-min grid-cols-2 gap-3 md:grid-cols-2 items-start">
       {univList.length > 0 &&
-        univList.map(({ id, name, logoUrl, startDateTime }) => (
+        univList.map(({ id, name, eventName, logoUrl, startDateTime }) => (
           <UnivItem
             key={id}
             isSelected={selectedUnivId === id}
-            onSelect={() => onSelect(id, name)}
+            onSelect={() => onSelect(id, eventName)}
             logoUrl={logoUrl}
             name={name}
+            eventName={eventName}
             startDateTime={startDateTime}
           />
         ))}
