@@ -64,9 +64,9 @@ const FestivalDetailSection = () => {
                 인근에 노상공영주차장&#40;합정/당인 공영주차장&#41;이 있습니다.
               </span>
             </li>
-            <li>
+            <li className="flex flex-col">
               <span>
-                *기타 모든 문의는 소리터 인스타그램을 통해 부탁드립니다
+                *기타 모든 문의는 소리터 인스타그램을 통해 부탁드립니다.
               </span>
               <Link
                 to="https://www.instagram.com/soritor_official/"
