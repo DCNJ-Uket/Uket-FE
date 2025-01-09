@@ -65,9 +65,11 @@ const NextButton = (as: NextButtonProps) => {
         ticketId: ticketData.ticketId,
         eventId: ticketData.eventId,
       });
+      return;
     }
 
     push(activityName, params || {});
+    return;
   };
 
   return (

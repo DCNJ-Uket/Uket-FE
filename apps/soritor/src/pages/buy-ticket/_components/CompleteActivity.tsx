@@ -72,7 +72,7 @@ const CompleteActivity: ActivityComponentType<CompleteParams> = ({
                 <h6 className="text-desc text-base font-medium">
                   공연 티켓가 ₩{deposit.ticketPrice}
                 </h6>
-                <div className="flex items-center gap-2 justify-center">
+                <div className="flex items-center justify-center gap-2">
                   <div className="text-base font-normal text-[#8989A1]">
                     <span>{deposit.accountNumber} </span>
                     <span>{deposit.accountOwner}</span>

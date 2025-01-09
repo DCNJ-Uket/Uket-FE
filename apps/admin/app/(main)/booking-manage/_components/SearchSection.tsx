@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -9,18 +8,26 @@ import {
 import { Input } from "@ui/components/ui/input";
 
 interface SearchSectionProps {
-  handleTicketSearch: (type: string, value: string) => void;
+  handleTicketSearch: () => void;
+  handleSearchValue: (value: string) => void;
+  handleSearchType: (type: string) => void;
+  searchType: string;
+  searchValue: string;
 }
 
 function SearchSection(props: SearchSectionProps) {
-  const { handleTicketSearch } = props;
+  const {
+    handleTicketSearch,
+    handleSearchValue,
+    handleSearchType,
+    searchType,
+    searchValue,
+  } = props;
 
-  const [type, setType] = useState("PHONE_NUMBER");
-  const [inputValue, setInputValue] = useState("");
-
-  const handleIconClick = () => {
-    handleTicketSearch(type, inputValue);
-    setInputValue("");
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleTicketSearch();
+    }
   };
 
   return (
@@ -30,13 +37,13 @@ function SearchSection(props: SearchSectionProps) {
         boxShadow: "1px 1px 10px 0px #0000000F",
       }}
     >
-      <Select defaultValue="PHONE_NUMBER" onValueChange={setType}>
+      <Select defaultValue={searchType} onValueChange={handleSearchType}>
         <SelectTrigger className="bg-formInput min-w-48 gap-2 rounded-l-lg text-black">
-          <SelectValue placeholder="전화번호 뒷자리" />
+          <SelectValue placeholder="입금자명" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="PHONE_NUMBER">전화번호 뒷자리</SelectItem>
           <SelectItem value="USER_NAME">입금자명</SelectItem>
+          <SelectItem value="PHONE_NUMBER">전화번호 뒷자리</SelectItem>
           <SelectItem value="SHOW_DATE">티켓 날짜(YY.MM.DD)</SelectItem>
           <SelectItem value="RESERVATION_USER_TYPE">사용자 구분</SelectItem>
           <SelectItem value="STATUS">티켓 상태</SelectItem>
@@ -44,9 +51,10 @@ function SearchSection(props: SearchSectionProps) {
       </Select>
       <Input
         isIcon
-        iconClick={handleIconClick}
-        value={inputValue}
-        onChange={e => setInputValue(e.target.value)}
+        iconClick={handleTicketSearch}
+        value={searchValue}
+        onChange={e => handleSearchValue(e.target.value)}
+        onKeyDown={handleKeyDown}
         className="w-44 rounded-none rounded-r-lg border-none ring-offset-0 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
       />
     </section>

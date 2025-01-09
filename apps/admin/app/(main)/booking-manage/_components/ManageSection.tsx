@@ -13,7 +13,7 @@ import BookingList from "./BookingList";
 function ManageSection() {
   const [page, setPage] = useState(1);
   const [isSearch, setIsSearch] = useState(false);
-  const [searchType, setSearchType] = useState("PHONE_NUMBER");
+  const [searchType, setSearchType] = useState("USER_NAME");
   const [searchInputValue, setSearchInputValue] = useState("");
 
   const { data: listData } = useQueryTicketList(page, { enabled: !isSearch });
@@ -38,17 +38,26 @@ function ManageSection() {
   }, [isSearch, listData, searchData]);
 
   const handleViewAllTicket = () => {
+    setSearchInputValue("");
     setIsSearch(false);
     setPage(1);
   };
 
-  const handleTicketSearch = (type: string, value: string) => {
-    if (value.length > 0) {
-      setSearchType(type);
-      setSearchInputValue(value);
+  const handleTicketSearch = () => {
+    if (searchInputValue.length > 0) {
+      setSearchType(searchType);
+      setSearchInputValue(searchInputValue);
       setIsSearch(true);
       setPage(1);
     }
+  };
+
+  const handleSearchType = (type: string) => {
+    setSearchType(type);
+  };
+
+  const handleSearchValue = (value: string) => {
+    setSearchInputValue(value);
   };
 
   return (
@@ -63,7 +72,13 @@ function ManageSection() {
             전체 내역 보기
           </p>
         </div>
-        <SearchSection handleTicketSearch={handleTicketSearch} />
+        <SearchSection
+          handleTicketSearch={handleTicketSearch}
+          handleSearchType={handleSearchType}
+          handleSearchValue={handleSearchValue}
+          searchType={searchType}
+          searchValue={searchInputValue}
+        />
       </div>
       <BookingList
         tickets={tickets}
