@@ -16,6 +16,7 @@ const TicketContainer = (props: TicketContainerProps) => {
         "z-40 flex w-full flex-col gap-[9px] rounded-lg bg-white px-5 pb-[15px] pt-[17px] shadow-lg",
         (isDisabled || isSoldOut) &&
           "pointer-events-none bg-[#D9D9D9] opacity-60",
+        isDisabled && "blur-[2px]",
       )}
       onClick={onSelect}
     >

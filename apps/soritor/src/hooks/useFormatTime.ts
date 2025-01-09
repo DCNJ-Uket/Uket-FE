@@ -18,7 +18,10 @@ export const useFormatTime = (date: string) => {
   const dateMinutes = String(dateObject.getMinutes()).padStart(2, "0");
   const formatTime = `${dateHours}:${dateMinutes}`;
 
+  const formatDetail = formatDate + " " + formatTime;
+
   return {
+    formatDetail,
     formatDate,
     formatTime,
     isoDate: dateObject,

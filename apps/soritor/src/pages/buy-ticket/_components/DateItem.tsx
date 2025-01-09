@@ -49,10 +49,12 @@ const DateItem = (props: DateItemProps) => {
     useFormatTime(startDate);
   const { formatTime: formatEndTime } = useFormatTime(endDate);
 
+  const { formatDetail: formatTicketingDetail } = useFormatTime(ticketingDate);
+
   return (
     <div className="relative">
-      {isDisabled && <Overlay />}
-      {isSoldOut && !isDisabled && <Overlay soldOut />}
+      {isDisabled && <Overlay disabledMent={formatTicketingDetail} />}
+      {isSoldOut && !isDisabled && <Overlay />}
 
       <TicketContainer
         isDisabled={isDisabled}
