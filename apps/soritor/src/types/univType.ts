@@ -12,6 +12,7 @@ export type FestivalInfoResponse = FestivalInfo;
 export type FestivalUniversity = {
   id: number;
   name: string;
+  eventName: string;
   logoUrl: string;
   startDateTime: string;
 };
