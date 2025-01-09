@@ -9,9 +9,9 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@ui/components/ui/form";
 import { Button } from "@ui/components/ui/button";
-
 
 import { useLoginForm } from "@/hooks/useLoginForm";
 
@@ -36,6 +36,7 @@ function AuthSection() {
                     <FormControl>
                       <Input id="id" placeholder="아이디" {...field} />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -53,13 +54,14 @@ function AuthSection() {
                         {...field}
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
             <div className="space-y-4">
-              <p className="h-5 text-center text-sm text-[#FD7250] sm:text-left">
-                {error && error}
+              <p className="h-5 text-center text-sm text-[#EF4444] sm:text-left">
+                {error && <span>{error}</span>}
               </p>
               <Button
                 type="submit"
