@@ -31,7 +31,7 @@ function AuthSection() {
                 control={form.control}
                 name="email"
                 render={({ field }) => (
-                  <FormItem className="grid w-full items-center gap-1.5 sm:max-w-xs">
+                  <FormItem className="grid w-full items-center gap-1.5 md:w-full">
                     <FormLabel className="text-[#5E5E6E]">ID</FormLabel>
                     <FormControl>
                       <Input id="id" placeholder="아이디" {...field} />
@@ -44,7 +44,7 @@ function AuthSection() {
                 control={form.control}
                 name="password"
                 render={({ field }) => (
-                  <FormItem className="grid w-full items-center gap-1.5 sm:max-w-xs md:w-full">
+                  <FormItem className="grid w-full items-center gap-1.5 md:w-full">
                     <FormLabel className="text-[#5E5E6E]">PW</FormLabel>
                     <FormControl>
                       <Input
