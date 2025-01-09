@@ -19,14 +19,14 @@ function AuthSection() {
   const { form, onSubmit, error } = useLoginForm();
 
   return (
-    <section className={cn("mt-16 flex grow flex-col gap-11")}>
+    <section className={cn("mt-12 flex grow flex-col gap-11")}>
       <main className="flex flex-col gap-10">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className="flex flex-col gap-5"
           >
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 w-full">
               <FormField
                 control={form.control}
                 name="email"
