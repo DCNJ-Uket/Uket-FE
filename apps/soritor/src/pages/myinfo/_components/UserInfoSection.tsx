@@ -63,7 +63,7 @@ const UserInfoSection = () => {
             <InfoItem title="학번" content={userInfo.studentCode} />
           </InfoContainer>
         )}
-        <div className="flex w-full flex-col gap-2 bg-white px-6 pb-6 pt-4">
+        <div className="flex w-full flex-col gap-2 bg-white px-6 py-4">
           <div className="flex h-8 items-center justify-start gap-3">
             <div className="text-lg font-bold text-[#17171B]">
               문의﹒제보하기
