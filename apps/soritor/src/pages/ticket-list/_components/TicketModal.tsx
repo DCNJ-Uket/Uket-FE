@@ -16,7 +16,8 @@ import { TicketItem } from "@/types/ticketType";
 
 import TicketHeader from "./TicketHeader";
 import TicketDetail from "./TicketDetail";
-import QrcodeAndDeposit from "./QrcodeAndDeposit";
+import Qrcode from "./Qrcode";
+import Deposit from "./Deposit";
 import ConfirmModal from "./ConfirmModal";
 
 interface TicketModalProps {
@@ -57,20 +58,22 @@ const TicketModal = (props: TicketModalProps) => {
         </CardTitle>
         <CardDescription className="flex flex-col items-center justify-center text-[12px] sm:text-sm">
           <RetryErrorBoundary fallbackComponent={QrCodeAndDepositErrorFallback}>
-            <QrcodeAndDeposit
-              ticketId={ticketId}
-              eventId={eventId}
-              ticketStatus={ticketStatus}
-            />
+            {ticketStatus === "입금 확인중" && (
+              <Deposit
+                ticketId={ticketId}
+                ticketStatus={ticketStatus}
+                eventId={eventId}
+              />
+            )}
+            {ticketStatus === "예매 완료" && (
+              <Qrcode ticketId={ticketId} ticketStatus={ticketStatus} />
+            )}
           </RetryErrorBoundary>
         </CardDescription>
       </CardHeader>
       <CardContent>
         <section className="flex flex-col gap-3">
-          <TicketHeader
-            universityName={universityName}
-            eventName={eventName}
-          />
+          <TicketHeader universityName={universityName} eventName={eventName} />
           <Separator className="bg-[#5E5E6E]" />
           <TicketDetail
             userName={userName}

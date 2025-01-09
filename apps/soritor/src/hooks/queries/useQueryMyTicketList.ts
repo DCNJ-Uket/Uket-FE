@@ -17,7 +17,7 @@ export const useQueryMyTicketList = () => {
         enterEndTime: formatDate(item.enterEndTime, "time"),
       }));
     },
-    staleTime: 1000 * 10,
+    staleTime: 0,
   });
 
   if (error) {
