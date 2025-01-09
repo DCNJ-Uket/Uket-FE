@@ -33,7 +33,6 @@ const QrcodeAndDeposit = (props: QrcodeAndDepositProps) => {
     const timer = setInterval(() => {
       setRemainingTime(prev => {
         if (prev <= 1) {
-          clearInterval(timer); // Clear timer when countdown reaches zero
           return 0;
         }
         return prev - 1; // Decrease countdown
@@ -42,6 +41,13 @@ const QrcodeAndDeposit = (props: QrcodeAndDepositProps) => {
 
     return () => clearInterval(timer); // Cleanup on unmount
   }, []);
+
+  useEffect(() => {
+    if (remainingTime === 0) {
+      refetch(); // 타이머가 0일 때 refetch 호출
+      setRemainingTime(15); // 타이머를 15초로 초기화
+    }
+  }, [remainingTime]);
 
   const { data: deposit } = useQueryDepositUrl(
     ticketId,
