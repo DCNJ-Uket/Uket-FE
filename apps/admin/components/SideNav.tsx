@@ -56,7 +56,7 @@ const SideNav = () => {
       <AdminLogo logo_style="w-24" font_style="font-medium text-xs" />
       <div className="text-sm">
         <p className="text-[#5E5E6E]">
-          <span className="text-brand">관리자님,</span>
+          <span className="text-brand">소리터 관리자님,</span>
           <span>안녕하세요.</span>
         </p>
       </div>
