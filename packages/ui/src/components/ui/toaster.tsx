@@ -15,14 +15,22 @@ interface ToasterProps {
 }
 
 export function Toaster(props: ToasterProps) {
-  const { toasts } = useToast();
+  const { toasts, dismiss } = useToast();
   const { className } = props;
+
+  const handleToastClick = (toastId: string) => {
+    toasts.forEach(toast => {
+      if (toast.id === toastId) {
+        dismiss(toastId);
+      }
+    });
+  };
 
   return (
     <ToastProvider>
       {toasts.map(function ({ id, title, description, action, ...props }) {
         return (
-          <Toast key={id} {...props}>
+          <Toast key={id} {...props} onClick={() => handleToastClick(id)}>
             <div className="grid gap-1">
               {title && <ToastTitle>{title}</ToastTitle>}
               {description && (
