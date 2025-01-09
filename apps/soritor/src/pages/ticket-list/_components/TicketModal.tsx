@@ -68,13 +68,19 @@ const TicketModal = (props: TicketModalProps) => {
             {ticketStatus === "예매 완료" && (
               <Qrcode ticketId={ticketId} ticketStatus={ticketStatus} />
             )}
+            {ticketStatus === "입장 완료" && (
+              <div className="flex flex-col items-center text-desc h-40 justify-center gap-2">
+                <h1 className="font-black text-xl">입장 완료! 공연을 즐겨보세요</h1>
+                <h2 className="font-medium text-sm">재입장은 관리자에게 문의 바랍니다.</h2>
+              </div>
+            )}
           </RetryErrorBoundary>
         </CardDescription>
       </CardHeader>
       <CardContent>
         <section className="flex flex-col gap-3">
           <TicketHeader universityName={universityName} eventName={eventName} />
-          <Separator className="bg-[#5E5E6E]" />
+          <Separator className="bg-desc" />
           <TicketDetail
             userName={userName}
             showDate={showDate}
