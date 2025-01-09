@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
   CarouselApi,
@@ -86,6 +87,11 @@ const CarouselT = (props: PropType) => {
     <Carousel
       className="w-full max-w-full"
       opts={{ align: "start" }}
+      plugins={[
+        Autoplay({
+          delay: 2000,
+        }),
+      ]}
       setApi={setEmblaApi}
     >
       <CarouselContent>{slideComponent}</CarouselContent>
