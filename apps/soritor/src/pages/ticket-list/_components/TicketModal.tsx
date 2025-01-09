@@ -90,22 +90,16 @@ const TicketModal = (props: TicketModalProps) => {
       </CardContent>
       {ticketStatus !== "입금 확인중" && (
         <CardFooter className="mx-5 mb-3 justify-center overflow-hidden rounded-lg bg-[#FDC950] py-3">
-          <div className="inline-flex min-w-full flex-nowrap items-center">
-            <h1 className="animate-infinite-scroll min-w-full text-center text-sm text-[#5E5E6E]">
-              <span>학생증 또는 신분증을 제시해 주세요!</span>
-            </h1>
-            <h1
-              className="animate-infinite-scroll min-w-full text-center text-sm text-[#5E5E6E]"
-              aria-hidden={true}
-            >
-              <span>학생증 또는 신분증을 제시해 주세요!</span>
-            </h1>
-            <h1
-              className="animate-infinite-scroll min-w-full text-center text-sm text-[#5E5E6E]"
-              aria-hidden={true}
-            >
-              <span>학생증 또는 신분증을 제시해 주세요!</span>
-            </h1>
+          <div className="inline-flex min-w-full flex-nowrap items-center gap-5">
+            {Array.from({ length: 3 }).map((_, index) => (
+              <h1
+                key={index}
+                className="animate-infinite-scroll min-w-full text-center text-sm text-[#5E5E6E]"
+                aria-hidden={true}
+              >
+                <span>입장 시 신분증을 함께 제시해 주세요!</span>
+              </h1>
+            ))}
           </div>
         </CardFooter>
       )}
