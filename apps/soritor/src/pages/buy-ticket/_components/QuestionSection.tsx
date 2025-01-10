@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "@uket/ui/components/ui/input";
 
 import { OptionType } from "@/types/surveyType";
@@ -24,6 +24,30 @@ const QuestionSection = (props: QuestionSectionProps) => {
     setIsSheetOpen(false);
   };
 
+  const handleResize = () => {
+    if (window.visualViewport) {
+      const viewportHeight = window.visualViewport.height || window.innerHeight;
+      const keyboardHeight = window.innerHeight - viewportHeight;
+
+      if (keyboardHeight > 0) {
+        window.scrollTo(0, keyboardHeight);
+      }
+    }
+  };
+
+  useEffect(() => {
+    window.visualViewport?.addEventListener("resize", handleResize);
+
+    return () => {
+      window.visualViewport?.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const handleSheetClose = () => {
+    setIsSheetOpen(false);
+    handleResize();
+  };
+
   return (
     <div className="flex grow flex-col justify-start gap-4 px-[22px]">
       <section className="flex flex-col gap-2 rounded-lg bg-white px-5 py-5 pt-4 shadow-lg">
@@ -40,7 +64,7 @@ const QuestionSection = (props: QuestionSectionProps) => {
       </section>
       <PerformerSheet
         isOpen={isSheetOpen}
-        onClose={() => setIsSheetOpen(false)}
+        onClose={handleSheetClose}
         performers={performerList.map(option => option.value)}
         onSelectPerformer={handleSelectPerformer}
       />
