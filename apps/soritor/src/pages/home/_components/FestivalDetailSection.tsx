@@ -29,7 +29,7 @@ const FestivalDetailSection = () => {
         <div className="mb-10">
           <ol className="list-disc pl-6">
             <li>공연일자: 2025년 1월 17일</li>
-            <li>공연시간: 오후 4시 30분 입장~</li>
+            <li>공연시간: 17:00 ~ 20:00&#40;16:30부터 입장 가능&#41;</li>
             <li>
               장소: 합정 얼라이브홀 &#40;서울 마포구 독막로7길 20 지층&#41;
             </li>
