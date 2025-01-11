@@ -45,7 +45,6 @@ const QuestionSection = (props: QuestionSectionProps) => {
 
   const handleSheetClose = () => {
     setIsSheetOpen(false);
-    handleResize();
   };
 
   return (
