@@ -24,28 +24,28 @@ const QuestionSection = (props: QuestionSectionProps) => {
     setIsSheetOpen(false);
   };
 
-  const handleResize = () => {
-    if (window.visualViewport) {
-      const viewportHeight = window.visualViewport.height || window.innerHeight;
-      const keyboardHeight = window.innerHeight - viewportHeight;
-
-      if (keyboardHeight > 0) {
-        window.scrollTo(0, keyboardHeight);
-      }
-    }
-  };
-
   useEffect(() => {
-    window.visualViewport?.addEventListener("resize", handleResize);
+    if (typeof window !== "undefined" && window.visualViewport) {
+      const resizeHandler = () => {
+        const viewportHeight =
+          window.visualViewport?.height || window.innerHeight;
+        const keyboardHeight = window.innerHeight - viewportHeight;
 
-    return () => {
-      window.visualViewport?.removeEventListener("resize", handleResize);
-    };
+        if (keyboardHeight > 0) {
+          window.scrollTo(0, keyboardHeight);
+        }
+      };
+
+      window.visualViewport.addEventListener("resize", resizeHandler);
+
+      return () => {
+        window.visualViewport?.removeEventListener("resize", resizeHandler);
+      };
+    }
   }, []);
 
   const handleSheetClose = () => {
     setIsSheetOpen(false);
-    handleResize();
   };
 
   return (
