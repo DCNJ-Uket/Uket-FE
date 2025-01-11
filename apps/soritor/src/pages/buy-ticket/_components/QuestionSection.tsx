@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Input } from "@uket/ui/components/ui/input";
 
 import { OptionType } from "@/types/surveyType";
@@ -24,25 +24,25 @@ const QuestionSection = (props: QuestionSectionProps) => {
     setIsSheetOpen(false);
   };
 
-  useEffect(() => {
-    if (typeof window !== "undefined" && window.visualViewport) {
-      const resizeHandler = () => {
-        const viewportHeight =
-          window.visualViewport?.height || window.innerHeight;
-        const keyboardHeight = window.innerHeight - viewportHeight;
+  // useEffect(() => {
+  //   if (typeof window !== "undefined" && window.visualViewport) {
+  //     const resizeHandler = () => {
+  //       const viewportHeight =
+  //         window.visualViewport?.height || window.innerHeight;
+  //       const keyboardHeight = window.innerHeight - viewportHeight;
 
-        if (keyboardHeight > 0) {
-          window.scrollTo(0, keyboardHeight);
-        }
-      };
+  //       if (keyboardHeight > 0) {
+  //         window.scrollTo(0, keyboardHeight);
+  //       }
+  //     };
 
-      window.visualViewport.addEventListener("resize", resizeHandler);
+  //     window.visualViewport.addEventListener("resize", resizeHandler);
 
-      return () => {
-        window.visualViewport?.removeEventListener("resize", resizeHandler);
-      };
-    }
-  }, []);
+  //     return () => {
+  //       window.visualViewport?.removeEventListener("resize", resizeHandler);
+  //     };
+  //   }
+  // }, []);
 
   const handleSheetClose = () => {
     setIsSheetOpen(false);
