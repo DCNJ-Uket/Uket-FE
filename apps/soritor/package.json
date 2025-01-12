@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "prebuild": "pnpm dlx puppeteer browsers install",
+    "prebuild": "pnpm dlx puppeteer browsers install chrome",
     "build": "vite build",
     "type-check": "tsc",
     "lint": "eslint '**/*.{ts,tsx}' --ext ts,tsx --fix --report-unused-disable-directives --max-warnings 0",
