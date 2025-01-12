@@ -16,7 +16,7 @@ const LoginPage = () => {
       <main className="container mb-10 mt-6 flex h-full w-full flex-col justify-between">
         <section className="flex w-full flex-col items-center gap-4">
           <h1 className="w-full text-2xl font-black">
-            <p>학교 축제 티켓을</p>
+            <p>공연 티켓을</p>
             <p>예매해 볼까요?</p>
           </h1>
           <h2 className="w-full text-[#454545]">
