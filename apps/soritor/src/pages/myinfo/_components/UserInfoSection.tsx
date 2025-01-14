@@ -34,7 +34,7 @@ const UserInfoSection = () => {
               className="h-full w-full rounded-full object-cover"
             />
           </div>
-          <p className="text-xl font-bold">{userInfo.name}</p>
+          <p className="text-xl font-bold">{userInfo.depositorName}</p>
         </div>
         <Button
           variant="outline"
