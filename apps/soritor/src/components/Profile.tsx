@@ -34,7 +34,7 @@ const Profile = () => {
                 className="h-full w-full rounded-full object-cover"
               />
             </div>
-            <p className="font-bold">{userInfo.name}</p>
+            <p className="font-bold">{userInfo.depositorName}</p>
           </div>
         </Button>
       )}
