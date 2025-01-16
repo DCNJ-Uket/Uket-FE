@@ -15,16 +15,12 @@ export const useQueryUserInfo = () => {
 
   if (!accessToken || !refreshToken) return { data: null };
 
-  const { data, error } = useSuspenseQuery<UserInfoResponse>({
+  const { data } = useSuspenseQuery<UserInfoResponse>({
     queryKey: ["user-info"],
     queryFn: () => getUserInfo(),
     refetchOnMount: true,
     refetchOnWindowFocus: true,
   });
-
-  if (error) {
-    throw error;
-  }
 
   return { data: data };
 };

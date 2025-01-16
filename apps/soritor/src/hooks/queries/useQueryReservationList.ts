@@ -8,15 +8,11 @@ export const useQueryReservationList = (
 ) => {
   const userType =
     reservationUserType !== undefined ? reservationUserType : "일반인";
-  const { data, error } = useSuspenseQuery({
+  const { data } = useSuspenseQuery({
     queryKey: ["reservation-info", id, userType],
     queryFn: () => getReservationList(id, userType),
     staleTime: 0,
   });
-
-  if (error) {
-    throw error;
-  }
 
   return { data };
 };

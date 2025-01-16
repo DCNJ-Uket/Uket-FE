@@ -10,7 +10,7 @@ export const useQueryTicketQRCode = (
   ticketId: TicketItem["ticketId"],
   ticketStatus: TicketItem["ticketStatus"],
 ) => {
-  const { data, error, refetch } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: ["qrcode", ticketId],
     queryFn: () => getTicketQRCode(ticketId),
     select: data => {
@@ -19,10 +19,6 @@ export const useQueryTicketQRCode = (
     staleTime: 0,
     enabled: !!ticketId && ticketStatus !== "입금 확인중",
   });
-
-  if (error) {
-    throw error;
-  }
 
   return { data, refetch };
 };
