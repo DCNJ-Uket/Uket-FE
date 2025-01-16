@@ -89,7 +89,7 @@ instance.interceptors.response.use(
     return response;
   },
   async (error: AxiosError) => {
-    const { status } = error;
+    const { status } = error.response!;
     const config = error.config as RequestConfig;
 
     if (

@@ -24,7 +24,13 @@ const queryClient = new QueryClient({
       staleTime: 1000 * 60 * 10,
     },
     mutations: {
-      throwOnError: true,
+      throwOnError: error => {
+        // error는 axios interceptor에서 전달받은 에러 객체입니다.(CustomAxiosError)
+        // error.isToast는 mode === 'TOAST_UI'를 의미합니다.
+        // 따라서, 'TOAST_UI'라면 에러를 전파하지 않습니다 (return false)
+        return !error.isToast;
+      },
+      onError: error => errorHandler(error as CustomAxiosError),
     },
   },
   queryCache: new QueryCache({
