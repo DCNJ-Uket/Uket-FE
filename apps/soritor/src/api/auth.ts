@@ -39,10 +39,20 @@ export const reissue = async () => {
   const refreshToken = getRefreshToken("refreshToken");
   const accessToken = getAccessToken();
 
-  const { data } = await fetcher.post("/auth/reissue", {
-    accessToken,
-    refreshToken,
-  });
+  const { data } = await fetcher.post(
+    "/auth/reissue",
+    {
+      accessToken,
+      refreshToken,
+    },
+    {
+      mode: "TOAST_UI",
+      errorContent: {
+        title: '토큰 갱신에 오류가 발생했어요.',
+        description: '다시 로그인 해주세요.',
+      }
+    },
+  );
 
   const { accessToken: newAccessToken } = data;
 
