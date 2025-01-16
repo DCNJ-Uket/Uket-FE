@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { Toaster } from "@uket/ui/components/ui/toaster";
+import { Toaster as Sonner } from "@uket/ui/components/ui/sonner";
 
 import Nav from "@/components/Nav";
 import CriticalErrorBoundary from "@/components/error/CriticalErrorBoundary";
@@ -25,6 +26,7 @@ const App = () => {
           </main>
         </div>
         <Toaster className="bottom-0 left-1/2 -translate-x-1/2" />
+        <Sonner richColors />
       </section>
     </CriticalErrorBoundary>
   );
