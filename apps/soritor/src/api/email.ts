@@ -4,13 +4,13 @@ import {
   EmailAuthVerifyParams,
 } from "@/types/emailType";
 
-import { instance } from "./instance";
+import { fetcher } from "./instance";
 
 export const requestEmailAuth = async ({
   email,
   universityId,
 }: EmailAuthRequestParams) => {
-  const { data } = await instance.post<EmailAuthResponse>(`/email/send`, {
+  const { data } = await fetcher.post<EmailAuthResponse>(`/email/send`, {
     email,
     universityId,
   });
@@ -23,7 +23,7 @@ export const verifyEmailAuth = async ({
   universityId,
   authCode,
 }: EmailAuthVerifyParams) => {
-  const { data } = await instance.post<EmailAuthResponse>(`/email/verify`, {
+  const { data } = await fetcher.post<EmailAuthResponse>(`/email/verify`, {
     email,
     universityId,
     authCode,
