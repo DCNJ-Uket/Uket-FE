@@ -6,6 +6,8 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 
+import { successToast } from "@/constants/successToast";
+
 import { useHandleError } from "@/utils/errorHandler";
 import CustomAxiosError from "@/utils/customError";
 
@@ -32,7 +34,18 @@ const queryClient = new QueryClient({
         // 따라서, 'TOAST_UI'라면 에러를 전파하지 않습니다 (return false)
         return !error.isToast;
       },
-      onError: error => errorHandler(error as CustomAxiosError),
+      onError: error => {
+        errorHandler(error as CustomAxiosError);
+      },
+      onSuccess: (data, _, context) => {
+        if ((context as any).mutationKey in successToast) {
+          const mutationKey = (context as any)
+            ?.mutationKey as keyof typeof successToast;
+          if (mutationKey in successToast) {
+            successToast[mutationKey].onSuccess();
+          }
+        }
+      },
     },
   },
   queryCache: new QueryCache({

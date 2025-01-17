@@ -27,7 +27,13 @@ export const getMyTicketList = async () => {
 };
 
 export const cancelTicket = async (ticketId: TicketItem["ticketId"]) => {
-  const { data } = await fetcher.delete(`/tickets/${ticketId}/cancel`);
+  const { data } = await fetcher.delete(`/tickets/${ticketId}/cancel`, {
+    mode: "TOAST_UI",
+    errorContent: {
+      title: '티켓 취소 오류',
+      description: '잠시 후 다시 시도해 주세요.'
+    }
+  });
 
   return data;
 };

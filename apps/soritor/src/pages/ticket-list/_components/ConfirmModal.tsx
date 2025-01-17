@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useToast } from "@uket/ui/components/ui/use-toast";
 import {
   Dialog,
   DialogClose,
@@ -20,29 +19,12 @@ interface ConfirmModalProps {
 
 function ConfirmModal(props: ConfirmModalProps) {
   const { ticketId } = props;
-  const { toast } = useToast();
-
   const [open, setOpen] = useState(false);
-
-  const mutation = useMutationCancelTicket();
+  const { mutate } = useMutationCancelTicket();
 
   const handleCancel = () => {
-    mutation.mutate(ticketId, {
-      onSuccess: () => {
-        setOpen(false);
-        toast({
-          title: "티켓 취소 성공!",
-        });
-      },
-      onError: () => {
-        setOpen(false);
-        toast({
-          variant: "destructive",
-          title: "오류",
-          description: "티켓 취소 중 오류가 발생했습니다. 다시 시도해주세요.",
-        });
-      },
-    });
+    setOpen(false);
+    mutate(ticketId);
   };
 
   return (

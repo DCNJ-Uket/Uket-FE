@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useToast } from "@uket/ui/components/ui/use-toast";
 import {
   Dialog,
   DialogClose,
@@ -9,35 +8,16 @@ import {
 } from "@uket/ui/components/ui/dialog";
 import { Button } from "@uket/ui/components/ui/button";
 
-import { useNavigate } from "@/router";
-
 import { useMutationDeleteUser } from "@/hooks/mutations/useMutationDeleteUser";
 
 const DeleteUserInfoModal = () => {
-  const { toast } = useToast();
-
   const [open, setOpen] = useState(false);
 
-  const navigate = useNavigate();
-
-  const mutation = useMutationDeleteUser();
+  const { mutate } = useMutationDeleteUser();
 
   const handleDeleteUserInfo = () => {
     setOpen(false);
-    mutation.mutate(undefined, {
-      onSuccess: () => {
-        toast({
-          title: "회원탈퇴 성공!",
-        });
-        navigate("/", { replace: true });
-      },
-      onError: () => {
-        toast({
-          title: "회원탈퇴 실패",
-          variant: "brandDestructive",
-        });
-      },
-    });
+    mutate();
   };
 
   return (

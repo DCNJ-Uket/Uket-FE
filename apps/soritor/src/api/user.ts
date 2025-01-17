@@ -25,7 +25,17 @@ export const updateUserInfo = async ({
 };
 
 export const deleteUserInfo = async () => {
-  const { data } = await fetcher.post<DeleteUserResponse>("/users/delete");
+  const { data } = await fetcher.post<DeleteUserResponse>(
+    "/users/delete2",
+    null,
+    {
+      mode: "TOAST_UI",
+      errorContent: {
+        title: "회원탈퇴 오류",
+        description: "잠시 후 다시 시도해 주세요.",
+      },
+    },
+  );
 
   return data;
 };
