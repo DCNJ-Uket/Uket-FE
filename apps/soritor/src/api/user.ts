@@ -26,7 +26,7 @@ export const updateUserInfo = async ({
 
 export const deleteUserInfo = async () => {
   const { data } = await fetcher.post<DeleteUserResponse>(
-    "/users/delete2",
+    "/users/delete",
     null,
     {
       mode: "TOAST_UI",
