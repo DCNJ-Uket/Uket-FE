@@ -2,7 +2,7 @@ import { toast } from "@uket/ui/components/ui/sonner";
 
 import { navigateTo } from "../utils/globalNavigate";
 
-export const successToast = {
+export const SUCCESS_TOAST = {
   deleteUser: {
     onSuccess: () => {
       navigateTo("/", { replace: true });

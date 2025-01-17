@@ -7,7 +7,7 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 
-import { successToast } from "@/constants/successToast";
+import { SUCCESS_TOAST } from "@/constants/success_toast";
 
 import { errorHandler } from "@/utils/errorHandler";
 import CustomAxiosError from "@/utils/customError";
@@ -36,9 +36,9 @@ const queryClient = new QueryClient({
       onError: error => errorHandler(error as CustomAxiosError),
       onSuccess: (data, _, context) => {
         const mutationKey = (context as any)
-          ?.mutationKey as keyof typeof successToast;
-        if (mutationKey in successToast) {
-          successToast[mutationKey].onSuccess();
+          ?.mutationKey as keyof typeof SUCCESS_TOAST;
+        if (mutationKey in SUCCESS_TOAST) {
+          SUCCESS_TOAST[mutationKey].onSuccess();
         }
       },
     },
