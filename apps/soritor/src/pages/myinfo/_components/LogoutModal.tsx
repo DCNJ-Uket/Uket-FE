@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useToast } from "@uket/ui/components/ui/use-toast";
+import { toast } from "@uket/ui/components/ui/sonner";
 import {
   Dialog,
   DialogClose,
@@ -14,9 +14,8 @@ import { useNavigate } from "@/router";
 import { clearAccessToken } from "@/utils/handleToken";
 import { clearRefreshToken } from "@/utils/handleCookie";
 
-const LogoutModal = () => {
-  const { toast } = useToast();
 
+const LogoutModal = () => {
   const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -25,9 +24,7 @@ const LogoutModal = () => {
     clearRefreshToken("refreshToken");
     clearAccessToken("accessToken");
     setOpen(false);
-    toast({
-      title: "로그아웃 성공!",
-    });
+    toast.success("로그아웃이 완료되었습니다.");
     navigate("/", { replace: true });
   };
 

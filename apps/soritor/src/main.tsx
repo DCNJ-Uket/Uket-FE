@@ -2,6 +2,7 @@ import { HelmetProvider } from "react-helmet-async";
 import ReactDOM from "react-dom/client";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { inject } from "@vercel/analytics";
+import { Toaster as Sonner } from "@uket/ui/components/ui/sonner";
 import { Routes } from "@generouted/react-router";
 
 import "@uket/ui/globals.css";
@@ -15,6 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <HelmetProvider>
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
       <QueryProvider>
+        <Sonner richColors />
         <CookieProvider>
           <Routes />
           <SVGProvider />

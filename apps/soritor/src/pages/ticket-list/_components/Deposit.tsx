@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { useToast } from "@uket/ui/components/ui/use-toast";
 import { Button } from "@uket/ui/components/ui/button";
 
 import { useQueryDepositUrl } from "@/hooks/queries/useQueryDepositUrl";
@@ -16,8 +15,6 @@ interface DepositProps {
 
 const Deposit = (props: DepositProps) => {
   const { ticketId, eventId, ticketStatus: isDepositActive } = props;
-
-  const { toast } = useToast();
 
   const { data: deposit } = useQueryDepositUrl(
     ticketId,
@@ -64,7 +61,7 @@ const Deposit = (props: DepositProps) => {
                 variant="link"
                 className="text-brand cursor-pointer px-1 font-bold"
                 onClick={() =>
-                  handleCopyClipBoard(deposit?.accountNumber ?? "", toast)
+                  handleCopyClipBoard(deposit?.accountNumber ?? "")
                 }
               >
                 복사
