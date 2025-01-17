@@ -15,6 +15,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       throwOnError: error => {
+        if (error.response?.status === 500) return true;
         // error는 axios interceptor에서 전달받은 에러 객체입니다.(CustomAxiosError)
         // error.isToast는 mode === 'TOAST_UI'를 의미합니다.
         // 따라서, 'TOAST_UI'라면 에러를 전파하지 않습니다 (return false)
@@ -25,6 +26,7 @@ const queryClient = new QueryClient({
     },
     mutations: {
       throwOnError: error => {
+        if (error.response?.status === 500) return true;
         // error는 axios interceptor에서 전달받은 에러 객체입니다.(CustomAxiosError)
         // error.isToast는 mode === 'TOAST_UI'를 의미합니다.
         // 따라서, 'TOAST_UI'라면 에러를 전파하지 않습니다 (return false)
