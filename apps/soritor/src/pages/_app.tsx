@@ -1,14 +1,20 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { Toaster } from "@uket/ui/components/ui/toaster";
-import { Toaster as Sonner } from "@uket/ui/components/ui/sonner";
 
 import Nav from "@/components/Nav";
 import CriticalErrorBoundary from "@/components/error/CriticalErrorBoundary";
 
 import Redirects from "@/utils/redirects";
+import { setGlobalNavigate } from "@/utils/globalNavigate";
 
 const App = () => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setGlobalNavigate(navigate);
+  }, [navigate]);
 
   return (
     <CriticalErrorBoundary>
@@ -26,7 +32,6 @@ const App = () => {
           </main>
         </div>
         <Toaster className="bottom-0 left-1/2 -translate-x-1/2" />
-        <Sonner richColors />
       </section>
     </CriticalErrorBoundary>
   );
