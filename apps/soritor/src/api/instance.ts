@@ -23,7 +23,7 @@ interface RequestConfigWithToast extends RequestConfigBase {
   mode: "TOAST_UI";
   errorContent?: {
     title: string;
-    description: string;
+    description?: string;
   } | null;
 }
 
