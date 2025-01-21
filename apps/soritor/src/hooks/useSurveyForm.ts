@@ -36,7 +36,12 @@ export const useSurveyForm = () => {
   const onSurveySubmit = async (data: SurveyFormSchemaType) => {
     const { surveyId, responses } = data;
 
-    const response = await mutateAsync({ surveyId, responses });
+    const response = await mutateAsync(
+      { surveyId, responses },
+      {
+        onSuccess: data => data,
+      },
+    );
     return response;
   };
 

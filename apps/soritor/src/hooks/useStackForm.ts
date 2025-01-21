@@ -1,10 +1,15 @@
 import { z } from "zod";
 import { UseFormReturn, useForm } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useMutationSignup } from "@/hooks/mutations/useMutationSignup";
 
+import { setAccessToken } from "@/utils/handleToken";
+import { setRefreshToken } from "@/utils/handleCookie";
+
 import { EXP } from "../utils/vaildateForm";
+import { user } from "./queries/user";
 
 export type FormSchemaType = z.infer<typeof FormSchema>;
 export type FormType = UseFormReturn<FormSchemaType, unknown, undefined>;
@@ -18,6 +23,7 @@ export const FormSchema = z.object({
 });
 
 export const useStackForm = () => {
+  const queryClient = useQueryClient();
   const { mutateAsync } = useMutationSignup();
 
   const form = useForm<FormSchemaType>({
@@ -33,11 +39,22 @@ export const useStackForm = () => {
   const onSubmit = async (data: FormSchemaType) => {
     const { userType, userName, userPhone } = data;
 
-    await mutateAsync({
-      userType,
-      userName,
-      userPhone,
-    });
+    await mutateAsync(
+      {
+        userType,
+        userName,
+        userPhone,
+      },
+      {
+        onSettled: () => {
+          queryClient.invalidateQueries({ queryKey: user.info().queryKey });
+        },
+        onSuccess: ({ accessToken, refreshToken }) => {
+          setAccessToken(accessToken);
+          setRefreshToken("refreshToken", refreshToken);
+        },
+      },
+    );
   };
 
   return { form, onSubmit };
