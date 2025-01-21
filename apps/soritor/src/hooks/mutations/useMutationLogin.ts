@@ -8,6 +8,8 @@ import { AuthResponse, LoginRequestParams } from "@/types/authType";
 import { setAccessToken } from "@/utils/handleToken";
 import { deleteCookie, getCookie, setRefreshToken } from "@/utils/handleCookie";
 
+import { user } from "../queries/user";
+
 
 export const useMutationLogin = () => {
   const navigate = useNavigate();
@@ -17,7 +19,7 @@ export const useMutationLogin = () => {
     mutationFn: ({ code, provider }: LoginRequestParams) =>
       login({ code, provider }),
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["user-info"] });
+      queryClient.invalidateQueries({ queryKey: user.info().queryKey });
     },
     onSuccess: ({ accessToken, refreshToken, isRegistered }: AuthResponse) => {
       setAccessToken(accessToken);

@@ -4,10 +4,9 @@ import { Button } from "@uket/ui/components/ui/button";
 
 import Image from "@/components/Image";
 
-import { useQueryTicketQRCode } from "@/hooks/queries/useQueryTicketQRCode";
+import { useQueryTicketQrcode } from "@/hooks/queries/ticket";
 
 import { TicketItem } from "@/types/ticketType";
-
 
 interface QrcodeProps {
   ticketId: TicketItem["ticketId"];
@@ -17,7 +16,7 @@ interface QrcodeProps {
 const Qrcode = (props: QrcodeProps) => {
   const { ticketId, ticketStatus: isDepositActive } = props;
 
-  const { data: qrcode, refetch } = useQueryTicketQRCode(
+  const { data: qrcode, refetch } = useQueryTicketQrcode(
     ticketId,
     isDepositActive,
   );

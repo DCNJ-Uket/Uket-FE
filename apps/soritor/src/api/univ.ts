@@ -4,6 +4,7 @@ import {
   FestivalUniversityResponse,
   FestivalInfoResponse,
   UniversityResponse,
+  FestivalUniversity,
 } from "@/types/univType";
 
 
@@ -14,7 +15,7 @@ export const getFestivalUniversityList = async () => {
   return data.items;
 };
 
-export const getFestiavalByUniversity = async (id: string | null) => {
+export const getFestiavalByUniversity = async (id: FestivalUniversity['id']) => {
   const { data } = await fetcher.get<FestivalInfoResponse>(
     `/universities/${id}/event`,
   );

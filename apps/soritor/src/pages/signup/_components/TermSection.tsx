@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ChevronRightIcon } from "@uket/ui/components/ui/icon";
 import { Checkbox } from "@uket/ui/components/ui/checkbox";
 
-import { useQueryTermList } from "@/hooks/queries/useQueryTermList";
+import { useQueryTermList } from "@/hooks/queries/term";
 
 import { TermAgreedParams } from "@/types/termType";
 

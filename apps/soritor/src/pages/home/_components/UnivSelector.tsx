@@ -6,7 +6,7 @@ import {
   SelectTrigger,
 } from "@uket/ui/components/ui/select";
 
-import { useQueryFestivalUnivList } from "@/hooks/queries/useQueryFestivalUnivList";
+import { useQueryFestivalList } from "@/hooks/queries/festival";
 
 interface UnivSelectorProps {
   currentUniv: string | null;
@@ -15,7 +15,7 @@ interface UnivSelectorProps {
 
 const UnivSelector = (props: UnivSelectorProps) => {
   const { currentUniv, onSelect } = props;
-  const { data: univList } = useQueryFestivalUnivList();
+  const { data: univList } = useQueryFestivalList();
 
   const handleSelect = (value: string) => {
     const selectedUniv = univList.find(({ name }) => name === value);

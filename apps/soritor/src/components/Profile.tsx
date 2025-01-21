@@ -4,7 +4,7 @@ import { Button } from "@uket/ui/components/ui/button";
 
 import { useNavigate } from "@/router";
 
-import { useQueryUserInfo } from "@/hooks/queries/useQueryUserInfo";
+import { useQueryUserInfo } from "@/hooks/queries/user";
 
 import Image from "./Image";
 

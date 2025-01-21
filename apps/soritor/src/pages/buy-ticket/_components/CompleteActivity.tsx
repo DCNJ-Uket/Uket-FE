@@ -16,7 +16,7 @@ import Ticketing3DImg from "/complete3DTicket.png";
 
 import Image from "@/components/Image";
 
-import { useQueryDepositUrl } from "@/hooks/queries/useQueryDepositUrl";
+import { useQueryDepositurl } from "@/hooks/queries/reservation";
 
 import { handleCopyClipBoard } from "@/utils/handleCopyToClipboard";
 
@@ -36,7 +36,7 @@ const CompleteActivity: ActivityComponentType<CompleteParams> = ({
 
   const routeUrl = `/home?select-univ=${univName}&id=${univId}`;
 
-  const { data: deposit } = useQueryDepositUrl(
+  const { data: deposit } = useQueryDepositurl(
     ticketId,
     eventId,
     "입금 확인중",

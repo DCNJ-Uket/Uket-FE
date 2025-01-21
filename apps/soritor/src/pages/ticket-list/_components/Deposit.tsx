@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@uket/ui/components/ui/button";
 
-import { useQueryDepositUrl } from "@/hooks/queries/useQueryDepositUrl";
+import { useQueryDepositurl } from "@/hooks/queries/reservation";
 
 import { TicketItem } from "@/types/ticketType";
 
@@ -16,7 +16,7 @@ interface DepositProps {
 const Deposit = (props: DepositProps) => {
   const { ticketId, eventId, ticketStatus: isDepositActive } = props;
 
-  const { data: deposit } = useQueryDepositUrl(
+  const { data: deposit } = useQueryDepositurl(
     ticketId,
     eventId,
     isDepositActive,

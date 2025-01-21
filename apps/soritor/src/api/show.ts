@@ -1,16 +1,18 @@
 import { FormSchemaType } from "@/hooks/useTicketStackForm";
 
+import { FestivalInfo } from "@/types/univType";
 import {
   ShowInfoResponse,
   ReservationInfoResponse,
   TicketResponse,
+  ShowInfo,
 } from "@/types/showType";
 
 import { getAccessToken } from "@/utils/handleToken";
 
 import { fetcher } from "./instance";
 
-export const getShowList = async (id: string | null) => {
+export const getShowList = async (id: FestivalInfo["id"]) => {
   const accessToken = getAccessToken();
 
   const { data } = await fetcher.get<ShowInfoResponse>(`/events/${id}/shows`, {
@@ -24,7 +26,7 @@ export const getShowList = async (id: string | null) => {
 };
 
 export const getReservationList = async (
-  id: string | null,
+  id: ShowInfo["id"],
   reservationUserType: string | null,
 ) => {
   const accessToken = getAccessToken();

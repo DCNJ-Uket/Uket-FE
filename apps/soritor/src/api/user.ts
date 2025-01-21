@@ -7,7 +7,7 @@ import {
 import { fetcher } from "./instance";
 
 export const getUserInfo = async () => {
-  const { data } = await fetcher.get("/users/info");
+  const { data } = await fetcher.get<UserInfoResponse>("/users/info");
 
   return data;
 };

@@ -5,6 +5,7 @@ import { updateUserInfo } from "@/api/user";
 
 import { UserInfoResponse, UserInfoUpdateRequest } from "@/types/userType";
 
+import { user } from "../queries/user";
 
 
 export const useMutationUpdateInfo = () => {
@@ -13,7 +14,7 @@ export const useMutationUpdateInfo = () => {
   const mutation = useMutation({
     mutationFn: (userInfo: UserInfoUpdateRequest) => updateUserInfo(userInfo),
     onSuccess: (data: UserInfoResponse) => {
-      queryClient.invalidateQueries({ queryKey: ["user-info"] });
+      queryClient.invalidateQueries({ queryKey: user.info().queryKey });
       return data;
     },
   });

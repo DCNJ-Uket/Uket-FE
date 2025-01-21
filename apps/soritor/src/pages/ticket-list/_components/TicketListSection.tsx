@@ -5,13 +5,13 @@ import {
   CarouselItem,
 } from "@uket/ui/components/ui/carousel";
 
-import { useQueryMyTicketList } from "@/hooks/queries/useQueryMyTicketList";
+import { useQueryUserTicketList } from "@/hooks/queries/user";
 
 import Ticket from "./Ticket";
 
 const TicketListSection = () => {
-  const { data: myTicketList } = useQueryMyTicketList();
-  
+  const { data: myTicketList } = useQueryUserTicketList();
+
   return (
     <Carousel className="w-full max-w-full" opts={{ loop: true }}>
       <CarouselContent
@@ -23,7 +23,10 @@ const TicketListSection = () => {
       >
         {myTicketList.length > 0 &&
           myTicketList.map(ticket => (
-            <CarouselItem key={ticket.ticketId} className="basis-11/12 pb-2 pl-2 justify-items-center">
+            <CarouselItem
+              key={ticket.ticketId}
+              className="basis-11/12 justify-items-center pb-2 pl-2"
+            >
               <div className="p-1">
                 <Ticket ticket={ticket} />
               </div>

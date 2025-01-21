@@ -9,6 +9,8 @@ import { AuthResponse } from "@/types/authType";
 import { setAccessToken } from "@/utils/handleToken";
 import { setRefreshToken } from "@/utils/handleCookie";
 
+import { user } from "../queries/user";
+
 
 export const useMutationSignup = () => {
   const queryClient = useQueryClient();
@@ -21,7 +23,7 @@ export const useMutationSignup = () => {
         userPhone,
       }),
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["user-info"] });
+      queryClient.invalidateQueries({ queryKey: user.info().queryKey });
     },
     onSuccess: ({ accessToken, refreshToken }: AuthResponse) => {
       setAccessToken(accessToken);

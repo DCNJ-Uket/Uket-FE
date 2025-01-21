@@ -5,6 +5,9 @@ import { cancelTicket } from "@/api/ticket";
 
 import { CancelTicketResponse } from "@/types/ticketType";
 
+import { user } from "../queries/user";
+
+
 export const useMutationCancelTicket = () => {
   const queryClient = useQueryClient();
 
@@ -15,7 +18,7 @@ export const useMutationCancelTicket = () => {
     },
     mutationFn: (ticketId: number) => cancelTicket(ticketId),
     onSuccess: (data: CancelTicketResponse) => {
-      queryClient.invalidateQueries({ queryKey: ["my-ticket-list"] });
+      queryClient.invalidateQueries({ queryKey: user.ticket().queryKey });
       return data;
     },
   });
