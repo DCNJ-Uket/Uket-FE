@@ -4,10 +4,10 @@ import {
   DeleteUserResponse,
 } from "@/types/userType";
 
-import { instance } from "./instance";
+import { fetcher } from "./instance";
 
 export const getUserInfo = async () => {
-  const { data } = await instance.get("/users/info");
+  const { data } = await fetcher.get("/users/info");
 
   return data;
 };
@@ -16,7 +16,7 @@ export const updateUserInfo = async ({
   depositorName,
   phoneNumber,
 }: UserInfoUpdateRequest) => {
-  const { data } = await instance.patch<UserInfoResponse>("/users/info", {
+  const { data } = await fetcher.patch<UserInfoResponse>("/users/info", {
     depositorName,
     phoneNumber,
   });
@@ -25,7 +25,17 @@ export const updateUserInfo = async ({
 };
 
 export const deleteUserInfo = async () => {
-  const { data } = await instance.post<DeleteUserResponse>("/users/delete");
+  const { data } = await fetcher.post<DeleteUserResponse>(
+    "/users/delete",
+    null,
+    {
+      mode: "TOAST_UI",
+      errorContent: {
+        title: "회원탈퇴 오류",
+        description: "잠시 후 다시 시도해 주세요.",
+      },
+    },
+  );
 
   return data;
 };

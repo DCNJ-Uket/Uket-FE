@@ -1,4 +1,4 @@
-import { instance } from "@/api/instance";
+import { fetcher } from "@/api/instance";
 
 import {
   FestivalUniversityResponse,
@@ -9,20 +9,21 @@ import {
 
 export const getFestivalUniversityList = async () => {
   const { data } =
-    await instance.get<FestivalUniversityResponse>(`/universities`);
+    await fetcher.get<FestivalUniversityResponse>(`/universities`);
 
   return data.items;
 };
 
 export const getFestiavalByUniversity = async (id: string | null) => {
-  const { data } = await instance.get<FestivalInfoResponse>(
+  const { data } = await fetcher.get<FestivalInfoResponse>(
     `/universities/${id}/event`,
   );
+
   return data;
 };
 
 export const searchUniversityList = async () => {
-  const { data } = await instance.get<UniversityResponse>(
+  const { data } = await fetcher.get<UniversityResponse>(
     `/universities/certification`,
   );
 

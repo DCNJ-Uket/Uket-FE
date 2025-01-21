@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useToast } from "@uket/ui/components/ui/use-toast";
 import {
   Dialog,
   DialogClose,
@@ -8,34 +7,25 @@ import {
   DialogTrigger,
 } from "@uket/ui/components/ui/dialog";
 import { Button } from "@uket/ui/components/ui/button";
-
-import { useNavigate } from "@/router";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { useMutationDeleteUser } from "@/hooks/mutations/useMutationDeleteUser";
 
+import { clearAccessToken } from "@/utils/handleToken";
+import { clearRefreshToken } from "@/utils/handleCookie";
+
 const DeleteUserInfoModal = () => {
-  const { toast } = useToast();
-
   const [open, setOpen] = useState(false);
-
-  const navigate = useNavigate();
-
-  const mutation = useMutationDeleteUser();
+  const queryClient = useQueryClient();
+  const { mutate } = useMutationDeleteUser();
 
   const handleDeleteUserInfo = () => {
     setOpen(false);
-    mutation.mutate(undefined, {
+    mutate(undefined, {
       onSuccess: () => {
-        toast({
-          title: "회원탈퇴 성공!",
-        });
-        navigate("/", { replace: true });
-      },
-      onError: () => {
-        toast({
-          title: "회원탈퇴 실패",
-          variant: "brandDestructive",
-        });
+        queryClient.removeQueries({ queryKey: ["user-info"] });
+        clearRefreshToken("refreshToken");
+        clearAccessToken("accessToken");
       },
     });
   };

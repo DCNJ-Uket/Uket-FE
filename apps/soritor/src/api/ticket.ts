@@ -5,12 +5,13 @@ import {
   TicketItem,
 } from "@/types/ticketType";
 
-import { instance } from "./instance";
+import { fetcher } from "./instance";
 
 export const getTicketQRCode = async (ticketId: TicketItem["ticketId"]) => {
-  const { data } = await instance.get<MyTicketQRCodeResponse>(
+  const { data } = await fetcher.get<MyTicketQRCodeResponse>(
     `/tickets/${ticketId}/qrcode`,
     {
+      mode: "BOUNDARY",
       responseType: "blob",
     },
   );
@@ -20,19 +21,25 @@ export const getTicketQRCode = async (ticketId: TicketItem["ticketId"]) => {
 
 export const getMyTicketList = async () => {
   const { data } =
-    await instance.get<MyTicketListInfoResponse>("/users/tickets");
+    await fetcher.get<MyTicketListInfoResponse>("/users/tickets");
 
   return data;
 };
 
 export const cancelTicket = async (ticketId: TicketItem["ticketId"]) => {
-  const { data } = await instance.delete(`/tickets/${ticketId}/cancel`);
+  const { data } = await fetcher.delete(`/tickets/${ticketId}/cancel`, {
+    mode: "TOAST_UI",
+    errorContent: {
+      title: '티켓 취소 오류',
+      description: '잠시 후 다시 시도해 주세요.'
+    }
+  });
 
   return data;
 };
 
 export const getDepositUrl = async (ticketId: TicketItem["ticketId"]) => {
-  const { data } = await instance.get<DepositResponse>(
+  const { data } = await fetcher.get<DepositResponse>(
     `/events/${ticketId}/account`,
   );
 

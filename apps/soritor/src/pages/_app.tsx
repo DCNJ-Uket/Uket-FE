@@ -1,13 +1,20 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { Toaster } from "@uket/ui/components/ui/toaster";
 
 import Nav from "@/components/Nav";
 import CriticalErrorBoundary from "@/components/error/CriticalErrorBoundary";
 
 import Redirects from "@/utils/redirects";
+import { setGlobalNavigate } from "@/utils/globalNavigate";
 
 const App = () => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setGlobalNavigate(navigate);
+  }, [navigate]);
 
   return (
     <CriticalErrorBoundary>
