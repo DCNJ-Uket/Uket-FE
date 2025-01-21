@@ -32,14 +32,30 @@ export const reservation = createQueryKeys("reservation", {
   }),
 });
 
+/**
+ * 선택한 공연의 id로 예매 가능한 공연 목록을 조회합니다.
+ * @param {FestivalInfo["id"]} id
+ * @returns {any}
+ */
 export const useQueryShowList = (id: FestivalInfo["id"]) => {
   return useSuspenseQuery(reservation.show(id));
 };
 
+/**
+ * 공연 별 질의응답 문항을 조회합니다.
+ * @param {FestivalInfo["id"]} id
+ * @returns {any}
+ */
 export const useQuerySurveyList = (id: FestivalInfo["id"]) => {
   return useSuspenseQuery(reservation.survey(id));
 };
 
+/**
+ * 공연 별 예매 가능 시간을 조회합니다.
+ * @param {FestivalInfo["id"]} id
+ * @param {string} reservationUserType
+ * @returns {any}
+ */
 export const useQueryReservationList = (
   id: ShowInfo["id"],
   reservationUserType: string = "일반인",
@@ -50,6 +66,13 @@ export const useQueryReservationList = (
   return useSuspenseQuery({ ...reservation.time(id, userType), staleTime: 0 });
 };
 
+/**
+ * 공연 주최측의 계좌 정보를 조회합니다.
+ * @param {TicketItem["ticketId"]} ticketId
+ * @param {TicketItem["eventId"]} eventId
+ * @param {TicketItem["ticketStatus"]} ticketStatus
+ * @returns {any}
+ */
 export const useQueryDepositurl = (
   ticketId: TicketItem["ticketId"],
   eventId: TicketItem["eventId"],
