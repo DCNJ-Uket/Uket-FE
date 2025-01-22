@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { RefreshCwIcon } from "@uket/ui/components/ui/icon";
 import { Button } from "@uket/ui/components/ui/button";
+import { TicketItem } from "@uket/api/types/ticket";
+import { useQueryTicketQrcode } from "@uket/api/queries/ticket";
 
 import Image from "@/components/Image";
-
-import { useQueryTicketQrcode } from "@/hooks/queries/ticket";
-
-import { TicketItem } from "@/types/ticketType";
 
 interface QrcodeProps {
   ticketId: TicketItem["ticketId"];

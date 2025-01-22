@@ -5,6 +5,7 @@ import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
 import UserInfoSection from "./_components/UserInfoSection";
 import LogoutModal from "./_components/LogoutModal";
 
+
 const MyInfo = () => {
   return (
     <main className="relative flex h-full flex-col items-center bg-[#F2F2F2]">

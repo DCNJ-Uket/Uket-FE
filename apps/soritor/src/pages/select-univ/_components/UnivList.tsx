@@ -1,4 +1,4 @@
-import { useQueryFestivalList } from "@/hooks/queries/festival";
+import { useQueryFestivalList } from '@uket/api/queries/festival'
 
 import UnivItem from "./UnivItem";
 

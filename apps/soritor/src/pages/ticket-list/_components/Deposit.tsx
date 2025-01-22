@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@uket/ui/components/ui/button";
-
-import { useQueryDepositurl } from "@/hooks/queries/reservation";
-
-import { TicketItem } from "@/types/ticketType";
+import { TicketItem } from "@uket/api/types/ticket";
+import { useQueryDepositurl } from "@uket/api/queries/reservation";
 
 import { handleCopyClipBoard } from "@/utils/handleCopyToClipboard";
 

@@ -1,13 +1,10 @@
 import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { LoaderCircle } from "@uket/ui/components/ui/icon";
+import { Provider } from "@uket/api/types/auth";
+import { useMutationLogin } from "@uket/api/mutations/useMutationLogin";
 
 import { useParams } from "@/router";
-
-import { useMutationLogin } from "@/hooks/mutations/useMutationLogin";
-
-import { Provider } from "@/types/authType";
-
 
 const CallbackPage = () => {
   const { provider } = useParams("/login/:provider");

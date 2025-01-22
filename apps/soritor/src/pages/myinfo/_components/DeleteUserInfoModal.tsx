@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "@uket/util/token";
 import {
   Dialog,
   DialogClose,
@@ -7,12 +8,8 @@ import {
   DialogTrigger,
 } from "@uket/ui/components/ui/dialog";
 import { Button } from "@uket/ui/components/ui/button";
-import { useQueryClient } from "@tanstack/react-query";
-
-import { useMutationDeleteUser } from "@/hooks/mutations/useMutationDeleteUser";
-
-import { clearAccessToken } from "@/utils/handleToken";
-import { clearRefreshToken } from "@/utils/handleCookie";
+import { useMutationDeleteUser } from "@uket/api/mutations/useMutationDeleteUser";
+import { useQueryClient } from "@uket/api";
 
 const DeleteUserInfoModal = () => {
   const [open, setOpen] = useState(false);
@@ -24,8 +21,8 @@ const DeleteUserInfoModal = () => {
     mutate(undefined, {
       onSuccess: () => {
         queryClient.removeQueries({ queryKey: ["user-info"] });
-        clearRefreshToken("refreshToken");
-        clearAccessToken("accessToken");
+        REFRESH_TOKEN.clear("refreshToken");
+        ACCESS_TOKEN.clear();
       },
     });
   };

@@ -5,8 +5,7 @@ import {
   SelectContent,
   SelectTrigger,
 } from "@uket/ui/components/ui/select";
-
-import { useQueryFestivalList } from "@/hooks/queries/festival";
+import { useQueryFestivalList } from "@uket/api/queries/festival";
 
 interface UnivSelectorProps {
   currentUniv: string | null;

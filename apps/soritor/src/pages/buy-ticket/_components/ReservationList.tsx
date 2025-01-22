@@ -1,4 +1,4 @@
-import { useQueryReservationList } from "@/hooks/queries/reservation";
+import { useQueryReservationList } from "@uket/api/queries/reservation";
 
 import TimeItem from "./TimeItem";
 

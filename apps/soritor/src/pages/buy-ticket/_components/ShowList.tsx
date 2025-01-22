@@ -1,4 +1,4 @@
-import { useQueryShowList } from "@/hooks/queries/reservation";
+import { useQueryShowList } from "@uket/api/queries/reservation";
 
 import DateItem from "./DateItem";
 

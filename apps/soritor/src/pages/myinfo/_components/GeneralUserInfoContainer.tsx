@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Button } from "@uket/ui/components/ui/button";
-import { useQueryClient } from "@tanstack/react-query";
-
-import { user } from "@/hooks/queries/user";
-import { useMutationUpdateInfo } from "@/hooks/mutations/useMutationUpdateInfo";
+import { user } from "@uket/api/queries/user";
+import { useMutationUpdateUserInfo } from "@uket/api/mutations/useMutationUpdateUserInfo";
+import { useQueryClient } from "@uket/api";
 
 import InfoItem from "./InfoItem";
 
@@ -21,7 +20,7 @@ const GeneralUserInfoContainer = (props: GeneralUserInfoContainerProps) => {
   const depositorNameRegex = /^([가-힣]{2,4}|[a-zA-Z]{2,10})$/;
   const phoneNumberRegex = /^\d{3}-?\d{4}-?\d{4}$/;
 
-  const { mutate } = useMutationUpdateInfo();
+  const { mutate } = useMutationUpdateUserInfo();
 
   const [isEdit, setIsEdit] = useState(false);
   const handleIsEdit = () => {

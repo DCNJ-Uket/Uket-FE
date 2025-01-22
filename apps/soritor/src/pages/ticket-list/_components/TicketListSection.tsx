@@ -4,8 +4,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@uket/ui/components/ui/carousel";
-
-import { useQueryUserTicketList } from "@/hooks/queries/user";
+import { useQueryUserTicketList } from "@uket/api/queries/user";
 
 import Ticket from "./Ticket";
 

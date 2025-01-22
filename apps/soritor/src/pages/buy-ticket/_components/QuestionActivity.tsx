@@ -1,10 +1,10 @@
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useQuerySurveyList } from "@uket/api/queries/reservation";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
 import { useSurveyForm } from "@/hooks/useSurveyForm";
-import { useQuerySurveyList } from "@/hooks/queries/reservation";
 
 import SelectHeader from "./SelectHeader";
 import QuestionSection from "./QuestionSection";

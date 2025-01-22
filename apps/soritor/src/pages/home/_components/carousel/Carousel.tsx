@@ -9,11 +9,11 @@ import {
   CarouselItem,
 } from "@uket/ui/components/ui/carousel";
 import { Card, CardContent } from "@uket/ui/components/ui/card";
+import { FestivalInfo } from "@uket/api/types/univ";
 
 import Indicator from "@/components/Indicator";
 import Image from "@/components/Image";
 
-import { FestivalInfo } from "@/types/univType";
 
 import CarouselDotButtonList from "./CarouselDotButtonList";
 

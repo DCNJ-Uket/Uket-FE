@@ -1,4 +1,5 @@
 import { useSearchParams } from "react-router-dom";
+import { useQueryDepositurl } from "@uket/api/queries/reservation";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
@@ -15,8 +16,6 @@ import CompleteBackgroudImg from "/ticketingComplete.png";
 import Ticketing3DImg from "/complete3DTicket.png";
 
 import Image from "@/components/Image";
-
-import { useQueryDepositurl } from "@/hooks/queries/reservation";
 
 import { handleCopyClipBoard } from "@/utils/handleCopyToClipboard";
 

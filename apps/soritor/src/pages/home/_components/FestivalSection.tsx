@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect } from "react";
-
-import { useQueryFestivalDetail } from "@/hooks/queries/festival";
+import { useQueryFestivalDetail } from "@uket/api/queries/festival";
 
 import SectionItem from "./SectionItem";
 import FestivalMap from "./map/FestivalMap";

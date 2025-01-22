@@ -1,8 +1,7 @@
 import { z } from "zod";
 import { UseFormReturn, useForm } from "react-hook-form";
+import { useMutationSubmitSurvey } from "@uket/api/mutations/useMutationSubmitSurvey";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-import { useMutationSubmitSurvey } from "@/hooks/mutations/useMutationSubmitSurvey";
 
 export type SurveyFormSchemaType = z.infer<typeof SurveyRequestSchema>;
 export type SurveyFormType = UseFormReturn<

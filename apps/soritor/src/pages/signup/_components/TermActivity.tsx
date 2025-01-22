@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { TermAgreedParams } from "@uket/api/types/term";
+import { useMutationAgreeTerm } from "@uket/api/mutations/useMutationAgreeTerm";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen, IconBack } from "@stackflow/plugin-basic-ui";
 
 import TermErrorFallback from "@/components/fallback/TermErrorFallback";
 import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
 
-import { useMutationAgreeTerm } from "@/hooks/mutations/useMutationAgreeTerm";
 
-import { TermAgreedParams } from "@/types/termType";
 
 import TermSection from "./TermSection";
 import NextStepButton from "./NextStepButton";

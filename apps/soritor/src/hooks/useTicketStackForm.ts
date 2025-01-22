@@ -1,10 +1,9 @@
 import { z } from "zod";
 import { UseFormReturn, useForm } from "react-hook-form";
-import { useQueryClient } from "@tanstack/react-query";
+import { user } from "@uket/api/queries/user";
+import { useMutationBuyTicket } from "@uket/api/mutations/useMutationBuyTicket";
+import { useQueryClient } from "@uket/api";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-import { user } from "./queries/user";
-import { useMutationBuyTicket } from "./mutations/useMutationBuyTicket";
 
 export type FormSchemaType = z.infer<typeof FormSchema>;
 export type FormType = UseFormReturn<FormSchemaType, unknown, undefined>;

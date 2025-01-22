@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
 import { ExternalLink } from "@uket/ui/components/ui/icon";
 import { Button } from "@uket/ui/components/ui/button";
+import { useQueryUserInfo } from "@uket/api/queries/user";
 
 import { useNavigate } from "@/router";
 
 import Image from "@/components/Image";
 
-import { useQueryUserInfo } from "@/hooks/queries/user";
-
 import InfoItem from "./InfoItem";
 import InfoContainer from "./InfoContainer";
 import GeneralUserInfoContainer from "./GeneralUserInfoContainer";
+
 
 const OPEN_CHATTING = "https://open.kakao.com/me/uket";
 
