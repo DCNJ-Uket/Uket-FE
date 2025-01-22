@@ -1,12 +1,17 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createQueryKeys } from "@lukemorales/query-key-factory";
 
-import { getTermList } from "@/api/term";
+import { TermListResponse } from "../types/term";
+import { fetcher } from "../instance";
 
 export const term = createQueryKeys("term", {
   list: () => ({
     queryKey: ["term-list"],
-    queryFn: getTermList,
+    queryFn: async () => {
+      const { data } = await fetcher.get<TermListResponse>("/terms");
+
+      return data.items;
+    },
   }),
 });
 

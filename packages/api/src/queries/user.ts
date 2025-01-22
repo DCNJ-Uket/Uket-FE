@@ -1,22 +1,29 @@
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "@uket/util/token";
+import { formatDate } from "@uket/util/time";
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { createQueryKeys } from "@lukemorales/query-key-factory";
 
-import { getUserInfo } from "@/api/user";
-import { getMyTicketList } from "@/api/ticket";
-
-import { getAccessToken } from "@/utils/handleToken";
-import { formatDate } from "@/utils/handleTicket";
-import { getRefreshToken } from "@/utils/handleCookie";
-
+import { UserInfoResponse } from "../types/user";
+import { MyTicketListInfoResponse } from "../types/ticket";
+import { fetcher } from "../instance";
 
 export const user = createQueryKeys("user", {
   info: () => ({
     queryKey: ["user-info"],
-    queryFn: getUserInfo,
+    queryFn: async () => {
+      const { data } = await fetcher.get<UserInfoResponse>("/users/info");
+
+      return data;
+    },
   }),
   ticket: () => ({
     queryKey: ["user-ticket-list"],
-    queryFn: getMyTicketList,
+    queryFn: async () => {
+      const { data } =
+        await fetcher.get<MyTicketListInfoResponse>("/users/tickets");
+
+      return data;
+    },
   }),
 });
 
@@ -25,8 +32,8 @@ export const user = createQueryKeys("user", {
  * @returns {UserInfoResponse}
  */
 export const useQueryUserInfo = () => {
-  const accessToken = getAccessToken();
-  const refreshToken = getRefreshToken("refreshToken");
+  const accessToken = ACCESS_TOKEN.get();
+  const refreshToken = REFRESH_TOKEN.get("refreshToken");
 
   if (!accessToken || !refreshToken) return { data: null };
 

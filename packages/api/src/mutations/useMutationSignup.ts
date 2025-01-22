@@ -1,15 +1,17 @@
 import { useMutation } from "@tanstack/react-query";
 
-import { signup } from "@/api/auth";
-
-import { FormSchemaType } from "@/hooks/useStackForm";
-
+import { signup } from "../auth";
 
 export const useMutationSignup = () => {
   const mutation = useMutation({
-    mutationFn: ({ userType, userName, userPhone }: Partial<FormSchemaType>) =>
+    mutationFn: ({
+      userName,
+      userPhone,
+    }: {
+      userName: string;
+      userPhone: string;
+    }) =>
       signup({
-        userType,
         userName,
         userPhone,
       }),

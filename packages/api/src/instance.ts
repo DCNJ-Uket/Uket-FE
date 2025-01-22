@@ -1,13 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "@uket/util/token";
 
-import {
-  clearAccessToken,
-  getAccessToken,
-  setAccessToken,
-} from "@/utils/handleToken";
-import { clearRefreshToken } from "@/utils/handleCookie";
-import CustomAxiosError from "@/utils/customError";
-
+import CustomAxiosError from "./error/default";
 import { reissue } from "./auth";
 
 type ErrorDisplayMode = "TOAST_UI" | "BOUNDARY";
@@ -36,7 +30,7 @@ interface RequestConfigWithBoundary extends RequestConfigBase {
 // 사용자가 설정한 mode에 따라 config의 타입이 바뀝니다.
 export type RequestConfig = RequestConfigWithToast | RequestConfigWithBoundary;
 
-const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
+const BASE_URL = `https://dev.api.uket.site`;
 const SERVER_VERSION = "/api/v1";
 
 const AUTH_REQUIRED_PATH = [
@@ -76,7 +70,7 @@ instance.interceptors.request.use(config => {
     config.url &&
     (AUTH_REQUIRED_PATH.includes(config.url) || isDynamicUrlMatched(config.url))
   ) {
-    const accessToken = getAccessToken();
+    const accessToken = ACCESS_TOKEN.get();
 
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
@@ -96,8 +90,8 @@ instance.interceptors.response.use(
       (status === 404 || status === 403 || status === 400) &&
       config.url === "/auth/reissue"
     ) {
-      clearAccessToken("accessToken");
-      clearRefreshToken("refreshToken");
+      ACCESS_TOKEN.clear();
+      REFRESH_TOKEN.clear("refreshToken");
       window.location.replace("/login");
     }
 
@@ -108,7 +102,7 @@ instance.interceptors.response.use(
     ) {
       const newAccessToken = await reissue();
 
-      setAccessToken(newAccessToken);
+      ACCESS_TOKEN.set(newAccessToken);
 
       config.headers!.Authorization = `Bearer ${newAccessToken}`;
 

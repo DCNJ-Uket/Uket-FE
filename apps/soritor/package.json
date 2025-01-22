@@ -29,6 +29,8 @@
     "@tanstack/react-query-devtools": "^5.29.0",
     "@types/imagemin-webp": "^7.0.3",
     "@uket/ui": "workspace:*",
+    "@uket/api": "workspace:*",
+    "@uket/util": "workspace:*",
     "@vercel/analytics": "^1.2.2",
     "@vercel/speed-insights": "^1.0.10",
     "axios": "^1.6.8",

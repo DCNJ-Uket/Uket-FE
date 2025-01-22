@@ -1,28 +1,38 @@
-import dayjs from "dayjs";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createQueryKeys } from "@lukemorales/query-key-factory";
 
 import {
-  getFestiavalByUniversity,
-  getFestivalUniversityList,
-  searchUniversityList,
-} from "@/api/univ";
-
-import { FestivalUniversity } from "@/types/univType";
-
+  FestivalInfoResponse,
+  FestivalUniversity,
+  FestivalUniversityResponse,
+  UniversityResponse,
+} from "../types/univ";
+import { fetcher } from "../instance";
 
 export const festival = createQueryKeys("festival", {
   list: () => ({
     queryKey: ["festival-list"],
-    queryFn: getFestivalUniversityList,
+    queryFn: async () => {
+      const { data } =
+        await fetcher.get<FestivalUniversityResponse>(`/universities`);
+      return data.items;
+    },
   }),
   detail: (id: FestivalUniversity["id"]) => ({
     queryKey: ["festival-detail"],
-    queryFn: () => getFestiavalByUniversity(id),
+    queryFn: async () => {
+      const { data } = await fetcher.get<FestivalInfoResponse>(
+        `/universities/${id}/event`,
+      );
+      return data;
+    },
   }),
   certification: () => ({
     queryKey: ["certification"],
-    queryFn: searchUniversityList,
+    queryFn: async () => {
+      const { data } = await fetcher.get<UniversityResponse>(`/universities`);
+      return data.items;
+    },
   }),
 });
 
@@ -31,14 +41,7 @@ export const festival = createQueryKeys("festival", {
  * @returns {FestivalUniversity[]} 축제 목록 배열
  */
 export const useQueryFestivalList = () => {
-  return useSuspenseQuery({
-    ...festival.list(),
-    select: data =>
-      data.map(item => ({
-        ...item,
-        startDateTime: dayjs(item.startDateTime).format("YYYY.MM.DD HH:mm"),
-      })),
-  });
+  return useSuspenseQuery(festival.list());
 };
 
 /**

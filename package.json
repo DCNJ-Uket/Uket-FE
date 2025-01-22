@@ -17,7 +17,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "engines": {
-    "node": ">= 20"
+    "node": ">= 18"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
