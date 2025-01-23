@@ -1,8 +1,10 @@
 import { z } from "zod";
 import { UseFormReturn, useForm } from "react-hook-form";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "@uket/util/token";
+import { user } from "@uket/api/queries/user";
+import { useMutationSignup } from "@uket/api/mutations/useMutationSignup";
+import { useQueryClient } from "@uket/api";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-import { useMutationSignup } from "@/hooks/mutations/useMutationSignup";
 
 import { EXP } from "../utils/vaildateForm";
 
@@ -18,6 +20,7 @@ export const FormSchema = z.object({
 });
 
 export const useStackForm = () => {
+  const queryClient = useQueryClient();
   const { mutateAsync } = useMutationSignup();
 
   const form = useForm<FormSchemaType>({
@@ -31,13 +34,23 @@ export const useStackForm = () => {
   });
 
   const onSubmit = async (data: FormSchemaType) => {
-    const { userType, userName, userPhone } = data;
+    const { userName, userPhone } = data;
 
-    await mutateAsync({
-      userType,
-      userName,
-      userPhone,
-    });
+    await mutateAsync(
+      {
+        userName,
+        userPhone,
+      },
+      {
+        onSettled: () => {
+          queryClient.invalidateQueries({ queryKey: user.info().queryKey });
+        },
+        onSuccess: ({ accessToken, refreshToken }) => {
+          ACCESS_TOKEN.set(accessToken);
+          REFRESH_TOKEN.set("refreshToken", refreshToken);
+        },
+      },
+    );
   };
 
   return { form, onSubmit };

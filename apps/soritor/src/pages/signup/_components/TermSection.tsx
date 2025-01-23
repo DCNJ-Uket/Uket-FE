@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
 import { ChevronRightIcon } from "@uket/ui/components/ui/icon";
 import { Checkbox } from "@uket/ui/components/ui/checkbox";
-
-import { useQueryTermList } from "@/hooks/queries/useQueryTermList";
-
-import { TermAgreedParams } from "@/types/termType";
+import { TermAgreedParams } from "@uket/api/types/term";
+import { useQueryTermList } from "@uket/api/queries/term";
 
 const TERM_NAME = ["개인 정보 제공 동의", "이용 약관 동의"];
 

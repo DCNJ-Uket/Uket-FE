@@ -2,7 +2,7 @@
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local", "tsconfig.json"],
   "globalEnv": ["NODE_ENV", "VITE_*", "NEXT_PUBLIC_*"],
-  "pipeline": {
+  "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"],
@@ -11,7 +11,6 @@
     "deploy": {
       "dependsOn": ["build", "lint"]
     },
-    "type-check": {},
     "lint": {
       "dependsOn": ["^lint"]
     },

@@ -1,4 +1,4 @@
-import { useQueryFestivalUnivList } from "@/hooks/queries/useQueryFestivalUnivList";
+import { useQueryFestivalList } from '@uket/api/queries/festival'
 
 import UnivItem from "./UnivItem";
 
@@ -9,10 +9,10 @@ interface UnivListProps {
 
 const UnivList = (props: UnivListProps) => {
   const { selectedUnivId, onSelect } = props;
-  const { data: univList } = useQueryFestivalUnivList();
+  const { data: univList } = useQueryFestivalList();
 
   return (
-    <main className="grid grow auto-rows-min grid-cols-2 gap-3 md:grid-cols-2 items-start">
+    <main className="grid grow auto-rows-min grid-cols-2 items-start gap-3 md:grid-cols-2">
       {univList.length > 0 &&
         univList.map(({ id, name, eventName, logoUrl, startDateTime }) => (
           <UnivItem

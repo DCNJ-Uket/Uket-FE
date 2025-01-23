@@ -1,16 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react-hooks/rules-of-hooks */
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { onErrorHandler, SUCCESS_TOAST } from "@uket/api/error/handler";
+import CustomAxiosError from "@uket/api/error/default";
 import {
   QueryCache,
   QueryClient,
   QueryClientProvider,
-} from "@tanstack/react-query";
-
-import { SUCCESS_TOAST } from "@/constants/success_toast";
-
-import { errorHandler } from "@/utils/errorHandler";
-import CustomAxiosError from "@/utils/customError";
+  ReactQueryDevtools,
+} from "@uket/api";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,7 +28,7 @@ const queryClient = new QueryClient({
         // 따라서, 'TOAST_UI'라면 에러를 전파하지 않습니다 (return false)
         return !error.isToast;
       },
-      onError: error => errorHandler(error as CustomAxiosError),
+      onError: error => onErrorHandler(error as CustomAxiosError),
       onSuccess: (data, _, context) => {
         const mutationKey = (context as any)
           ?.mutationKey as keyof typeof SUCCESS_TOAST;
@@ -45,7 +40,7 @@ const queryClient = new QueryClient({
   },
   queryCache: new QueryCache({
     // throwOnError가 false일 경우에만, onError 핸들러가 호출됩니다.
-    onError: error => errorHandler(error as CustomAxiosError),
+    onError: error => onErrorHandler(error as CustomAxiosError),
   }),
 });
 

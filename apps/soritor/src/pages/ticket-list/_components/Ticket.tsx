@@ -6,11 +6,11 @@ import {
 } from "@uket/ui/components/ui/dialog";
 import { Card, CardContent } from "@uket/ui/components/ui/card";
 import { AspectRatio } from "@uket/ui/components/ui/aspect-ratio";
+import { TicketItem } from "@uket/api/types/ticket";
 
 import Indicator from "@/components/Indicator";
 import Image from "@/components/Image";
 
-import { TicketItem } from "@/types/ticketType";
 
 import TicketHeader from "./TicketHeader";
 import TicketDetail from "./TicketDetail";

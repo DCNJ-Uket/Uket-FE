@@ -1,15 +1,13 @@
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "@uket/util/token";
+
 import { Navigate, Path } from "@/router";
-
-import { getAccessToken } from "./handleToken";
-import { getRefreshToken } from "./handleCookie";
-
 
 const PRIVATE: Path[] = ["/buy-ticket", "/ticket-list", "/signup", "/myinfo"];
 const PUBLIC_REGEX = /^\/login(?:\/([^/]+))?$/;
 
 const Redirects = ({ children }: { children: React.ReactNode }) => {
   const isAuthenticated =
-    !!getAccessToken() && !!getRefreshToken("refreshToken");
+    !!ACCESS_TOKEN.get() && !!REFRESH_TOKEN.get("refreshToken");
   const isValidLoginPath =
     location.pathname === "/login" && location.pathname.match(PUBLIC_REGEX);
 

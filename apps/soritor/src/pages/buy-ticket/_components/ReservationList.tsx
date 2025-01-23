@@ -1,4 +1,4 @@
-import { useQueryReservationList } from "@/hooks/queries/useQueryReservationList";
+import { useQueryReservationList } from "@uket/api/queries/reservation";
 
 import TimeItem from "./TimeItem";
 
@@ -11,7 +11,7 @@ interface ReservationListProps {
 const ReservationList = (props: ReservationListProps) => {
   const { showId, selectedItem, onSelect } = props;
 
-  const { data: reservationList } = useQueryReservationList(showId);
+  const { data: reservationList } = useQueryReservationList(Number(showId));
 
   return (
     <div className="flex flex-col gap-4 px-[22px]">

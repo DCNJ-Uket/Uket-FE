@@ -1,10 +1,9 @@
 import { useLocation } from "react-router-dom";
 import { cn } from "@uket/ui/lib/utils";
 import { Button } from "@uket/ui/components/ui/button";
+import { useQueryUserInfo } from "@uket/api/queries/user";
 
 import { useNavigate } from "@/router";
-
-import { useQueryUserInfo } from "@/hooks/queries/useQueryUserInfo";
 
 import Image from "./Image";
 

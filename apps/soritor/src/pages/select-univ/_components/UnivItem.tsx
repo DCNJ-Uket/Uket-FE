@@ -1,8 +1,7 @@
 import { cn } from "@uket/ui/lib/utils";
+import { FestivalUniversity } from "@uket/api/types/univ";
 
 import Image from "@/components/Image";
-
-import { FestivalUniversity } from "@/types/univType";
 
 interface UnivItemProps
   extends Pick<
@@ -43,9 +42,7 @@ const UnivItem = (props: UnivItemProps) => {
         {festivalLogo}
       </div>
       <header className="text-center">
-        <p className="whitespace-wrap font-bold">
-          {eventName}
-        </p>
+        <p className="whitespace-wrap font-bold">{eventName}</p>
       </header>
     </div>
   );

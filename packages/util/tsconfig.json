@@ -1,0 +1,5 @@
+{
+  "extends": "@uket/typescript-config/vite.json",
+  "include": ["src", "vite.config.ts", "src/vite-env.d.ts"],
+  "exclude": ["node_modules"]
+}

@@ -7,12 +7,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@uket/ui/components/ui/card";
+import { TicketItem } from "@uket/api/types/ticket";
 
 import Indicator from "@/components/Indicator";
 import QrCodeAndDepositErrorFallback from "@/components/fallback/QrcodeAndDepositErrorFallback";
 import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
 
-import { TicketItem } from "@/types/ticketType";
+
 
 import TicketHeader from "./TicketHeader";
 import TicketDetail from "./TicketDetail";

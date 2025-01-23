@@ -1,4 +1,4 @@
-import { useQueryShowList } from "@/hooks/queries/useQueryShowList";
+import { useQueryShowList } from "@uket/api/queries/reservation";
 
 import DateItem from "./DateItem";
 
@@ -11,7 +11,7 @@ interface ShowListProps {
 const ShowList = (props: ShowListProps) => {
   const { eventId, selectedItem, onSelect } = props;
 
-  const { data } = useQueryShowList(eventId);
+  const { data } = useQueryShowList(Number(eventId));
   const { shows } = data;
 
   return (

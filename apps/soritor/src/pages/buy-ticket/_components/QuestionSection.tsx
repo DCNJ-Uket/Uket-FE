@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Input } from "@uket/ui/components/ui/input";
-
-import { OptionType } from "@/types/surveyType";
+import { OptionType } from "@uket/api/types/survey";
 
 import PerformerSheet from "./PerformerSheet";
 

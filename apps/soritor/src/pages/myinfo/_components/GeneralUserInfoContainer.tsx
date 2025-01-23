@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Button } from "@uket/ui/components/ui/button";
-
-import { useMutationUpdateInfo } from "@/hooks/mutations/useMutationUpdateInfo";
+import { user } from "@uket/api/queries/user";
+import { useMutationUpdateUserInfo } from "@uket/api/mutations/useMutationUpdateUserInfo";
+import { useQueryClient } from "@uket/api";
 
 import InfoItem from "./InfoItem";
 
@@ -12,12 +13,14 @@ interface GeneralUserInfoContainerProps {
 }
 
 const GeneralUserInfoContainer = (props: GeneralUserInfoContainerProps) => {
+  const queryClient = useQueryClient();
+
   const { depositorName, phoneNumber, universityName } = props;
 
   const depositorNameRegex = /^([가-힣]{2,4}|[a-zA-Z]{2,10})$/;
   const phoneNumberRegex = /^\d{3}-?\d{4}-?\d{4}$/;
 
-  const mutation = useMutationUpdateInfo();
+  const { mutate } = useMutationUpdateUserInfo();
 
   const [isEdit, setIsEdit] = useState(false);
   const handleIsEdit = () => {
@@ -72,12 +75,14 @@ const GeneralUserInfoContainer = (props: GeneralUserInfoContainerProps) => {
       return;
     }
 
-    mutation.mutate(
+    mutate(
       { depositorName: editedDepositorName, phoneNumber: editedPhoneNumber },
       {
-        onSuccess: () => {
+        onSuccess: data => {
           setIsEdit(false);
           setErrors({ depositorName: "", phoneNumber: "" });
+          queryClient.invalidateQueries({ queryKey: user.info().queryKey });
+          return data;
         },
       },
     );

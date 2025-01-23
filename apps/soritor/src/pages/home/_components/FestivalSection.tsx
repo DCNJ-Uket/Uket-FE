@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect } from "react";
-
-import { useQueryFestivalInfoByUniversity } from "@/hooks/queries/useQueryFestivalByUniversity";
+import { useQueryFestivalDetail } from "@uket/api/queries/festival";
 
 import SectionItem from "./SectionItem";
 import FestivalMap from "./map/FestivalMap";
@@ -14,9 +13,9 @@ interface FestivalSectionProps {
 }
 
 const FestivalSection = (props: FestivalSectionProps) => {
-  const { univId, univName, onUpdateEventId } = props;
+  const { univId, onUpdateEventId } = props;
 
-  const { data } = useQueryFestivalInfoByUniversity(univId);
+  const { data } = useQueryFestivalDetail(Number(univId));
 
   useEffect(() => {
     if (data && data.id && typeof onUpdateEventId === "function") {

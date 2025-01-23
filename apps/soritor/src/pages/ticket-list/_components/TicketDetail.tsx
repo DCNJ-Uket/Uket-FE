@@ -1,4 +1,4 @@
-import { TicketItem } from "@/types/ticketType";
+import { TicketItem } from "@uket/api/types/ticket";
 
 import GridItem from "./GridItem";
 

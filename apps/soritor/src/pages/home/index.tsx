@@ -14,6 +14,7 @@ import FestivalSection from "./_components/FestivalSection";
 import FestivalDetailSection from "./_components/FestivalDetailSection";
 import FestivalSectionSuspenseFallback from "./_components/fallback/FestivalSectionSusepnseFallback";
 
+
 // TODO: DynamicMetaTag 하드코딩 수정
 const HomePage = () => {
   const navigate = useNavigate();

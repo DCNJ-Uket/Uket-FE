@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "prebuild": "pnpm dlx puppeteer browsers install chrome",
+    "prebuild": "npx puppeteer browsers install chrome",
     "build": "vite build",
     "type-check": "tsc",
     "lint": "eslint '**/*.{ts,tsx}' --ext ts,tsx --fix --report-unused-disable-directives --max-warnings 0",
@@ -20,6 +20,7 @@
   "dependencies": {
     "@generouted/react-router": "^1.19.3",
     "@hookform/resolvers": "^3.3.4",
+    "@lukemorales/query-key-factory": "^1.3.4",
     "@stackflow/core": "^1.0.10",
     "@stackflow/plugin-basic-ui": "^1.5.3",
     "@stackflow/plugin-renderer-basic": "^1.1.8",
@@ -28,6 +29,8 @@
     "@tanstack/react-query-devtools": "^5.29.0",
     "@types/imagemin-webp": "^7.0.3",
     "@uket/ui": "workspace:*",
+    "@uket/api": "workspace:*",
+    "@uket/util": "workspace:*",
     "@vercel/analytics": "^1.2.2",
     "@vercel/speed-insights": "^1.0.10",
     "axios": "^1.6.8",

@@ -1,8 +1,9 @@
 import { z } from "zod";
 import { UseFormReturn, useForm } from "react-hook-form";
+import { user } from "@uket/api/queries/user";
+import { useMutationBuyTicket } from "@uket/api/mutations/useMutationBuyTicket";
+import { useQueryClient } from "@uket/api";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-import { useMutationBuyTicket } from "./mutations/useMutationBuyTicket";
 
 export type FormSchemaType = z.infer<typeof FormSchema>;
 export type FormType = UseFormReturn<FormSchemaType, unknown, undefined>;
@@ -13,6 +14,7 @@ export const FormSchema = z.object({
 });
 
 export const useTicketStackForm = () => {
+  const queryClient = useQueryClient();
   const { mutateAsync, isPending } = useMutationBuyTicket();
 
   const form = useForm<FormSchemaType>({
@@ -27,7 +29,15 @@ export const useTicketStackForm = () => {
   const onSubmit = async (data: FormSchemaType) => {
     const { universityId, reservationId } = data;
 
-    const response = await mutateAsync({ universityId, reservationId });
+    const response = await mutateAsync(
+      { universityId, reservationId },
+      {
+        onSuccess: data => {
+          queryClient.invalidateQueries({ queryKey: user.ticket().queryKey });
+          return data;
+        },
+      },
+    );
     return response.ticket;
   };
 

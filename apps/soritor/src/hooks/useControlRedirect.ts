@@ -1,11 +1,7 @@
-import { useLocation } from "react-router-dom";
 import { useState } from "react";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "@uket/util/token";
 
 import { Path, useNavigate } from "@/router";
-
-import { getAccessToken } from "@/utils/handleToken";
-import { getRefreshToken, setCookie } from "@/utils/handleCookie";
-
 
 interface RedirectAndModalPath {
   path?: Path;
@@ -15,13 +11,12 @@ interface RedirectAndModalPath {
 export const useControlRedirect = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  const { pathname, search } = useLocation();
   const handleOpenModalOrRedirect = ({
     path,
     onCustomClick,
   }: RedirectAndModalPath) => {
     const isAuthenticated =
-      !!getAccessToken() && !!getRefreshToken("refreshToken");
+      !!ACCESS_TOKEN.get() && !!REFRESH_TOKEN.get("refreshToken");
     if (!isAuthenticated) {
       setOpen(true);
     } else {
@@ -37,7 +32,6 @@ export const useControlRedirect = () => {
 
   const handleRedirectToLogin = () => {
     handleCloseModal();
-    setCookie('login_redirect_url', pathname + search)
     navigate("/login");
   };
 
