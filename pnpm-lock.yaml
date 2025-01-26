@@ -53,6 +53,9 @@ importers:
       '@uket/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@uket/util':
+        specifier: workspace:*
+        version: link:../../packages/util
       '@yudiel/react-qr-scanner':
         specifier: ^2.0.4
         version: 2.0.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)

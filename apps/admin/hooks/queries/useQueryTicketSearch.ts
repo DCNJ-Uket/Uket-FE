@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getSearchTicket } from "@/api/ticket";
 
+import { formatDate } from "@uket/util/time";
+
 export const useQueryTicketSearch = (
   searchType: string,
   value: string,
@@ -12,6 +14,21 @@ export const useQueryTicketSearch = (
     queryKey: ["ticket-search", searchType, value, page],
     queryFn: () => getSearchTicket(searchType, value, page),
     ...options,
+    select: data => {
+      const timeData = data.content.map(item => {
+        return {
+          ...item,
+          showTime: formatDate(item.showTime, "fullCompact"),
+          updatedDate: formatDate(item.updatedDate, "fullCompact"),
+          orderDate: formatDate(item.orderDate, "fullCompact"),
+        };
+      });
+
+      return {
+        ...data,
+        timezoneData: timeData,
+      };
+    },
   });
 
   if (error) {
