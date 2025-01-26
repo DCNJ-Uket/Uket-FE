@@ -108,6 +108,7 @@ export const useQueryReservationList = (
     select: data => {
       return data.map(item => ({
         ...item,
+        startDate: formatDate(item.startTime, "fullTimeStamp"),
         startTime: formatDate(item.startTime, "time"),
         endTime: formatDate(item.endTime, "time"),
       }));
