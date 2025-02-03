@@ -2,11 +2,9 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 import { getEntryList } from "@/api/entry";
 
-import { useFormat } from "@/hooks/useFormat";
+import { formatDate } from "@uket/util/time";
 
 export const useQueryEntryList = ({ page = 1 }: { page: number }) => {
-  const { handleFormatDate } = useFormat();
-
   const {
     isPending,
     isError,
@@ -22,12 +20,10 @@ export const useQueryEntryList = ({ page = 1 }: { page: number }) => {
     placeholderData: keepPreviousData,
     select: data => {
       const newContent = data.content.map(item => {
-        const formattedEnterTime = handleFormatDate(item.enterTime);
-        const formattedTicketDate = handleFormatDate(item.ticketDate);
         return {
           ...item,
-          enterTime: formattedEnterTime,
-          ticketDate: formattedTicketDate,
+          enterTime: formatDate(item.enterTime, "fullCompact"),
+          ticketDate: formatDate(item.ticketDate, "fullCompact"),
         };
       });
 

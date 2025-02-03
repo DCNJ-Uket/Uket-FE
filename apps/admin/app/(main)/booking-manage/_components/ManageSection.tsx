@@ -32,7 +32,7 @@ function ManageSection() {
   useEffect(() => {
     const data = isSearch ? searchData : listData;
     if (data) {
-      setTickets(data.content);
+      setTickets(data.timezoneData);
       setTotalPages(data.totalPages);
     }
   }, [isSearch, listData, searchData]);

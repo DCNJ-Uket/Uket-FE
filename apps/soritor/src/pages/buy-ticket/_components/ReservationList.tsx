@@ -16,9 +16,10 @@ const ReservationList = (props: ReservationListProps) => {
   return (
     <div className="flex flex-col gap-4 px-[22px]">
       {reservationList.map(
-        ({ id, startTime, endTime, reservedCount, totalCount }) => (
+        ({ id, startDate, startTime, endTime, reservedCount, totalCount }) => (
           <TimeItem
             key={id}
+            startDate={startDate}
             startTime={startTime}
             endTime={endTime}
             reservedCount={reservedCount}

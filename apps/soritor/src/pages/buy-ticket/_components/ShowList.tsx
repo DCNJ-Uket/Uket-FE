@@ -11,22 +11,30 @@ interface ShowListProps {
 const ShowList = (props: ShowListProps) => {
   const { eventId, selectedItem, onSelect } = props;
 
-  const { data } = useQueryShowList(Number(eventId));
-  const { shows } = data;
+  const { data: shows } = useQueryShowList(Number(eventId));
 
   return (
     <div className="flex flex-col gap-4 px-[22px]">
       {shows.map(
-        ({ id, name, startDate, endDate, ticketingDate, totalTicketCount }) => (
+        ({
+          id,
+          name,
+          showDate,
+          startTime,
+          endTime,
+          ticketingDate,
+          totalTicketCount,
+        }) => (
           <DateItem
             key={id}
             name={name}
-            startDate={startDate}
-            endDate={endDate}
+            showDate={showDate}
+            startTime={startTime}
+            endTime={endTime}
             ticketingDate={ticketingDate}
             totalTicketCount={totalTicketCount}
             isSelected={selectedItem === id}
-            onSelect={() => onSelect(id, name, startDate)}
+            onSelect={() => onSelect(id, name, showDate)}
           />
         ),
       )}

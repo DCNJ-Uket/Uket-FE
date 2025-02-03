@@ -1,16 +1,18 @@
 interface OverlayProps {
   disabledMent?: string;
+  alreadyStart?: boolean;
 }
 
 const Overlay = (props: OverlayProps) => {
-  const { disabledMent } = props;
+  const { disabledMent, alreadyStart } = props;
 
   return (
     <>
-      {disabledMent ? (
+      {disabledMent || alreadyStart ? (
         <div className="absolute left-0 top-1/2 z-30 flex w-full -translate-y-1/2 items-center justify-center">
           <div className="whitespace-nowrap text-center text-lg font-extrabold text-[#FD724F]">
-            {disabledMent} OPEN
+            {disabledMent && <p>{disabledMent} OPEN</p>}
+            {alreadyStart && <p>이미 시작된 공연입니다.</p>}
           </div>
         </div>
       ) : (

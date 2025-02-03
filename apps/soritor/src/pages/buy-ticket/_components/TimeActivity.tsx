@@ -7,7 +7,6 @@ import BuyTicketErrorFallback from "@/components/fallback/BuyTicketErrorFallback
 import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
 
 import { useReservationSelection } from "@/hooks/useReservationSelection";
-import { useFormatTime } from "@/hooks/useFormatTime";
 
 import SelectHeader from "./SelectHeader";
 import ReservationList from "./ReservationList";
@@ -37,10 +36,8 @@ const TimeActivity: ActivityComponentType<TimeParams> = ({ params }) => {
     handleSelectReservation,
   } = useReservationSelection(form);
 
-  const { formatTime: formatStartTime } = useFormatTime(selectedStartTime);
-  const { formatTime: formatEndTime } = useFormatTime(selectedEndTime);
   const formatSelectTime =
-    selectedStartTime !== "" ? `${formatStartTime} ~ ${formatEndTime}` : "";
+    selectedStartTime !== "" ? `${selectedStartTime} ~ ${selectedEndTime}` : "";
 
   return (
     <AppScreen appBar={{ border: false, height: "56px" }}>

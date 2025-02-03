@@ -1,4 +1,5 @@
 import { ACCESS_TOKEN } from "@uket/util/token";
+import { formatDate } from "@uket/util/time";
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { createQueryKeys } from "@lukemorales/query-key-factory";
 
@@ -68,7 +69,7 @@ export const reservation = createQueryKeys("reservation", {
     queryKey: ["deposit", eventId, ticketId],
     queryFn: async () => {
       const { data } = await fetcher.get<DepositResponse>(
-        `/events/${ticketId}/account`,
+        `/events/${eventId}/account`,
       );
 
       return data;
@@ -77,7 +78,18 @@ export const reservation = createQueryKeys("reservation", {
 });
 
 export const useQueryShowList = (id: FestivalInfo["id"]) => {
-  return useSuspenseQuery(reservation.show(id));
+  return useSuspenseQuery({
+    ...reservation.show(id),
+    select: data => {
+      return data.shows.map(show => ({
+        ...show,
+        startTime: formatDate(show.startDate, "time"),
+        endTime: formatDate(show.endDate, "time"),
+        showDate: formatDate(show.startDate, "compact"),
+        ticketingDate: formatDate(show.ticketingDate, "fullCompact"),
+      }));
+    },
+  });
 };
 
 export const useQuerySurveyList = (id: FestivalInfo["id"]) => {
@@ -91,7 +103,18 @@ export const useQueryReservationList = (
   const userType =
     reservationUserType !== undefined ? reservationUserType : "일반인";
 
-  return useSuspenseQuery({ ...reservation.time(id, userType), staleTime: 0 });
+  return useSuspenseQuery({
+    ...reservation.time(id, userType),
+    select: data => {
+      return data.map(item => ({
+        ...item,
+        startDate: formatDate(item.startTime, "fullTimeStamp"),
+        startTime: formatDate(item.startTime, "time"),
+        endTime: formatDate(item.endTime, "time"),
+      }));
+    },
+    staleTime: 0,
+  });
 };
 
 export const useQueryDepositurl = (

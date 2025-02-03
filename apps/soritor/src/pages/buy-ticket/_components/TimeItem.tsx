@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 
-import { useFormatTime } from "@/hooks/useFormatTime";
-
 import TicketQuantityItem from "./TicketQuantityItem";
 import TicketHeader from "./TicketHeader";
 import TicketFooter from "./TicketFooter";
@@ -10,6 +8,7 @@ import TicketContainer from "./TicketContainer";
 import Overlay from "./Overlay";
 
 interface TimeItemProps {
+  startDate: string;
   startTime: string;
   endTime: string;
   reservedCount: number;
@@ -20,6 +19,7 @@ interface TimeItemProps {
 
 const TimeItem = (props: TimeItemProps) => {
   const {
+    startDate,
     startTime,
     endTime,
     reservedCount,
@@ -40,24 +40,21 @@ const TimeItem = (props: TimeItemProps) => {
 
   useEffect(() => {
     const currentTime = new Date().getTime();
-    const ticketingTime = new Date(startTime).getTime();
-    setIsDisabled(currentTime > ticketingTime);
-  }, [startTime]);
-
-  const { formatTime: formatStartTime } = useFormatTime(startTime);
-  const { formatTime: formatEndTime } = useFormatTime(endTime);
+    const showStartTime = new Date(startDate).getTime();
+    setIsDisabled(currentTime > showStartTime);
+  }, [startDate]);
 
   return (
     <div className="relative">
-      {isDisabled && <Overlay />}
-      {isSoldOut && !isDisabled && <Overlay soldOut />}
+      {isDisabled && <Overlay alreadyStart />}
+      {isSoldOut && !isDisabled && <Overlay />}
       <TicketContainer
         isDisabled={isDisabled}
         isSoldOut={isSoldOut}
         onSelect={onSelect}
       >
         <TicketHeader
-          title={`${formatStartTime} ~ ${formatEndTime}`}
+          title={`${startTime} ~ ${endTime}`}
           fontStyle="text-[32px] font-extrabold"
           isSelected={isSelected}
         />
