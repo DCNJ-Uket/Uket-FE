@@ -69,7 +69,7 @@ export const reservation = createQueryKeys("reservation", {
     queryKey: ["deposit", eventId, ticketId],
     queryFn: async () => {
       const { data } = await fetcher.get<DepositResponse>(
-        `/events/${ticketId}/account`,
+        `/events/${eventId}/account`,
       );
 
       return data;
