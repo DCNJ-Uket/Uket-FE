@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 
-import { useFormatTime } from "@/hooks/useFormatTime";
-
 import TicketQuantityItem from "./TicketQuantityItem";
 import TicketHeader from "./TicketHeader";
 import TicketFooter from "./TicketFooter";
@@ -11,8 +9,9 @@ import Overlay from "./Overlay";
 
 interface DateItemProps {
   name: string;
-  startDate: string;
-  endDate: string;
+  showDate: string;
+  startTime: string;
+  endTime: string;
   ticketingDate: string;
   totalTicketCount: number;
   isSelected: boolean;
@@ -22,8 +21,9 @@ interface DateItemProps {
 const DateItem = (props: DateItemProps) => {
   const {
     name,
-    startDate,
-    endDate,
+    showDate,
+    startTime,
+    endTime,
     ticketingDate,
     totalTicketCount,
     isSelected,
@@ -33,27 +33,19 @@ const DateItem = (props: DateItemProps) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isSoldOut, setIsSoldOut] = useState(false);
 
-  const { isoDate: isoTicketingDate } = useFormatTime(ticketingDate);
-
   useEffect(() => {
     setIsSoldOut(totalTicketCount <= 0);
   }, [totalTicketCount]);
 
   useEffect(() => {
     const currentTime = new Date().getTime();
-    const ticketingTime = new Date(isoTicketingDate).getTime();
+    const ticketingTime = new Date(ticketingDate).getTime();
     setIsDisabled(currentTime < ticketingTime);
-  }, [isoTicketingDate]);
-
-  const { formatDate: formatShowDate, formatTime: formatStartTime } =
-    useFormatTime(startDate);
-  const { formatTime: formatEndTime } = useFormatTime(endDate);
-
-  const { formatDetail: formatTicketingDetail } = useFormatTime(ticketingDate);
+  }, [ticketingDate]);
 
   return (
     <div className="relative">
-      {isDisabled && <Overlay disabledMent={formatTicketingDetail} />}
+      {isDisabled && <Overlay disabledMent={ticketingDate} />}
       {isSoldOut && !isDisabled && <Overlay />}
 
       <TicketContainer
@@ -71,9 +63,9 @@ const DateItem = (props: DateItemProps) => {
           <div className="flex gap-2">
             <p className="font-medium">일시</p>
             <div>
-              <p className="text-[#5E5E6E]">{formatShowDate}</p>
+              <p className="text-[#5E5E6E]">{showDate}</p>
               <p className="text-[#5E5E6E]">
-                {formatStartTime} ~ {formatEndTime}
+                {startTime} ~ {endTime}
               </p>
             </div>
           </div>

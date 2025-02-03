@@ -10,7 +10,6 @@ import RetryErrorBoundary from "@/components/error/RetryErrorBoundary";
 import { useTicketStackForm } from "@/hooks/useTicketStackForm";
 import { useShowSelection } from "@/hooks/useShowSelections";
 import useItemSelect from "@/hooks/useItemSelect";
-import { useFormatTime } from "@/hooks/useFormatTime";
 
 import ShowList from "./ShowList";
 import SelectHeader from "./SelectHeader";
@@ -56,10 +55,9 @@ const DateActivity: ActivityComponentType = () => {
     setSelectedShowName(name);
   };
 
-  const { formatDate } = useFormatTime(selectedShowDate);
   const formatShowDate =
     selectedShowDate !== ""
-      ? `${selectedShowName} (${formatDate.slice(2)})`
+      ? `${selectedShowName} (${selectedShowDate.slice(2)})`
       : "";
 
   return (
