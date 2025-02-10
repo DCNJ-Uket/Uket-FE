@@ -147,7 +147,7 @@ function BookingTable<TData, TValue>({
   );
 
   return (
-    <div className="flex flex-col justify-between">
+    <div className="relative">
       <main className="rounded-lg bg-white shadow-sm">
         <section className="px-3 pb-6 pt-3">
           <Table>
@@ -207,7 +207,7 @@ function BookingTable<TData, TValue>({
           </Table>
         </section>
       </main>
-      <div className="my-4 flex items-center justify-center space-x-6">
+      <div className="mt-4 flex items-center justify-center space-x-6">
         {pageGroup > 0 && (
           <div className="space-x-2">
             <Button
