@@ -8,7 +8,7 @@ import { useQueryTicketList } from "@/hooks/queries/useQueryTicketList";
 import { TicketResponse } from "@/types/ticketType";
 
 import SearchSection from "./SearchSection";
-import BookingList from "./BookingList";
+import BookingTable, { columns } from "./BookingTable";
 
 function ManageSection() {
   const [page, setPage] = useState(1);
@@ -80,12 +80,15 @@ function ManageSection() {
           searchValue={searchInputValue}
         />
       </div>
-      <BookingList
-        tickets={tickets}
-        setPage={setPage}
-        page={page}
-        totalPages={totalPages}
-      />
+      {tickets && (
+        <BookingTable
+          columns={columns}
+          data={tickets}
+          pageIndex={page}
+          setPageIndex={setPage}
+          pageCount={totalPages}
+        />
+      )}
     </section>
   );
 }
