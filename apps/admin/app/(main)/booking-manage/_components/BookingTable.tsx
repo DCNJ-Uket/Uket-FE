@@ -74,7 +74,7 @@ export const columns: ColumnDef<Entry>[] = [
   },
   {
     accessorKey: "friend",
-    header: "친구",
+    header: "지인",
     cell: ({ row }) => {
       return <div>{row.original.formAnswers[0].answer}</div>;
     },
