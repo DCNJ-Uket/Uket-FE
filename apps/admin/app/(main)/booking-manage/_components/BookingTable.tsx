@@ -29,7 +29,7 @@ import TicketStatus from "./TicketStatus";
 
 export type Entry = TicketResponse;
 
-export const columns: ColumnDef<Entry>[] = [
+export const getColumns = (pageIndex: number): ColumnDef<Entry>[] => [
   {
     accessorKey: "depositorName",
     header: "입금자명",
@@ -56,7 +56,7 @@ export const columns: ColumnDef<Entry>[] = [
   },
   {
     accessorKey: "ticketStatus",
-    header: () => <div>티켓 상태</div>,
+    header: "티켓 상태",
     cell: ({ row }) => {
       const ticketId = row.original.ticketId;
       const ticketStatus = row.original.ticketStatus;
@@ -64,10 +64,11 @@ export const columns: ColumnDef<Entry>[] = [
 
       return (
         <TicketStatus
+          key={ticketId}
           id={ticketId}
           status={ticketStatus}
           userName={depositorName}
-          page={row.index + 1}
+          page={pageIndex}
         />
       );
     },
@@ -81,21 +82,20 @@ export const columns: ColumnDef<Entry>[] = [
   },
 ];
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
+interface DataTableProps<TData> {
   data: TData[];
   pageIndex: number;
   setPageIndex: (pageIndex: number) => void;
   pageCount: number;
 }
 
-function BookingTable<TData, TValue>({
-  columns,
+function BookingTable<TData extends TicketResponse>({
   data,
   pageIndex,
   setPageIndex,
   pageCount,
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps<TData>) {
+  const columns = getColumns(pageIndex);
   const table = useReactTable({
     data,
     columns,

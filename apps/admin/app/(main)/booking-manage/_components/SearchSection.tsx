@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   Select,
   SelectContent,
@@ -15,8 +16,15 @@ interface SearchSectionProps {
 function SearchSection(props: SearchSectionProps) {
   const { handleTicketSearch } = props;
 
+  const searchParams = useSearchParams();
+
   const [searchType, setSearchType] = useState("USER_NAME");
   const [searchValue, setSearchValue] = useState("");
+
+  useEffect(() => {
+    setSearchValue(searchParams.get("searchValue") || "");
+    setSearchType(searchParams.get("searchType") || "USER_NAME");
+  }, [searchParams]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
@@ -31,7 +39,7 @@ function SearchSection(props: SearchSectionProps) {
         boxShadow: "1px 1px 10px 0px #0000000F",
       }}
     >
-      <Select defaultValue={searchType} onValueChange={setSearchType}>
+      <Select value={searchType} onValueChange={setSearchType}>
         <SelectTrigger className="bg-formInput min-w-48 gap-2 rounded-l-lg text-black">
           <SelectValue placeholder="입금자명" />
         </SelectTrigger>

@@ -9,7 +9,7 @@ import { useQueryTicketList } from "@/hooks/queries/useQueryTicketList";
 import { TicketResponse } from "@/types/ticketType";
 
 import SearchSection from "./SearchSection";
-import BookingTable, { columns } from "./BookingTable";
+import BookingTable from "./BookingTable";
 
 function ManageSection() {
   const router = useRouter();
@@ -81,7 +81,6 @@ function ManageSection() {
       </div>
       {tickets && (
         <BookingTable
-          columns={columns}
           data={tickets}
           pageIndex={page}
           setPageIndex={newPage => updateQuery({ page: newPage })}
