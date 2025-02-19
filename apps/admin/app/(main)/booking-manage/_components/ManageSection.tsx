@@ -1,12 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { useQueryTicketSearch } from "@/hooks/queries/useQueryTicketSearch";
 import { useQueryTicketList } from "@/hooks/queries/useQueryTicketList";
-
-import { TicketResponse } from "@/types/ticketType";
 
 import SearchSection from "./SearchSection";
 import BookingTable from "./BookingTable";
@@ -33,16 +30,13 @@ function ManageSection() {
     },
   );
 
-  const [tickets, setTickets] = useState<TicketResponse[]>([]);
-  const [totalPages, setTotalPages] = useState(0);
+  const tickets = isSearchMode
+    ? searchData?.timezoneData
+    : listData?.timezoneData;
 
-  useEffect(() => {
-    const data = isSearchMode ? searchData : listData;
-    if (data) {
-      setTickets(data.timezoneData);
-      setTotalPages(data.totalPages);
-    }
-  }, [isSearchMode, listData, searchData]);
+  const totalPages = isSearchMode
+    ? searchData?.totalPages
+    : listData?.totalPages;
 
   const updateQuery = (params: Record<string, string | number | null>) => {
     const newParams = new URLSearchParams(searchParams.toString());
@@ -79,7 +73,7 @@ function ManageSection() {
         </div>
         <SearchSection handleTicketSearch={handleTicketSearch} />
       </div>
-      {tickets && (
+      {tickets && totalPages && (
         <BookingTable
           data={tickets}
           pageIndex={page}
