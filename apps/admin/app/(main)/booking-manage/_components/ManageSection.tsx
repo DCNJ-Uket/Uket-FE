@@ -73,12 +73,12 @@ function ManageSection() {
         </div>
         <SearchSection handleTicketSearch={handleTicketSearch} />
       </div>
-      {tickets && totalPages && (
+      {tickets && (
         <BookingTable
           data={tickets}
           pageIndex={page}
           setPageIndex={newPage => updateQuery({ page: newPage })}
-          pageCount={totalPages}
+          pageCount={totalPages || 1}
         />
       )}
     </section>
