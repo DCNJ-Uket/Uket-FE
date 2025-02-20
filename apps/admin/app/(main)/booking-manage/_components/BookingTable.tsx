@@ -111,8 +111,10 @@ function BookingTable<TData extends TicketResponse>({
     manualPagination: true,
   });
 
-  const [pageGroup, setPageGroup] = useState(0);
   const maxButtons = 5;
+  const [pageGroup, setPageGroup] = useState(
+    Math.floor(pageIndex / maxButtons),
+  );
 
   const handleFirst = () => {
     setPageGroup(0);
