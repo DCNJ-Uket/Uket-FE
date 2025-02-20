@@ -1,8 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
+import { formatDate } from "@uket/util/time";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 import { getSearchTicket } from "@/api/ticket";
-
-import { formatDate } from "@uket/util/time";
 
 export const useQueryTicketSearch = (
   searchType: string,
@@ -13,6 +12,7 @@ export const useQueryTicketSearch = (
   const { data, error, refetch } = useQuery({
     queryKey: ["ticket-search", searchType, value, page],
     queryFn: () => getSearchTicket(searchType, value, page),
+    placeholderData: keepPreviousData,
     ...options,
     select: data => {
       const timeData = data.content.map(item => {
