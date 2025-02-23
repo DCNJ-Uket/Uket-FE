@@ -23,61 +23,79 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import { TICKET_STATUS } from "@/constants/ticketStatus";
+import { TicketResponse } from "@/types/ticketType";
 
-import { Content } from "@/types/entryType";
+import TicketStatus from "./TicketStatus";
 
-export type Entry = Content;
+export type Entry = TicketResponse;
 
-export const columns: ColumnDef<Entry>[] = [
+export const getColumns = (pageIndex: number): ColumnDef<Entry>[] => [
   {
-    accessorKey: "enterTime",
-    header: () => <div>입장 시간</div>,
-  },
-  {
-    accessorKey: "name",
+    accessorKey: "depositorName",
     header: "입금자명",
   },
   {
-    accessorKey: "ticketDate",
+    accessorKey: "userType",
+    header: "사용자 구분",
+  },
+  {
+    accessorKey: "showTime",
     header: "티켓 날짜",
   },
   {
-    accessorKey: "phoneNumber",
+    accessorKey: "telephone",
     header: "전화번호",
   },
   {
+    accessorKey: "updatedDate",
+    header: "업데이트 일시",
+  },
+  {
+    accessorKey: "orderDate",
+    header: "주문 일시",
+  },
+  {
     accessorKey: "ticketStatus",
-    header: () => <div>결과</div>,
+    header: "티켓 상태",
     cell: ({ row }) => {
-      const ticketStatus = TICKET_STATUS.find(
-        item => item.value === row.getValue("ticketStatus"),
-      );
+      const ticketId = row.original.ticketId;
+      const ticketStatus = row.original.ticketStatus;
+      const depositorName = row.original.depositorName;
 
       return (
-        <div className="rounded-lg bg-[#F0EDFD] py-1 text-sm font-medium text-[#7250FD]">
-          {ticketStatus!.text}
-        </div>
+        <TicketStatus
+          key={ticketId}
+          id={ticketId}
+          status={ticketStatus}
+          userName={depositorName}
+          page={pageIndex}
+        />
       );
+    },
+  },
+  {
+    accessorKey: "friend",
+    header: "지인",
+    cell: ({ row }) => {
+      return <div>{row.original.formAnswers[0].answer}</div>;
     },
   },
 ];
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
+interface DataTableProps<TData> {
   data: TData[];
   pageIndex: number;
   setPageIndex: (pageIndex: number) => void;
   pageCount: number;
 }
 
-function EntryDataTable<TData, TValue>({
-  columns,
+function BookingTable<TData extends TicketResponse>({
   data,
   pageIndex,
   setPageIndex,
   pageCount,
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps<TData>) {
+  const columns = getColumns(pageIndex);
   const table = useReactTable({
     data,
     columns,
@@ -93,8 +111,10 @@ function EntryDataTable<TData, TValue>({
     manualPagination: true,
   });
 
-  const [pageGroup, setPageGroup] = useState(0);
   const maxButtons = 5;
+  const [pageGroup, setPageGroup] = useState(
+    Math.floor(pageIndex / maxButtons),
+  );
 
   const handleFirst = () => {
     setPageGroup(0);
@@ -131,7 +151,7 @@ function EntryDataTable<TData, TValue>({
   return (
     <div className="relative">
       <main className="rounded-lg bg-white shadow-sm">
-        <section className="px-3 pb-6 pr-14 pt-3">
+        <section className="px-3 pb-6 pt-3">
           <Table>
             <TableHeader className="[&_tr]:border-none">
               {table.getHeaderGroups().map(headerGroup => (
@@ -244,4 +264,4 @@ function EntryDataTable<TData, TValue>({
   );
 }
 
-export default EntryDataTable;
+export default BookingTable;

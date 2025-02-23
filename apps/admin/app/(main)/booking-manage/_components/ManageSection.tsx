@@ -1,63 +1,62 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { useQueryTicketSearch } from "@/hooks/queries/useQueryTicketSearch";
 import { useQueryTicketList } from "@/hooks/queries/useQueryTicketList";
 
-import { TicketResponse } from "@/types/ticketType";
-
 import SearchSection from "./SearchSection";
-import BookingList from "./BookingList";
+import BookingTable from "./BookingTable";
 
 function ManageSection() {
-  const [page, setPage] = useState(1);
-  const [isSearch, setIsSearch] = useState(false);
-  const [searchType, setSearchType] = useState("USER_NAME");
-  const [searchInputValue, setSearchInputValue] = useState("");
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const { data: listData } = useQueryTicketList(page, { enabled: !isSearch });
+  const page = Number(searchParams.get("page")) || 1;
+  const searchType = searchParams.get("searchType") || "USER_NAME";
+  const searchValue = searchParams.get("searchValue") || "";
+  const isSearchMode = Boolean(searchValue);
+
+  const { data: listData } = useQueryTicketList(page, {
+    enabled: !isSearchMode,
+  });
+
   const { data: searchData } = useQueryTicketSearch(
     searchType,
-    searchInputValue,
+    searchValue,
     page,
     {
-      enabled: isSearch,
+      enabled: isSearchMode,
     },
   );
 
-  const [tickets, setTickets] = useState<TicketResponse[]>([]);
-  const [totalPages, setTotalPages] = useState(0);
+  const tickets = isSearchMode
+    ? searchData?.timezoneData
+    : listData?.timezoneData;
 
-  useEffect(() => {
-    const data = isSearch ? searchData : listData;
-    if (data) {
-      setTickets(data.timezoneData);
-      setTotalPages(data.totalPages);
-    }
-  }, [isSearch, listData, searchData]);
+  const totalPages = isSearchMode
+    ? searchData?.totalPages
+    : listData?.totalPages;
+
+  const updateQuery = (params: Record<string, string | number | null>) => {
+    const newParams = new URLSearchParams(searchParams.toString());
+
+    Object.entries(params).forEach(([key, value]) => {
+      if (value === null) newParams.delete(key);
+      else newParams.set(key, String(value));
+    });
+
+    router.push(`?${newParams.toString()}`, { scroll: false });
+  };
 
   const handleViewAllTicket = () => {
-    setSearchInputValue("");
-    setIsSearch(false);
-    setPage(1);
+    updateQuery({ page: 1, searchType: null, searchValue: null });
   };
 
-  const handleTicketSearch = () => {
-    if (searchInputValue.length > 0) {
-      setSearchType(searchType);
-      setSearchInputValue(searchInputValue);
-      setIsSearch(true);
-      setPage(1);
+  const handleTicketSearch = (type: string, value: string) => {
+    if (value.trim().length > 0) {
+      updateQuery({ page: 1, searchType: type, searchValue: value });
     }
-  };
-
-  const handleSearchType = (type: string) => {
-    setSearchType(type);
-  };
-
-  const handleSearchValue = (value: string) => {
-    setSearchInputValue(value);
   };
 
   return (
@@ -72,20 +71,16 @@ function ManageSection() {
             전체 내역 보기
           </p>
         </div>
-        <SearchSection
-          handleTicketSearch={handleTicketSearch}
-          handleSearchType={handleSearchType}
-          handleSearchValue={handleSearchValue}
-          searchType={searchType}
-          searchValue={searchInputValue}
-        />
+        <SearchSection handleTicketSearch={handleTicketSearch} />
       </div>
-      <BookingList
-        tickets={tickets}
-        setPage={setPage}
-        page={page}
-        totalPages={totalPages}
-      />
+      {tickets && (
+        <BookingTable
+          data={tickets}
+          pageIndex={page}
+          setPageIndex={newPage => updateQuery({ page: newPage })}
+          pageCount={totalPages || 1}
+        />
+      )}
     </section>
   );
 }

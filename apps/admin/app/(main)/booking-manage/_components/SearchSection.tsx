@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   Select,
   SelectContent,
@@ -8,25 +10,25 @@ import {
 import { Input } from "@ui/components/ui/input";
 
 interface SearchSectionProps {
-  handleTicketSearch: () => void;
-  handleSearchValue: (value: string) => void;
-  handleSearchType: (type: string) => void;
-  searchType: string;
-  searchValue: string;
+  handleTicketSearch: (type: string, value: string) => void;
 }
 
 function SearchSection(props: SearchSectionProps) {
-  const {
-    handleTicketSearch,
-    handleSearchValue,
-    handleSearchType,
-    searchType,
-    searchValue,
-  } = props;
+  const { handleTicketSearch } = props;
+
+  const searchParams = useSearchParams();
+
+  const [searchType, setSearchType] = useState("USER_NAME");
+  const [searchValue, setSearchValue] = useState("");
+
+  useEffect(() => {
+    setSearchValue(searchParams.get("searchValue") || "");
+    setSearchType(searchParams.get("searchType") || "USER_NAME");
+  }, [searchParams]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      handleTicketSearch();
+      handleTicketSearch(searchType, searchValue);
     }
   };
 
@@ -37,7 +39,7 @@ function SearchSection(props: SearchSectionProps) {
         boxShadow: "1px 1px 10px 0px #0000000F",
       }}
     >
-      <Select defaultValue={searchType} onValueChange={handleSearchType}>
+      <Select value={searchType} onValueChange={setSearchType}>
         <SelectTrigger className="bg-formInput min-w-48 gap-2 rounded-l-lg text-black">
           <SelectValue placeholder="입금자명" />
         </SelectTrigger>
@@ -51,9 +53,9 @@ function SearchSection(props: SearchSectionProps) {
       </Select>
       <Input
         isIcon
-        iconClick={handleTicketSearch}
+        iconClick={() => handleTicketSearch(searchType, searchValue)}
         value={searchValue}
-        onChange={e => handleSearchValue(e.target.value)}
+        onChange={e => setSearchValue(e.target.value)}
         onKeyDown={handleKeyDown}
         className="w-44 rounded-none rounded-r-lg border-none ring-offset-0 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
       />
