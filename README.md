@@ -27,6 +27,25 @@ Uket의 첫 출발은 **건국대학교 밴드 동아리 '소리터'** 와 함�
 2024.04 - <strong color="dodgerblue">Now</strong>
 - 2025.01: 건국대학교 밴드 동아리 **'소리터'** 공연에서 첫 서비스 운영
 - 2025.02 - Now: 새로운 기획자 합류로 Uket의 방향성 논의
+## 서비스 소개
+### 유저 서비스
+<figure class="half">
+  <img src="https://github.com/user-attachments/assets/1c3a81b8-863b-4eda-a606-9c73972706c0" alt="랜딩 페이지" width="32%" />
+  <img src="https://github.com/user-attachments/assets/158c29fa-a2a0-4a30-9323-cd7caf655173" alt="공연 선택" width="32%" />
+  <img src="https://github.com/user-attachments/assets/be17dd46-f79e-4400-98e6-20502d6c5b7e" alt="공연 정보 확인" width="32%" />
+</figure>
+<figure>
+  <img src="https://github.com/user-attachments/assets/38ba2e40-575f-4e08-8389-6b083b427bf7" alt="티켓 구매" width="32%" />
+  <img src="https://github.com/user-attachments/assets/87b4beca-6961-4a19-80cb-8b8d63227b71" alt="내 티켓 확인" width="32%" />
+  <img src="https://github.com/user-attachments/assets/6ff22ac5-e490-499d-97f6-37fd66943635" alt="내 정보 확인" width="32%" />
+</figure>
+
+### 어드민 서비스
+<img src="https://github.com/user-attachments/assets/a2ddcc0e-e750-4570-bfaf-c7cc98769e9f" alt="예매 내역 관리" />
+<img src="https://github.com/user-attachments/assets/f8237752-6ad2-448a-8ed6-fc7ce3c037d4" alt="실시간 입장 조회" />
+<figure>
+  <img src="https://github.com/user-attachments/assets/25b8be23-f6f6-43ad-b056-f95250e4e55d" alt="qr 코드 인식" width="50%" />
+</figure>
 
 ## 서비스 목표
 - **서비스 안정성 검증**
